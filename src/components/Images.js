@@ -7,7 +7,7 @@ class  Images extends Component{
         this.props.loadImages();
     }
     render(){
-        const { isLoading, images } = this.props;
+        const { images } = this.props;
     return (
 
         <div className="App">
@@ -15,7 +15,7 @@ class  Images extends Component{
 
                 <h2>Images !!!</h2>
             </header>
-            {images.map(image => (
+            {images.images.map(image => (
                 <div key={image.number}>
                     {image.name}
                 </div>

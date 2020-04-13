@@ -1,10 +1,8 @@
-import { put, call, takeEvery, select } from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 
-import { setImages, setError } from '../actions';
-import { IMAGES } from '../constants';
-import { fetchImages } from '../api';
-
-export const getPage = state => state.nextPage;
+import {setError, setImages} from '../actions';
+import {IMAGES} from '../constants';
+import {fetchImages} from '../api';
 
 export function* handleImagesLoad() {
     try {
