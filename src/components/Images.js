@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {loadImages} from "../actions";
+import {loadImages} from "../actions/imageActions";
 
 class  Images extends Component{
     componentDidMount() {

@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 
-import {setError, setImages} from '../actions';
+import {setError, setImages} from '../actions/imageActions';
 import {IMAGES} from '../constants';
 import {fetchImages} from '../api';
 
