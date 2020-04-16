@@ -4,6 +4,7 @@ import Welcome from './components/Welcome'
 import About from './components/About'
 import Images from './components/Images'
 import Properties from './components/Properties'
+import PropertyInfo from './components/PropertyInfo'
 import Renters from './components/Renters'
 import Payments from './components/Payments'
 import LeaseManagement from './components/LeaseManagement'
@@ -22,10 +23,11 @@ class Routes extends Component {
                     <Route exact path="/about" component={About}/>
                     <Route exact path="/images" component={Images}/>
                     <Route exact path="/users/:userId/properties" component={Properties}/>
+                    <Route exact path="/users/:userId/properties/:propId" component={PropertyInfo}/>
                     <Route exact path="/users/:userId/renters" component={Renters}/>
                     <Route exact path="/users/:userId/payments" component={Payments}/>
                     <Route exact path="/users/:userId/lease" component={LeaseManagement}/>
-                    <Route component={Welcome}/>
+                    {/*<Route component={Welcome}/>*/}
                 </Switch>
                 </div>
             </div>
