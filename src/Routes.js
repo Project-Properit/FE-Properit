@@ -9,6 +9,7 @@ import Renters from './components/Renters'
 import Payments from './components/Payments'
 import LeaseManagement from './components/LeaseManagement'
 import ProperitNavBar from './components/ProperitNavBar'
+import Documents from "./components/Documents";
 
 class Routes extends Component {
 
@@ -26,7 +27,7 @@ class Routes extends Component {
                     <Route exact path="/users/:userId/properties/:propId" component={PropertyInfo}/>
                     <Route exact path="/users/:userId/renters" component={Renters}/>
                     <Route exact path="/users/:userId/payments" component={Payments}/>
-                    <Route exact path="/users/:userId/lease" component={LeaseManagement}/>
+                    <Route exact path="/users/:userId/lease" component={Documents}/>
                     {/*<Route component={Welcome}/>*/}
                 </Switch>
                 </div>

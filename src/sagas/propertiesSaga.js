@@ -3,6 +3,7 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import {setError, setProperties} from '../actions/propertyActions';
 import {PROPERTIES} from '../constants';
 import {fetchProperties} from '../api';
+import {actionChannel, take} from "@redux-saga/core/effects";
 
 export function* handlePropertiesLoad(action) {
     try {
@@ -14,5 +15,12 @@ export function* handlePropertiesLoad(action) {
 }
 
 export default function* watchPropertiesLoad() {
-    yield takeEvery(PROPERTIES.LOAD, handlePropertiesLoad);
+    //Creating Channel like a queue for `PROPERTIES.LOAD` requests.
+    const subChannel = yield actionChannel(PROPERTIES.LOAD);
+    while (true){
+        // Blocking - takes actions from queue.
+        const action = yield take(subChannel);
+        yield call(handlePropertiesLoad, action)
+    }
+    // yield takeEvery(PROPERTIES.LOAD, handlePropertiesLoad);
 }
