@@ -11,7 +11,6 @@ const initialState = {
 const  signupReducer = (state = initialState, action) =>{
   switch (action.type) {
     case SIGNUP.SIGNUP_REQUESTING:
-      console.log('SIGNUP_REQUESTING')
       return {
         requesting: true,
         successful: false,

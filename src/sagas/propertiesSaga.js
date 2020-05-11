@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 
-import {setError, setProperties} from '../actions/propertyActions';
+import {setError, setProperties} from '../actions/propertiesActions';
 import {PROPERTIES} from '../constants';
 import {fetchProperties} from '../api';
 import {actionChannel, take} from "@redux-saga/core/effects";

@@ -1,19 +1,20 @@
 import {CLIENT} from '../constants';
 const initialSate = {
-  id: null,
   token: localStorage.getItem('token')|| null,
+  userId: localStorage.getItem('userId')|| null,
 }
 const clientReducer = (state = initialSate, action) => {
    switch (action.type) {
     case CLIENT.CLIENT_SET:
+        console.log(action)
       return {
-        id: action.token.userId,
+        userId: action.userId,
         token: action.token,
       }
 
     case CLIENT.CLIENT_UNSET:
       return {
-        id: null,
+        userId: null,
         token: null,
       }
 

@@ -1,39 +1,12 @@
-import { take, fork, cancel, call, put, cancelled } from 'redux-saga/effects'
-import { push } from "react-router-redux";
-
-
+import {call, cancel, cancelled, fork, put, take} from 'redux-saga/effects'
+import {push} from "react-router-redux";
 // Helper for api errors
-import { handleApiErrors } from '../lib/api-errors'
-
 // Our login constants
-import {
-  LOGIN
-} from '../constants'
-
+import {CLIENT, LOGIN} from '../constants'
 // So that we can modify our Client piece of state
-import {
-  setClient,
-  unsetClient,
-} from '../actions/clientActions'
+import {setClient, unsetClient,} from '../actions/clientActions'
+import {loginApi} from "../api";
 
-import {
-  CLIENT,
-} from '../constants'
-const loginUrl = `${process.env.REACT_APP_API_URL}/login`
-
-function loginApi (email, password) {
-  return fetch(loginUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic '+btoa(email+':'+password),
-    },
-  })
-    .then(handleApiErrors)
-    .then(response => response.json())
-    .then(json => json)
-    .catch((error) => { throw error })
-}
 function* logout () {
   // dispatches the CLIENT_UNSET action
   yield put(unsetClient())
@@ -48,26 +21,27 @@ function* logout () {
 }
 function* loginFlow (email, password) {
     let token
+    let userId
   try {
     // try to call to our loginApi() function.  Redux Saga
     // will pause here until we either are successful or
     // receive an error
-    token = yield call(loginApi, email, password)
-  console.log(token)
+    let response = yield call(loginApi, email, password)
+    token = response.token
+    userId = response.user_id
     // inform Redux to set our client token, this is non blocking so...
-    yield put(setClient(token))
+    yield put(setClient(token, userId))
 
     // .. also inform redux that our login was successful
     yield put({ type: LOGIN.LOGIN_SUCCESS })
 
     // set a stringified version of our token to localstorage on our domain
-    localStorage.setItem('token', JSON.stringify(token))
+    localStorage.setItem('token', (token))
+    localStorage.setItem('userId', userId)
 
     // redirect them to WIDGETS!
-    console.log('rediresct')
-      yield put(push('/'));
+      yield put(push('/users/'+userId));
 
-      // yield put(push('/'));
 
   } catch (error) {
     // error? send it to redux

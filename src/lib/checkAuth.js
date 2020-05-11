@@ -4,9 +4,7 @@ function checkAuthorization () {
   // attempt to grab the token from localstorage
   const storedToken = localStorage.getItem('token')
   // if it exists
-  console.log(storedToken)
   if (storedToken) {
-    console.log('true')
     return true
     // parse it down into an object
     const token = JSON.parse(storedToken)
@@ -23,7 +21,6 @@ function checkAuthorization () {
 
     // otherwise, dispatch the token to our setClient action
     // which will update our redux state with the token and return true
-    console.log('true')
     return true
   }
 
