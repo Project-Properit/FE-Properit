@@ -1,0 +1,36 @@
+.filesUploadContainer{
+    padding: 5px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.filesUploadContainer .filesDropzone{
+    padding: 30px;
+    background-color: #ececec;
+    border: 2px dashed gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filesUploadContainer .filesDropzone.hidden{
+    display: none;
+}
+
+.filesUploadContainer .filesList .file{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filesUploadContainer .filesList .file .fileName{
+    white-space: nowrap;
+    overflow: hidden;
+    width: 80%;
+    text-overflow: ellipsis;
+}
+
+#deleteAllFiles{
+    width: 10rem;
+    margin: 0.5rem calc(50% - 5rem);
+}

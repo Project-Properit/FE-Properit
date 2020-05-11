@@ -14,6 +14,8 @@ function ProperitNavBar() {
                 <Nav.Link href="#users/123/lease">Lease Management</Nav.Link>
                 <Nav.Link href="#about">About</Nav.Link>
                 <Nav.Link href="#images">Images(Example)</Nav.Link>
+                <Nav.Link href="#document">Document</Nav.Link>
+
             </Nav>
         </Navbar>
     );

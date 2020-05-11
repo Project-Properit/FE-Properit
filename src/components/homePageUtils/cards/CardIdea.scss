@@ -1,0 +1,20 @@
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .card-idea-title {
+    color: #AD974F;
+    text-align: center;
+
+  }
+  .card-idea-text {
+    color: #231F20;
+    overflow: hidden;
+    white-space: pre-line;
+    text-align: center;
+    font-weight: bold;
+
+  }
+}
