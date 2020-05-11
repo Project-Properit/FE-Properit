@@ -15,13 +15,15 @@ import history from './history';
 import PrivateRoute from "./components/PrivateRoute";
 import {Switch} from "react-bootstrap";
 import PublicRoute from "./components/PublicRoute";
+import HomePage from "./components/pages/HomePage";
+
 function App() {
     return (
         <Router history={history}>
             <ProperitNavBar/>
             <div style={{padding: '14px'}}>
                 <Switch>
-                    <Route exact path="/" component={Welcome}/>
+                    <Route exact path="/" component={HomePage}/>
                     <PublicRoute path="/login" component={Login}/>
                     <PublicRoute path="/signup" component={Signup}/>
                     <PrivateRoute exact path="/about" component={About}/>
@@ -30,6 +32,8 @@ function App() {
                     <PrivateRoute exact path="/renters" component={Renters}/>
                     <PrivateRoute exact path="/payments" component={Payments}/>
                     <PrivateRoute exact path="/lease" component={Documents}/>
+                    <PrivateRoute exact path="/document" component={Documents}/>
+
                 </Switch>
             </div>
         </Router>

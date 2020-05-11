@@ -1,0 +1,14 @@
+#header {
+  height: calc(100vh - 60px);
+  padding-top: 100px;
+  min-height: 100px;
+  opacity: 0.7;
+  font-size: 38px;
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 670px){
+  #header {
+    min-height: 500px;
+  }
+}

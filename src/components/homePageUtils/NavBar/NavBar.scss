@@ -1,0 +1,45 @@
+.homePageNav {
+  position: fixed;
+  z-index: 1000;
+  //background: cadetblue;
+  background-color: #231F20 !important;
+  font-size: 18px;
+  top: 0;
+  width: 100%;
+  height: 60px;
+
+  & > div {
+    display: flex;
+
+  }
+  .logo {
+    height: 60px;
+  }
+  ul {
+    list-style: none;
+    padding: 0 5rem 0 5rem;
+    padding-top: 14px;
+
+    li {
+      display: inline;
+
+      img {
+        height: 30px;
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+        padding: 18px;
+
+        &.is-active {
+          background: #AD974F;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}

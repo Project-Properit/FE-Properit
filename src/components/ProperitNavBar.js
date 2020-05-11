@@ -21,6 +21,8 @@ class ProperitNavBar extends Component {
                         <Nav.Link as={Link} to="/lease">Lease Management</Nav.Link>
                         <Nav.Link as={Link} to='/about' >About</Nav.Link>
                         <Nav.Link onClick={() => this.props.logout()}>Logout</Nav.Link>
+                        <Nav.Link href="#document">Document</Nav.Link>
+
                     </>}
                     {!isLogin &&
                     <>

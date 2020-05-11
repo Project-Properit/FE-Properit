@@ -6,9 +6,11 @@ import clientReducer from "./clientReducer";
 import signupReducer from "./signUpReducer";
 import loginReducer from "./loginReducer";
 import myPropertyReducer from "./propertyReducer";
+import filesUploadReducer from "./fileUploadReducer";
 
 const rootReducer = combineReducers({
     myProperties: myPropertiesReducer,
+    fileUpload: filesUploadReducer,
     myDocuments: myDocumentsReducer,
     clientReducer,
     signupReducer,
