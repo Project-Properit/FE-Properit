@@ -33,7 +33,7 @@ class HomePage extends PureComponent {
 
         return (
             <HashRouter>
-                <div>
+                <div className={'bla'}>
                     <NavBar />
                     <div className="content">
                         <Header />

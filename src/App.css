@@ -168,19 +168,26 @@ a {
 .isCurrent a, h2 {
   color: #f1a07a;
 }
-table tr {
-	text-align: center;
-	padding-left:10px;
-}
-table td:first-child {
-	text-align: left;
-	padding-left:10px;
-	border-left: 0;
-}
-table td {
-	padding:10px;
-}
+/*table tr {*/
+/*	text-align: center;*/
+/*	padding-left:10px;*/
+/*}*/
+/*table td:first-child {*/
+/*	text-align: left;*/
+/*	padding-left:10px;*/
+/*	border-left: 0;*/
+/*}*/
+/*table td {*/
+/*	padding:10px;*/
+/*}*/
 
-table tr:hover td {
-	background: #f2f2f2;
-}
+/*table tr:hover td {*/
+/*	background: #f2f2f2;*/
+/*}*/
+ .custom-control{
+   padding-left: 0 !important;
+
+ } .custom-switch {
+  padding-left: 0 !important;
+
+ }
