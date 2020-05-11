@@ -1,22 +1,34 @@
-import { PROPERTIES } from '../constants';
+import { PROPERTY } from '../constants';
+import { createFormAction } from 'redux-form-saga';
 
-const loadProperties = (userId) => ({
-    type: PROPERTIES.LOAD,
-    userId
+const loadProperty = (propertyId) => ({
+    type: PROPERTY.LOAD,
+    propertyId
+});
+const removeProperty = (propertyId) => ({
+    type: PROPERTY.REMOVE,
+    propertyId
+});
+const clearProperty = () => ({
+    type: PROPERTY.CLEAR,
 });
 
-const setProperties = myProperties => ({
-    type: PROPERTIES.LOAD_SUCCESS,
-    myProperties,
+const setProperty = myProperty => ({
+    type: PROPERTY.LOAD_SUCCESS,
+    myProperty,
 });
 
 const setError = error => ({
-    type: PROPERTIES.LOAD_FAIL,
+    type: PROPERTY.LOAD_FAIL,
     error,
 });
 
+const updatePropertyFormAction = createFormAction('UpdateProperty');
 export {
-    loadProperties,
-    setProperties,
+    loadProperty,
+    setProperty,
     setError,
+    clearProperty,
+    removeProperty,
+    updatePropertyFormAction
 };

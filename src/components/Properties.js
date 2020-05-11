@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {loadProperties} from "../actions/propertyActions";
+import {loadProperties} from "../actions/propertiesActions";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {PropertyCard} from "./PropertyCard";
@@ -8,8 +8,8 @@ import Loading from "./Loading";
 
 class Properties extends Component {
     componentDidMount() {
-        const {userId} = this.props.match.params;
-        this.props.loadProperties(userId);
+        console.log(this.props.ownerId)
+        this.props.loadProperties(this.props.ownerId);
     }
 
     render() {
@@ -28,8 +28,8 @@ class Properties extends Component {
                     {this.props.myProperties.map(prop => (
                             <PropertyCard
                                 onRemove={(propId)=>this.onRemoveProperty(propId)}
-                                infoUrl={this.onInfoProperty(prop.prop_id)}
-                                key={prop.prop_id}
+                                infoUrl={this.onInfoProperty(prop.id)}
+                                key={prop.id}
                                 property={prop}/>
                     ))}
                 </Row>
@@ -46,18 +46,19 @@ class Properties extends Component {
     }
 
     onInfoProperty(propId) {
-        return this.props.match.url +'/' +propId
+        return '/properties/' +propId
     }
 }
 
-const mapStateToProps = ({myProperties}) => ({
+const mapStateToProps = ({myProperties, clientReducer}) => ({
     isLoading: myProperties.isLoading,
     myProperties: myProperties.myProperties,
     error: myProperties.error,
+    ownerId: clientReducer.userId,
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadProperties: (userId) => dispatch(loadProperties(userId)),
+    loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
 });
 
 export default connect(

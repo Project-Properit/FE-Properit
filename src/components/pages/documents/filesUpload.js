@@ -6,7 +6,6 @@ import FilesList from "./filesList";
 import "./filesUpload.css";
 import {connect} from "react-redux";
 import { setFiles, setExistedFiles, addFiles } from "../../../actions/fielsUploadActions";
-import {loadImages} from "../../../actions/imageActions";
 
 
 const ADD_FILES_TEXT = "הוספת קבצים";

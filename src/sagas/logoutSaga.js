@@ -11,6 +11,7 @@ function* logout (action) {
 
   // remove our token
   localStorage.removeItem('token')
+  localStorage.removeItem('userId')
   // redirect to the /login screen
   yield put(push('/login'));
 
