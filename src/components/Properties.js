@@ -4,6 +4,7 @@ import {loadProperties} from "../actions/propertyActions";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {PropertyCard} from "./PropertyCard";
+import Loading from "./Loading";
 
 class Properties extends Component {
     componentDidMount() {
@@ -20,9 +21,9 @@ class Properties extends Component {
                 <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
                     <h2> Properties - {userId}</h2>
                 </header>
-                {this.props.isLoading &&
-                <div>Loading..</div>
-                }
+
+               <Loading loading={this.props.isLoading}/>
+
                 <Row>
                     {this.props.myProperties.map(prop => (
                             <PropertyCard
