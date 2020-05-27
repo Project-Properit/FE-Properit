@@ -21,9 +21,10 @@ export const PropertyCard = props => {
                     <Card.Text>{prop.rent_fee}$</Card.Text>
                     <Card.Subtitle className="mb-2 text-muted">{prop.comments}</Card.Subtitle>
                     <Card.Link as={Link} to={props.infoUrl}>Info</Card.Link>
-                    {/*<Button style={{marginLeft:'1rem'}} onClick={()=>props.onRemove(prop.prop_id)} variant="outline-danger">Remove</Button>*/}
 
+                    {/*<Button style={{marginLeft:'1rem'}} onClick={()=>props.onRemove(prop.prop_id)} variant="outline-danger">Remove</Button>*/}
                 </Card.Body>
+                <Card.Link as={Link} to={props.groupsPaymentsUrl}>Show all Payments</Card.Link>
             </Card>
         </Col>)
 };

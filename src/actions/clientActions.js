@@ -7,7 +7,6 @@ const setClient = (token, userId) => ({
 });
 
 
-
 const unsetClient = () => ({
 type: CLIENT.CLIENT_UNSET,});
 

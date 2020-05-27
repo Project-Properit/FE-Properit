@@ -13,7 +13,7 @@ const filesUploadReducer = (state = initialState, action) => {
             ...state,
             files: action.files
         }
-        console.log(newState);
+        // console.log(newState);
         return newState;
     }if (action.type === FILEUPLOAD.SET_EXISTED_FILES) {
         return {
@@ -27,10 +27,10 @@ const filesUploadReducer = (state = initialState, action) => {
             ...state,
             files: newFiles
         }
-        console.log(newState);
+        // console.log(newState);
         return newState;
     }
-    console.log(state);
+    // console.log(state);
     return state;
 };
 
