@@ -21,6 +21,7 @@ import DocumentsView from "./components/pages/DocumentsView/index";
 
 import Documents from "./components/Documents";
 import CreateGroupPayments from "./components/CreateGroupPayments";
+import SelectionModeView from "./components/SelectionModeView";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                     <Route exact path="/" component={HomePage}/>
                     <PublicRoute path="/login" component={Login}/>
                     <PublicRoute path="/signup" component={Signup}/>
+                    <PrivateRoute exact path="/chooseView" component={SelectionModeView}/>
                     <PrivateRoute exact path="/about" component={About}/>
                     <PrivateRoute exact path="/properties" component={Properties}/>
                     <PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
@@ -40,7 +42,6 @@ function App() {
                     <PrivateRoute exact path="/renters" component={Renters}/>
                     <PrivateRoute exact path="/lease" component={Documents}/>
                     <PrivateRoute exact path="/documents" component={DocumentsView}/>
-
                 </Switch>
             </div>
         </Router>
