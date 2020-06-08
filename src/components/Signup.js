@@ -7,6 +7,8 @@ import Errors from '../notifications/Errors'
 
 import signupRequest from '../actions/sugnUpActions'
 import Select  from "react-select";
+import Navbar from "react-bootstrap/Navbar";
+import logo from "../images/logoWhite .jpg";
 const userOptions = [
     {
       label: 'Asset Owner',
@@ -54,7 +56,13 @@ class Signup extends Component {
         } = this.props
 
         return (
-            <div className="signup">
+             <div>
+                 <Navbar bg="dark" variant="dark">
+                    <Navbar.Brand href="/signUp"><img className="logo" style={{height: '60px'}} src={logo}
+                                                          alt='logo'/></Navbar.Brand>
+                 </Navbar>
+            <div style={{textAlign:'center',marginTop:'20px'}} className={'container'}>
+              <div className="signup">
                 {/* Use the Submit handler with our own submit handler*/}
                 <form className="widget-form" onSubmit={handleSubmit(this.submit)}>
                     <h1>Signup</h1>
@@ -135,6 +143,8 @@ class Signup extends Component {
                     )}
                 </div>
             </div>
+            </div>
+             </div>
         )
     }
 }
