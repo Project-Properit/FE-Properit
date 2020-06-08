@@ -20,8 +20,8 @@ export const GroupPaymentsCard = props => {
                     <Card.Text>{prop.description}</Card.Text>
                     <Card.Subtitle className="mb-2 text-muted">{prop.creation_date}</Card.Subtitle>
                     <Row>
-                        {prop.payments.map(groupPayments => (
-                            <a>Payment</a>
+                        {prop.payments.map(payment => (
+                            <a key={payment}>Payment</a>
                             ))}
                     </Row>
                     {/*<Button style={{marginLeft:'1rem'}} onClick={()=>props.onRemove(prop.prop_id)} variant="outline-danger">Remove</Button>*/}

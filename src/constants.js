@@ -41,7 +41,8 @@ const CLIENT = {
 const USER = {
     LOAD_SUCCESS: "USER_LOAD_SUCCESS",
     LOAD: "USER_LOAD",
-    LOAD_FAIL: "USER_LOAD_FAIL"
+    LOAD_FAIL: "USER_LOAD_FAIL",
+    CLEAR: "CLEAR"
 
 };
 const SIGNUP = {

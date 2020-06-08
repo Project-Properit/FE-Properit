@@ -19,7 +19,6 @@ const apiCall = async (url, method, jsonBody = {}, withToken = true) => {
     if (response.status >= 400) {
         throw new Error(data.errors);
     }
-    console.log(data);
     return data;
 
 }

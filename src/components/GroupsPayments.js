@@ -29,8 +29,8 @@ class GroupsPayments extends Component {
                 <Row>
                     {this.props.myGroupsPayments.map(groupPayments => (
                         <GroupPaymentsCard
-                            infoUrl={this.onInfoGroupPayments(propId, groupPayments.id)}
                             key={groupPayments.id}
+                            infoUrl={this.onInfoGroupPayments(propId, groupPayments.id)}
                             groupPayments={groupPayments}/>
                     ))}
                 </Row>

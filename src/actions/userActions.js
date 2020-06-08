@@ -1,4 +1,5 @@
 import {USER} from '../constants'
+import {createFormAction} from "redux-form-saga";
 
 const setUser = userObject => ({
     type: USER.LOAD_SUCCESS,
@@ -10,13 +11,19 @@ const loadUser = (userId) => ({
     userId
 });
 
+const clearUsers = () => ({
+    type: USER.CLEAR
+})
+
 const setError = error => ({
     type: USER.LOAD_FAIL,
     error,
 });
 
+
 export {
     setUser,
     loadUser,
-    setError
+    setError,
+    clearUsers
 };

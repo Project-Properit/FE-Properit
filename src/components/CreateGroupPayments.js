@@ -1,26 +1,44 @@
 import React, {Component} from 'react';
 import Container from "react-bootstrap/Container";
-import Switch from "react-switch";
-import {createGroupPropertyFormAction} from "../actions/groupPaymentsActions";
+import {createGroupPaymentsFormAction} from "../actions/groupsPaymentsActions";
 import {loadProperty} from "../actions/propertyActions"
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {loadUser} from "../actions/userActions";
+import {clearUsers, loadUser} from "../actions/userActions";
 import Loading from "./Loading";
-import {loginApi} from "../api";
-import UserPaymentCard from "./UserPaymentCard";
-import divWithClassName from "react-bootstrap/cjs/divWithClassName";
+import Switch from "react-switch";
+import "./styles.css"
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
 
 class CreateGroupPayments extends Component {
+    constructor() {
+        super();
+        this.state = {amounts: {}, checked: false, totalAmount: 0, sumAllAmounts: 0};
+        this.handleChange = this.handleChange.bind(this);
+    }
+
     componentDidMount() {
         const {propId} = this.props.match.params;
         this.props.loadProperty(propId);
+        this.send_users_load = false
+    }
+
+    componentWillUnmount() {
+        this.props.clearUsers()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!this.send_users_load && this.props.all_users_were_load.length !== this.props.initialValues.tenant_list.length) {
+            this.props.initialValues.tenant_list.map(tenant => this.props.loadUser(tenant))
+            this.send_users_load = true
+        }
     }
 
     render() {
         const {propId} = this.props.match.params;
         const {handleSubmit, pristine, reset, submitting} = this.props; // handleSubmit is provided by reduxForm
-        const submit = handleSubmit(createGroupPropertyFormAction); // creating our submit handler by passing our action
+        const submit = handleSubmit(createGroupPaymentsFormAction); // creating our submit handler by passing our action
         return (
             <Container className="App">
                 <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
@@ -28,7 +46,6 @@ class CreateGroupPayments extends Component {
                 </header>
 
                 <Loading loading={this.props.isLoading}/>
-
                 <form onSubmit={submit}>
                     <table>
                         <tbody>
@@ -53,40 +70,47 @@ class CreateGroupPayments extends Component {
                         <tr>
                             <td><label>Amount</label></td>
                             <td>
-                                <Field component="input" name="amount" type="number" placeholder="amount"/>
+                                <Field onChange={(e) => {
+                                    this.setTotalAmount(e)
+                                }} component="input" name="amount" type="number" placeholder="amount"
+                                       value={this.state.sumAllAmounts ? this.state.sumAllAmounts : "amount"}/>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    {/*<div>*/}
-                    {/*    <Switch onChange={this.handleChange} checked={this.checked}/>*/}
-                    {/*</div>*/}
-                    <Loading loading={this.props.isLoading}/>
-                    {this.props.initialValues.tenant_list.map((tenant,index) => (
-                        <div key={index}>
-                            {console.log(tenant)}
-                            <UserPaymentCard userId={tenant}/>
-                        </div>
-
-                    ))}
-                    {/*<table key={index}>*/}
-                    {/*    {this.getUser(tenant)}*/}
-                    {/*    <tbody>*/}
-                    {/*    <tr>*/}
-                    {/*        <td><label>Tenant</label></td>*/}
-                    {/*        <td>*/}
-                    {/*            <Field component="input" name="tenant_name" type="text" placeholder={this.props.user ? this.props.user.first_name: null} disabled/>*/}
-                    {/*        </td>*/}
-                    {/*    </tr>*/}
-                    {/*    <tr>*/}
-                    {/*        <td><label>Custom Amount</label></td>*/}
-                    {/*        <td>*/}
-                    {/*            <Field component="input" name="amount" type="number" placeholder="Amount"/>*/}
-                    {/*        </td>*/}
-                    {/*    </tr>*/}
-                    {/*    </tbody>*/}
-                    {/*</table>*/}
-
+                    <div>
+                        <span>Custom Separate</span>
+                        <Switch onChange={this.handleChange} checked={this.state.checked} className="react-switch"/>
+                    </div>
+                    <div hidden={!this.state.checked}>
+                        <Loading loading={this.props.isLoading}/>
+                        <table>
+                            <tbody>
+                            <tr>
+                                {this.props.all_users_were_load.map(tenant => (
+                                    <td key={tenant.email}>
+                                        <Col style={{margin: '1rem'}}>
+                                            <Card border={null} style={{width: "18rem"}}>
+                                                <Card.Body>
+                                                    <Card.Title>
+                                                        <p style={{float: 'left'}}>
+                                                            <b>{tenant ? tenant.first_name : null}</b></p>
+                                                        {/*<div style={{width:'4rem'}}></div>*/}
+                                                        <div style={{clear: 'both'}}/>
+                                                    </Card.Title>
+                                                    <input onChange={(e) => {
+                                                        this.checkTotalAmount(e, tenant.email)
+                                                    }} name="amount" type="number" placeholder={"Amount"}
+                                                           value={this.state.amounts[tenant.email] ? this.state.amounts[tenant.email] : "Amount"}/>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    </td>
+                                ))}
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div>
                         <button type="submit" disabled={pristine || submitting}>Save</button>
                     </div>
@@ -98,27 +122,54 @@ class CreateGroupPayments extends Component {
             </Container>
         )
     }
-    getUser(userId)  {
-        this.props.loadUser(userId)
+
+    checkTotalAmount(e, email) {
+        this.setNewAmount(email, e.target.value)
+        this.setState({sumAllAmounts: 0})
+        Object.entries(this.state.amounts).map(([key, value]) => this.setState({
+            sumAllAmounts: this.state.sumAllAmounts + parseInt(value)
+        }))
+        console.log(this.state.sumAllAmounts)
+
     }
 
+    setTotalAmount(e) {
+        this.setState({totalAmount: parseInt(e.target.value)})
+        let amount = e.target.value / this.props.all_users_were_load.length;
+        this.props.all_users_were_load.forEach(tenant => this.setNewAmount(tenant.email, amount))
+    }
+
+    setNewAmount(email, amount) {
+        let amounts = this.state.amounts
+        amounts[email] = amount
+        this.setState(amounts)
+    }
+
+    handleChange(checked) {
+        console.log(checked)
+        this.setState({checked})
+    }
 }
 
-const mapStateToProps = ({myPropertyReducer, userReducer}) => ({
+CreateGroupPayments = reduxForm({form: 'groupPayments'})(CreateGroupPayments)
+
+
+const mapStateToProps = ({myPropertyReducer, userReducer, state}) => ({
     isLoading: myPropertyReducer.isLoading,
     myProperty: myPropertyReducer.myProperty,
     error: myPropertyReducer.error,
     initialValues: myPropertyReducer.initialValues,
-    user: userReducer.user
+    all_users_were_load: userReducer.all_users_were_load,
+    isLoaded: userReducer.isLoaded
 });
 
 const mapDispatchToProps = dispatch => ({
     loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
-    loadUser: (userId) => dispatch(loadUser(userId))
+    loadUser: (userId) => dispatch(loadUser(userId)),
+    clearUsers: () => dispatch(clearUsers())
 });
 
-CreateGroupPayments = reduxForm({form: 'groupPayments'})(CreateGroupPayments)
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(CreateGroupPayments);

@@ -26,14 +26,10 @@ const setError = error => ({
     error,
 });
 
-const updateGroupPropertyFormAction = createFormAction('UpdateGroupPayments');
-const createGroupPropertyFormAction = createFormAction('CreateGroupPayments');
 export {
     loadGroupPayments,
     setGroupPayments,
     setError,
     clearGroupPayments,
-    removeGroupPayments,
-    updateGroupPropertyFormAction,
-    createGroupPropertyFormAction
+    removeGroupPayments
 };
