@@ -21,7 +21,8 @@ const  signupReducer = (state = initialState, action) =>{
       return {
         errors: [],
         messages: [{
-          body: `Successfully created account for ${action.response.email}`,
+          body: `Successfully created account for user`,
+          // ${action.response.email}`,
           time: new Date(),
         }],
         requesting: false,

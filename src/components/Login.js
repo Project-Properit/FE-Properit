@@ -7,6 +7,8 @@ import Messages from '../notifications/Messages'
 import Errors from '../notifications/Errors'
 
 import loginRequest from '../actions/loginActions'
+import Navbar from "react-bootstrap/Navbar";
+import logo from "../images/logoWhite .jpg";
 
 
 class Login extends Component {
@@ -26,6 +28,12 @@ class Login extends Component {
         } = this.props
 
         return (
+            <div>
+                 <Navbar bg="dark" variant="dark">
+                    <Navbar.Brand href="/login"><img className="logo" style={{height: '60px'}} src={logo}
+                                                          alt='logo'/></Navbar.Brand>
+                 </Navbar>
+             <div style={{textAlign:'center',marginTop:'20px'}} className={'container'}>
             <div className="login">
                 <form className="widget-form" onSubmit={handleSubmit(this.submit)}>
                     <h1>LOGIN</h1>
@@ -65,6 +73,8 @@ class Login extends Component {
                     )}
                 </div>
             </div>
+             </div>
+                     </div>
         )
     }
 }

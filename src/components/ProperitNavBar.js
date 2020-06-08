@@ -25,11 +25,11 @@ class ProperitNavBar extends Component {
                         }
                         {isLogin && (!isOwner || !isTenant) &&
                         <>
-                            <Nav.Link href="/properties">My Properties</Nav.Link>
-                            <Nav.Link href={`/renters`}>My Renters</Nav.Link>
-                            <Nav.Link href="/payments">Payments</Nav.Link>
-                            <Nav.Link href="/lease">Lease Management</Nav.Link>
-                            <Nav.Link href='/about'>About</Nav.Link>
+                        <Nav.Link as={Link} to="/properties">My Properties</Nav.Link>
+                        <Nav.Link as={Link} to={`/renters`}>My Renters</Nav.Link>
+                        <Nav.Link as={Link} to="/payments">Payments</Nav.Link>
+                        <Nav.Link as={Link} to="/lease">Lease Management</Nav.Link>
+                        <Nav.Link as={Link} to='/about' >About</Nav.Link>
                             <Nav.Link href="/documents">Document</Nav.Link>
                             <Nav.Link onClick={() => this.props.logout()}>Logout</Nav.Link>
                         </>}
