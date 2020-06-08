@@ -2,6 +2,8 @@ import {CLIENT} from '../constants';
 const initialSate = {
   token: localStorage.getItem('token')|| null,
   userId: localStorage.getItem('userId')|| null,
+  isTenant: localStorage.getItem('isTenant')|| null,
+  isOwner: localStorage.getItem('isOwner')|| null,
 }
 const clientReducer = (state = initialSate, action) => {
    switch (action.type) {
@@ -10,12 +12,16 @@ const clientReducer = (state = initialSate, action) => {
       return {
         userId: action.userId,
         token: action.token,
+        isTenant: action.isTenant,
+        isOwner: action.isOwner,
       }
 
-    case CLIENT.CLIENT_UNSET:
+       case CLIENT.CLIENT_UNSET:
       return {
         userId: null,
         token: null,
+        isTenant: null,
+        isOwner: null
       }
 
     default:

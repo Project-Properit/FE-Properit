@@ -7,4 +7,4 @@ const logoutAction = () => ({
 });
 
 // Since it's the only one here
-export default logoutAction
+export { logoutAction}
