@@ -4,11 +4,13 @@ const initialSate = {
   userId: localStorage.getItem('userId')|| null,
   isTenant: localStorage.getItem('isTenant')|| null,
   isOwner: localStorage.getItem('isOwner')|| null,
+  chosenMode: null
 }
 const clientReducer = (state = initialSate, action) => {
    switch (action.type) {
+
     case CLIENT.CLIENT_SET:
-        console.log(action)
+
       return {
         userId: action.userId,
         token: action.token,
@@ -21,8 +23,17 @@ const clientReducer = (state = initialSate, action) => {
         userId: null,
         token: null,
         isTenant: null,
-        isOwner: null
+        isOwner: null,
+          chosenMode: null
+
       }
+
+       case CLIENT.SET_MODE:
+           console.log(action)
+           return {
+               ...state,
+               chosenMode: action.mode
+           }
 
     default:
       return state

@@ -34,7 +34,7 @@ function* loginFlow (email, password) {
     isOwner = response.is_owner
     isTenant = response.is_tenant
     // inform Redux to set our client token, this is non blocking so...
-    yield put(setClient(token, userId))
+    yield put(setClient(token, userId, isOwner, isTenant))
 
     // .. also inform redux that our login was successful
     yield put({ type: LOGIN.LOGIN_SUCCESS })
@@ -44,10 +44,14 @@ function* loginFlow (email, password) {
     localStorage.setItem('userId', userId)
     localStorage.setItem('isOwner', isOwner)
     localStorage.setItem('isTenant', isTenant)
-
+  if(isOwner && isTenant)
+  {
+    yield put(push('/chooseView'));
+  }
+  else {
     // redirect them to WIDGETS!
-      yield put(push('/users/'+userId));
-
+    yield put(push('/properties'));
+  }
 
   } catch (error) {
     // error? send it to redux

@@ -11,6 +11,11 @@ class ProperitNavBar extends Component {
         const isLogin = this.props.token
         const isOwner = this.props.isOwner
         const isTenant = this.props.isTenant
+        const chosenMode = this.props.chosenMode
+        console.log(chosenMode)
+        console.log(isOwner)
+        console.log(isTenant)
+        console.log(isLogin)
         if(isLogin) {
             return (
 
@@ -18,21 +23,28 @@ class ProperitNavBar extends Component {
                     <Navbar.Brand href="/properties"><img className="logo" style={{height: '60px'}} src={logo}
                                                           alt='logo'/></Navbar.Brand>
                     <Nav className="mr-auto">
-                        {isOwner && isTenant &&
-                        <>
-                            <Nav.Link onClick={()=> logoutAction()}>Logout</Nav.Link>
-                        </>
-                        }
-                        {isLogin && (!isOwner || !isTenant) &&
+                        {/*{isOwner && isTenant && chosenMode===null &&*/}
+                        {/*<>*/}
+                        {/*    <Nav.Link onClick={()=> this.props.logout()}>Logout</Nav.Link>*/}
+                        {/*</>*/}
+                        {/*}*/}
+                        {isLogin && chosenMode==='owner' &&
                         <>
                         <Nav.Link as={Link} to="/properties">My Properties</Nav.Link>
-                        <Nav.Link as={Link} to={`/renters`}>My Renters</Nav.Link>
-                        <Nav.Link as={Link} to="/payments">Payments</Nav.Link>
-                        <Nav.Link as={Link} to="/lease">Lease Management</Nav.Link>
-                        <Nav.Link as={Link} to='/about' >About</Nav.Link>
-                            <Nav.Link href="/documents">Document</Nav.Link>
+                            </>
+                        }
+                        {isLogin && chosenMode==='tenant' &&
+                        <>
+                            <Nav.Link as={Link} to="/payments">Payments</Nav.Link>
+                        </>
+                        }
+                        {/*<Nav.Link as={Link} to={`/renters`}>My Renters</Nav.Link>*/}
+                        {/*<Nav.Link as={Link} to="/payments">Payments</Nav.Link>*/}
+                        {/*<Nav.Link as={Link} to="/lease">Lease Management</Nav.Link>*/}
+                        {/*<Nav.Link as={Link} to='/about' >About</Nav.Link>*/}
+                        {/*    <Nav.Link as={Link} to="/documents">Document</Nav.Link>*/}
                             <Nav.Link onClick={() => this.props.logout()}>Logout</Nav.Link>
-                        </>}
+
                     </Nav>
                 </Navbar>
             );
@@ -49,6 +61,7 @@ const mapStateToProps = ({clientReducer}) => ({
     userId: clientReducer.userId,
     isOwner: clientReducer.isOwner,
     isTenant: clientReducer.isTenant,
+    chosenMode: clientReducer.chosenMode
 });
 export default connect(
     mapStateToProps,

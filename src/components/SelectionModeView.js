@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {setMode} from "../actions/clientActions";
 
 
 class SelectionModeView extends Component {
@@ -17,7 +18,7 @@ class SelectionModeView extends Component {
                 </header>
                 <Row>
                     <Col>
-                        <Link as={Link} to={this.onOwnerMode()}>
+                        <Link as={Link} to={'/properties'} onClick={()=>this.onOwnerMode()}>
                         <Card>
                             <Card.Body>
                                 <Card.Title>
@@ -29,7 +30,7 @@ class SelectionModeView extends Component {
                         </Link>
                     </Col>
                     <Col>
-                        <Link as={Link} to={this.onTenantMode()}>
+                        <Link as={Link} to={'/about'} onClick={()=>this.onTenantMode()}>
                         <Card>
                             <Card.Body>
                                 <Card.Title>
@@ -46,17 +47,17 @@ class SelectionModeView extends Component {
         );
     }
     onOwnerMode() {
-
+        this.props.setMode('owner')
         return '/properties'
     }
     onTenantMode() {
+        this.props.setMode('tenant')
         return '/about'
     }
 }
-const mapStateToProps = ({clientReducer}) => ({
-    token: clientReducer.token,
-
+const mapDispatchToProps = dispatch => ({
+    setMode: (mode) => dispatch(setMode(mode))
 });
-export default connect(
-    mapStateToProps
+export default connect(null,
+    mapDispatchToProps
     )(SelectionModeView);

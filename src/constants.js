@@ -36,7 +36,8 @@ const DOCUMENTS = {
 };
 const CLIENT = {
      CLIENT_SET: "CLIENT_SET",
-    CLIENT_UNSET: "CLIENT_UNSET"
+    CLIENT_UNSET: "CLIENT_UNSET",
+    SET_MODE:"SET_MODE"
 
 };
 const USER = {
