@@ -1,68 +1,82 @@
-import React from "react";
-import { AttachFile, Cancel } from "@material-ui/icons";
-import { Typography, Button } from "@material-ui/core";
+import React, {useState} from "react";
+import axios from 'axios';
+import { AttachFile, Cancel} from "@material-ui/icons";
+import {Typography, Button, Link} from "@material-ui/core";
 import Files from "react-files";
 import FilesList from "./filesList";
 import "./filesUpload.css";
 import {connect} from "react-redux";
-import { setFiles, setExistedFiles, addFiles } from "../../../actions/fielsUploadActions";
-
+import { setFiles, setExistedFiles, addFiles, deleteFiles } from "../../../actions/fielsUploadActions";
 
 const ADD_FILES_TEXT = "הוספת קבצים";
 const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ שתרצה להעלות";
 const DELETE_ALL_FILES_TEXT = "מחק הכל";
 
-/*
-    files - new files that the client uploaded from his computer (type: 'Files'), they containes the actuall
-    contnet and stored in the request state until they uploaded to azure.
 
-    existedFiles- the files that already uploaded to azure, and saved in the mission state as metaData of the files
-    with id for the blob in azure. This props exist to be able to display the already exists files, and remove them.
-
-    how to use?
-        for files:
-        when you want to upload the files, you need to add id to the file for uploadFiles api:
-            use: files.map(file => ({id: `ID()_file.name', browserFile: file}))
-            then use FileToDbModel from utils with the above object to create object that can be stored in mongo
-            (the id is the reference to azure).
-
-        for existed files:
-            there is no need to upload them to azure, you can remove them and the backend is responsible to delete from azure
-*/
-//{ files, setFiles, maxFiles, existedFiles, setExistedFiles }
 function FilesUpload (props) {
 
-    const { files, setFiles, maxFiles, existedFiles, setExistedFiles } = props;
+    const {addFiles, maxFiles, existedFiles, setExistedFiles } = props;
+
+    const [files, setFiles] = useState([]);
+
+    const setNewFiles = React.useCallback((newFiles) => {
+        setFiles(newFiles);
+        props.setFiles([...props.files, ...newFiles]);
+        props.foo([...props.files, ...newFiles]);
+    }, [props.foo, props.setFiles, props.files]);
 
     const filesRef = React.useRef();
-
     const onFilesChange = React.useCallback(newFiles => {
-        console.log(`hello: ${newFiles}`);
-        setFiles(newFiles);
-    }, [setFiles]);
+        newFiles[newFiles.length - 1].image = ''
+        setNewFiles([...newFiles]);
+        const formData = new FormData();
+        formData.append("file", newFiles[newFiles.length - 1]);
+        axios.patch(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e`, formData, {
+            headers: {
+                'x-access-tokens':localStorage.getItem('token') || '',
+                "Content-Type": "multipart/form-data"
+            }
+        }).then(response => {
+            console.log("Done")
+            console.log(response.data)
+            newFiles[newFiles.length - 1].image = response.data.file || ''
+            setNewFiles([...newFiles])
+        }).catch((e) => {
+            console.log(e)
+        })
+    }, [setNewFiles]);
 
     const deleteFile = React.useCallback(fileId => {
         const deletedFile = files.find(file => file.id.toString() === fileId.toString());
 
         if (deletedFile) {
             filesRef.current.removeFile(deletedFile);
-            setFiles(files.filter(f => f !== deletedFile));
+            setNewFiles(files.filter(f => f.id.toString() !== deletedFile.id.toString()));
         }
-    }, [files, setFiles]);
+
+        // axios.delete(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e`, formData, {
+        //     headers: {
+        //         'x-access-tokens':localStorage.getItem('token') || '',
+        //         "Content-Type": "multipart/form-data"
+        //     }
+        // }).then(() => {
+        //     console.log("Done")
+        // }).catch((e) => {
+        //     console.log(e)
+        // })
+
+    }, [files, setNewFiles]);
 
     const deleteExistedFile = React.useCallback(fileId => {
         const deletedFile = existedFiles.find(file => file._id.toString() === fileId.toString());
         setExistedFiles(existedFiles.filter(f => f !== deletedFile));
-        // TODO: delete from azure
     }, [existedFiles, setExistedFiles]);
 
     const deleteAllFiles = React.useCallback(() => {
         filesRef.current.removeFiles();
-        setFiles([]);
+        setNewFiles([]);
         setExistedFiles([]);
-        // TODO: delete all the existedFiles from azure
-    }, [setFiles, setExistedFiles]);
-
+    }, [setNewFiles, setExistedFiles]);
 
     return (
         <div className="App">
@@ -76,6 +90,7 @@ function FilesUpload (props) {
                 onChange={onFilesChange}
                 multiple={maxFiles > 1}
                 maxFiles={maxFiles - existedFiles.length}
+                accepts={['image/png', '.pdf']}
                 maxFileSize={10000000}
                 minFileSize={0}
                 clickable
@@ -88,18 +103,19 @@ function FilesUpload (props) {
                 existedFiles={existedFiles}
                 deleteFileHandler={deleteFile}
                 deleteExistedFileHandler={deleteExistedFile} />
-            {
-                files.length + existedFiles.length > 0 ?
-                    <Button
-                        id="deleteAllFiles"
-                        color="secondary"
-                        variant="contained"
-                        onClick={deleteAllFiles}
-                        startIcon={<Cancel />}
-                    >
-                        {DELETE_ALL_FILES_TEXT}
-                    </Button> : ""
-            }
+
+            {/*{*/}
+            {/*    files.length + existedFiles.length > 0 ?*/}
+            {/*        <Button*/}
+            {/*            id="deleteAllFiles"*/}
+            {/*            color="secondary"*/}
+            {/*            variant="contained"*/}
+            {/*            onClick={deleteAllFiles}*/}
+            {/*            startIcon={<Cancel />}*/}
+            {/*        >*/}
+            {/*            {DELETE_ALL_FILES_TEXT}*/}
+            {/*        </Button> : ""*/}
+            {/*}*/}
             </div>
         </div>);
 };
@@ -107,20 +123,27 @@ function FilesUpload (props) {
 FilesUpload.defaultProps = {
     maxFiles: 3,
     files: [],
+    addFiles: () => {},
     existedFiles: [],
     setFiles: () => { },
-    setExistedFiles: () => { }
+    setExistedFiles: () => { },
+    foo: () => {},
 };
 
-const mapStateToProps = ({ files, existedFiles }) => ({
-    files,
-    existedFiles
-});
+const mapStateToProps = (state) => {
+    console.log(state);
+    return ({
+        properties: state.myProperties,
+        // files: state.fileUpload.files,
+        existedFiles: state.fileUpload.existedFiles
+    });
+}
 
 const mapDispatchToProps = dispatch => ({
     setFiles: (files) => dispatch(setFiles(files)),
     setExistedFiles: (existedFiles) => dispatch(setExistedFiles(existedFiles)),
-    addFiles: (files) => dispatch(addFiles(files))
+    addFiles: (files) => dispatch(addFiles(files)),
+    deleteFiles: (files) => dispatch(deleteFiles(files))
 
 
 });

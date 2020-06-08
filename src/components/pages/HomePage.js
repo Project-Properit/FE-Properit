@@ -37,7 +37,7 @@ class HomePage extends PureComponent {
                     <NavBar />
                     <div className="content">
                         <Header />
-                        <section className="container section" id="photos">
+                        <section className="container section" id="section_1">
                             <CardIdea
                                 image={idea}
                                 title="Idea"
