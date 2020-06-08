@@ -48,6 +48,11 @@ const updatePropApi = async (propertyId, propertyObject) => {
     const url = `${process.env.REACT_APP_API_URL}/api/assets/`+propertyId;
     return apiCall(url,'PUT', propertyObject)
 };
+const createPropApi = async (propertyObject) => {
+    console.log(propertyObject)
+    const url = `${process.env.REACT_APP_API_URL}/api/assets`;
+    return apiCall(url,'POST', propertyObject)
+};
 const fetchDocuments = async (userId) => {
     return  new Promise(resolve => {
         setTimeout(() => resolve([
@@ -74,4 +79,4 @@ const fetchDocuments = async (userId) => {
         })
 }
 
-export {fetchProperties, fetchDocuments, loginApi, fetchProperty, updatePropApi, removeProperty}
+export {fetchProperties, fetchDocuments, loginApi, fetchProperty, updatePropApi, removeProperty, createPropApi}

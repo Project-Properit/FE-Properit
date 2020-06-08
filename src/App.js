@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import About from "./components/About";
 import Properties from "./components/Properties";
 import PropertyInfo from "./components/PropertyInfo";
+import AddNewProperty from "./components/AddNewProperty";
 import Renters from "./components/Renters";
 import Payments from "./components/Payments";
 import ProperitNavBar from "./components/ProperitNavBar";
@@ -28,6 +29,7 @@ function App() {
                     <PublicRoute path="/signup" component={Signup}/>
                     <PrivateRoute exact path="/about" component={About}/>
                     <PrivateRoute exact path="/properties" component={Properties}/>
+                    <PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
                     <PrivateRoute exact path="/properties/:propId" component={PropertyInfo}/>
                     <PrivateRoute exact path="/renters" component={Renters}/>
                     <PrivateRoute exact path="/payments" component={Payments}/>

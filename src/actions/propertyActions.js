@@ -5,6 +5,10 @@ const loadProperty = (propertyId) => ({
     type: PROPERTY.LOAD,
     propertyId
 });
+const addNewProperty = (propertyObject) => ({
+    type: PROPERTY.ADD,
+    propertyObject
+});
 const removeProperty = (propertyId) => ({
     type: PROPERTY.REMOVE,
     propertyId
@@ -24,11 +28,14 @@ const setError = error => ({
 });
 
 const updatePropertyFormAction = createFormAction('UpdateProperty');
+const createPropertyFormAction = createFormAction('CreateProperty');
 export {
     loadProperty,
     setProperty,
     setError,
     clearProperty,
     removeProperty,
-    updatePropertyFormAction
+    addNewProperty,
+    updatePropertyFormAction,
+    createPropertyFormAction,
 };
