@@ -7,22 +7,33 @@ const initialState = {
 }
 
 const filesUploadReducer = (state = initialState, action) => {
-    if (action.type === FILEUPLOAD.SET_FILES) {
-        // const newFiles = _.concat(state.file, action.files)
-        const newState = {
-            ...state,
-            files: action.files
-        }
-        console.log(newState);
-        return newState;
-    }if (action.type === FILEUPLOAD.SET_EXISTED_FILES) {
+    if (action.type === FILEUPLOAD.SET_EXISTED_FILES) {
         return {
             ...state,
             existedFiles: action.existedFiles
         }
     }
     if (action.type === FILEUPLOAD.SET_FILES) {
-        const newFiles = _.concat(state.file, action.files)
+        const newState = {
+            ...state,
+            files: action.files
+        }
+        console.log(newState);
+        return newState;
+    }
+
+    if (action.type === FILEUPLOAD.ADD_FILES) {
+        const newFiles = _.concat(state.files, action.files)
+        const newState = {
+            ...state,
+            files: newFiles
+
+        }
+        console.log(newState);
+        return newState;
+    }
+    if (action.type === FILEUPLOAD.DELETE_FILES) {
+        const newFiles = _.concat(state.files, action.files)
         const newState = {
             ...state,
             files: newFiles

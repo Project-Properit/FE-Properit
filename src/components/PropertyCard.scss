@@ -1,0 +1,77 @@
+
+.propBody{
+    //width: 100vw;
+    //height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 40px;
+}
+.propCard {
+    display: grid;
+    grid-template-columns: 250px;
+    grid-template-rows: 200px 200px 60px;
+    grid-template-areas: "image" "text" "stats";
+
+    font-family: Roboto;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+    text-align: center;
+
+    transition: 0.5s ease;
+    //cursor: pointer;
+}
+
+.propCard-image {
+    grid-area: image;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    //background: url("https://properit.s3.amazonaws.com/house1.jpg");
+    background-size: cover;
+}
+.propCard-text {
+    grid-area: text;
+    margin: 25px;
+}
+.propCard-text .tenants {
+    //color: rgb(255,7,110);
+    color: #4e555b;
+    font-size: 17px;
+}
+.propCard-text p {
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+}
+.propCard-text h2{
+    margin-top: 0px;
+    font-size: 28px;
+
+}
+.propCard-stats {
+    grid-area: stats;
+    display: grid;
+    grid-template-rows: 1fr;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: #AD974F;
+}
+.propCard-stats .stat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.propCard-stats .value {
+    font-size: 22px;
+    font-weight: 500;
+    color: #231F20;
+
+}
+.propCard:hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}

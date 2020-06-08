@@ -18,9 +18,9 @@ class Properties extends Component {
         return (
 
             <Container className="App">
-                <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
-                    <h2> Properties - {userId}</h2>
-                </header>
+                {/*<header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">*/}
+                {/*    <h2> Properties - {userId}</h2>*/}
+                {/*</header>*/}
 
                <Loading loading={this.props.isLoading}/>
 
@@ -30,7 +30,7 @@ class Properties extends Component {
                                 onRemove={(propId)=>this.onRemoveProperty(propId)}
                                 infoUrl={this.onInfoProperty(prop.id)}
                                 key={prop.id}
-                                property={prop}/>
+                                    property={prop}/>
                     ))}
                 </Row>
                 <div>

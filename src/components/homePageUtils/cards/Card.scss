@@ -1,9 +1,11 @@
-.cardHome {
+.card {
   width: 12em;
   height: 5em;
   position: absolute !important;
   right: 30px;
   background-color: #231F20 !important;
+  //border: 1px solid rgba(0,0,0,.125);
+  //border-radius: .25rem;
 
   .card-action {
     height: 40%;
