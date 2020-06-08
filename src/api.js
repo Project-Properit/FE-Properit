@@ -32,20 +32,20 @@ const fetchProperties = async (userId) => {
     //         {prop_id:4, tenants:["ten1"], name: "Second Prop", address: "Address 2"},
     //     ]), TIMEOUT)
     // })
-    const url = `${process.env.REACT_APP_API_URL}/api/assets?owner_id=`+userId;
+    const url = `${process.env.REACT_APP_API_URL}/assets?owner_id=`+userId;
     return apiCall(url,'GET')
 };
 const fetchProperty = async (propertyId) => {
-    const url = `${process.env.REACT_APP_API_URL}/api/assets?id=`+propertyId;
+    const url = `${process.env.REACT_APP_API_URL}/aassets?id=`+propertyId;
     return apiCall(url,'GET')
 };
 const removeProperty = async (propertyId) => {
-    const url = `${process.env.REACT_APP_API_URL}/api/assets/`+propertyId;
+    const url = `${process.env.REACT_APP_API_URL}/assets/`+propertyId;
     return apiCall(url,'DELETE')
 };
 const updatePropApi = async (propertyId, propertyObject) => {
     console.log(propertyObject)
-    const url = `${process.env.REACT_APP_API_URL}/api/assets/`+propertyId;
+    const url = `${process.env.REACT_APP_API_URL}/assets/`+propertyId;
     return apiCall(url,'PUT', propertyObject)
 };
 const fetchDocuments = async (userId) => {

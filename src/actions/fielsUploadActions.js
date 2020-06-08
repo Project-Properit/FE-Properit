@@ -15,5 +15,10 @@ const addFiles = (files) => ({
     files,
 })
 
+const deleteFiles = (files) => ({
+    type: FILEUPLOAD.DELETE_FILES,
+    files,
+})
 
-export { setFiles, setExistedFiles, addFiles };
+
+export { setFiles, setExistedFiles, addFiles, deleteFiles };

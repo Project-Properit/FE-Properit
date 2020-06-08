@@ -8,12 +8,12 @@
   height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 170px;
-  padding: 20px;
-  color: white;
-}
+/*.App-header {*/
+/*  background-color: #222;*/
+/*  height: 170px;*/
+/*  padding: 20px;*/
+/*  color: white;*/
+/*}*/
 
 .App-intro {
   font-size: large;
@@ -23,6 +23,8 @@
   padding: 20px;
   height: 100%;
   width: 100%;
+  /*background: url("/images/background1.jpg");*/
+
 }
 
 @keyframes App-logo-spin {
@@ -165,9 +167,12 @@ a {
   font-weight: bold;
 }
 
-.isCurrent a, h2 {
-  color: #f1a07a;
-}
+/*.isCurrent a, h2 {*/
+/*  color: #f1a07a;*/
+/*}*/
+
+
+
 /*table tr {*/
 /*	text-align: center;*/
 /*	padding-left:10px;*/
