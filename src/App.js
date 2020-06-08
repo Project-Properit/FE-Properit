@@ -16,6 +16,9 @@ import {Switch} from "react-bootstrap";
 import PublicRoute from "./components/PublicRoute";
 import HomePage from "./components/pages/HomePage";
 import FilesUpload from "./components/pages/documents/filesUpload";
+import DocumentsView from "./components/pages/DocumentsView/index";
+
+
 import Documents from "./components/Documents";
 
 function App() {
@@ -34,7 +37,7 @@ function App() {
                     <PrivateRoute exact path="/renters" component={Renters}/>
                     <PrivateRoute exact path="/payments" component={Payments}/>
                     <PrivateRoute exact path="/lease" component={Documents}/>
-                    <PrivateRoute exact path="/documents" component={FilesUpload}/>
+                    <PrivateRoute exact path="/documents" component={DocumentsView}/>
 
                 </Switch>
             </div>
