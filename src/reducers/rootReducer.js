@@ -7,11 +7,17 @@ import signupReducer from "./signUpReducer";
 import loginReducer from "./loginReducer";
 import myPropertyReducer from "./propertyReducer";
 import filesUploadReducer from "./fileUploadReducer";
+import myGroupsPaymentsReducer from "./groupsPaymentsReducer"
+import myGroupPaymentsReducer from "./groupPaymentsReducer"
+import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
     myProperties: myPropertiesReducer,
+    myGroupsPayments: myGroupsPaymentsReducer,
+    myGroupPayments: myGroupPaymentsReducer,
     fileUpload: filesUploadReducer,
     myDocuments: myDocumentsReducer,
+    userReducer,
     clientReducer,
     signupReducer,
     loginReducer,

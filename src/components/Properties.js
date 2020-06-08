@@ -31,8 +31,10 @@ class Properties extends Component {
                             <PropertyCard
                                 onRemove={(propId)=>this.onRemoveProperty(propId)}
                                 infoUrl={this.onInfoProperty(prop.id)}
+                                groupsPaymentsUrl={this.onGroupsPayments(prop.id)}
                                 key={prop.id}
                                 property={prop}/>
+
                     ))}
                 </Row>
                 <div>
@@ -51,6 +53,9 @@ class Properties extends Component {
 
     onInfoProperty(propId) {
         return '/properties/' +propId
+    }
+    onGroupsPayments(propId) {
+        return '/properties/' +propId +'/payments'
     }
 }
 

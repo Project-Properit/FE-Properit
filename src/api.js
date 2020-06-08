@@ -19,7 +19,6 @@ const apiCall = async (url, method,jsonBody={},withToken=true) =>{
     if (response.status >= 400) {
         throw new Error(data.errors);
     }
-    console.log(data);
     return data;
 
 }
@@ -36,7 +35,7 @@ const fetchProperties = async (userId) => {
     return apiCall(url,'GET')
 };
 const fetchProperty = async (propertyId) => {
-    const url = `${process.env.REACT_APP_API_URL}/aassets?id=`+propertyId;
+    const url = `${process.env.REACT_APP_API_URL}/assets?id=`+propertyId;
     return apiCall(url,'GET')
 };
 const removeProperty = async (propertyId) => {
@@ -50,7 +49,7 @@ const updatePropApi = async (propertyId, propertyObject) => {
 };
 const createPropApi = async (propertyObject) => {
     console.log(propertyObject)
-    const url = `${process.env.REACT_APP_API_URL}/api/assets`;
+    const url = `${process.env.REACT_APP_API_URL}/assets`;
     return apiCall(url,'POST', propertyObject)
 };
 const fetchDocuments = async (userId) => {
@@ -79,4 +78,33 @@ const fetchDocuments = async (userId) => {
         })
 }
 
-export {fetchProperties, fetchDocuments, loginApi, fetchProperty, updatePropApi, removeProperty, createPropApi}
+const fetchGroupsPayments = async (assetId) => {
+    const url = `${process.env.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
+    return apiCall(url, 'GET')
+};
+const fetchGroupPayments = async (assetId, groupPaymentsId) => {
+    const url = `${process.env.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments/' + groupPaymentsId;
+    return apiCall(url, 'GET')
+};
+
+const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
+    const url = `${process.env.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
+    return apiCall(url, 'POST', groupPaymentsObject)
+}
+const fetchUser = async (userId) => {
+    const url = `${process.env.REACT_APP_API_URL}/users/` + userId;
+    return apiCall(url, 'GET')
+}
+export {
+    fetchProperties,
+    fetchDocuments,
+    loginApi,
+    fetchProperty,
+    updatePropApi,
+    removeProperty,
+    fetchGroupsPayments,
+    fetchGroupPayments,
+    createGroupPaymentsApi,
+    fetchUser,
+    createPropApi
+}

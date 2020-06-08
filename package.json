@@ -21,6 +21,7 @@
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
     "react-files": "^2.4.8",
+    "react-final-form": "^6.5.0",
     "react-parallax": "^3.0.3",
     "react-pdf": "^4.1.0",
     "react-router-redux": "^4.0.8",
@@ -28,6 +29,7 @@
     "react-scroll-parallax": "^2.3.2",
     "react-scrollspy": "^3.4.2",
     "react-scrollspy-nav": "^1.2.4",
+    "react-switch": "^5.0.1",
     "redux-form": "^8.3.5",
     "redux-form-saga": "^0.2.0"
   },

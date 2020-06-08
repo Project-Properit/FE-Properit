@@ -23,13 +23,16 @@ export const PropertyCard = props => {
                     <div className="stat">
                         <Card.Link as={Link} to={props.infoUrl} className="value">Info</Card.Link>
                     </div>
+                <div className="stat">
+                    <Card.Link as={Link} to={props.groupsPaymentsUrl} className="value">Show all Payments</Card.Link>
+                </div>
                 </div>
             </div>
 
         </div>
-            // </Col>
+        // </Col>
 
-)
+    )
 };
 
 
