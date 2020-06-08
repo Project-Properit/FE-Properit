@@ -6,7 +6,28 @@ import Messages from '../notifications/Messages'
 import Errors from '../notifications/Errors'
 
 import signupRequest from '../actions/sugnUpActions'
-
+import Select  from "react-select";
+const userOptions = [
+    {
+      label: 'Asset Owner',
+      value: 'owner',
+    },
+    {
+      label: 'Asset tenant',
+      value: 'tenant',
+    }
+  ];
+export const ReduxFormSelect = props => {
+  const { input, options } = props;
+  return (
+    <Select
+      {...input}
+      onChange={value => input.onChange(value)}
+      onBlur={() => input.onBlur(input.value)}
+      options={options}
+    />
+  )
+}
 class Signup extends Component {
 
 
@@ -71,7 +92,9 @@ class Signup extends Component {
                         className="last_name"
                         label="last_name"
                         component="input"
-                    /><label htmlFor="phone">Phone</label>
+                    />
+
+                    <label htmlFor="phone">Phone</label>
                     <Field
                         name="phone"
                         type="text"
@@ -80,7 +103,12 @@ class Signup extends Component {
                         label="phone"
                         component="input"
                     />
-                    <button action="submit">SIGNUP</button>
+                      <div>
+                    <label>User Type</label>
+                        <Field id="userType" name="userType" component={ReduxFormSelect} options={userOptions} />
+
+                        </div>
+                    <button style={{'marginTop':'20px'}} action="submit">SIGNUP</button>
                 </form>
                 <div className="auth-messages">
                     {
