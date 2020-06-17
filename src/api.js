@@ -21,6 +21,7 @@ const apiCall = async (url, method,jsonBody={},withToken=true) =>{
     }
     return data;
 
+
 }
 const fetchProperties = async (userId) => {
     //  return  new Promise(resolve => {

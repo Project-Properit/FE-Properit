@@ -22,6 +22,8 @@ function* logout () {
 function* loginFlow (email, password) {
     let token
     let userId
+    let isOwner
+    let isTenant
   try {
     // try to call to our loginApi() function.  Redux Saga
     // will pause here until we either are successful or
@@ -29,8 +31,10 @@ function* loginFlow (email, password) {
     let response = yield call(loginApi, email, password)
     token = response.token
     userId = response.user_id
+    isOwner = response.is_owner
+    isTenant = response.is_tenant
     // inform Redux to set our client token, this is non blocking so...
-    yield put(setClient(token, userId))
+    yield put(setClient(token, userId, isOwner, isTenant))
 
     // .. also inform redux that our login was successful
     yield put({ type: LOGIN.LOGIN_SUCCESS })
@@ -38,10 +42,16 @@ function* loginFlow (email, password) {
     // set a stringified version of our token to localstorage on our domain
     localStorage.setItem('token', (token))
     localStorage.setItem('userId', userId)
-
+    localStorage.setItem('isOwner', isOwner)
+    localStorage.setItem('isTenant', isTenant)
+  if(isOwner && isTenant)
+  {
+    yield put(push('/chooseView'));
+  }
+  else {
     // redirect them to WIDGETS!
-      yield put(push('/users/'+userId));
-
+    yield put(push('/properties'));
+  }
 
   } catch (error) {
     // error? send it to redux

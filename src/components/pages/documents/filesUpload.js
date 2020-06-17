@@ -31,7 +31,7 @@ function FilesUpload (props) {
         setNewFiles([...newFiles]);
         const formData = new FormData();
         formData.append("file", newFiles[newFiles.length - 1]);
-        axios.patch(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e`, formData, {
+        axios.post(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e/documents`, formData, {
             headers: {
                 'x-access-tokens':localStorage.getItem('token') || '',
                 "Content-Type": "multipart/form-data"
@@ -39,7 +39,7 @@ function FilesUpload (props) {
         }).then(response => {
             console.log("Done")
             console.log(response.data)
-            newFiles[newFiles.length - 1].image = response.data.file || ''
+            newFiles[newFiles.length - 1].image = response.data.document_url || ''
             setNewFiles([...newFiles])
         }).catch((e) => {
             console.log(e)
