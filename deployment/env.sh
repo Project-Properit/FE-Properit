@@ -1,3 +1,4 @@
+
 #!/bin/bash
 rm -rf ./env-config.js
 touch ./env-config.js
