@@ -1,3 +1,4 @@
+# Node #
 FROM node:alpine as build
 WORKDIR /app
 COPY . /app
@@ -9,6 +10,8 @@ RUN npm install
 RUN apk del .build-deps
 ENV PATH /app/node_modules/.bin:$PATH
 RUN npm run build
+
+# Nginx #
 FROM nginx
 COPY --from=build /app/build /usr/share/nginx/html
 COPY deployment/default.conf /etc/nginx/conf.d
@@ -19,6 +22,5 @@ RUN apt update
 RUN apt install dos2unix
 RUN dos2unix config.env
 RUN dos2unix env.sh
-# Make our shell script executable
 RUN chmod +x env.sh
 CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
