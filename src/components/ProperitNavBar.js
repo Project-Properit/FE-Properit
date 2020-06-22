@@ -26,7 +26,8 @@ class ProperitNavBar extends Component {
 		const isTenant = this.props.isTenant
 		const chosenModeNotFromScreen = this.props.isOwner? 'owner': 'tenant'
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
-		const documentsUrl = this.props.location.pathname +'/documents'
+		const documentsUrl = this.props.location.pathname.replace('/documents','').replace('/payments','') +'/documents'
+		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'
 		console.log(chosenMode)
 		console.log('isOwner', isOwner)
 		console.log('isTenant', isTenant)
@@ -49,6 +50,7 @@ class ProperitNavBar extends Component {
 						<>
 							<Nav.Link as={Link} to="/properties">Properties</Nav.Link>
 							<Nav.Link as={Link} to={documentsUrl}>Documents</Nav.Link>
+							<Nav.Link as={Link} to={paymentsUrl}>Payments</Nav.Link>
 							{this.props.myProperties.length >0 &&
 							<SimpleListMenu choosenFunc={(d) => this.onChooseAddress(d)}
 						                options={this.props.myProperties.map(a => a.address)}/>}
