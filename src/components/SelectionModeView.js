@@ -47,10 +47,13 @@ class SelectionModeView extends Component {
         );
     }
     onOwnerMode() {
+        console.log('OOOOWWWWNNNNEEEERRRR')
         this.props.setMode('owner')
         return '/properties'
     }
     onTenantMode() {
+        console.log('TTTTEEEENNNNAAAANNNNTTTT')
+
         this.props.setMode('tenant')
         return '/about'
     }

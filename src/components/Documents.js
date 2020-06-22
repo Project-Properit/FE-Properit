@@ -55,13 +55,13 @@ class Documents extends Component {
                         {this.props.myDocuments.map(doc => (
                             <div key={doc.doc_id}>
                                 {/*{doc.doc_location}*/}
-                                <FilesUpload
-                                    // file={doc.doc_location}
-                                    onLoadSuccess={this.onDocumentLoadSuccess}
-                                    files={this.state.browserFiles} setFiles={this.addBrowserFiles} maxFiles={3}
-                                >
-                                    <Page pageNumber={pageNumber} />
-                                </FilesUpload>
+                                {/*<FilesUpload*/}
+                                {/*    // file={doc.doc_location}*/}
+                                {/*    onLoadSuccess={this.onDocumentLoadSuccess}*/}
+                                {/*    files={this.state.browserFiles} setFiles={this.addBrowserFiles} maxFiles={3}*/}
+                                {/*>*/}
+                                {/*    <Page pageNumber={pageNumber} />*/}
+                                {/*</FilesUpload>*/}
                                 {/*<p>Page {pageNumber} of {numPages}</p>*/}
                                 {/*<PDFViewer style={{size:'100px'}}*/}
                                 {/*    document={{*/}
