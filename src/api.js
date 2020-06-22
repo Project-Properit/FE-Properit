@@ -35,6 +35,11 @@ const fetchProperties = async (userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets?owner_id=`+userId;
     return apiCall(url,'GET')
 };
+
+const fetchPayment = async (paymentId) => {
+    const url = `${window._env_.REACT_APP_API_URL}/payments?id=` + paymentId;
+    return apiCall(url, 'GET')
+};
 const fetchProperty = async (propertyId) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets?id=`+propertyId;
     return apiCall(url,'GET')
@@ -61,7 +66,8 @@ const fetchDocuments = async (userId) => {
         ]), TIMEOUT)
     })
 };
- function loginApi(email, password) {
+
+function loginApi(email, password) {
     const loginUrl = `${window._env_.REACT_APP_API_URL}/login`
 
     return fetch(loginUrl, {
@@ -107,5 +113,6 @@ export {
     fetchGroupPayments,
     createGroupPaymentsApi,
     fetchUser,
-    createPropApi
+    createPropApi,
+    fetchPayment
 }

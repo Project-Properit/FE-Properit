@@ -10,12 +10,12 @@ import Switch from "react-switch";
 import "./styles.css"
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
+import Input from "@material-ui/core/Input";
 
 class CreateGroupPayments extends Component {
     constructor() {
         super();
         this.state = {amounts: {}, checked: false, totalAmount: 0, sumAllAmounts: 0};
-        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -46,79 +46,39 @@ class CreateGroupPayments extends Component {
                 </header>
 
                 <Loading loading={this.props.isLoading}/>
-                <form onSubmit={submit}>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <Field component="input" name="assetId" type="text" placeholder="assetId"
-                                       hidden/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label>Title</label></td>
-                            <td>
-                                <Field component="input" name="title" type="text" placeholder="title"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label>Description</label></td>
-                            <td>
-                                <Field component="input" name="description" type="text" placeholder="description"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label>Amount</label></td>
-                            <td>
-                                <Field onChange={(e) => {
-                                    this.setTotalAmount(e)
-                                }} component="input" name="amount" type="number" placeholder="amount"
+                <div>
+                    <Input name="assetId" type="text" placeholder="assetId" hidden/>
+                    <Input name="title" type="text" placeholder="title"/>
+                    <Input name="description" type="text" placeholder="description"/>
+                    <Input onChange={(e) => {this.setTotalAmount(e)}} name="amount" type="number" placeholder="amount"
                                        value={this.state.sumAllAmounts ? this.state.sumAllAmounts : "amount"}/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div>
-                        <span>Custom Separate</span>
-                        <Switch onChange={this.handleChange} checked={this.state.checked} className="react-switch"/>
-                    </div>
-                    <div hidden={!this.state.checked}>
-                        <Loading loading={this.props.isLoading}/>
-                        <table>
-                            <tbody>
-                            <tr>
-                                {this.props.all_users_were_load.map(tenant => (
-                                    <td key={tenant.email}>
-                                        <Col style={{margin: '1rem'}}>
-                                            <Card border={null} style={{width: "18rem"}}>
-                                                <Card.Body>
-                                                    <Card.Title>
-                                                        <p style={{float: 'left'}}>
-                                                            <b>{tenant ? tenant.first_name : null}</b></p>
-                                                        {/*<div style={{width:'4rem'}}></div>*/}
-                                                        <div style={{clear: 'both'}}/>
-                                                    </Card.Title>
-                                                    <input onChange={(e) => {
-                                                        this.checkTotalAmount(e, tenant.email)
-                                                    }} name="amount" type="number" placeholder={"Amount"}
-                                                           value={this.state.amounts[tenant.email] ? this.state.amounts[tenant.email] : "Amount"}/>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    </td>
+                    {this.props.all_users_were_load.map(tenant => (
+                        <div key={tenant.email}>
+                            <Col style={{margin: '1rem'}}>
+                                <Card border={null} style={{width: "18rem"}}>
+                                    <Card.Body>
+                                        <Card.Title>
+                                            <p style={{float: 'left'}}>
+                                                <b>{tenant ? tenant.first_name : null}</b></p>
+                                            {/*<div style={{width:'4rem'}}></div>*/}
+                                            <div style={{clear: 'both'}}/>
+                                        </Card.Title>
+                                        <Input onChange={(e) => {
+                                            this.checkTotalAmount(e, tenant.email)
+                                        }} name="amount" type="number" placeholder={"Amount"}
+                                               value={this.state.amounts[tenant.email] ? this.state.amounts[tenant.email] : "Amount"}/>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </div>
                                 ))}
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
                     <div>
-                        <button type="submit" disabled={pristine || submitting}>Save</button>
+                        <button type="submit" onSubmit={submit}>Save</button>
                     </div>
-                </form>
+                </div>
                 <div>
                     {this.props.error}
                 </div>
-
             </Container>
         )
     }
@@ -145,10 +105,6 @@ class CreateGroupPayments extends Component {
         this.setState(amounts)
     }
 
-    handleChange(checked) {
-        console.log(checked)
-        this.setState({checked})
-    }
 }
 
 CreateGroupPayments = reduxForm({form: 'groupPayments'})(CreateGroupPayments)

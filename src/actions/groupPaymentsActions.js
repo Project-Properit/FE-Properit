@@ -15,10 +15,9 @@ const clearGroupPayments = () => ({
     type: GROUPPAYMENTS.CLEAR,
 });
 
-const setGroupPayments = (propertyId, groupPaymentsId) => ({
+const setGroupPayments = (myGroupPayments) => ({
     type: GROUPPAYMENTS.LOAD_SUCCESS,
-    propertyId,
-    groupPaymentsId
+    myGroupPayments
 });
 
 const setError = error => ({
