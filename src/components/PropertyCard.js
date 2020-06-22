@@ -17,14 +17,18 @@ export const PropertyCard = props => {
                     <h2> {prop.address}</h2>
                     <p>{prop.comments}</p>
                     <Card.Link as={Link} to={props.groupsPaymentsUrl} className="value">Show all Payments</Card.Link>
+                <Card.Link as={Link} to={props.infoUrl} className="value">Choose</Card.Link>
                 </div>
                 <div className="propCard-stats">
                     <div className="stat">
-                        <Card.Link as={Link} to={props.infoUrl} className="value">Info</Card.Link>
+                        <Card.Link as={Link} to={props.editUrl} className="value">Info</Card.Link>
                     </div>
                 </div>
             </div>
+
         </div>
+        // </Col>
+
     )
 };
 

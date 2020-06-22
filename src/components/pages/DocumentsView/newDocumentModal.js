@@ -6,8 +6,6 @@ import FilesUpload from "../documents/filesUpload";
 import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } from "@material-ui/core";
 
 
-
-
 const validateDocument = (name, files) => ({
     isValid: (name !== null && name.length > 0) && files.length > 0,
     errors: {
@@ -28,50 +26,16 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
 
     const createDocument = useCallback(async () => {
         const trimmedName = name !== null ? name.trim() : name;
+        console.log('trimmedName',trimmedName)
         const validation = validateDocument(trimmedName, files);
         if (validation.isValid) {
-            createDocumentHandler({ name: trimmedName, files});
+            // createDocumentHandler({ name: trimmedName, files});
             closeHandler();
             reset();
         } else {
             setErrors(validation.errors);
         }
-    }, [name, files, setErrors, closeHandler, createDocumentHandler]);
-
-
-    //----
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         numPages: null,
-    //         pageNumber: 1,
-    //         browserFiles: [],
-    //     }
-    // }
-
-    // addBrowserFiles = (newFiles) => {
-    //     this.setState((prevState) => {
-    //         const files = [...prevState.browserFiles, newFiles];
-    //         return {browserFiles: files};
-    //     })
-    // }
-    // const [browserFiles, setBrowserFiles] = useState([]);
-
-    // componentDidMount() {
-    //
-    //
-    //     console.log(React.version);
-    //     const {userId} = this.props.match.params;
-    //     this.props.loadDocuments(userId);
-    // }
-    // onDocumentLoadSuccess = ({ numPages }) => {
-    //     this.setState({ numPages });
-    // }
-    //----
-
-    React.useEffect(() => {
-        console.log(files)
-    }, [files]);
+    }, [name, files, setErrors, closeHandler]);
 
     return <MyModal open setOpen={closeHandler} closeMe={closeHandler} style={{ width: "30%" }}>
         <div style={{ padding: "24px", textAlign: "center" }}>
@@ -94,7 +58,7 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
                          // file={doc.doc_location}
                          // onLoadSuccess={this.onDocumentLoadSuccess}
                          // files={this.state.browserFiles} setFiles={this.addBrowserFiles} maxFiles={3}
-                         files={files} foo={setFiles} maxFiles={2}
+                         files={files} foo={setFiles} maxFiles={1}
             />
             {
                 errors.files ? <div style={{ marginTop: "10px", color: "red" }}>{errors.files}</div> : ""

@@ -16,7 +16,18 @@ function* logout (action) {
   yield put(push('/login'));
 
 }
+function* logoutNoRedirect (action) {
+  // dispatches the CLIENT_UNSET action
+  yield put(unsetClient())
+
+  // remove our token
+  localStorage.removeItem('token')
+  localStorage.removeItem('userId')
+
+
+}
 
 export default function* watchLogout() {
     yield takeEvery(LOGIN.LOGOUT, logout);
+    yield takeEvery(LOGIN.LOGOUT_NO_REDIRECT, logoutNoRedirect);
 }

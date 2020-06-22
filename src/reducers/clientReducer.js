@@ -24,12 +24,12 @@ const clientReducer = (state = initialSate, action) => {
         token: null,
         isTenant: null,
         isOwner: null,
-          chosenMode: null
+        chosenMode: null
 
       }
 
        case CLIENT.SET_MODE:
-           console.log(action)
+           console.log('action',action)
            return {
                ...state,
                chosenMode: action.mode

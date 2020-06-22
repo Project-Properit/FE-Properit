@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, Router} from 'react-router-dom';
 import './App.css'
-// import Login from "./components/Login";
 import Login from "./components/pages/NewLogin/index";
 
 import Signup from "./components/Signup";
@@ -17,6 +16,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import {Switch} from "react-bootstrap";
 import PublicRoute from "./components/PublicRoute";
 import HomePage from "./components/pages/HomePage";
+import NewUserPage from "./components/pages/NewUserPage";
+import DocumentsPage from "./components/pages/DocumentsPage";
 import FilesUpload from "./components/pages/documents/filesUpload";
 import DocumentsView from "./components/pages/DocumentsView/index";
 
@@ -39,13 +40,14 @@ function App() {
                     <PrivateRoute exact path="/about" component={About}/>
                     <PrivateRoute exact path="/properties" component={Properties}/>
                     <PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
-                    <PrivateRoute exact path="/properties/:propId" component={PropertyInfo}/>
+                    <PrivateRoute exact path="/properties/:propId" component={DocumentsPage}/>
+                    <PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>
                     <PrivateRoute exact path="/properties/:propId/payments" component={GroupsPayments}/>
+                    <PrivateRoute exact path="/properties/:propId/documents" component={DocumentsPage}/>
                     <PrivateRoute exact path="/properties/:propId/payments/:groupPaymentId" component={PaymentsInfo}/>
                     <PrivateRoute exact path="/properties/:propId/CreatePayments" component={CreateGroupPayments}/>
                     <PrivateRoute exact path="/renters" component={Renters}/>
-                    <PrivateRoute exact path="/lease" component={Documents}/>
-                    <PrivateRoute exact path="/documents" component={DocumentsView}/>
+                    <PrivateRoute exact path="/newUser" component={NewUserPage}/>
                 </Switch>
             </div>
         </Router>

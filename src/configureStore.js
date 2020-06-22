@@ -8,7 +8,7 @@ import { routerMiddleware } from 'connected-react-router';
 
 export default function configureStore() {
     const composeSetup =
-    process.env.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    window._env_.NODE_ENV !== 'production' && typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         : compose;
     const sagaMiddleware = createSagaMiddleware();
