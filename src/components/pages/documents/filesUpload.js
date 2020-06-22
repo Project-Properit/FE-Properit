@@ -31,7 +31,7 @@ function FilesUpload (props) {
         setNewFiles([...newFiles]);
         const formData = new FormData();
         formData.append("file", newFiles[newFiles.length - 1]);
-        axios.post(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e/documents`, formData, {
+        axios.post(`${window._env_.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e/documents`, formData, {
             headers: {
                 'x-access-tokens':localStorage.getItem('token') || '',
                 "Content-Type": "multipart/form-data"
@@ -54,7 +54,7 @@ function FilesUpload (props) {
             setNewFiles(files.filter(f => f.id.toString() !== deletedFile.id.toString()));
         }
 
-        // axios.delete(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e`, formData, {
+        // axios.delete(`${window._env_.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e`, formData, {
         //     headers: {
         //         'x-access-tokens':localStorage.getItem('token') || '',
         //         "Content-Type": "multipart/form-data"
