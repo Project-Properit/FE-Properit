@@ -10,6 +10,7 @@ import filesUploadReducer from "./fileUploadReducer";
 import myGroupsPaymentsReducer from "./groupsPaymentsReducer"
 import myGroupPaymentsReducer from "./groupPaymentsReducer"
 import userReducer from "./userReducer";
+import payment from "./paymentReducer";
 
 const rootReducer = combineReducers({
     myProperties: myPropertiesReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     signupReducer,
     loginReducer,
     myPropertyReducer,
+    payment,
     form
 
 });

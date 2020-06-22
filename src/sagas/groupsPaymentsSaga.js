@@ -2,7 +2,7 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 
 import {setError, setGroupsPayments} from '../actions/groupsPaymentsActions';
 import {GROUPSPAYMENTS, PROPERTY} from '../constants';
-import {createGroupPaymentsApi, fetchGroupsPayments} from '../api';
+import {createGroupPaymentsApi, fetchGroupPayments, fetchGroupsPayments} from '../api';
 import {actionChannel, take} from "@redux-saga/core/effects";
 import {updatePropertyFormAction} from "../actions/propertyActions";
 import {handlePropertyRemove} from "./propertySaga";
@@ -36,13 +36,13 @@ export function* handleGroupPaymentsCreate(action) {
     delete x.assetId;
 
     try {
-        // yield call(createGroupPaymentsApi, assetId, x); // calling our api method
+        yield call(createGroupPaymentsApi, assetId, x); // calling our api method
         // it should return promise
         // promise should be resolved if login successfull
         // or rejected if login credentials is wrong
 
         // so if apiClient promise resolved, then we can notify our form about successful response
-        // yield put(createGroupPaymentsFormAction.success());
+        yield put(createGroupPaymentsFormAction.success());
         // do something else here ...
     } catch (error) {
         // if apiClient promise rejected, then we will be here

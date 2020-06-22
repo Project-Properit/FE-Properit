@@ -24,6 +24,7 @@ import DocumentsView from "./components/pages/DocumentsView/index";
 import Documents from "./components/Documents";
 import CreateGroupPayments from "./components/CreateGroupPayments";
 import SelectionModeView from "./components/SelectionModeView";
+import {PaymentsInfo} from "./components/PaymentsInfo";
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
                     <PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
                     <PrivateRoute exact path="/properties/:propId" component={PropertyInfo}/>
                     <PrivateRoute exact path="/properties/:propId/payments" component={GroupsPayments}/>
+                    <PrivateRoute exact path="/properties/:propId/payments/:groupPaymentId" component={PaymentsInfo}/>
                     <PrivateRoute exact path="/properties/:propId/CreatePayments" component={CreateGroupPayments}/>
                     <PrivateRoute exact path="/renters" component={Renters}/>
                     <PrivateRoute exact path="/lease" component={Documents}/>
