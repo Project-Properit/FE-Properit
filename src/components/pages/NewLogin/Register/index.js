@@ -90,7 +90,7 @@ class Signup extends Component {
 
         return (
             <div>
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
                     <Navbar.Brand href="/signUp"><img className="logo" style={{height: '60px'}} src={logo}
                                                       alt='logo'/></Navbar.Brand>
                 </Navbar>
