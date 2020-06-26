@@ -60,6 +60,12 @@ const createPropApi = async (propertyObject) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets`;
     return apiCall(url,'POST', propertyObject)
 };
+
+const payApi = async (payId) => {
+    const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}`;
+    return apiCall(url,'PUT')
+};
+
 const fetchDocuments = async (userId) => {
     return  new Promise(resolve => {
         setTimeout(() => resolve([
@@ -87,8 +93,10 @@ function loginApi(email, password) {
         })
 }
 
-const fetchGroupsPayments = async (assetId) => {
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
+const fetchGroupsPayments = async (assetId, userId) => {
+    // const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
+    console.log(assetId)
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments?pay_to=' + userId;
     return apiCall(url, 'GET')
 };
 const fetchGroupPayments = async (assetId, groupPaymentsId) => {
@@ -117,5 +125,6 @@ export {
     fetchUser,
     createPropApi,
     fetchPayment,
-    fetchPayments
+    fetchPayments,
+    payApi
 }

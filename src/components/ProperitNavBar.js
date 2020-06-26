@@ -27,6 +27,7 @@ class ProperitNavBar extends Component {
 		const chosenModeNotFromScreen = this.props.isOwner ? 'owner' : 'tenant'
 		console.log('chosenModeNotFromScreen',chosenModeNotFromScreen)
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
+        localStorage.setItem('mode', chosenMode)
 		console.log('chosenMode',chosenMode)
 		const documentsUrl = this.props.location.pathname.replace('/documents','').replace('/payments','') +'/documents'
 		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'

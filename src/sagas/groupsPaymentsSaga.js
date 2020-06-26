@@ -1,17 +1,14 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 
-import {setError, setGroupsPayments} from '../actions/groupsPaymentsActions';
-import {GROUPSPAYMENTS, PROPERTY} from '../constants';
-import {createGroupPaymentsApi, fetchGroupPayments, fetchGroupsPayments} from '../api';
+import {createGroupPaymentsFormAction, setError, setGroupsPayments} from '../actions/groupsPaymentsActions';
+import {GROUPSPAYMENTS} from '../constants';
+import {createGroupPaymentsApi, fetchGroupsPayments} from '../api';
 import {actionChannel, take} from "@redux-saga/core/effects";
-import {updatePropertyFormAction} from "../actions/propertyActions";
-import {handlePropertyRemove} from "./propertySaga";
-import {createGroupPaymentsFormAction} from "../actions/groupsPaymentsActions";
 import {SubmissionError} from "redux-form";
 
 export function* handleGroupsPaymentsLoad(action) {
     try {
-        const myGroupsPayments = yield call(fetchGroupsPayments, action.assetId);
+        const myGroupsPayments = yield call(fetchGroupsPayments, action.assetId, action.userId);
         yield put(setGroupsPayments(myGroupsPayments));
     } catch (error) {
         yield put(setError(error.toString()));

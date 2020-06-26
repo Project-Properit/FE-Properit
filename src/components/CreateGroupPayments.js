@@ -15,7 +15,7 @@ import Input from "@material-ui/core/Input";
 class CreateGroupPayments extends Component {
     constructor() {
         super();
-        this.state = {amounts: {}, checked: false, totalAmount: 0, sumAllAmounts: 0};
+        this.state = {amounts: {}, totalAmount: 0, sumAllAmounts: 0};
     }
 
     componentDidMount() {

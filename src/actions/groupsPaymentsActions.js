@@ -1,9 +1,10 @@
 import { GROUPSPAYMENTS } from '../constants';
 import {createFormAction} from "redux-form-saga";
 
-const loadGroupsPayments = (assetId) => ({
+const loadGroupsPayments = (assetId,userId) => ({
     type: GROUPSPAYMENTS.LOAD,
-    assetId
+    assetId,
+    userId
 });
 
 const setGroupsPayments = myGroupsPayments => ({

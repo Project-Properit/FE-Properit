@@ -14,6 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
+import { payApi } from "../api";
 
 const useRowStyles = makeStyles({
   root: {
@@ -28,6 +29,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -44,7 +46,7 @@ function Row(props) {
         <TableCell align="right">{row.myself.amount}</TableCell>
         <TableCell align="right">{row.description}</TableCell>
         <TableCell align="right">{row.creation_time}</TableCell>
-        <TableCell align="right">{row.myself.is_open ? <Button color="primary">Pay</Button> :'Paid'}</TableCell>
+        <TableCell align="right">{row.myself.is_open ? <Button onClick={()=>payApi(row.myself.payment_id)} color="primary">Pay</Button> :'Paid'}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
