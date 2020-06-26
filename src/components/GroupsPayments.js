@@ -72,7 +72,7 @@ const mapStateToProps = ({myGroupsPayments, myGroupPayments}) => ({
     isLoading: myGroupsPayments.isLoading,
     myGroupsPayments: myGroupsPayments.myGroupsPayments,
     allGroupPayments: myGroupPayments.allGroupPayments,
-    error: myGroupsPayments.error,
+    error: myGroupsPayments.error
 });
 
 const mapDispatchToProps = dispatch => ({

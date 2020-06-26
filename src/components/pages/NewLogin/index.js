@@ -32,7 +32,14 @@ class Login extends Component {
 	submit = () => {
 		this.props.loginRequest(this.state.user, this.state.password)
 	}
-
+    onKeyDown = (e) => {
+        console.log(e)
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            e.stopPropagation();
+            this.submit();
+        }
+    }
 	handleChange(event) {
 		this.setState({user: event.target.value});
 	}
@@ -55,7 +62,7 @@ class Login extends Component {
 			}
 		} = this.props
 		return (
-			<div>
+			<div onKeyPress={e=>this.onKeyDown(e)}>
 				<Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
 					<Navbar.Brand href="/signUp"><img className="logo" style={{height: '60px'}} src={logo}
 													  alt='logo'/></Navbar.Brand>
