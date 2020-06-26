@@ -48,6 +48,7 @@ function* loginFlow(email, password) {
 		localStorage.setItem('userId', userId)
 		localStorage.setItem('isOwner', isOwner)
 		localStorage.setItem('isTenant', isTenant)
+        localStorage.setItem('assetId', tenantAssetId)
 		if (isOwner && isTenant) {
 			yield put(push('/chooseView'));
 		} else if (isOwner) {

@@ -16,6 +16,7 @@ const clientReducer = (state = initialSate, action) => {
         token: action.token,
         isTenant: action.isTenant,
         isOwner: action.isOwner,
+        chosenMode: action.chosenMode
       }
 
        case CLIENT.CLIENT_UNSET:

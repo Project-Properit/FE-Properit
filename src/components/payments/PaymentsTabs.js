@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import Payments from "./Payments";
-import PaymentsRequests from "./PaymentsRequests";
 import FadeIn from "react-fade-in";
 import UserTabs from "../UserTabs";
+import PaymentsRequests from "./PaymentsRequests";
 
 class PaymentsTabs extends Component {
     render() {
+        console.log(this.props.chosenMode)
         return (
             <div>
-                                <FadeIn>
-                    <UserTabs/>
-                </FadeIn>
+                {
+                    (localStorage.getItem('mode') === 'tenant') ?
+                    (<FadeIn>
+                            <UserTabs/>
+                        </FadeIn>
+                    ) : (
+                        <FadeIn>
+                            <PaymentsRequests/>
+                        </FadeIn>)
+                }
+                }}
+
                 {/*<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">*/}
                 {/*    <Tab eventKey="paymentGroup" title="My Groups">*/}
                 {/*        <Payments/>*/}
@@ -25,5 +32,4 @@ class PaymentsTabs extends Component {
         );
     }
 }
-
-export default PaymentsTabs;
+export default PaymentsTabs

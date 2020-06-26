@@ -30,7 +30,7 @@ class SelectionModeView extends Component {
                         </Link>
                     </Col>
                     <Col>
-                        <Link as={Link} to={'/about'} onClick={()=>this.onTenantMode()}>
+                        <Link as={Link} to={'/properties/' +localStorage.getItem('assetId') +'/payments'} onClick={()=>this.onTenantMode()}>
                         <Card>
                             <Card.Body>
                                 <Card.Title>
@@ -55,7 +55,7 @@ class SelectionModeView extends Component {
         console.log('TTTTEEEENNNNAAAANNNNTTTT')
 
         this.props.setMode('tenant')
-        return '/about'
+        return '/payments'
     }
 }
 const mapDispatchToProps = dispatch => ({

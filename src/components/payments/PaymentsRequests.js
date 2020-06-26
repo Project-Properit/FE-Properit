@@ -3,6 +3,7 @@ import {loadGroupsPayments} from "../../actions/groupsPaymentsActions";
 import {connect} from "react-redux";
 import Test from "./Test";
 import {withRouter} from "react-router-dom";
+import GroupsCollapsibleTable from "../GroupsPaymentsTable";
 
 class PaymentsRequests extends Component {
     componentDidMount() {
@@ -14,7 +15,7 @@ class PaymentsRequests extends Component {
     render() {
         return (
             <div>
-                <Test/>
+                <GroupsCollapsibleTable groupsPayments={this.props.myGroupsPayments}/>
             </div>
         );
     }
