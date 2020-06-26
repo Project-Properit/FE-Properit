@@ -36,6 +36,7 @@ function* loginFlow(email, password) {
 		isOwner = response.is_owner
 		isTenant = response.is_tenant
 		tenantAssetId = response.tenant_asset_id==='None' || response.tenant_asset_id===null ? null: response.tenant_asset_id
+		console.log('tenantAssetId',tenantAssetId)
 		// inform Redux to set our client token, this is non blocking so...
 		yield put(setClient(token, userId, isOwner, isTenant))
 
@@ -54,7 +55,7 @@ function* loginFlow(email, password) {
 			yield put(push('/properties'));
 		} else {
 			if (tenantAssetId) {
-				yield put(push('/properties/' + tenantAssetId + '/documents'));
+				yield put(push('/properties/' + tenantAssetId + '/payments'));
 			}
 			else{
               yield put(push('/newUser'));

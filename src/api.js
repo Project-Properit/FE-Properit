@@ -35,6 +35,11 @@ const fetchProperties = async (userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets?owner_id=`+userId;
     return apiCall(url,'GET')
 };
+const fetchPayments = async (assetId, userId) => {
+
+    const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/groups-payments?pay_from=`+userId;
+    return apiCall(url,'GET')
+};
 
 const fetchPayment = async (paymentId) => {
     const url = `${window._env_.REACT_APP_API_URL}/payments?id=` + paymentId;
@@ -114,5 +119,6 @@ export {
     createGroupPaymentsApi,
     fetchUser,
     createPropApi,
-    fetchPayment
+    fetchPayment,
+    fetchPayments
 }

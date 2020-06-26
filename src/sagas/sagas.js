@@ -12,6 +12,7 @@ import {PropertyUpdateWatcherSaga} from "./propertySaga";
 import formActionSaga from 'redux-form-saga';
 import {groupPaymentsDeleteWatcherSaga, watchGroupPaymentsLoad} from "./groupPaymentsSaga";
 import {watchPaymentLoad} from "./paymentSaga";
+import watchPaymentsLoad from "./myPaymentsSaga";
 
 
 export default function* rootSaga() {
@@ -20,5 +21,5 @@ export default function* rootSaga() {
         propertiesSaga(), documentsSaga(),groupsPaymentsSaga(),groupPaymentsCreateWatcherSaga(),groupPaymentsDeleteWatcherSaga(),
         signupWatcher(), loginWatcher(), watchLogout(), watchGroupPaymentsLoad(),
         watchPropertyLoad(),formActionSaga(), PropertyUpdateWatcherSaga(),
-        watchPaymentLoad()]);
+        watchPaymentLoad(),watchPaymentsLoad()]);
 }
