@@ -6,14 +6,27 @@
   background-color: #231F20 !important;
   //border: 1px solid rgba(0,0,0,.125);
   //border-radius: .25rem;
-
+.white-text {
+  color: #fff !important;
+}
   .card-action {
     height: 40%;
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    background-color: inherit;
+    border-top: 1px solid rgba(160,160,160,0.2);
+    position: relative;
+    padding: 16px 24px;
 
+    .waves-effect {
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      z-index: 1;
+
+    }
     .no-background {
       background-color: #231F20 !important;
       border: 1px solid #fff;
@@ -23,6 +36,11 @@
       color: white !important;
       background-color: #AD974F;
 
+      text-decoration: none;
+      letter-spacing: .5px;
+      outline: 0;
+      height: 36px;
+      text-transform: uppercase;
       &:focus {
         outline: none;
         border-color: #8E793E !important;
