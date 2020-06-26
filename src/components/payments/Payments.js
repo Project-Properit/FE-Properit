@@ -4,10 +4,9 @@ class Payments extends Component {
     render() {
         return (
             <div>
-                
+
             </div>
         );
     }
 }
-
-export default Payments;
+export default Payments

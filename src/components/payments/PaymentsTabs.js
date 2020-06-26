@@ -13,7 +13,7 @@ class PaymentsTabs extends Component {
                         <Payments/>
                     </Tab>
                     <Tab eventKey="requests" title="Requests">
-                        <PaymentsRequests/>
+                        <PaymentsRequests />
                     </Tab>
                 </Tabs>
             </div>

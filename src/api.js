@@ -85,8 +85,9 @@ function loginApi(email, password) {
         })
 }
 
-const fetchGroupsPayments = async (assetId) => {
+const fetchGroupsPayments = async (assetId, userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
+    // const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments?pay_to=' + userId;
     return apiCall(url, 'GET')
 };
 const fetchGroupPayments = async (assetId, groupPaymentsId) => {

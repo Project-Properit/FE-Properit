@@ -25,7 +25,6 @@ const clientReducer = (state = initialSate, action) => {
         isTenant: null,
         isOwner: null,
         chosenMode: null
-
       }
 
        case CLIENT.SET_MODE:
