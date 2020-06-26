@@ -3,7 +3,7 @@ import {Route, Router} from 'react-router-dom';
 import './App.css'
 import Login from "./components/pages/NewLogin/index";
 
-import Signup from "./components/Signup";
+import Signup from "./components/pages/NewLogin/Register/index";
 import About from "./components/About";
 import Properties from "./components/Properties";
 import PropertyInfo from "./components/PropertyInfo";
@@ -27,12 +27,15 @@ import CreateGroupPayments from "./components/CreateGroupPayments";
 import SelectionModeView from "./components/SelectionModeView";
 import {PaymentsInfo} from "./components/PaymentsInfo";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
+import MenuDrawer from "./components/MenuDrawer";
+
 
 function App() {
     return (
         <Router history={history}>
             <ProperitNavBar/>
             <div className={'tt'}>
+                <MenuDrawer/>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
                     <PublicRoute path="/login" component={Login}/>

@@ -19,26 +19,27 @@ class ProperitNavBar extends Component {
 
 	render() {
         const {propId} = this.props.match.params;
-		console.log('ds',this.props.match.params)
-		console.log('propId',this.props.location.pathname)
 		const isLogin = this.props.token
 		const isOwner = this.props.isOwner
 		const isTenant = this.props.isTenant
-		const chosenModeNotFromScreen = this.props.isOwner? 'owner': 'tenant'
+		console.log(typeof(this.props.isOwner))
+		console.log('this.props.isOwner',this.props.isOwner)
+		const chosenModeNotFromScreen = this.props.isOwner ? 'owner' : 'tenant'
+		console.log('chosenModeNotFromScreen',chosenModeNotFromScreen)
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
+		console.log('chosenMode',chosenMode)
 		const documentsUrl = this.props.location.pathname.replace('/documents','').replace('/payments','') +'/documents'
 		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'
-		console.log(chosenMode)
 		console.log('isOwner', isOwner)
 		console.log('isTenant', isTenant)
-		console.log('properties', this.props.myProperties)
+
 
 
 		if (isLogin) {
 			return (
 
-				<Navbar bg="dark" variant="dark">
-					<Navbar.Brand href="/properties"><img className="logo" style={{height: '60px'}} src={logo}
+                <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
+					<Navbar.Brand as={Link} to="/properties"><img className="logo" style={{height: '60px'}} src={logo}
 					                                      alt='logo'/></Navbar.Brand>
 					<Nav className="mr-auto">
 						{/*{isOwner && isTenant && chosenMode===null &&*/}

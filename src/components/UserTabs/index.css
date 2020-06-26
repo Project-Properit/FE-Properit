@@ -1,0 +1,18 @@
+.user-dashboard {
+    height: 100%;
+    font-size: 20px;
+}
+
+.user-dashboard .page {
+    margin-top: 16px;
+}
+
+.user-dashboard .MuiTab-root {
+    font-size: 20px;
+}
+
+
+
+.MuiTabs-root .MuiBadge-badge {
+    right: -12px;
+}

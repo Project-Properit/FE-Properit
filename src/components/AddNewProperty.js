@@ -9,7 +9,6 @@ import  Select  from "react-select";
 const MyDropdown = ({ input, ...props }) => {
  const handleBlur = () => input.onBlur
     const handleChange = () => {
-     console.log("fdf")
     }
  return (
    <div>

@@ -5,9 +5,6 @@ import {
 // In order to perform an action of type LOGIN_REQUESTING
 // we need an email and password
 const loginRequest = function loginRequest (email, password ) {
-  console.log('ddddddddd')
-  console.log(email)
-  console.log(password)
   return {
     type: LOGIN.LOGIN_REQUESTING,
     email,

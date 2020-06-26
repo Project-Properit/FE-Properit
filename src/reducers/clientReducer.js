@@ -2,8 +2,8 @@ import {CLIENT} from '../constants';
 const initialSate = {
   token: localStorage.getItem('token')|| null,
   userId: localStorage.getItem('userId')|| null,
-  isTenant: localStorage.getItem('isTenant')|| null,
-  isOwner: localStorage.getItem('isOwner')|| null,
+  isTenant: !(localStorage.getItem('isTenant') || null === 'false'),
+  isOwner: !(localStorage.getItem('isOwner')|| null === 'false'),
   chosenMode: null
 }
 const clientReducer = (state = initialSate, action) => {
@@ -28,7 +28,6 @@ const clientReducer = (state = initialSate, action) => {
       }
 
        case CLIENT.SET_MODE:
-           console.log('action',action)
            return {
                ...state,
                chosenMode: action.mode
