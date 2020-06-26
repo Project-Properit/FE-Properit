@@ -1,10 +1,16 @@
 import {CLIENT} from '../constants';
+
+
 const initialSate = {
   token: localStorage.getItem('token')|| null,
   userId: localStorage.getItem('userId')|| null,
-  isTenant: !(localStorage.getItem('isTenant') || null === 'false'),
-  isOwner: !(localStorage.getItem('isOwner')|| null === 'false'),
+  isTenant: getReal(localStorage.getItem('isTenant')),
+  isOwner: getReal(localStorage.getItem('isOwner')),
   chosenMode: null
+}
+
+function getReal(item) {
+    return (item==='true'|| item)
 }
 const clientReducer = (state = initialSate, action) => {
    switch (action.type) {

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {loadGroupsPayments} from "../../actions/groupsPaymentsActions";
 import {connect} from "react-redux";
-import Test from "./Test";
 import {withRouter} from "react-router-dom";
 import GroupsCollapsibleTable from "../GroupsPaymentsTable";
 

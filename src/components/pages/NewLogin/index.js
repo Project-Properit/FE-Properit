@@ -30,8 +30,6 @@ class Login extends Component {
 	}
 
 	submit = () => {
-		console.log(this.state.user)
-		console.log(this.state.password)
 		this.props.loginRequest(this.state.user, this.state.password)
 	}
     onKeyDown = (e) => {
@@ -63,7 +61,6 @@ class Login extends Component {
 				errors
 			}
 		} = this.props
-		console.log(this.props)
 		return (
 			<div onKeyPress={e=>this.onKeyDown(e)}>
 				<Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
