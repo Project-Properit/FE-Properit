@@ -7,7 +7,6 @@ const initialState = {
   errors: [],
 }
 
-
 const  signupReducer = (state = initialState, action) =>{
   switch (action.type) {
     case SIGNUP.SIGNUP_REQUESTING:
@@ -22,17 +21,12 @@ const  signupReducer = (state = initialState, action) =>{
         errors: [],
         messages: [{
           body: `Successfully created account for user`,
-          // ${action.response.email}`,
           time: new Date(),
         }],
         requesting: false,
         successful: true,
       }
 
-    // reset the state but with errors!
-    // the error payload returned is actually far
-    // more detailed, but we'll just stick with
-    // the base message for now
     case SIGNUP.SIGNUP_ERROR:
       return {
         errors: state.errors.concat([{

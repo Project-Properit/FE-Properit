@@ -1,6 +1,7 @@
 import { SIGNUP } from '../constants'
 
-const signupRequest = function signupRequest ({ email, password , phone, first_name, last_name, userType}) {
+const signupRequest = function signupRequest (all) {
+  const { email, password , phone, first_name, last_name, user_type, payment_details} = all
   return {
     type: SIGNUP.SIGNUP_REQUESTING,
     email,
@@ -8,7 +9,8 @@ const signupRequest = function signupRequest ({ email, password , phone, first_n
     phone,
     first_name,
     last_name,
-    userType
+    user_type,
+    payment_details
   }
 }
 

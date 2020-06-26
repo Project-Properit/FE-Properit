@@ -60,6 +60,12 @@ const createPropApi = async (propertyObject) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets`;
     return apiCall(url,'POST', propertyObject)
 };
+
+const payApi = async (payId) => {
+    const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}`;
+    return apiCall(url,'PUT')
+};
+
 const fetchDocuments = async (userId) => {
     return  new Promise(resolve => {
         setTimeout(() => resolve([
@@ -117,5 +123,6 @@ export {
     fetchUser,
     createPropApi,
     fetchPayment,
-    fetchPayments
+    fetchPayments,
+    payApi
 }
