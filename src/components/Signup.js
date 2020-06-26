@@ -9,6 +9,13 @@ import signupRequest from '../actions/sugnUpActions'
 import Select  from "react-select";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../images/logoWhite .jpg";
+import FadeIn from "react-fade-in";
+import {Button, IconButton, InputAdornment, TextField} from "@material-ui/core";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
+// import UserSelect from '../components/UsersSelect'
+import "./Signup.css";
+
+
 const userOptions = [
     {
       label: 'Asset Owner',
@@ -62,62 +69,129 @@ class Signup extends Component {
                                                           alt='logo'/></Navbar.Brand>
                  </Navbar>
             <div style={{textAlign:'center',marginTop:'20px'}} className={'container'}>
-              <div className="signup">
+              {/*<div className="signup">*/}
                 {/* Use the Submit handler with our own submit handler*/}
-                <form className="widget-form" onSubmit={handleSubmit(this.submit)}>
-                    <h1>Signup</h1>
-                    <label htmlFor="email">Email</label>
-                    <Field
-                        name="email"
-                        type="text"
-                        id="email"
-                        className="email"
-                        label="Email"
-                        component="input"
-                    />
-                    <label htmlFor="password">Password</label>
-                    <Field
-                        name="password"
-                        type="password"
-                        id="password"
-                        className="password"
-                        label="Password"
-                        component="input"
-                    />
-                    <label htmlFor="first_name">First Name</label>
-                    <Field
-                        name="first_name"
-                        type="text"
-                        id="first_name"
-                        className="first_name"
-                        label="first_name"
-                        component="input"
-                    /><label htmlFor="phone">Last Name</label>
-                    <Field
-                        name="last_name"
-                        type="text"
-                        id="last_name"
-                        className="last_name"
-                        label="last_name"
-                        component="input"
-                    />
+                  <FadeIn>
+                      <div className="register-page">
+                          <form className="register-panel">
+                              <TextField
+                                  className="item"
+                                  value={""}
+                                  variant="outlined"
+                                  label="Email"
+                                  required
+                              />
+                              <TextField
+                                  className="item"
+                                  value={""}
+                                  variant="outlined"
+                                  label="First Name"
+                                  required
+                              />
+                              <TextField
+                                  className="item"
+                                  value={""}
+                                  variant="outlined"
+                                  label="Last Name"
+                                  required
+                              />
+                              <TextField
+                                  className="item"
+                                  value={""}
+                                  variant="outlined"
+                                  label="Phone"
+                                  required
+                              />
+                              <TextField
+                                  id="outlined-end-adornment"
+                                  className="item"
+                                  variant="outlined"
+                                  type={"password"}
+                                  value={""}
+                                  label="סיסמא"
+                                  required
+                                  InputProps={{
+                                      endAdornment: (
+                                          <InputAdornment position="end">
+                                              <IconButton
+                                                  aria-label="toggle password visibility"
+                                                  edge="end"
+                                              >
+                                                  {<VisibilityOff/>}
 
-                    <label htmlFor="phone">Phone</label>
-                    <Field
-                        name="phone"
-                        type="text"
-                        id="phone"
-                        className="phone"
-                        label="phone"
-                        component="input"
-                    />
-                      <div>
-                    <label>User Type</label>
-                        <Field id="userType" name="userType" component={ReduxFormSelect} options={userOptions} />
+                                              </IconButton>
+                                          </InputAdornment>)
+                                  }}
+                              />
+                              {/*<UserSelect*/}
+                              {/*    className="item"*/}
+                              {/*    value={""}*/}
+                              {/*    required*/}
+                              {/*/>*/}
+                          </form>
+                          <Button
+                              color="primary"
+                              variant="contained"
+                              style={{ fontWeight: "bold", fontSize: "24px" }}
+                          >
+                              צור משתמש
+                          </Button>
+                      </div>
+                  </FadeIn>
+                {/*<form className="widget-form" onSubmit={handleSubmit(this.submit)}>*/}
+                {/*    <h1>Signup</h1>*/}
+                {/*    <label htmlFor="email">Email</label>*/}
+                {/*    <Field*/}
+                {/*        name="email"*/}
+                {/*        type="text"*/}
+                {/*        id="email"*/}
+                {/*        className="email"*/}
+                {/*        label="Email"*/}
+                {/*        component="input"*/}
+                {/*    />*/}
+                {/*    <label htmlFor="password">Password</label>*/}
+                {/*    <Field*/}
+                {/*        name="password"*/}
+                {/*        type="password"*/}
+                {/*        id="password"*/}
+                {/*        className="password"*/}
+                {/*        label="Password"*/}
+                {/*        component="input"*/}
+                {/*    />*/}
+                {/*    <label htmlFor="first_name">First Name</label>*/}
+                {/*    <Field*/}
+                {/*        name="first_name"*/}
+                {/*        type="text"*/}
+                {/*        id="first_name"*/}
+                {/*        className="first_name"*/}
+                {/*        label="first_name"*/}
+                {/*        component="input"*/}
+                {/*    /><label htmlFor="phone">Last Name</label>*/}
+                {/*    <Field*/}
+                {/*        name="last_name"*/}
+                {/*        type="text"*/}
+                {/*        id="last_name"*/}
+                {/*        className="last_name"*/}
+                {/*        label="last_name"*/}
+                {/*        component="input"*/}
+                {/*    />*/}
 
-                        </div>
-                    <button style={{'marginTop':'20px'}} action="submit">SIGNUP</button>
-                </form>
+                {/*    <label htmlFor="phone">Phone</label>*/}
+                {/*    <Field*/}
+                {/*        name="phone"*/}
+                {/*        type="text"*/}
+                {/*        id="phone"*/}
+                {/*        className="phone"*/}
+                {/*        label="phone"*/}
+                {/*        component="input"*/}
+                {/*    />*/}
+                {/*      <div>*/}
+                {/*    <label>User Type</label>*/}
+                {/*        <Field id="userType" name="userType" component={ReduxFormSelect} options={userOptions} />*/}
+
+                {/*        </div>*/}
+                {/*    <button style={{'marginTop':'20px'}} action="submit">SIGNUP</button>*/}
+                {/*</form>*/}
                 <div className="auth-messages">
                     {
                         /*
@@ -142,7 +216,7 @@ class Signup extends Component {
                         <Link to="/login">Already a Member? Login Here »</Link>
                     )}
                 </div>
-            </div>
+            {/*</div>*/}
             </div>
              </div>
         )

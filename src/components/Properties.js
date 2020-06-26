@@ -6,6 +6,8 @@ import Row from "react-bootstrap/Row";
 import {PropertyCard} from "./PropertyCard";
 import Loading from "./Loading";
 import Button from "@material-ui/core/Button";
+import UserTabs from "./UserTabs/index";
+import FadeIn from "react-fade-in";
 
 class Properties extends Component {
     componentDidMount() {
@@ -17,6 +19,7 @@ class Properties extends Component {
         const {userId} = this.props.match.params;
 
         return (
+            <div id="userContent">
 
             <Container className="App">
                 <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
@@ -43,6 +46,7 @@ class Properties extends Component {
                 </div>
 
             </Container>
+            </div>
         )
     }
     onAddProperty() {

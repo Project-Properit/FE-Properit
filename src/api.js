@@ -4,7 +4,6 @@ const TIMEOUT=1000;
 
 const apiCall = async (url, method,jsonBody={},withToken=true) =>{
     let jb = null
-    console.log(method)
     if (Object.keys(jsonBody).length && (method==='POST' || method==='PUT')){
          jb = JSON.stringify(jsonBody)
     }
@@ -35,6 +34,11 @@ const fetchProperties = async (userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets?owner_id=`+userId;
     return apiCall(url,'GET')
 };
+const fetchPayments = async (assetId, userId) => {
+
+    const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/groups-payments?pay_from=`+userId;
+    return apiCall(url,'GET')
+};
 
 const fetchPayment = async (paymentId) => {
     const url = `${window._env_.REACT_APP_API_URL}/payments?id=` + paymentId;
@@ -49,12 +53,10 @@ const removeProperty = async (propertyId) => {
     return apiCall(url,'DELETE')
 };
 const updatePropApi = async (propertyId, propertyObject) => {
-    console.log(propertyObject)
     const url = `${window._env_.REACT_APP_API_URL}/assets/`+propertyId;
     return apiCall(url,'PUT', propertyObject)
 };
 const createPropApi = async (propertyObject) => {
-    console.log(propertyObject)
     const url = `${window._env_.REACT_APP_API_URL}/assets`;
     return apiCall(url,'POST', propertyObject)
 };
@@ -114,5 +116,6 @@ export {
     createGroupPaymentsApi,
     fetchUser,
     createPropApi,
-    fetchPayment
+    fetchPayment,
+    fetchPayments
 }

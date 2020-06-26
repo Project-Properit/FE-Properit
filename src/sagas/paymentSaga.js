@@ -5,9 +5,7 @@ import {fetchPayment} from "../api";
 
 export function* handlePaymentLoad(action) {
     try {
-        // console.log(action)
         const payment = yield call(fetchPayment, action.paymentId);
-        // console.log(payment)
         yield put(setPayment(payment[0]));
     } catch (error) {
         yield put(setError(error.toString()));
@@ -16,7 +14,6 @@ export function* handlePaymentLoad(action) {
 
 export function* handlePaymentRemove(action) {
     try {
-        console.log(action)
         const success = yield call(removePayment, action.propertyId);
         // yield put(setProperty(myProperty));
     } catch (error) {

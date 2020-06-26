@@ -11,6 +11,7 @@ import myGroupsPaymentsReducer from "./groupsPaymentsReducer"
 import myGroupPaymentsReducer from "./groupPaymentsReducer"
 import userReducer from "./userReducer";
 import payment from "./paymentReducer";
+import myPaymentsReducer from "./myPaymentsReducer";
 
 const rootReducer = combineReducers({
     myProperties: myPropertiesReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     loginReducer,
     myPropertyReducer,
     payment,
+    myPaymentsReducer,
     form
 
 });
