@@ -55,10 +55,7 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
 
             <br />
             <FilesUpload
-                         // file={doc.doc_location}
-                         // onLoadSuccess={this.onDocumentLoadSuccess}
-                         // files={this.state.browserFiles} setFiles={this.addBrowserFiles} maxFiles={3}
-                         files={files} foo={setFiles} maxFiles={1}
+                         files={files} foo={setFiles} maxFiles={1} name={name}
             />
             {
                 errors.files ? <div style={{ marginTop: "10px", color: "red" }}>{errors.files}</div> : ""

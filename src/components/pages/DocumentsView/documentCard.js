@@ -43,7 +43,7 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
             </span>
 			<div>
 				<b>קבצים מצורפים: </b>
-				<a href={document.path_url}>{document.path_url}</a>
+				<a href={document.url}>{document.url}</a>
 			</div>
 		</div>
 	</div>;
