@@ -20,9 +20,7 @@ class Properties extends Component {
 
         return (
             <div id="userContent">
-                <FadeIn>
-                    <UserTabs/>
-                </FadeIn>
+
             <Container className="App">
                 <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
                     <h2> Properties - {userId}</h2>
