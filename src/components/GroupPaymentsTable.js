@@ -28,15 +28,6 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-function getStatus(row) {
-	let status = 'Paid'
-	row.participants.forEach(part=> {
-		if(part.is_open)
-			status =  "Open"
-		}
-	)
-	return status
-}
   return (
     <React.Fragment>
       <TableRow className={classes.root}>

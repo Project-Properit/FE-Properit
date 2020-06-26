@@ -7,7 +7,6 @@ import CollapsibleTable from "../GroupPaymentsTable";
 class Payments extends Component {
 	componentDidMount() {
 		const {propId} = this.props.match.params
-		console.log('llllllllllllllllll',propId)
 		this.props.loadPayments(propId, this.props.userId)
 	}
 
