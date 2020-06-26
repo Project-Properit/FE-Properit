@@ -1,21 +1,64 @@
-.login-page {
+
+.login-fade {
+    background: url("../../../images/modern-loft-interior.jpg") no-repeat center;
+    background-size: cover;
+    font-family: sans-serif;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center;
+    height: calc(100vh - 64px);
+}
+.login-box {
+    width: 320px;
+    height: 420px;
+    background: #ad995ec2;
+    color: #1b1e21;
+    /*color: #fff;*/
+    top: 50%;
+    left: 50%;
+    padding: 70px 30px;
+    margin: 8% auto 0;
 }
 
-.login-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 400px;
-    margin-top: 100px;
-    margin-bottom: 50px;
+.login-box .avatar {
+    top: -48px !important;
 }
 
-.login-panel .item {
-    margin-bottom: 10px;
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    left: calc(50% - 50px);
+
+}
+
+h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+
+}
+
+.login-box .item {
     width: 100%;
+    margin-bottom: 20px;
+
+}
+.login-box .item .label{
+}
+.login-box .button {
+    width: 100%;
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    background: #1b1e21;
+    color: #ad995e91;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.login-box .link{
+
+    color: #16181b;
 }

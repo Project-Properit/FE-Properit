@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom'
 import { Button, IconButton, InputAdornment, TextField, Typography } from "@material-ui/core";
 import { VisibilityOff } from "@material-ui/icons";
 import FadeIn from "react-fade-in";
+import avatar from '../../../images/avatar-black2.png';
+import backHome from '../../../images/home2.jpg';
 
 import "./login.css";
 
 import Messages from '../../../notifications/Messages'
 import Errors from '../../../notifications/Errors'
 import loginRequest from '../../../actions/loginActions'
+import Navbar from "react-bootstrap/Navbar";
+import logo from "../../../images/logoWhite .jpg";
 
 
 class Login extends Component {
@@ -54,9 +58,18 @@ class Login extends Component {
 		} = this.props
 		console.log(this.props)
 		return (
-			<FadeIn>
-				<div className="login-page">
-					<form style={{}} className="login-panel">
+			<div>
+				<Navbar bg="dark" variant="dark">
+					<Navbar.Brand href="/signUp"><img className="logo" style={{height: '60px'}} src={logo}
+													  alt='logo'/></Navbar.Brand>
+				</Navbar>
+				<div style={{textAlign:'center'}}>
+			 <FadeIn className="login-fade">
+				 {/*<div className="login-page">*/}
+				<div className="login-box">
+					<img src={avatar} className="avatar"/>
+					<h1>Login Here</h1>
+					<form className="login-panel">
 						<TextField
 							required
 							className="item"
@@ -88,33 +101,39 @@ class Login extends Component {
 									</InputAdornment>)
 							}}
 						/>
+						<div className="auth-messages">
+							{!requesting && !!errors.length && (
+								<Errors message="Failure to login due to:" errors={errors}/>
+							)}
+							{!requesting && !!messages.length && (
+								<Messages messages={messages}/>
+							)}
+							{requesting && <div>Logging in...</div>}
+						</div>
+						<Button
+							className="button"
+							color="primary"
+							variant="contained"
+							onClick={() => this.submit()}
+							style={{fontWeight: "bold", fontSize: "24px"}}
+						>
+							הכנס למערכת
+						</Button>
+						{/*<div style={{marginTop: '20px'}}>*/}
+							<Typography className="item">
+								<Link className="link" to="/signup">Need to Signup? Click Here »</Link>
+							</Typography>
+						{/*</div>*/}
 					</form>
-					<div className="auth-messages">
-						{!requesting && !!errors.length && (
-							<Errors message="Failure to login due to:" errors={errors}/>
-						)}
-						{!requesting && !!messages.length && (
-							<Messages messages={messages}/>
-						)}
-						{requesting && <div>Logging in...</div>}
-					</div>
-					<Button
-						color="primary"
-						variant="contained"
-						onClick={() => this.submit()}
-						style={{fontWeight: "bold", fontSize: "24px"}}
-					>
-						הכנס למערכת
-					</Button>
-					<div style={{marginTop: '20px'}}>
-						<Typography className="item">
-							Need to Signup?
-							<Link to="/signup">Need to Signup? Click Here »</Link>
-						</Typography>
-					</div>
+
+
 
 				</div>
+			 {/*</div>*/}
 			</FadeIn>
+				</div>
+			</div>
+
 		)
 	}
 }

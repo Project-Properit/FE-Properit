@@ -4,7 +4,7 @@ import './App.css'
 // import Login from "./components/Login";
 import Login from "./components/pages/NewLogin/index";
 
-import Signup from "./components/Signup";
+import Signup from "./components/pages/NewLogin/Register/index";
 import About from "./components/About";
 import Properties from "./components/Properties";
 import PropertyInfo from "./components/PropertyInfo";
@@ -24,12 +24,15 @@ import DocumentsView from "./components/pages/DocumentsView/index";
 import Documents from "./components/Documents";
 import CreateGroupPayments from "./components/CreateGroupPayments";
 import SelectionModeView from "./components/SelectionModeView";
+import MenuDrawer from "./components/MenuDrawer";
+
 
 function App() {
     return (
         <Router history={history}>
             <ProperitNavBar/>
             <div className={'tt'}>
+                <MenuDrawer/>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
                     <PublicRoute path="/login" component={Login}/>

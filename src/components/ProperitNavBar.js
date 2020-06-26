@@ -19,7 +19,7 @@ class ProperitNavBar extends Component {
         if(isLogin) {
             return (
 
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
                     <Navbar.Brand href="/properties"><img className="logo" style={{height: '60px'}} src={logo}
                                                           alt='logo'/></Navbar.Brand>
                     <Nav className="mr-auto">
