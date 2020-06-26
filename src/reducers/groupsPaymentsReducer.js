@@ -1,6 +1,6 @@
 import { GROUPSPAYMENTS } from '../constants';
 
-const myGroupsPaymentsReducer = (state = {myGroupsPayments:[]}, action) => {
+const myGroupsPayments = (state = {myGroupsPayments:[]}, action) => {
     switch (action.type) {
         case GROUPSPAYMENTS.LOAD: return {
             ...state,
@@ -24,4 +24,4 @@ const myGroupsPaymentsReducer = (state = {myGroupsPayments:[]}, action) => {
 
 };
 
-export default myGroupsPaymentsReducer;
+export default myGroupsPayments;
