@@ -1,10 +1,11 @@
-import { DonutLargeRounded, Build, GroupAdd, InsertDriveFile} from "@material-ui/icons";
+import {Build, GroupAdd, InsertDriveFile} from "@material-ui/icons";
+import PaymentIcon from '@material-ui/icons/Payment';
 
 const menuItemTypes = {
     payments: {
         to: "/documents",
         text: "תשלומים",
-        Icon: DonutLargeRounded
+        Icon: PaymentIcon
     },
     professional: {
         to: "/documents",

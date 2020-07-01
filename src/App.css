@@ -198,3 +198,43 @@ a {
   padding-left: 0 !important;
 
  }
+
+
+#main-page {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#main-page .org-bar {
+  background: #cecece38;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#routeContent{
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #afafaf;
+}
+

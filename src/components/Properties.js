@@ -8,7 +8,7 @@ import Loading from "./Loading";
 import Button from "@material-ui/core/Button";
 import UserTabs from "./UserTabs/index";
 import FadeIn from "react-fade-in";
-
+import CreatProperties from "./pages/properties/index"
 class Properties extends Component {
     componentDidMount() {
         console.log(this.props.ownerId)
@@ -25,8 +25,9 @@ class Properties extends Component {
                 <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
                     <h2> Properties - {userId}</h2>
                 </header>
-                <Button onClick={()=>this.onAddProperty()}>Add New Property</Button>
 
+                {/*<Button onClick={()=>this.onAddProperty()}>Add New Property</Button>*/}
+                <CreatProperties/>
                <Loading loading={this.props.isLoading}/>
 
                 <Row>
