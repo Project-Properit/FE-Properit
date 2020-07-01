@@ -21,6 +21,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-credit-cards": "^0.8.3",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-files": "^2.4.8",
     "react-final-form": "^6.5.0",

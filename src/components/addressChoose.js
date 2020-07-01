@@ -80,6 +80,31 @@ export default function SimpleListMenu(props) {
 		// 			</div>
 
 		<div>
+			<Button
+				ref={logoutRef}
+				dir="rtl"
+				style={{
+					padding: 0,
+					color: "white",
+					fontWeight: "bold",
+					fontSize: "22px",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "space-between",
+					position: "relative",
+					minWidth: "182px"
+				}}
+				onClick={
+				handleClickListItem
+					// setExpanded(!expanded)
+
+
+				}
+			>
+				<div style={{marginRight: "8px", marginLeft: "8px", whiteSpace: "nowrap"}}>
+					{props.options[selectedIndex]}
+				</div>
+			</Button>
 	<List component="nav" aria-label="Device settings">
 		<ListItem
 			button
@@ -87,6 +112,17 @@ export default function SimpleListMenu(props) {
 			aria-controls="lock-menu"
 			aria-label="when device is locked"
 			onClick={handleClickListItem}
+			style={{
+				padding: 0,
+				color: "white",
+				fontWeight: "bold",
+				fontSize: "22px",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "space-between",
+				position: "relative",
+				minWidth: "182px"
+			}}
 		>
 			<ListItemText primary="Choose Address" secondary={props.options[selectedIndex]}/>
 		</ListItem>
