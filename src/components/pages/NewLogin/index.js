@@ -65,7 +65,8 @@ class Login extends Component {
 			<div onKeyPress={e=>this.onKeyDown(e)}>
 				<Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
 					<Navbar.Brand href="/signUp"><img className="logo" style={{height: '60px'}} src={logo}
-													  alt='logo'/></Navbar.Brand>
+													  alt='logo'/><
+						/Navbar.Brand>
 				</Navbar>
 				<div style={{textAlign:'center'}}>
 			 <FadeIn className="login-fade">

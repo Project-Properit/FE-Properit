@@ -160,7 +160,7 @@ class Signup extends Component {
 									label="Phone"
 									required
 								/>
-								<FormControl>
+								<FormControl className="item">
 									<InputLabel id="demo-simple-select-label">User Type</InputLabel>
 									<Select className="item"
 									        labelId="user-type-select-label"

@@ -10,29 +10,30 @@ import { addFiles, deleteFiles, setExistedFiles, setFiles } from "../../../actio
 
 const ADD_FILES_TEXT = "הוספת קבצים";
 const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ שתרצה להעלות";
-const DELETE_ALL_FILES_TEXT = "מחק הכל";
 
 
 function FilesUpload(props) {
+	const fileName = props.name
+	console.log('fileName----',fileName)
+	const propId = window.location.pathname.replace('/properties/','').replace('/documents','')
+	console.log('propId-----',propId)
+	const {name, maxFiles, existedFiles, setExistedFiles} = props;
 
-	const {addFiles, maxFiles, existedFiles, setExistedFiles} = props;
+	const [files, setFiles, setName] = useState([]);
 
-	const [files, setFiles] = useState([]);
-
-	const setNewFiles = React.useCallback((newFiles) => {
+	const setNewFiles = React.useCallback(newFiles => {
 		setFiles(newFiles);
 		props.setFiles([...props.files, ...newFiles]);
 		props.foo([...props.files, ...newFiles]);
-	}, [props.foo, props.setFiles, props.files]);
+	}, [setFiles, props]);
 
 	const filesRef = React.useRef();
 	const onFilesChange = React.useCallback(newFiles => {
-		console.log('newFiles',newFiles)
 		newFiles[newFiles.length - 1].image = ''
 		setNewFiles([...newFiles]);
 		const formData = new FormData();
-		formData.append("שוהם", newFiles[newFiles.length - 1]);
-		axios.post(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e/documents`, formData, {
+		formData.append('fileName', newFiles[newFiles.length - 1]);
+		axios.post(`${process.env.REACT_APP_API_URL}/assets/${propId}/documents`, formData, {
 			headers: {
 				'x-access-tokens': localStorage.getItem('token') || '',
 				"Content-Type": "multipart/form-data"
@@ -102,19 +103,6 @@ function FilesUpload(props) {
 					existedFiles={existedFiles}
 					deleteFileHandler={deleteFile}
 					deleteExistedFileHandler={deleteExistedFile}/>
-
-				{/*{*/}
-				{/*    files.length + existedFiles.length > 0 ?*/}
-				{/*        <Button*/}
-				{/*            id="deleteAllFiles"*/}
-				{/*            color="secondary"*/}
-				{/*            variant="contained"*/}
-				{/*            onClick={deleteAllFiles}*/}
-				{/*            startIcon={<Cancel />}*/}
-				{/*        >*/}
-				{/*            {DELETE_ALL_FILES_TEXT}*/}
-				{/*        </Button> : ""*/}
-				{/*}*/}
 			</div>
 		</div>);
 };
