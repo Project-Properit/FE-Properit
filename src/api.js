@@ -107,6 +107,24 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
     return apiCall(url, 'POST', groupPaymentsObject)
+
+function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments) {
+
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-tokens':localStorage.getItem('token')||''
+        },
+        body: JSON.stringify({title, description, is_public, amount, payments}),
+    })
+        .then(handleApiErrors) // we'll make this in a second
+        .then(response => response.json())
+        .then(json => json)
+        .catch((error) => {
+            throw error
+        })
 }
 const fetchUser = async (userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/users/` + userId;

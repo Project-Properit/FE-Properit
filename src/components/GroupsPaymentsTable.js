@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -28,14 +28,15 @@ function GroupRow(props) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+    console.log(props.isOwner)
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
                 <TableCell>
-                    {row.is_public &&
+                    {row.is_public || props.isOwner ?
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                    </IconButton>}
+                    </IconButton>:null}
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {row.title}
@@ -85,6 +86,8 @@ function GroupRow(props) {
 }
 
 export default function GroupsCollapsibleTable(props) {
+    const [groupsPayments, setgroupsPayments] = useState([]);
+    let groups = props.groupsPayments? props.groupsPayments: groupsPayments
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -99,9 +102,9 @@ export default function GroupsCollapsibleTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.groupsPayments.map((groupPayment,id) => (
-                        // console.log(groupPayment)
-                        <GroupRow key={id} row={groupPayment}/>
+
+                    {groups.map((groupPayment,id) => (
+                        <GroupRow key={id} isOwner={props.isOwner} row={groupPayment}/>
                     ))}
                 </TableBody>
             </Table>

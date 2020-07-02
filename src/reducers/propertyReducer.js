@@ -1,23 +1,25 @@
 import { PROPERTY} from '../constants';
 
-const myPropertyReducer = (state = {myProperty:null, initialValues:{tenant_list:[]}}, action) => {
+const   myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues:{tenant_list:[]}}, action) => {
     switch (action.type) {
         case PROPERTY.LOAD: return {
             ...state,
             isLoading:true,
-            myProperty:null,
+            myProperty:{tenant_list:[]},
             initialValues:{tenant_list:[]}
         };
         case PROPERTY.CLEAR: return {
             ...state,
             initialValues:null
         };
-        case PROPERTY.LOAD_SUCCESS: return {
+        case PROPERTY.LOAD_SUCCESS:
+            return {
             ...state,
             isLoading:false,
             myProperty:action.myProperty[0],
             initialValues:{
                 assetId:action.myProperty[0].id,
+                ownerId:action.myProperty[0].owner_id,
                 address:action.myProperty[0].address,
                 comments:action.myProperty[0].comments,
                 rent_fee:action.myProperty[0].rent_fee,
