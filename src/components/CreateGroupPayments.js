@@ -166,6 +166,7 @@ class CreateGroupPayments extends Component {
                                     />
                                     <div style={{display: "flex"}}>
                                         {this.props.myProperty.tenant_list.map(tenant => (
+                                            tenant.id !== this.props.userId?
                                             <div key={tenant.id}>
                                                 <Card style={{minWidth: 275}}>
                                                     <CardContent>
@@ -190,7 +191,7 @@ class CreateGroupPayments extends Component {
                                                         </Typography>
                                                     </CardContent>
                                                 </Card>
-                                            </div>
+                                            </div>:null
                                         ))
                                         }
                                     </div>
