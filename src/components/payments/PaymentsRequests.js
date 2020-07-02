@@ -30,24 +30,20 @@ class PaymentsRequests extends Component {
     }
 
     openModal = () => {
-        console.log("openModal")
         this.setState({newDocumentModalOpened: true})
     };
 
     closeModal = () => {
-        console.log("closeModal")
         this.setState({newDocumentModalOpened: false})
     };
-    onButtonClick = () => {
 
-    }
 
     render() {
         let {propId} = this.props.match.params
         return (
             <div id="documentsContainer">
                 {this.state.newDocumentModalOpened ?
-                    (<CreateGroupPayments userId={this.props.userId} propId={propId} closeHandler={this.closeModal}/>
+                    (<CreateGroupPayments userId={this.props.userId} propId={propId} loadGroups={this.props.loadGroupsPayments} closeHandler={this.closeModal}/>
                     ) : ""
                 }
                 <GroupsCollapsibleTable isOwner={this.state.isOwner} groupsPayments={this.props.myGroupsPayments} />

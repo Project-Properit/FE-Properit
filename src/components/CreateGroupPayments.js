@@ -5,8 +5,6 @@ import "./styles.css"
 import {Button, TextField} from "@material-ui/core";
 import FadeIn from "react-fade-in";
 import MyModal from "./pages/Modal";
-import Errors from "../notifications/Errors";
-import Messages from "../notifications/Messages";
 import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
@@ -27,6 +25,7 @@ class CreateGroupPayments extends Component {
             is_public: true
         };
     }
+
     reset = () => {
         this.setState({
             checked: {},
@@ -47,18 +46,18 @@ class CreateGroupPayments extends Component {
         delete this.state.tenants[tenantId]
     };
 
-    amountNotZero = (tenant) =>{
+    amountNotZero = (tenant) => {
         return tenant.amount > 0
     }
 
-    validateGroupPayment = (title, tenants) => ({
-        isValid: (title !== null && title.length > 0) && tenants.length > 0 && tenants.every(this.amountNotZero),
-        errors: {
-            name: (title === null || title.length === 0),
-            tenants: tenants.length === 0 ? "הקבוצה ריקה" : false,
-            amount: tenants.every(this.amountNotZero)? "תשלום אינו תקין": false
-        }
-    });
+    // validateGroupPayment = (title, tenants) => ({
+    //     isValid: (title !== null && title.length > 0) && tenants.length > 0 && tenants.every(this.amountNotZero),
+    //     errors: {
+    //         name: (title === null || title.length === 0),
+    //         tenants: tenants.length === 0 ? "הקבוצה ריקה" : false,
+    //         amount: tenants.every(this.amountNotZero)? "תשלום אינו תקין": false
+    //     }
+    // });
     getCheckbox = (tenantId) => {
         let checked = this.state.checked
         if (checked.hasOwnProperty(tenantId)) {
@@ -77,19 +76,21 @@ class CreateGroupPayments extends Component {
         //     this.state(validation.errors);
         // }
         // else {
-            let payments = []
-            let userId = this.props.userId
-            let groupPaymentsObject = {...this.state, payments: []}
-            delete groupPaymentsObject.checked
-            let tenants = this.state.tenants
-            Object.keys(tenants).forEach(function (key) {
-                payments.push({pay_from: key, pay_to: userId, amount: tenants[key].amount, method: null})
-            })
-            groupPaymentsObject['payments'] = payments
-            delete groupPaymentsObject.tenants
-            this.props.closeHandler();
-            this.reset();
-            this.props.createGroupPayments(groupPaymentsObject);
+        let payments = []
+        let userId = this.props.userId
+        let groupPaymentsObject = {...this.state, payments: []}
+        delete groupPaymentsObject.checked
+        let tenants = this.state.tenants
+        Object.keys(tenants).forEach(function (key) {
+            payments.push({pay_from: key, pay_to: userId, amount: tenants[key].amount, method: null})
+        })
+        groupPaymentsObject['payments'] = payments
+        delete groupPaymentsObject.tenants
+        this.props.createGroupPayments(groupPaymentsObject);
+        this.props.closeHandler();
+        // this.reset();
+
+        this.props.loadGroups(this.props.propId, userId)
         // }
     }
 
@@ -113,14 +114,14 @@ class CreateGroupPayments extends Component {
     }
 
     render() {
-        const {
-            create: {
-                requesting,
-                successful,
-                messages,
-                errors
-            }
-        } = this.props
+        // const {
+        //     create: {
+        //         requesting,
+        //         successful,
+        //         messages,
+        //         errors
+        //     }
+        // } = this.props
         return (
             <div>
                 <MyModal open setOpen={this.props.closeHandler} closeMe={this.props.closeHandler}
@@ -168,13 +169,13 @@ class CreateGroupPayments extends Component {
                                             <div key={tenant.id}>
                                                 <Card style={{minWidth: 275}}>
                                                     <CardContent>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Checkbox
-                                                            checked={this.getCheckbox(tenant.id)}
-                                                            onChange={e => this.setCheckbox(e, tenant.id)}
-                                                            inputProps={{'aria-label': 'primary checkbox'}}
-                                                        />}
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={this.getCheckbox(tenant.id)}
+                                                                    onChange={e => this.setCheckbox(e, tenant.id)}
+                                                                    inputProps={{'aria-label': 'primary checkbox'}}
+                                                                />}
                                                             label={"Add " + tenant.first_name + ' ' + tenant.last_name}
                                                         />
                                                         <Typography style={{marginBottom: 12}} color="textSecondary">
@@ -243,7 +244,7 @@ class CreateGroupPayments extends Component {
 
 const mapStateToProps = ({myPropertyReducer, myGroupsPayments}) => ({
     myProperty: myPropertyReducer.myProperty,
-    create: myGroupsPayments.create
+    create: myGroupsPayments.create,
 
 });
 

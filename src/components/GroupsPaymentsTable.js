@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
@@ -86,6 +86,8 @@ function GroupRow(props) {
 }
 
 export default function GroupsCollapsibleTable(props) {
+    const [groupsPayments, setgroupsPayments] = useState([]);
+    let groups = props.groupsPayments? props.groupsPayments: groupsPayments
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
@@ -100,8 +102,8 @@ export default function GroupsCollapsibleTable(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.groupsPayments.map((groupPayment,id) => (
-                        // console.log(groupPayment)
+
+                    {groups.map((groupPayment,id) => (
                         <GroupRow key={id} isOwner={props.isOwner} row={groupPayment}/>
                     ))}
                 </TableBody>
