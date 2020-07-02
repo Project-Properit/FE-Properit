@@ -4,7 +4,7 @@ const TIMEOUT=1000;
 
 const apiCall = async (url, method,jsonBody={},withToken=true) =>{
     let jb = null
-    if (Object.keys(jsonBody).length && (method==='POST' || method==='PUT')){
+    if (Object.keys(jsonBody).length && (method==='POST' || method==='PUT'|| method==='PATCH')){
          jb = JSON.stringify(jsonBody)
     }
     const response = await fetch(url,{
@@ -36,7 +36,7 @@ const fetchProperties = async (userId) => {
 };
 const fetchPayments = async (assetId, userId) => {
 
-    const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/groups-payments?pay_from=`+userId;
+    const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/group-payments?pay_from=`+userId;
     return apiCall(url,'GET')
 };
 
@@ -63,7 +63,7 @@ const createPropApi = async (propertyObject) => {
 
 const payApi = async (payId) => {
     const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}`;
-    return apiCall(url,'PUT')
+    return apiCall(url,'PATCH')
 };
 
 const fetchDocuments = async (userId) => {
@@ -96,16 +96,16 @@ function loginApi(email, password) {
 const fetchGroupsPayments = async (assetId, userId) => {
     // const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
     console.log(assetId)
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments?pay_to=' + userId;
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments?pay_to=' + userId;
     return apiCall(url, 'GET')
 };
 const fetchGroupPayments = async (assetId, groupPaymentsId) => {
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments/' + groupPaymentsId;
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments/' + groupPaymentsId;
     return apiCall(url, 'GET')
 };
 
 const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
     return apiCall(url, 'POST', groupPaymentsObject)
 }
 const fetchUser = async (userId) => {

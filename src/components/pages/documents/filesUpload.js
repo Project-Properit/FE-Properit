@@ -33,7 +33,7 @@ function FilesUpload(props) {
 		setNewFiles([...newFiles]);
 		const formData = new FormData();
 		formData.append('fileName', newFiles[newFiles.length - 1]);
-		axios.post(`${process.env.REACT_APP_API_URL}/assets/${propId}/documents`, formData, {
+		axios.patch(`${process.env.REACT_APP_API_URL}/assets/${propId}/documents`, formData, {
 			headers: {
 				'x-access-tokens': localStorage.getItem('token') || '',
 				"Content-Type": "multipart/form-data"
