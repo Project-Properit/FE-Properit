@@ -28,14 +28,15 @@ function GroupRow(props) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+    console.log(props.isOwner)
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
                 <TableCell>
-                    {row.is_public &&
+                    {row.is_public || props.isOwner ?
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                    </IconButton>}
+                    </IconButton>:null}
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {row.title}
@@ -101,7 +102,7 @@ export default function GroupsCollapsibleTable(props) {
                 <TableBody>
                     {props.groupsPayments.map((groupPayment,id) => (
                         // console.log(groupPayment)
-                        <GroupRow key={id} row={groupPayment}/>
+                        <GroupRow key={id} isOwner={props.isOwner} row={groupPayment}/>
                     ))}
                 </TableBody>
             </Table>
