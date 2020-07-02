@@ -44,7 +44,7 @@ function GroupRow(props) {
                 <TableCell align="right">{row.owner.first_name + ' ' + row.owner.last_name}</TableCell>
                 <TableCell align="right">{row.amount}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.creation_time}</TableCell>
+                <TableCell align="right">{row.creation_date}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={7}>

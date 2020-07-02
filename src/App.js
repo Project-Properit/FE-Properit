@@ -34,7 +34,7 @@ const ORGBAR_HEIGHT = 30;
 const TOPBAR_HEIGHT = 65;
 
 function App() {
-    const loggedInUser = "shoham";
+    const loggedInUser = false; //TODO:Change to state
     const orgBarExists = !!loggedInUser;
     const topBarHeight = TOPBAR_HEIGHT + (orgBarExists ? ORGBAR_HEIGHT : 0);
     const routeContentHeight = `calc(100vh - ${topBarHeight}px)`;

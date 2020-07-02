@@ -43,10 +43,10 @@ function Row(props) {
           {row.title}
         </TableCell>
         <TableCell align="right">{row.owner.first_name + ' ' +row.owner.last_name}</TableCell>
-        <TableCell align="right">{row.myself.amount}</TableCell>
+        <TableCell align="right">{row.my_payment.amount}</TableCell>
         <TableCell align="right">{row.description}</TableCell>
-        <TableCell align="right">{row.creation_time}</TableCell>
-        <TableCell align="right">{row.myself.is_open ? <Button onClick={()=>payApi(row.myself.payment_id)} color="primary">Pay</Button> :'Paid'}</TableCell>
+        <TableCell align="right">{row.creation_date}</TableCell>
+        <TableCell align="right">{row.my_payment.is_open ? <Button onClick={()=>payApi(row.my_payment.payment_id)} color="primary">Pay</Button> :'Paid'}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
