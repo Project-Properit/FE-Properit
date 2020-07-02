@@ -114,10 +114,10 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 	return apiCall(url, 'GET')
 };
 
-const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
-    return apiCall(url, 'POST', groupPaymentsObject)
-}
+// const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
+//     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
+//     return apiCall(url, 'POST', groupPaymentsObject)
+// }
 function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments) {
 
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';

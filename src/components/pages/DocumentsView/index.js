@@ -38,7 +38,7 @@ const DocumentsView = (props) => {
 			</Button>
 		}
 		<div id="documentsList">
-			{
+			{props.documents&&
 				Object.keys(props.documents).map(function (key, index) {
 					console.log('-----', props.documents[key])
 					return (
