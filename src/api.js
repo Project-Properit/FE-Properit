@@ -36,7 +36,7 @@ const fetchProperties = async (userId) => {
 };
 const fetchPayments = async (assetId, userId) => {
 
-    const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/groups-payments?pay_from=`+userId;
+    const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/group-payments?pay_from=`+userId;
     return apiCall(url,'GET')
 };
 
@@ -96,17 +96,32 @@ function loginApi(email, password) {
 const fetchGroupsPayments = async (assetId, userId) => {
     // const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
     console.log(assetId)
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments?pay_to=' + userId;
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments?pay_to=' + userId;
     return apiCall(url, 'GET')
 };
 const fetchGroupPayments = async (assetId, groupPaymentsId) => {
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments/' + groupPaymentsId;
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments/' + groupPaymentsId;
     return apiCall(url, 'GET')
 };
 
-const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
-    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/groups-payments';
-    return apiCall(url, 'POST', groupPaymentsObject)
+
+function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments) {
+
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-tokens':localStorage.getItem('token')||''
+        },
+        body: JSON.stringify({title, description, is_public, amount, payments}),
+    })
+        .then(handleApiErrors) // we'll make this in a second
+        .then(response => response.json())
+        .then(json => json)
+        .catch((error) => {
+            throw error
+        })
 }
 const fetchUser = async (userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/users/` + userId;

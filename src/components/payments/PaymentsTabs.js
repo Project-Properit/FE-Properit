@@ -18,16 +18,6 @@ class PaymentsTabs extends Component {
                             <PaymentsRequests/>
                         </FadeIn>)
                 }
-                }}
-
-                {/*<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">*/}
-                {/*    <Tab eventKey="paymentGroup" title="My Groups">*/}
-                {/*        <Payments/>*/}
-                {/*    </Tab>*/}
-                {/*    <Tab eventKey="requests" title="Requests">*/}
-                {/*        <PaymentsRequests/>*/}
-                {/*    </Tab>*/}
-                {/*</Tabs>*/}
             </div>
         );
     }

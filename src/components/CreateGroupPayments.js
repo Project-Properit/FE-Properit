@@ -1,128 +1,256 @@
 import React, {Component} from 'react';
-import Container from "react-bootstrap/Container";
-import {createGroupPaymentsFormAction} from "../actions/groupsPaymentsActions";
 import {loadProperty} from "../actions/propertyActions"
-import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {clearUsers, loadUser} from "../actions/userActions";
-import Loading from "./Loading";
-import Switch from "react-switch";
 import "./styles.css"
-import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Input from "@material-ui/core/Input";
+import {Button, TextField} from "@material-ui/core";
+import FadeIn from "react-fade-in";
+import MyModal from "./pages/Modal";
+import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
+import Typography from "@material-ui/core/Typography";
+import Checkbox from "@material-ui/core/Checkbox";
+import {createGroupPayments} from "../actions/groupsPaymentsActions";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+
 
 class CreateGroupPayments extends Component {
     constructor() {
         super();
-        this.state = {amounts: {}, totalAmount: 0, sumAllAmounts: 0};
+        this.state = {
+            checked: {},
+            tenants: {},
+            title: '',
+            amount: 0,
+            description: '',
+            is_public: true
+        };
+    }
+
+    reset = () => {
+        this.setState({
+            checked: {},
+            tenants: {},
+            title: '',
+            amount: 0,
+            description: '',
+            is_public: true
+        })
+    }
+    setCheckbox = (event, tenantId) => {
+        let checked = this.state.checked
+        checked[tenantId] = event.target.checked
+        if (!event.target.checked) {
+            this.setNewAmount(0, tenantId)
+        }
+        this.setState({checked: checked})
+        delete this.state.tenants[tenantId]
+    };
+
+    amountNotZero = (tenant) => {
+        return tenant.amount > 0
+    }
+
+    // validateGroupPayment = (title, tenants) => ({
+    //     isValid: (title !== null && title.length > 0) && tenants.length > 0 && tenants.every(this.amountNotZero),
+    //     errors: {
+    //         name: (title === null || title.length === 0),
+    //         tenants: tenants.length === 0 ? "הקבוצה ריקה" : false,
+    //         amount: tenants.every(this.amountNotZero)? "תשלום אינו תקין": false
+    //     }
+    // });
+    getCheckbox = (tenantId) => {
+        let checked = this.state.checked
+        if (checked.hasOwnProperty(tenantId)) {
+            return this.state.checked[tenantId]
+        } else {
+            checked[tenantId] = false
+            this.setState({checked: checked})
+            return false
+        }
+    }
+    submit = () => {
+        // const trimmedTitle = this.state.title !== null ? this.state.title.trim() : this.state.title;
+        // console.log('trimmedTitle',trimmedTitle)
+        // const validation = this.validateGroupPayment(trimmedTitle, this.state.tenants);
+        // if (!validation.isValid) {
+        //     this.state(validation.errors);
+        // }
+        // else {
+        let payments = []
+        let userId = this.props.userId
+        let groupPaymentsObject = {...this.state, payments: []}
+        delete groupPaymentsObject.checked
+        let tenants = this.state.tenants
+        Object.keys(tenants).forEach(function (key) {
+            payments.push({pay_from: key, pay_to: userId, amount: tenants[key].amount, method: null})
+        })
+        groupPaymentsObject['payments'] = payments
+        delete groupPaymentsObject.tenants
+        this.props.createGroupPayments(groupPaymentsObject);
+        this.props.closeHandler();
+        // this.reset();
+
+        this.props.loadGroups(this.props.propId, userId)
+        // }
     }
 
     componentDidMount() {
-        const {propId} = this.props.match.params;
-        this.props.loadProperty(propId);
-        this.send_users_load = false
+        this.props.loadProperty(this.props.propId);
+        this.setState({assetId: this.props.propId})
     }
 
-    componentWillUnmount() {
-        this.props.clearUsers()
+    titleTypeChanged = (e) => {
+        const {value} = e.target;
+        this.setState({title: value});
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!this.send_users_load && this.props.all_users_were_load.length !== this.props.initialValues.tenant_list.length) {
-            this.props.initialValues.tenant_list.map(tenant => this.props.loadUser(tenant))
-            this.send_users_load = true
-        }
+    descriptionTypeChanged = (e) => {
+        const {value} = e.target;
+        this.setState({description: value});
+    }
+
+    setPublic = (event) => {
+        this.setState({is_public: event.target.checked})
     }
 
     render() {
-        const {propId} = this.props.match.params;
-        const {handleSubmit, pristine, reset, submitting} = this.props; // handleSubmit is provided by reduxForm
-        const submit = handleSubmit(createGroupPaymentsFormAction); // creating our submit handler by passing our action
+        // const {
+        //     create: {
+        //         requesting,
+        //         successful,
+        //         messages,
+        //         errors
+        //     }
+        // } = this.props
         return (
-            <Container className="App">
-                <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
-                    <h2> Payments - {propId}</h2>
-                </header>
+            <div>
+                <MyModal open setOpen={this.props.closeHandler} closeMe={this.props.closeHandler}
+                         style={{width: "30%"}}>
+                    <div style={{textAlign: 'center'}}>
+                        <FadeIn className="register-fade">
+                            <div className="register-box" style={{background: "whitesmoke"}}>
+                                <form>
+                                    {/*<div className="register-page">*/}
+                                    {/*    <form className="register-panel">*/}
+                                    <TextField
+                                        className="item"
+                                        value={this.state.title}
+                                        onChange={this.titleTypeChanged}
+                                        variant="outlined"
+                                        label="Title"
+                                        required
+                                    />
+                                    <TextField
+                                        className="item"
+                                        value={this.state.description}
+                                        onChange={this.descriptionTypeChanged}
+                                        variant="outlined"
+                                        label="Description"
+                                        required
+                                    />
+                                    <TextField
+                                        className="item"
+                                        value={this.state.amount}
+                                        variant="outlined"
+                                        label="Total Amount"
+                                        disabled
+                                    />
+                                    <FormControlLabel
+                                        control={
+                                            <Checkbox
+                                                checked={this.state.is_public}
+                                                onChange={this.setPublic}
 
-                <Loading loading={this.props.isLoading}/>
-                <div>
-                    <Input name="assetId" type="text" placeholder="assetId" hidden/>
-                    <Input name="title" type="text" placeholder="title"/>
-                    <Input name="description" type="text" placeholder="description"/>
-                    <Input onChange={(e) => {this.setTotalAmount(e)}} name="amount" type="number" placeholder="amount"
-                                       value={this.state.sumAllAmounts ? this.state.sumAllAmounts : "amount"}/>
-                    {this.props.all_users_were_load.map(tenant => (
-                        <div key={tenant.email}>
-                            <Col style={{margin: '1rem'}}>
-                                <Card border={null} style={{width: "18rem"}}>
-                                    <Card.Body>
-                                        <Card.Title>
-                                            <p style={{float: 'left'}}>
-                                                <b>{tenant ? tenant.first_name : null}</b></p>
-                                            {/*<div style={{width:'4rem'}}></div>*/}
-                                            <div style={{clear: 'both'}}/>
-                                        </Card.Title>
-                                        <Input onChange={(e) => {
-                                            this.checkTotalAmount(e, tenant.email)
-                                        }} name="amount" type="number" placeholder={"Amount"}
-                                               value={this.state.amounts[tenant.email] ? this.state.amounts[tenant.email] : "Amount"}/>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        </div>
-                                ))}
-                    <div>
-                        <button type="submit" onSubmit={submit}>Save</button>
+                                            />}
+                                        label={"Public Group Payment"}
+                                    />
+                                    <div style={{display: "flex"}}>
+                                        {this.props.myProperty.tenant_list.map(tenant => (
+                                            <div key={tenant.id}>
+                                                <Card style={{minWidth: 275}}>
+                                                    <CardContent>
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={this.getCheckbox(tenant.id)}
+                                                                    onChange={e => this.setCheckbox(e, tenant.id)}
+                                                                    inputProps={{'aria-label': 'primary checkbox'}}
+                                                                />}
+                                                            label={"Add " + tenant.first_name + ' ' + tenant.last_name}
+                                                        />
+                                                        <Typography style={{marginBottom: 12}} color="textSecondary">
+                                                            <TextField
+                                                                className="item"
+                                                                value={this.getTenantAmount(tenant.id)}
+                                                                onChange={e => this.setNewAmount(e.target.value, tenant.id)}
+                                                                variant="outlined"
+                                                                label="Amount"
+                                                                disabled={!this.getCheckbox(tenant.id)}
+                                                            />
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Card>
+                                            </div>
+                                        ))
+                                        }
+                                    </div>
+                                    <Button
+                                        className="button"
+                                        color="primary"
+                                        variant="contained"
+                                        style={{fontWeight: "bold", fontSize: "24px"}}
+                                        onClick={() => this.submit()}
+                                    >
+                                        צור קבוצה
+                                    </Button>
+                                </form>
+                            </div>
+                        </FadeIn>
                     </div>
-                </div>
-                <div>
-                    {this.props.error}
-                </div>
-            </Container>
+                </MyModal>;
+            </div>
         )
     }
 
-    checkTotalAmount(e, email) {
-        this.setNewAmount(email, e.target.value)
-        this.setState({sumAllAmounts: 0})
-        Object.entries(this.state.amounts).map(([key, value]) => this.setState({
-            sumAllAmounts: this.state.sumAllAmounts + parseInt(value)
-        }))
-        console.log(this.state.sumAllAmounts)
-
+    getTenantAmount(tenantId) {
+        if (this.state.tenants.hasOwnProperty(tenantId)) {
+            return this.state.tenants[tenantId].amount
+        }
+        return 0
     }
 
-    setTotalAmount(e) {
-        this.setState({totalAmount: parseInt(e.target.value)})
-        let amount = e.target.value / this.props.all_users_were_load.length;
-        this.props.all_users_were_load.forEach(tenant => this.setNewAmount(tenant.email, amount))
+    setTotalAmount() {
+        let tenants = this.state.tenants
+        let totalAmount = 0
+        Object.keys(tenants).forEach(function (key) {
+            totalAmount += parseInt(tenants[key].amount)
+        })
+        this.setState({amount: totalAmount})
     }
 
-    setNewAmount(email, amount) {
-        let amounts = this.state.amounts
-        amounts[email] = amount
-        this.setState(amounts)
+    setNewAmount = (amount, tenantId) => {
+        let tenants = this.state.tenants
+        // const {value} = e.target
+        if (this.state.tenants.hasOwnProperty(tenantId)) {
+            tenants[tenantId].amount = parseInt(amount)
+        } else {
+            tenants[tenantId] = {amount: parseInt(amount)}
+        }
+        this.setState({tenants})
+        this.setTotalAmount()
     }
 
 }
 
-CreateGroupPayments = reduxForm({form: 'groupPayments'})(CreateGroupPayments)
-
-
-const mapStateToProps = ({myPropertyReducer, userReducer, state}) => ({
-    isLoading: myPropertyReducer.isLoading,
+const mapStateToProps = ({myPropertyReducer, myGroupsPayments}) => ({
     myProperty: myPropertyReducer.myProperty,
-    error: myPropertyReducer.error,
-    initialValues: myPropertyReducer.initialValues,
-    all_users_were_load: userReducer.all_users_were_load,
-    isLoaded: userReducer.isLoaded
+    create: myGroupsPayments.create,
+
 });
 
 const mapDispatchToProps = dispatch => ({
     loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
-    loadUser: (userId) => dispatch(loadUser(userId)),
-    clearUsers: () => dispatch(clearUsers())
+    createGroupPayments: (all) => dispatch(createGroupPayments(all))
 });
 
 export default connect(

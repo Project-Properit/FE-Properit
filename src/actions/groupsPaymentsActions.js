@@ -1,7 +1,6 @@
-import { GROUPSPAYMENTS } from '../constants';
-import {createFormAction} from "redux-form-saga";
+import {GROUPSPAYMENTS} from '../constants';
 
-const loadGroupsPayments = (assetId,userId) => ({
+const loadGroupsPayments = (assetId, userId) => ({
     type: GROUPSPAYMENTS.LOAD,
     assetId,
     userId
@@ -17,11 +16,19 @@ const setError = error => ({
     error,
 });
 
-const createGroupPaymentsFormAction = createFormAction('CreateGroupPayments');
+const createGroupPayments = function createGroupPayments(all) {
+    console.log(all)
+    const {assetId, title, description, is_public, amount, payments} = all
+    return {
+        type: GROUPSPAYMENTS.CREATE,
+        assetId, title, description, is_public, amount, payments
+    }
+}
+
 
 export {
     loadGroupsPayments,
     setGroupsPayments,
     setError,
-    createGroupPaymentsFormAction
+    createGroupPayments
 };
