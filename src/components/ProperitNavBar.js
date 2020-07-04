@@ -18,29 +18,42 @@ class ProperitNavBar extends Component {
 
 
 	render() {
-        const {propId} = this.props.match.params;
 		const isLogin = this.props.token
 		const isOwner = this.props.isOwner
 		const isTenant = this.props.isTenant
-		console.log(typeof(this.props.isOwner))
-		console.log('this.props.isOwner',this.props.isOwner)
-		const chosenModeNotFromScreen = this.props.isOwner ? 'owner' : 'tenant'
-		console.log('chosenModeNotFromScreen',chosenModeNotFromScreen)
+		const tenantAssetId = this.props.tenantAssetId
+		let chosenModeNotFromScreen;
+		if (this.props.isOwner && this.props.isTenant){chosenModeNotFromScreen=null}
+		else if (this.props.isOwner) {chosenModeNotFromScreen='owner'}
+		else if (this.props.isTenant) {chosenModeNotFromScreen='tenant'}
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
-        localStorage.setItem('mode', chosenMode)
-		console.log('chosenMode',chosenMode)
-		const documentsUrl = this.props.location.pathname.replace('/documents','').replace('/payments','') +'/documents'
-		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'
 		console.log('isOwner', isOwner)
 		console.log('isTenant', isTenant)
+		console.log('this.props.chosenMode',this.props.chosenMode)
+		console.log('chosenModeNotFromScreen',chosenModeNotFromScreen)
 
-
+		let mainUrl;
+		if(!chosenMode){
+			mainUrl='/chooseView'
+		}
+		else if(chosenMode==='owner'){mainUrl="/properties"}
+		else if(chosenMode==='tenant')
+		{
+			if(tenantAssetId && tenantAssetId!=='null'){
+				mainUrl=`/properties/${tenantAssetId}/payments`
+			}
+			else{
+				mainUrl='/newUser'
+			}
+		}
+		const documentsUrl = this.props.location.pathname.replace('/documents','').replace('/payments','') +'/documents'
+		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'
 
 		if (isLogin) {
 			return (
 
                 <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
-					<Navbar.Brand as={Link} to="/properties"><img className="logo" style={{height: '60px'}} src={logo}
+					<Navbar.Brand as={Link} to={mainUrl}><img className="logo" style={{height: '60px'}} src={logo}
 					                                      alt='logo'/></Navbar.Brand>
 					<Nav className="mr-auto">
 						{/*{isOwner && isTenant && chosenMode===null &&*/}
@@ -97,6 +110,7 @@ const mapStateToProps = ({clientReducer, myProperties}) => ({
 	isOwner: clientReducer.isOwner,
 	isTenant: clientReducer.isTenant,
 	chosenMode: clientReducer.chosenMode,
+	tenantAssetId: clientReducer.tenantAssetId,
 	myProperties: myProperties.myProperties
 
 });

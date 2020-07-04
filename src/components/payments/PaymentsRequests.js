@@ -25,7 +25,6 @@ class PaymentsRequests extends Component {
         if(!this.props.isLoading && !this.state.isOwner && !this.state.isSetOnce) {
             let isOwner = this.props.myProperty.owner_id === this.props.userId
             this.setState({isOwner, isSetOnce:true})
-            console.log(this.state)
         }
     }
 

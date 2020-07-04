@@ -11,7 +11,6 @@ class Payments extends Component {
 	}
 
 	render() {
-		console.log('this.props.myPayments',this.props.myPayments)
 		return (
 			<div>
 			<CollapsibleTable groupPayments={this.props.myPayments}/>

@@ -19,7 +19,6 @@ const DocumentsView = (props) => {
 		setNewDocumentModalOpened(false);
 	}, []);
 	const deleteDoc = (ii) => {
-		console.log(ii)
 	}
 
 
@@ -40,7 +39,6 @@ const DocumentsView = (props) => {
 		<div id="documentsList">
 			{props.documents&&
 				Object.keys(props.documents).map(function (key, index) {
-					console.log('-----', props.documents[key])
 					return (
 						<DocumentCard
 							key={index}

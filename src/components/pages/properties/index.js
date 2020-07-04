@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { Button } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import NewPropertiesModal from "./newPropertiesModal";
+// import NewPropertiesModal from "./newPropertiesModal";
+import AddNewPropertyModal from "./AddNewPropertyModal";
 
 
 
@@ -20,9 +21,10 @@ const DocumentsView = (props) => {
     return <div id="documentsContainer">
         {
             newPropertiesModalOpened ?
-                <NewPropertiesModal closeHandler={closeModal}
-                    // createDocumentHandler={(document) => setDocuments([document])}
-                />
+                <AddNewPropertyModal closeHandler={closeModal}/>
+                // <NewPropertiesModal closeHandler={closeModal}
+                //     // createDocumentHandler={(document) => setDocuments([document])}
+                // />
                 : ""
         }
         {

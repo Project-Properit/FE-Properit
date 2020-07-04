@@ -40,13 +40,6 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
         const trimmedRoom = room !== null ? room.trim() : room;
         const trimmedRental = rental !== null ? rental.trim() : rental;
 
-
-        console.log('trimmedAddress',trimmedAddress)
-        console.log('trimmedRoom',trimmedRoom)
-        console.log('trimmedComment',trimmedComment)
-        console.log('trimmedRental',trimmedRental)
-
-
         const validation = validateProperties(trimmedComment, trimmedAddress, trimmedRoom, trimmedRental);
         if (validation.isValid) {
             closeHandler();
@@ -66,7 +59,6 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
                 required
                 error={errors.address}
                 onChange={(event) => {
-                    console.log(event.target.value);
                     setAddress(event.target.value);
                 }}
             />
@@ -78,7 +70,6 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
                 variant="outlined"
                 error={errors.room}
                 onChange={(event) => {
-                    console.log(event.target.value);
                     setRoom(event.target.value);
                 }}
                 type="number"
@@ -94,7 +85,6 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
                 variant="outlined"
                 error={errors.rental}
                 onChange={(event) => {
-                    console.log(event.target.value);
                     setRental(event.target.value);
                 }}
                 type="number"
@@ -113,7 +103,6 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
                 required
                 error={errors.comment}
                 onChange={(event) => {
-                    console.log(event.target.value);
                     setComment(event.target.value);
                 }}
             />

@@ -26,7 +26,6 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
 
     const createDocument = useCallback(async () => {
         const trimmedName = name !== null ? name.trim() : name;
-        console.log('trimmedName',trimmedName)
         const validation = validateDocument(trimmedName, files);
         if (validation.isValid) {
             // createDocumentHandler({ name: trimmedName, files});
@@ -47,7 +46,6 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
                 required
                 error={errors.name}
                 onChange={(event) => {
-                    console.log(event.target.value);
                     setName(event.target.value);
                 }}
             />

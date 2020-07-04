@@ -69,13 +69,6 @@ class CreateGroupPayments extends Component {
         }
     }
     submit = () => {
-        // const trimmedTitle = this.state.title !== null ? this.state.title.trim() : this.state.title;
-        // console.log('trimmedTitle',trimmedTitle)
-        // const validation = this.validateGroupPayment(trimmedTitle, this.state.tenants);
-        // if (!validation.isValid) {
-        //     this.state(validation.errors);
-        // }
-        // else {
         let payments = []
         let userId = this.props.userId
         let groupPaymentsObject = {...this.state, payments: []}

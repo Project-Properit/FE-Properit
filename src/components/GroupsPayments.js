@@ -24,7 +24,6 @@ class GroupsPayments extends Component {
     componentDidUpdate() {
         if (!this.state.isLoaded && !this.props.isLoading) {
             this.props.myGroupsPayments.map(groupPaymentsId => {
-                // console.log(groupPaymentsId)
                 this.props.loadGroupPayments(this.state.propId, groupPaymentsId)
             })
             this.setState({isLoaded: true})
