@@ -49,8 +49,9 @@ const fetchProperty = async (propertyId) => {
 	return apiCall(url, 'GET')
 };
 const removeProperty = async (propertyId) => {
-	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
-	return apiCall(url, 'DELETE')
+    console.log("again morangS")
+	// const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
+	// return apiCall(url, 'DELETE')
 };
 const updatePropApi = async (propertyId, propertyObject) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
@@ -114,10 +115,6 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 	return apiCall(url, 'GET')
 };
 
-// const createGroupPaymentsApi = async (assetId, groupPaymentsObject) => {
-//     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
-//     return apiCall(url, 'POST', groupPaymentsObject)
-// }
 function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments) {
 
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
@@ -128,6 +125,25 @@ function createGroupPaymentsApi (assetId, title, description, is_public, amount,
             'x-access-tokens':localStorage.getItem('token')||''
         },
         body: JSON.stringify({title, description, is_public, amount, payments}),
+    })
+        .then(handleApiErrors) // we'll make this in a second
+        .then(response => response.json())
+        .then(json => json)
+        .catch((error) => {
+            throw error
+        })
+}
+
+function deleteGroupPayments(assetId, groupPaymentsId) {
+    console.log("testsetset")
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments/' + groupPaymentsId;
+    console.log(url)
+    return fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-tokens':localStorage.getItem('token')||''
+        }
     })
         .then(handleApiErrors) // we'll make this in a second
         .then(response => response.json())
@@ -147,6 +163,7 @@ const fetchUser = async (userId) => {
 		fetchProperty,
 		updatePropApi,
 		removeProperty,
+        deleteGroupPayments,
 		fetchGroupsPayments,
 		fetchGroupPayments,
 		createGroupPaymentsApi,

@@ -29,12 +29,11 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
         <TableCell>
-        {row.is_public &&
+        {row.is_public && row.participants.length > 0 &&
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>}
@@ -48,6 +47,7 @@ function Row(props) {
         <TableCell align="right">{row.creation_date}</TableCell>
         <TableCell align="right">{row.my_payment.is_open ? <Button onClick={()=>payApi(row.my_payment.payment_id)} color="primary">Pay</Button> :'Paid'}</TableCell>
       </TableRow>
+        {row.participants.length > 0?
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -64,7 +64,7 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.participants.map((historyRow) => (
+                    {row.participants.map((historyRow) => (
                     <TableRow key={historyRow.id}>
                       <TableCell component="th" scope="row">
                         {historyRow.first_name + ' ' + historyRow.last_name}
@@ -78,7 +78,7 @@ function Row(props) {
             </Box>
           </Collapse>
         </TableCell>
-      </TableRow>
+      </TableRow>:null}
     </React.Fragment>
   );
 }

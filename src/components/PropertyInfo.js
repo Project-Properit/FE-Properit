@@ -23,31 +23,24 @@ class PropertyInfo extends Component {
         return (
             <Container className="App">
                 <header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
-                    <h2> Properties- {propId}</h2>
+                    <h2>Properties- {propId}</h2>
                 </header>
                 <form onSubmit={submit}>
                     <table>
                         <tbody>
-
                         <tr>
-
                             <td>
-                                <Field component="input" name="assetId" type="text" placeholder="assetId"
-                                       hidden/>
-                                {/*<div>*/}
+                                <Field component="input" name="assetId" type="text" placeholder="assetId" hidden/>
                                 <label style={{marginRight: '30px'}}>Type</label>
                             </td>
                             <td>
-                                <Field component="input" name="asset_type" type="text" placeholder="asset_type"
-                                       disabled/>
+                                <Field component="input" name="asset_type" type="text" placeholder="asset_type" disabled/>
                             </td>
-                            {/*</div>*/}
                         </tr>
                         <tr>
                             <td><label>Creation Date</label></td>
                             <td>
-                                <Field component="input" name="creation_date" type="text" placeholder="creation_date"
-                                       disabled/>
+                                <Field component="input" name="creation_date" type="text" placeholder="creation_date" disabled/>
                             </td>
                         </tr>
                         <tr>

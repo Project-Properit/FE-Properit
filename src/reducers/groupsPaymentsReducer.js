@@ -1,11 +1,13 @@
 import {GROUPSPAYMENTS} from '../constants';
 
 const myGroupsPayments = (state = {
-    myGroupsPayments: [], create: {
+    isLoading: false,
+    myGroupsPayments: [],
+    create: {
         requesting: false,
         successful: false,
         messages: [],
-        errors: [],
+        errors: {},
     }
 }, action) => {
     switch (action.type) {
@@ -13,13 +15,27 @@ const myGroupsPayments = (state = {
             return {
                 ...state,
                 isLoading: true,
-                myGroupsPayments: []
+                myGroupsPayments: [],
+                create: {
+                    requesting: false,
+                    successful: false,
+                    messages: [],
+                    errors: {},
+                }
             };
         case GROUPSPAYMENTS.LOAD_SUCCESS:
+            console.log("myGroups")
+            console.log(action.myGroupsPayments)
             return {
                 ...state,
                 isLoading: false,
-                myGroupsPayments: action.myGroupsPayments
+                myGroupsPayments: action.myGroupsPayments,
+                create: {
+                    requesting: false,
+                    successful: false,
+                    messages: [],
+                    errors: {},
+                }
             };
         case GROUPSPAYMENTS.LOAD_FAIL:
             return {
@@ -30,31 +46,37 @@ const myGroupsPayments = (state = {
             };
         case GROUPSPAYMENTS.CREATE:
             return {
-                requesting: true,
-                successful: false,
-                messages: [{body: 'Create ...', time: new Date()}],
-                errors: [],
+                create: {
+                    requesting: true,
+                    successful: false,
+                    messages: [{body: 'Create ...', time: new Date()}],
+                    errors: {},
+                }
             }
         case GROUPSPAYMENTS.CREATE_SUCCESS:
             return {
-                errors: [],
-                messages: [{
-                    body: `Successfully created group payments`,
-                    time: new Date(),
-                }],
-                requesting: false,
-                successful: true,
+                create: {
+                    errors: [],
+                    messages: [{
+                        body: `Successfully created group payments`,
+                        time: new Date(),
+                    }],
+                    requesting: false,
+                    successful: true,
+                }
             }
 
         case GROUPSPAYMENTS.CREATE_ERROR:
             return {
-                errors: state.errors.concat([{
-                    body: action.error.toString(),
-                    time: new Date(),
-                }]),
-                messages: [],
-                requesting: false,
-                successful: false,
+                create: {
+                    errors: state.errors.concat([{
+                        body: action.error.toString(),
+                        time: new Date(),
+                    }]),
+                    messages: [],
+                    requesting: false,
+                    successful: false,
+                }
             }
         default:
             return state

@@ -7,6 +7,8 @@ import {Button} from "@material-ui/core";
 import {Add} from "@material-ui/icons";
 import CreateGroupPayments from "../CreateGroupPayments";
 import {loadProperty} from "../../actions/propertyActions";
+import {deleteGroupPayments} from "../../actions/groupPaymentsActions";
+import Loading from "../Loading";
 
 class PaymentsRequests extends Component {
     constructor() {
@@ -43,12 +45,22 @@ class PaymentsRequests extends Component {
         return (
             <div id="documentsContainer">
                 {this.state.newDocumentModalOpened ?
-                    (<CreateGroupPayments userId={this.props.userId} propId={propId} loadGroups={this.props.loadGroupsPayments} closeHandler={this.closeModal}/>
-                    ) : ""
+                    <CreateGroupPayments
+                        userId={this.props.userId}
+                        propId={propId}
+                        loadGroups={this.props.loadGroupsPayments}
+                        closeHandler={this.closeModal}
+                    /> :null
                 }
-                <GroupsCollapsibleTable isOwner={this.state.isOwner} groupsPayments={this.props.myGroupsPayments} />
+                <Loading loading={this.props.isLoadingGroups}/>
+                <GroupsCollapsibleTable
+                    deleteMethod={this.props.deleteGroupPayments}
+                    userId={this.props.userId}
+                    propId={propId}
+                    isOwner={this.state.isOwner}
+                    groupsPayments={this.props.myGroupsPayments}
+                />
                 <Button variant="outlined" color="primary" className="createDocumentButton" onClick={this.openModal}>
-                    <Add/>
                     הוסף קבוצת תשלום
                 </Button>
             </div>
@@ -59,6 +71,7 @@ class PaymentsRequests extends Component {
 const mapStateToProps = ({myGroupsPayments, myPropertyReducer, clientReducer}) => ({
     isLoading: myPropertyReducer.isLoading,
     myGroupsPayments: myGroupsPayments.myGroupsPayments,
+    isLoadingGroups: myGroupsPayments.isLoading,
     myProperty: myPropertyReducer.myProperty,
     error: myGroupsPayments.error,
     userId: clientReducer.userId
@@ -67,7 +80,8 @@ const mapStateToProps = ({myGroupsPayments, myPropertyReducer, clientReducer}) =
 
 const mapDispatchToProps = dispatch => ({
     loadGroupsPayments: (assetId, userId) => dispatch(loadGroupsPayments(assetId, userId)),
-    loadProperty: (assetId) => dispatch(loadProperty(assetId))
+    loadProperty: (assetId) => dispatch(loadProperty(assetId)),
+    deleteGroupPayments:(userId, assetId, group_payments_id) => dispatch(deleteGroupPayments(userId, assetId, group_payments_id))
 });
 
 export default connect(

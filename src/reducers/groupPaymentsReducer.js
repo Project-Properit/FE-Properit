@@ -30,6 +30,13 @@ const myGroupPayments = (state = {myGroupPayments: {payments:[]}, allGroupPaymen
                 isLoading: false,
                 error: action.error
             };
+        case GROUPPAYMENTS.REMOVE:
+            return {
+                ...state,
+                allGroupPayments: [],
+                isLoading: false,
+                myGroupPayments: {payments:[]}
+            };
         default:
             return state
 
