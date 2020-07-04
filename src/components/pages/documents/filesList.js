@@ -4,7 +4,6 @@ import { Cancel } from "@material-ui/icons";
 
 function FilesList(props) {
     const deleteFile = React.useCallback(e => {
-        console.log(e.currentTarget.getAttribute("fileid"))
         props.deleteFileHandler(e.currentTarget.getAttribute("fileid"));
     }, [props.deleteFileHandler]);
 
@@ -26,8 +25,7 @@ function FilesList(props) {
                 size: existFile.size,
                 image: existFile.image,
                 onDelete: deleteExistFile }))];
-    console.log('here');
-    console.log(allFiles);
+
 
     return <ol className="filesList">
         {

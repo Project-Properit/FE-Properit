@@ -6,7 +6,6 @@ import {fetchGroupPayments, removeProperty} from '../api';
 
 export function* handleGroupPaymentsLoad(action) {
     try {
-        console.log(action)
         const myGroupPayments = yield call(fetchGroupPayments, action.propertyId, action.groupPaymentsId);
         yield put(setGroupPayments(myGroupPayments));
     } catch (error) {
@@ -16,7 +15,6 @@ export function* handleGroupPaymentsLoad(action) {
 
 export function* handleGroupPaymentsRemove(action) {
     try {
-        console.log(action)
         const success = yield call(removeProperty, action.propertyId);
         // yield put(setProperty(myProperty));
     } catch (error) {

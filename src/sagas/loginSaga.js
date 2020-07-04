@@ -12,7 +12,13 @@ function* logout() {
 	yield put(unsetClient())
 
 	// remove our token
-	localStorage.removeItem('token')
+	  localStorage.removeItem('token')
+  localStorage.removeItem('userId')
+  localStorage.removeItem('isTenant')
+  localStorage.removeItem('assetId')
+  localStorage.removeItem('isOwner')
+  localStorage.removeItem('chosenMode')
+  localStorage.removeItem('firstName')
 
 	// redirect to the /login screen
 	yield put(push('login'));
@@ -24,6 +30,7 @@ function* loginFlow(email, password) {
 	let token
 	let userId
 	let isOwner
+	let firstName
 	let isTenant
 	let tenantAssetId
 	try {
@@ -33,12 +40,13 @@ function* loginFlow(email, password) {
 		let response = yield call(loginApi, email, password)
 		token = response.token
 		userId = response.user_id
+		firstName = response.first_name
 		isOwner = response.is_owner
 		isTenant = response.is_tenant
 		tenantAssetId = response.tenant_asset_id==='None' || response.tenant_asset_id===null ? null: response.tenant_asset_id
 		console.log('tenantAssetId',tenantAssetId)
 		// inform Redux to set our client token, this is non blocking so...
-		yield put(setClient(token, userId, isOwner, isTenant))
+		yield put(setClient(token, userId, isOwner, isTenant, firstName, tenantAssetId))
 
 		// .. also inform redux that our login was successful
 		yield put({type: LOGIN.LOGIN_SUCCESS})
@@ -46,15 +54,18 @@ function* loginFlow(email, password) {
 		// set a stringified version of our token to localstorage on our domain
 		localStorage.setItem('token', (token))
 		localStorage.setItem('userId', userId)
+		localStorage.setItem('firstName', firstName)
 		localStorage.setItem('isOwner', isOwner)
 		localStorage.setItem('isTenant', isTenant)
         localStorage.setItem('assetId', tenantAssetId)
 		if (isOwner && isTenant) {
 			yield put(push('/chooseView'));
 		} else if (isOwner) {
+			localStorage.setItem('chosenMode', 'owner')
 			// redirect them to WIDGETS!
 			yield put(push('/properties'));
 		} else {
+			localStorage.setItem('chosenMode', 'tenant')
 			if (tenantAssetId) {
 				yield put(push('/properties/' + tenantAssetId + '/payments'));
 			}

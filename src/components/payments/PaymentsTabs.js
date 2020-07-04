@@ -5,11 +5,10 @@ import PaymentsRequests from "./PaymentsRequests";
 
 class PaymentsTabs extends Component {
     render() {
-        console.log(this.props.chosenMode)
         return (
             <div>
                 {
-                    (localStorage.getItem('mode') === 'tenant') ?
+                    (localStorage.getItem('chosenMode') === 'tenant') ?
                     (<FadeIn>
                             <UserTabs/>
                         </FadeIn>

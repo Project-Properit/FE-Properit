@@ -24,11 +24,12 @@ const useRowStyles = makeStyles({
 });
 
 
+
+
 function GroupRow(props) {
     const {row} = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
-    console.log(props.isOwner)
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
