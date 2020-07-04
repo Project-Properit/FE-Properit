@@ -63,9 +63,6 @@ class ProperitNavBar extends Component {
 							<Nav.Link as={Link} to="/properties">Properties</Nav.Link>
 							<Nav.Link as={Link} to={documentsUrl}>Documents</Nav.Link>
 							<Nav.Link as={Link} to={paymentsUrl}>Payments</Nav.Link>
-							{/*{this.props.myProperties.length >0 &&*/}
-							{/*<SimpleListMenu choosenFunc={(d) => this.onChooseAddress(d)}*/}
-						    {/*            options={this.props.myProperties.map(a => a.address)}/>}*/}
 						</>
 						}
 						{isLogin && chosenMode === 'tenant' &&
@@ -74,7 +71,7 @@ class ProperitNavBar extends Component {
 
 						</>
 						}
-						<Nav.Link onClick={() => this.props.logout()}>Logout</Nav.Link>
+
 
 					</Nav>
 					<form class="form-inline">
