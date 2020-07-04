@@ -17,7 +17,6 @@ const setError = error => ({
 });
 
 const createGroupPayments = function createGroupPayments(all) {
-    console.log(all)
     const {assetId, title, description, is_public, amount, payments} = all
     return {
         type: GROUPSPAYMENTS.CREATE,

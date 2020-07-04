@@ -15,7 +15,6 @@ export function* handlePropertyLoad(action) {
 }
 export function* handlePropertyRemove(action) {
     try {
-        console.log(action)
         const success = yield call(removeProperty, action.propertyId);
         // yield put(setProperty(myProperty));
     } catch (error) {
@@ -25,7 +24,6 @@ export function* handlePropertyRemove(action) {
 
 function* handlePropertyUpdate(action) {
 
-  console.log(action.payload)
     let x = Object.assign({}, action.payload);
     const assetId = x.assetId;
     delete x.assetId;
@@ -52,13 +50,8 @@ function* handlePropertyUpdate(action) {
 }
 function* handlePropertyCreate(action) {
 
-  console.log(action.payload)
-    let x = Object.assign({'owner_id':localStorage.getItem('userId')}, action.payload);
-    x.tenant_list = [x.tenant_list];
-    delete x.assetId;
-
   try {
-    yield call(createPropApi,x); // calling our api method
+    yield call(createPropApi,action.propertyObject); // calling our api method
     // it should return promise
     // promise should be resolved if login successfull
     // or rejected if login credentials is wrong
@@ -92,6 +85,6 @@ export function* watchPropertyLoad() {
 }
 export function* PropertyUpdateWatcherSaga() {
   yield takeEvery(updatePropertyFormAction.REQUEST, handlePropertyUpdate); // see details what is REQUEST param below
-  yield takeEvery(createPropertyFormAction.REQUEST, handlePropertyCreate); // see details what is REQUEST param below
+  yield takeEvery(PROPERTY.ADD, handlePropertyCreate); // see details what is REQUEST param below
   yield takeEvery(PROPERTY.REMOVE, handlePropertyRemove); // see details what is REQUEST param below
 }

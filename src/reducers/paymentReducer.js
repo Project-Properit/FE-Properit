@@ -15,7 +15,6 @@ const payment = (state = {allPayment: []}, action) => {
                 payment: null
             };
         case PAYMENT.LOAD_SUCCESS:
-            console.log(action.payment)
             let allPayments = [...state.allPayment, action.payment]
             return {
                 ...state,

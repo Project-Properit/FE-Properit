@@ -46,7 +46,7 @@ function Row(props) {
         <TableCell align="right">{row.my_payment.amount}</TableCell>
         <TableCell align="right">{row.description}</TableCell>
         <TableCell align="right">{row.creation_date}</TableCell>
-        <TableCell align="right">{row.my_payment.is_open ? <Button onClick={()=>payApi(row.my_payment.payment_id)} color="primary">Pay</Button> :'Paid'}</TableCell>
+        <TableCell align="right">{row.my_payment.is_open ? <Button onClick={()=>payApi(row.my_payment.payment_id)} color="primary">Pay</Button> :`Paid at ${row.my_payment.when_payed}`}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>

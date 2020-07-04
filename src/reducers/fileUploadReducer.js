@@ -18,7 +18,6 @@ const filesUploadReducer = (state = initialState, action) => {
             ...state,
             files: action.files
         }
-        // console.log(newState);
         return newState;
     }
 
@@ -29,7 +28,6 @@ const filesUploadReducer = (state = initialState, action) => {
             files: newFiles
 
         }
-        console.log(newState);
         return newState;
     }
     if (action.type === FILEUPLOAD.DELETE_FILES) {
@@ -38,10 +36,8 @@ const filesUploadReducer = (state = initialState, action) => {
             ...state,
             files: newFiles
         }
-        // console.log(newState);
         return newState;
     }
-    // console.log(state);
     return state;
 };
 

@@ -18,7 +18,7 @@ class SelectionModeView extends Component {
                 </header>
                 <Row>
                     <Col>
-                        <Link as={Link} to={'/properties'} onClick={()=>this.onOwnerMode()}>
+                        <Link as={Link}  onClick={()=>this.onOwnerMode()}>
                         <Card>
                             <Card.Body>
                                 <Card.Title>
@@ -30,7 +30,7 @@ class SelectionModeView extends Component {
                         </Link>
                     </Col>
                     <Col>
-                        <Link as={Link} to={'/properties/' +localStorage.getItem('assetId') +'/payments'} onClick={()=>this.onTenantMode()}>
+                        <Link as={Link} onClick={()=>this.onTenantMode()}>
                         <Card>
                             <Card.Body>
                                 <Card.Title>
@@ -48,11 +48,11 @@ class SelectionModeView extends Component {
     }
     onOwnerMode() {
         this.props.setMode('owner')
-        return '/properties'
+        // return '/properties'
     }
     onTenantMode() {
         this.props.setMode('tenant')
-        return '/payments'
+        // return '/payments'
     }
 }
 const mapDispatchToProps = dispatch => ({

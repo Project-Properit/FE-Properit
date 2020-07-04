@@ -5,12 +5,14 @@ const myPropertiesReducer = (state = {myProperties:[]}, action) => {
         case PROPERTIES.LOAD: return {
             ...state,
             isLoading:true,
-            myProperties:[]
+            myProperties:[],
+            error:null
         };
         case PROPERTIES.LOAD_SUCCESS: return {
             ...state,
             isLoading:false,
-            myProperties:action.myProperties
+            myProperties:action.myProperties,
+            error:null
         };
         case PROPERTIES.LOAD_FAIL: return {
             ...state,
