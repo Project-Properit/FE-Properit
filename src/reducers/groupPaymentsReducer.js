@@ -3,7 +3,6 @@ import {GROUPPAYMENTS} from '../constants';
 const myGroupPayments = (state = {myGroupPayments: {payments:[]}, allGroupPayments:[]}, action) => {
     switch (action.type) {
         case GROUPPAYMENTS.LOAD:
-            console.log(action)
             return {
                 ...state,
                 isLoading: false,
@@ -17,7 +16,6 @@ const myGroupPayments = (state = {myGroupPayments: {payments:[]}, allGroupPaymen
             };
         case GROUPPAYMENTS.LOAD_SUCCESS:
             let newGroupPayment = [...state.allGroupPayments,action.myGroupPayments]
-            console.log("SUCCESS",action.myGroupPayments)
             return {
                 ...state,
                 allGroupPayments: newGroupPayment,

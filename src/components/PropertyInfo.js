@@ -15,7 +15,6 @@ class PropertyInfo extends Component {
     }
 
     render() {
-        console.log(this.props.initialValues)
         const {propId} = this.props.match.params;
         const {handleSubmit, pristine, reset, submitting} = this.props; // handleSubmit is provided by reduxForm
         const submit = handleSubmit(updatePropertyFormAction); // creating our submit handler by passing our action

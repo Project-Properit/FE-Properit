@@ -1,11 +1,13 @@
 import { CLIENT } from '../constants'
 
-const setClient = (token, userId, isOwner, isTenant) => ({
+const setClient = (token, userId, isOwner, isTenant, firstName, tenantAssetId) => ({
     type: CLIENT.CLIENT_SET,
     token,
     userId,
     isOwner,
-    isTenant
+    isTenant,
+    firstName,
+    tenantAssetId
 });
 
 

@@ -5,7 +5,6 @@ import { Button, IconButton, InputAdornment, TextField, Typography } from "@mate
 import { VisibilityOff } from "@material-ui/icons";
 import FadeIn from "react-fade-in";
 import avatar from '../../../images/avatar-black2.png';
-import backHome from '../../../images/home2.jpg';
 
 import "./login.css";
 
@@ -33,7 +32,6 @@ class Login extends Component {
 		this.props.loginRequest(this.state.user, this.state.password)
 	}
     onKeyDown = (e) => {
-        console.log(e)
         if (e.key === 'Enter') {
             e.preventDefault();
             e.stopPropagation();

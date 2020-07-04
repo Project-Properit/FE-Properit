@@ -14,9 +14,7 @@ const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ �
 
 function FilesUpload(props) {
 	const fileName = props.name
-	console.log('fileName----',fileName)
 	const propId = window.location.pathname.replace('/properties/','').replace('/documents','')
-	console.log('propId-----',propId)
 	const {name, maxFiles, existedFiles, setExistedFiles} = props;
 
 	const [files, setFiles, setName] = useState([]);
@@ -42,7 +40,6 @@ function FilesUpload(props) {
 			newFiles[newFiles.length - 1].image = response.data.document_url || ''
 			setNewFiles([...newFiles])
 		}).catch((e) => {
-			console.log(e)
 		})
 	}, [setNewFiles]);
 
@@ -54,16 +51,6 @@ function FilesUpload(props) {
 			setNewFiles(files.filter(f => f.id.toString() !== deletedFile.id.toString()));
 		}
 
-		// axios.delete(`${process.env.REACT_APP_API_URL}/assets/5ecd23e452a93c7170031c8e`, formData, {
-		//     headers: {
-		//         'x-access-tokens':localStorage.getItem('token') || '',
-		//         "Content-Type": "multipart/form-data"
-		//     }
-		// }).then(() => {
-		//     console.log("Done")
-		// }).catch((e) => {
-		//     console.log(e)
-		// })
 
 	}, [files, setNewFiles]);
 
@@ -122,7 +109,6 @@ FilesUpload.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return ({
 		properties: state.myProperties,
 		// files: state.fileUpload.files,

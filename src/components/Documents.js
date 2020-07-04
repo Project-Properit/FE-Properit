@@ -24,12 +24,8 @@ class Documents extends Component {
             return {browserFiles: files};
         })
     }
-    // const [browserFiles, setBrowserFiles] = useState([]);
-
     componentDidMount() {
 
-
-        console.log(React.version);
         const {userId} = this.props.match.params;
         this.props.loadDocuments(userId);
     }
@@ -37,7 +33,6 @@ class Documents extends Component {
         this.setState({ numPages });
     }
     render() {
-        // console.log(this.props);
         const {userId} = this.props.match.params;
         const { pageNumber, numPages } = this.state;
 
