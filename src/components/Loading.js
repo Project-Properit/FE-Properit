@@ -5,7 +5,7 @@ let Loading = ({ loading }) => (
     loading ?
         <div style={{ textAlign: 'center' }}>
             <img src={img} alt='loading' />
-        </div> :
+        </div>:
         null
 );
 export default Loading;

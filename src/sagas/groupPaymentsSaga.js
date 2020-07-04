@@ -1,8 +1,10 @@
 import {actionChannel, call, put, take, takeEvery} from 'redux-saga/effects';
 
 import {setError, setGroupPayments} from '../actions/groupPaymentsActions';
-import {GROUPPAYMENTS, PROPERTY} from '../constants';
-import {fetchGroupPayments, removeProperty} from '../api';
+import {GROUPPAYMENTS} from '../constants';
+import {fetchGroupPayments, deleteGroupPayments} from '../api';
+import {loadGroupsPayments} from "../actions/groupsPaymentsActions";
+import {handleGroupsPaymentsLoad} from "./groupsPaymentsSaga";
 
 export function* handleGroupPaymentsLoad(action) {
     try {
@@ -15,7 +17,8 @@ export function* handleGroupPaymentsLoad(action) {
 
 export function* handleGroupPaymentsRemove(action) {
     try {
-        const success = yield call(removeProperty, action.propertyId);
+        yield call(deleteGroupPayments, action.assetId, action.groupPaymentsId);
+        yield call(handleGroupsPaymentsLoad, action)
         // yield put(setProperty(myProperty));
     } catch (error) {
         yield put(setError(error.toString()));
@@ -31,5 +34,5 @@ export function* watchGroupPaymentsLoad() {
     }
 }
 export function* groupPaymentsDeleteWatcherSaga() {
-    yield takeEvery(PROPERTY.REMOVE, handleGroupPaymentsRemove);
+    yield takeEvery(GROUPPAYMENTS.REMOVE, handleGroupPaymentsRemove);
 }

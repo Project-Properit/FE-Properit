@@ -6,11 +6,13 @@ const loadGroupPayments = (propertyId, groupPaymentsId) => ({
     propertyId,
     groupPaymentsId
 });
-const removeGroupPayments = (propertyId, groupPaymentsId) => ({
+const deleteGroupPayments = (userId, assetId, groupPaymentsId) => ({
     type: GROUPPAYMENTS.REMOVE,
-    propertyId,
+    userId,
+    assetId,
     groupPaymentsId
 });
+
 const clearGroupPayments = () => ({
     type: GROUPPAYMENTS.CLEAR,
 });
@@ -30,5 +32,5 @@ export {
     setGroupPayments,
     setError,
     clearGroupPayments,
-    removeGroupPayments
+    deleteGroupPayments
 };
