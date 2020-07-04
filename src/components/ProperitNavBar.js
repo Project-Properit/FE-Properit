@@ -56,11 +56,6 @@ class ProperitNavBar extends Component {
 					<Navbar.Brand as={Link} to={mainUrl}><img className="logo" style={{height: '60px'}} src={logo}
 					                                      alt='logo'/></Navbar.Brand>
 					<Nav className="mr-auto">
-						{/*{isOwner && isTenant && chosenMode===null &&*/}
-						{/*<>*/}
-						{/*    <Nav.Link onClick={()=> this.props.logout()}>Logout</Nav.Link>*/}
-						{/*</>*/}
-						{/*}*/}
 						{isLogin && chosenMode === 'owner' &&
 						<>
 							<Nav.Link as={Link} to="/properties">Properties</Nav.Link>
@@ -77,12 +72,6 @@ class ProperitNavBar extends Component {
 
 						</>
 						}
-						{/*<Nav.Link as={Link} to={`/renters`}>My Renters</Nav.Link>*/}
-						{/*<Nav.Link as={Link} to="/payments">Payments</Nav.Link>*/}
-						{/*<Nav.Link as={Link} to="/lease">Lease Management</Nav.Link>*/}
-						{/*<Nav.Link as={Link} to='/about' >About</Nav.Link>*/}
-						{/*    <Nav.Link as={Link} to="/documents">Document</Nav.Link>*/}
-
 						<Nav.Link onClick={() => this.props.logout()}>Logout</Nav.Link>
 
 					</Nav>
