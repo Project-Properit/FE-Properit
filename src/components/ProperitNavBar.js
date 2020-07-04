@@ -7,7 +7,7 @@ import { Link, withRouter } from "react-router-dom";
 import logo from "../images/logoWhite .jpg";
 import SimpleListMenu from "./addressChoose";
 import { loadProperties } from "../actions/propertiesActions";
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 class ProperitNavBar extends Component {
 
@@ -55,15 +55,17 @@ class ProperitNavBar extends Component {
                 <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
 					<Navbar.Brand as={Link} to={mainUrl}><img className="logo" style={{height: '60px'}} src={logo}
 					                                      alt='logo'/></Navbar.Brand>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
 						{isLogin && chosenMode === 'owner' &&
 						<>
 							<Nav.Link as={Link} to="/properties">Properties</Nav.Link>
 							<Nav.Link as={Link} to={documentsUrl}>Documents</Nav.Link>
 							<Nav.Link as={Link} to={paymentsUrl}>Payments</Nav.Link>
-							{this.props.myProperties.length >0 &&
-							<SimpleListMenu choosenFunc={(d) => this.onChooseAddress(d)}
-						                options={this.props.myProperties.map(a => a.address)}/>}
+							{/*{this.props.myProperties.length >0 &&*/}
+							{/*<SimpleListMenu choosenFunc={(d) => this.onChooseAddress(d)}*/}
+						    {/*            options={this.props.myProperties.map(a => a.address)}/>}*/}
 						</>
 						}
 						{isLogin && chosenMode === 'tenant' &&
@@ -75,6 +77,13 @@ class ProperitNavBar extends Component {
 						<Nav.Link onClick={() => this.props.logout()}>Logout</Nav.Link>
 
 					</Nav>
+					<form class="form-inline">
+						{this.props.myProperties.length >0 &&
+						<SimpleListMenu className="mr-sm-2"  choosenFunc={(d) => this.onChooseAddress(d)}
+										options={this.props.myProperties.map(a => a.address)}/>}
+						<Nav.Link onClick={() => this.props.logout()} style={{color: "rgba(255,255,255,.5)"}}><ExitToAppIcon/> Logout</Nav.Link>
+					</form>
+					</Navbar.Collapse>
 				</Navbar>
 			);
 		}
