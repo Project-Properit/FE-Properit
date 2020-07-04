@@ -7,9 +7,7 @@ import "./index.css";
 import menuItemTypes from "./menu-item-types";
 
 export const TOPBAR_HEIGHT = 65;
-// const ORGBAR_HEIGHT = 30;
-// const topBarHeight = TOPBAR_HEIGHT + (orgBarExists ? ORGBAR_HEIGHT : 0);
-// const routeContentHeight = `calc(100vh - ${topBarHeight}px)`;
+
 
 const menuByUserType = {
     user: ["payments", "professional", "renters", "documents"],
@@ -40,7 +38,7 @@ const MenuDrawer = () => {
             </List>
             <div className="open-close-button">
                 <IconButton onClick={toggleOpen}>
-                    {open ? <ChevronRight fontSize="large" /> : <ChevronLeft fontSize="large" />}
+                    {open ? <ChevronLeft fontSize="large" /> : <ChevronRight fontSize="large" />}
                 </IconButton>
             </div>
         </Drawer>

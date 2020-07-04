@@ -1,6 +1,7 @@
 import {Build, GroupAdd, InsertDriveFile} from "@material-ui/icons";
 import PaymentIcon from '@material-ui/icons/Payment';
 
+
 const menuItemTypes = {
     payments: {
         to: "/documents",
