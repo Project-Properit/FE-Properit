@@ -36,7 +36,7 @@ class  App extends React.Component {
 
     return (
 		<Router history={history}>
-			<ProperitNavBar/>
+            {this.props.userId? <ProperitNavBar/> :null}
 			<div style={{display: "flex"}}>
 				{this.props.userId && (
 					<MenuDrawer

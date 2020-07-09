@@ -1,24 +1,27 @@
-import React, {Component} from 'react';
+import React from 'react';
 import FadeIn from "react-fade-in";
 import UserTabs from "../UserTabs";
 import PaymentsRequests from "./PaymentsRequests";
 
-class PaymentsTabs extends Component {
-    render() {
-        return (
-            <div>
-                {
-                    (localStorage.getItem('chosenMode') === 'tenant') ?
+const PaymentsTabs = () => {
+    return (
+        <div>
+            {
+                (localStorage.getItem('chosenMode') === 'tenant') ?
                     (<FadeIn>
                             <UserTabs/>
                         </FadeIn>
                     ) : (
                         <FadeIn>
-                            <PaymentsRequests/>
+                            <div >
+                                <div style={{display:"flex",justifyContent:"center"}}>
+                                    <div >{"קבוצות התשלום שיצרתי"}</div>
+                                </div>
+                                <PaymentsRequests setGroupPaymentsCount={()=>{}}/>
+                            </div>
                         </FadeIn>)
-                }
-            </div>
-        );
-    }
+            }
+        </div>
+    );
 }
 export default PaymentsTabs

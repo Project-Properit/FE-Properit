@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {Delete} from "@material-ui/icons";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useRowStyles = makeStyles({
     root: {
@@ -41,15 +42,21 @@ function GroupRow(props) {
 
     const deleteDocument = () => {
         closeModal();
-        console.log(row.title + "-" + row.id + " deleted in asset " + props.propId)
         props.deleteMethod(props.userId, props.propId, row.id)
     };
+    const isClosed = (payment) => {
+        return !payment.is_open
+    }
+    const isDeletable = () => {
+        return row.participants.some(isClosed)
+    }
     return (
-        <React.Fragment>{deleteModalOpened?<SimpleValidationModal open onApprove={deleteDocument} closeMe={closeModal}/>:null}
+        <React.Fragment>{deleteModalOpened ?
+            <SimpleValidationModal open onApprove={deleteDocument} closeMe={closeModal}/> : null}
             <TableRow className={classes.root}>
-                <TableCell>{row.is_public || props.isOwner?<IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open?<KeyboardArrowUpIcon/>:<KeyboardArrowDownIcon/>}
-                    </IconButton>:null}
+                <TableCell><IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                    {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {row.title}
@@ -59,9 +66,13 @@ function GroupRow(props) {
                 <TableCell align="right">{row.description}</TableCell>
                 <TableCell align="right">{row.creation_date}</TableCell>
                 <TableCell>
-                    <IconButton onClick={openModal}>
-                        <Delete/>
-                    </IconButton>
+                    <Tooltip title={isDeletable() ? "לא ניתן למחוק. לפחות תשלום אחד אושר" : "מחק קבוצת תשלום זו"}>
+                        <div>
+                            <IconButton disabled={isDeletable()} onClick={openModal}>
+                                <Delete/>
+                            </IconButton>
+                        </div>
+                    </Tooltip>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -86,7 +97,9 @@ function GroupRow(props) {
                                             {historyRow.first_name + ' ' + historyRow.last_name}
                                         </TableCell>
                                         <TableCell>{historyRow.amount}</TableCell>
-                                        <TableCell align="right">{historyRow.is_open ? 'Open' : 'Closed'}</TableCell>
+                                        <TableCell align="right">{historyRow.is_open ? 'Open' : 'Close'}
+                                        </TableCell>
+                                        <TableCell>{historyRow.when_payed}</TableCell>
                                     </TableRow>
                                 ))}
                                 </TableBody>
@@ -100,7 +113,7 @@ function GroupRow(props) {
 }
 
 export default function GroupsCollapsibleTable(props) {
-    const [groupsPayments, setgroupsPayments] = useState([]);
+    const [groupsPayments] = useState([]);
     let groups = props.groupsPayments ? props.groupsPayments : groupsPayments
     return (
         <TableContainer component={Paper}>
@@ -113,13 +126,14 @@ export default function GroupsCollapsibleTable(props) {
                         <TableCell align="right">Amount</TableCell>
                         <TableCell align="right">description</TableCell>
                         <TableCell align="right">Creation Time</TableCell>
-                        <TableCell></TableCell>
+                        <TableCell>
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {groups.map((groupPayment, id) => (
                         <GroupRow key={id} userId={props.userId} propId={props.propId} deleteMethod={props.deleteMethod}
-                                  isOwner={props.isOwner} row={groupPayment}/>
+                                  isOwner={props.userId === groupPayment.owner} row={groupPayment}/>
                     ))}
                 </TableBody>
             </Table>
