@@ -54,25 +54,25 @@ class Signup extends Component {
 
 	cardNumberHandleInputChange = (e) => {
 
-		const {name, value} = e.target;
+		const {value} = e.target;
 		let payment_details = this.state.payment_details
 		payment_details.card_number = value
 		this.setState({payment_details});
 	}
 	cardOwnerHandleInputChange = (e) => {
-		const {name, value} = e.target;
+		const {value} = e.target;
 		let payment_details = this.state.payment_details
 		payment_details.card_owner = value
 		this.setState({payment_details});
 	}
 	cardDateHandleInputChange = (e) => {
-		const {name, value} = e.target;
+		const {value} = e.target;
 		let payment_details = this.state.payment_details
 		payment_details.valid_date = value
 		this.setState({payment_details});
 	}
 	cardCvcHandleInputChange = (e) => {
-		const {name, value} = e.target;
+		const {value} = e.target;
 		let payment_details = this.state.payment_details
 		payment_details.cvc = value
 		this.setState({payment_details});

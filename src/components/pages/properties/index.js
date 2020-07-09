@@ -8,7 +8,6 @@ import AddNewPropertyModal from "./AddNewPropertyModal";
 
 const DocumentsView = (props) => {
     const [newPropertiesModalOpened, setNewPropertiesModalOpened] = useState(false);
-    const [setDocuments] = useState([]);
 
     const openModal = useCallback(() => {
         setNewPropertiesModalOpened(true);

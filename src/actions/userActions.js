@@ -1,5 +1,4 @@
 import {USER} from '../constants'
-import {createFormAction} from "redux-form-saga";
 
 const setUser = userObject => ({
     type: USER.LOAD_SUCCESS,

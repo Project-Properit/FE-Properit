@@ -1,5 +1,4 @@
 import { GROUPPAYMENTS} from '../constants';
-import { createFormAction } from 'redux-form-saga';
 
 const loadGroupPayments = (propertyId, groupPaymentsId) => ({
     type: GROUPPAYMENTS.LOAD,

@@ -10,28 +10,18 @@ import { loadProperties } from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 class ProperitNavBar extends Component {
-
-
 	componentDidMount() {
 		this.props.loadProperties(this.props.ownerId);
 	}
 
-
 	render() {
 		const isLogin = this.props.token
-		const isOwner = this.props.isOwner
-		const isTenant = this.props.isTenant
 		const tenantAssetId = this.props.tenantAssetId
 		let chosenModeNotFromScreen;
 		if (this.props.isOwner && this.props.isTenant){chosenModeNotFromScreen=null}
 		else if (this.props.isOwner) {chosenModeNotFromScreen='owner'}
 		else if (this.props.isTenant) {chosenModeNotFromScreen='tenant'}
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
-		console.log('isOwner', isOwner)
-		console.log('isTenant', isTenant)
-		console.log('this.props.chosenMode',this.props.chosenMode)
-		console.log('chosenModeNotFromScreen',chosenModeNotFromScreen)
-
 		let mainUrl;
 		if(!chosenMode){
 			mainUrl='/chooseView'
@@ -84,7 +74,7 @@ class ProperitNavBar extends Component {
 
 
 					</Nav>
-					<form class="form-inline">
+					<form className="form-inline">
 						{this.props.myProperties.length >0 &&
 						<SimpleListMenu className="mr-sm-2"  choosenFunc={(d) => this.onChooseAddress(d)}
 										options={this.props.myProperties.map(a => a.address)}/>}

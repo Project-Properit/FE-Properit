@@ -3,7 +3,7 @@ import React, { useState, useCallback } from "react";
 import MyModal from "../Modal/index";
 import FilesUpload from "../documents/filesUpload";
 
-import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 
 const validateDocument = (name, files) => ({

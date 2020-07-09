@@ -1,7 +1,6 @@
 import React from "react";
 import {Payment} from "./Payment";
 import Row from "react-bootstrap/Row";
-import {displayCORSWarning} from "react-pdf/src/shared/utils";
 import Container from "react-bootstrap/Container";
 
 
