@@ -9,7 +9,7 @@ export const PropertyCard = props => {
 	return (
 		<div className="propBody">
 			<div className="propCard">
-				<img src={propImage} className="propCard-image"/>
+				{/*<img src={propImage} className="propCard-image"/>*/}
 				<div className="propCard-text">
 					<span className="tenants">{prop.tenant_list.length || 0} tenants</span>
 					<h2> {prop.address}</h2>

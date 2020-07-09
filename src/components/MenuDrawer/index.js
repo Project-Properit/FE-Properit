@@ -13,9 +13,19 @@ const menuByUserType = {
     user: ["payments", "professional", "renters", "documents"],
 };
 
+const generateDrawerUrl = (currenntUrl, to) => {
+    let url = currenntUrl;
+    Object.values(menuItemTypes).forEach((type) => {
+        url = url.replace(type.to, '');
+        console.log(type, url)
+    })
+    return url + to;
+};
+
 const MenuDrawer = () => {
     const [open, setOpen] = useState(true);
     const { pathname } = useLocation();
+    console.log('pathname', pathname);
     const toggleOpen = useCallback(() => setOpen(!open), [open, setOpen]);
 
     return (
@@ -28,7 +38,7 @@ const MenuDrawer = () => {
                     return (
                         <MenuDrawerItem
                             key={i}
-                            to={to}
+                            to={generateDrawerUrl(pathname, to)}
                             Icon={Icon}
                             text={text}
                             current={pathname}

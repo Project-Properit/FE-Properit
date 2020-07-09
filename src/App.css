@@ -203,14 +203,26 @@ a {
 #main-page {
   overflow-x: hidden;
   width: 100%;
-}
 
+}
+.page-in{
+  background: url("./images/home15.jpg") no-repeat center;
+  background-size: cover;
+  font-family: sans-serif;
+  /*display: flex;*/
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 64px);
+  opacity: 0.9;
+}
 #main-page .org-bar {
-  background: #cecece38;
+  background: #ad974f6b;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
+
 
 #routeContent{
   width: 100%;
