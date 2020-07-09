@@ -12,10 +12,11 @@ import {createGroupPayments} from "../actions/groupsPaymentsActions";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Errors from "../notifications/Errors";
 import Messages from "../notifications/Messages";
-import Slider from "@material-ui/core/Slider";
-import Typography from "@material-ui/core/Typography";
 import Tooltip from '@material-ui/core/Tooltip';
+import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
 import Switch from "@material-ui/core/Switch";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
 
 
 class CreateGroupPayments extends Component {
@@ -25,7 +26,7 @@ class CreateGroupPayments extends Component {
             checked: {},
             tenants: {},
             title: '',
-            amount: 0,
+            amount: '',
             description: '',
             is_public: true,
             create: {
@@ -34,14 +35,15 @@ class CreateGroupPayments extends Component {
                 messages: [],
                 errors: {},
             },
-            isPeriod: false
+            isPeriod: false,
+            createConfirmModalOpened: false
         };
     }
 
     setGroupPeriod = (event) => {
         if (event.target.checked) {
             this.setState({isPeriod: event.target.checked, months: [3, 8]})
-        }else{
+        } else {
             delete this.state.months
             this.setState({isPeriod: event.target.checked})
         }
@@ -56,13 +58,10 @@ class CreateGroupPayments extends Component {
             delete this.state.tenants[tenantId]
         }
         this.setState({checked: checked})
-        console.log(this.state.tenants)
     };
     validateGroupPayment = (title, description, tenants) => {
         let isOneAmountZero = false
-        console.log(tenants)
         for (const [key, value] of Object.entries(tenants)) {
-            console.log(value['amount'])
             if (value['amount'] <= 0) {
                 isOneAmountZero = true
             }
@@ -89,28 +88,18 @@ class CreateGroupPayments extends Component {
     }
 
     submit = () => {
-        const trimmedTitle = this.state.title !== null ? this.state.title.trim() : this.state.title;
-        const trimmedDescription = this.state.description !== null ? this.state.description.trim() : this.state.description;
-        const validation = this.validateGroupPayment(trimmedTitle, trimmedDescription, this.state.tenants);
-        if (!validation.isValid) {
-            let create = this.state.create
-            create.errors = validation.errors
-            this.setState({create});
-        } else {
-            let payments = []
-            let userId = this.props.userId
-            let groupPaymentsObject = {...this.state, userId: userId, payments: []}
-            delete groupPaymentsObject.checked
-            let tenants = this.state.tenants
-            Object.keys(tenants).forEach(function (key) {
-                payments.push({pay_from: key, pay_to: userId, amount: tenants[key].amount, method: null})
-            })
-            groupPaymentsObject['payments'] = payments
-            delete groupPaymentsObject.tenants
-            // console.log(groupPaymentsObject)
-            this.props.createGroupPayments(groupPaymentsObject);
-            this.props.closeHandler();
-        }
+        let payments = []
+        let userId = this.props.userId
+        let groupPaymentsObject = {...this.state, userId: userId, payments: []}
+        delete groupPaymentsObject.checked
+        let tenants = this.state.tenants
+        Object.keys(tenants).forEach(function (key) {
+            payments.push({pay_from: key, pay_to: userId, amount: tenants[key].amount, method: null})
+        })
+        groupPaymentsObject['payments'] = payments
+        delete groupPaymentsObject.tenants
+        this.props.createGroupPayments(groupPaymentsObject);
+        this.props.closeHandler();
     }
 
     componentDidMount() {
@@ -162,10 +151,27 @@ class CreateGroupPayments extends Component {
             </Tooltip>
         );
     }
+    closeModal = () => {
+        this.setState({createConfirmModalOpened: false})
+    }
+    openModal = () => {
+        const trimmedTitle = this.state.title !== null ? this.state.title.trim() : this.state.title;
+        const trimmedDescription = this.state.description !== null ? this.state.description.trim() : this.state.description;
+        const validation = this.validateGroupPayment(trimmedTitle, trimmedDescription, this.state.tenants);
+        if (!validation.isValid) {
+            let create = this.state.create
+            create.errors = validation.errors
+            this.setState({create});
+        } else {
+            this.setState({createConfirmModalOpened: true})
+        }
+    }
 
     render() {
         return (
             <div>
+                {this.state.createConfirmModalOpened ? <SimpleValidationModal open onApprove={this.submit}
+                                                                              closeMe={this.closeModal}/> : null}
                 <MyModal open setOpen={this.props.closeHandler} closeMe={this.props.closeHandler}
                          style={{width: "30%"}}>
                     <div style={{textAlign: 'center'}}>
@@ -205,31 +211,31 @@ class CreateGroupPayments extends Component {
                                             />}
                                         label={"Public Group Payment"}
                                     />
-                                    {/*<FormControlLabel*/}
-                                    {/*control={*/}
-                                    {/*    <Switch*/}
-                                    {/*    checked={this.state.isPeriod}*/}
-                                    {/*    onChange={this.setGroupPeriod}*/}
-                                    {/*/>}*/}
-                                    {/*label={"Set Period Group Payments"}*/}
-                                    {/*/>*/}
-                                    {/*{this.state.isPeriod?*/}
-                                    {/*<div>*/}
-                                    {/*    <Typography id="range-slider" gutterBottom>*/}
-                                    {/*        Choose months to charge*/}
-                                    {/*    </Typography>*/}
-                                    {/*    <Slider style={{paddingTop:"20px",width: 320}}*/}
-                                    {/*            min={1}*/}
-                                    {/*            step={1}*/}
-                                    {/*            max={12}*/}
-                                    {/*            scale={(x) => this.getMonth(x)}*/}
-                                    {/*            value={this.state.months}*/}
-                                    {/*            onChange={this.setMonths}*/}
-                                    {/*            valueLabelDisplay="on"*/}
-                                    {/*            aria-labelledby="range-slider"*/}
-                                    {/*            ValueLabelComponent={this.valueLabelComponent}*/}
-                                    {/*    />*/}
-                                    {/*</div>:null}*/}
+                                    <FormControlLabel
+                                    control={
+                                        <Switch
+                                        checked={this.state.isPeriod}
+                                        onChange={this.setGroupPeriod}
+                                    />}
+                                    label={"Set Period Group Payments"}
+                                    />
+                                    {this.state.isPeriod?
+                                    <div>
+                                        <Typography id="range-slider" gutterBottom>
+                                            Choose months to charge
+                                        </Typography>
+                                        <Slider style={{paddingTop:"20px",width: 320}}
+                                                min={1}
+                                                step={1}
+                                                max={12}
+                                                scale={(x) => this.getMonth(x)}
+                                                value={this.state.months}
+                                                onChange={this.setMonths}
+                                                valueLabelDisplay="on"
+                                                aria-labelledby="range-slider"
+                                                ValueLabelComponent={this.valueLabelComponent}
+                                        />
+                                    </div>:null}
                                     <div style={{display: "flex"}}>
                                         {this.props.myProperty.tenant_list.map(tenant => (
                                             tenant.id !== this.props.userId ?
@@ -267,7 +273,7 @@ class CreateGroupPayments extends Component {
                                         color="primary"
                                         variant="contained"
                                         style={{fontWeight: "bold", fontSize: "24px"}}
-                                        onClick={() => this.submit()}
+                                        onClick={this.openModal}
                                     >
                                         צור קבוצה
                                     </Button>
@@ -304,7 +310,6 @@ class CreateGroupPayments extends Component {
 
     setNewAmount = (amount, tenantId) => {
         let tenants = this.state.tenants
-        // const {value} = e.target
         if (this.state.tenants.hasOwnProperty(tenantId)) {
             tenants[tenantId].amount = parseInt(amount)
         } else {

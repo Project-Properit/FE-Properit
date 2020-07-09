@@ -28,8 +28,8 @@ export default function* watchGroupsPaymentsLoad() {
 
 function* handleGroupPaymentsCreate(action) {
     try {
-        const {assetId, title, description, is_public, amount, payments} = action
-        yield call(createGroupPaymentsApi, assetId, title, description, is_public, amount, payments)
+        const {assetId, title, description, is_public, amount, payments, isPeriod, months} = action
+        yield call(createGroupPaymentsApi, assetId, title, description, is_public, amount, payments, isPeriod, months)
         yield call(handleGroupsPaymentsLoad, action)
         // yield put({type: GROUPSPAYMENTS.CREATE_SUCCESS, response})
     } catch (error) {

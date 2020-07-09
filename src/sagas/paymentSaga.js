@@ -14,7 +14,7 @@ export function* handlePaymentLoad(action) {
 
 export function* handlePaymentRemove(action) {
     try {
-        const success = yield call(removePayment, action.propertyId);
+        yield call(removePayment, action.propertyId);
         // yield put(setProperty(myProperty));
     } catch (error) {
         yield put(setError(error.toString()));

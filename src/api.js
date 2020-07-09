@@ -49,7 +49,6 @@ const fetchProperty = async (propertyId) => {
 	return apiCall(url, 'GET')
 };
 const removeProperty = async (propertyId) => {
-    console.log("again morangS")
 	// const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
 	// return apiCall(url, 'DELETE')
 };
@@ -64,7 +63,19 @@ const createPropApi = async (propertyObject) => {
 
 const payApi = async (payId) => {
 	const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}`;
-	return apiCall(url, 'PATCH')
+    return fetch(url, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-tokens':localStorage.getItem('token')||''
+        }
+    })
+        .then(handleApiErrors) // we'll make this in a second
+        .then(response => response.json())
+        .then(json => json)
+        .catch((error) => {
+            throw error
+        })
 };
 
 const fetchDocuments = async (userId) => {
@@ -114,8 +125,9 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 	return apiCall(url, 'GET')
 };
 
-function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments) {
-
+function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments, isPeriod, months) {
+    const body = isPeriod ? JSON.stringify({title, description, is_public, amount, payments, isPeriod, months}):
+        JSON.stringify({title, description, is_public, amount, payments})
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
     return fetch(url, {
         method: 'POST',
@@ -123,7 +135,7 @@ function createGroupPaymentsApi (assetId, title, description, is_public, amount,
             'Content-Type': 'application/json',
             'x-access-tokens':localStorage.getItem('token')||''
         },
-        body: JSON.stringify({title, description, is_public, amount, payments}),
+        body: body
     })
         .then(handleApiErrors) // we'll make this in a second
         .then(response => response.json())
@@ -134,9 +146,7 @@ function createGroupPaymentsApi (assetId, title, description, is_public, amount,
 }
 
 function deleteGroupPayments(assetId, groupPaymentsId) {
-    console.log("testsetset")
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments/' + groupPaymentsId;
-    console.log(url)
     return fetch(url, {
         method: 'DELETE',
         headers: {
