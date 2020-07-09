@@ -65,14 +65,14 @@ class ProperitNavBar extends Component {
 						{/*}*/}
 						{isLogin && chosenMode === 'owner' &&
 						<>
-							<Nav.Link as={Link} to="/properties">Properties</Nav.Link>
-							<Nav.Link as={Link} to={documentsUrl}>Documents</Nav.Link>
-							<Nav.Link as={Link} to={paymentsUrl}>Payments</Nav.Link>
+							{/*<Nav.Link as={Link} to="/properties">Properties</Nav.Link>*/}
+							{/*<Nav.Link as={Link} to={documentsUrl}>Documents</Nav.Link>*/}
+							{/*<Nav.Link as={Link} to={paymentsUrl}>Payments</Nav.Link>*/}
 						</>
 						}
 						{isLogin && chosenMode === 'tenant' &&
 						<>
-							<Nav.Link as={Link} to="/payments">Payments</Nav.Link>
+							{/*<Nav.Link as={Link} to="/payments">Payments</Nav.Link>*/}
 
 						</>
 						}

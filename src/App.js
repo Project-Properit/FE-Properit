@@ -23,6 +23,7 @@ import { PaymentsInfo } from "./components/PaymentsInfo";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
 import MenuDrawer from "./components/MenuDrawer";
 import { connect } from "react-redux";
+import FadeIn from "react-fade-in";
 
 const ORGBAR_HEIGHT = 30;
 const TOPBAR_HEIGHT = 65;
@@ -31,8 +32,30 @@ class  App extends React.Component {
 
 
     render() {
-    const topBarHeight = TOPBAR_HEIGHT + (this.props.firstName ? ORGBAR_HEIGHT : 0);
-    const routeContentHeight = `calc(100vh - ${topBarHeight}px)`;
+		const isLogin = this.props.token
+		const topBarHeight = TOPBAR_HEIGHT + (this.props.firstName ? ORGBAR_HEIGHT : 0);
+    	const routeContentHeight = `calc(100vh - ${topBarHeight}px)`;
+		const switchComp = <Switch>
+			<Route exact path="/" component={HomePage}/>
+			<PublicRoute path="/login" component={Login}/>
+			<PublicRoute path="/signup" component={Signup}/>
+			<PrivateRoute exact path="/chooseView" component={SelectionModeView}/>
+			<PrivateRoute exact path="/about" component={About}/>
+			<PrivateRoute exact path="/properties" component={Properties}/>
+			<PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
+			<PrivateRoute exact path="/properties/:propId" component={DocumentsPage}/>
+			<PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>
+			<PrivateRoute exact path="/properties/:propId/payments" component={PaymentsTabs}/>
+			<PrivateRoute exact path="/properties/:propId/documents" component={DocumentsPage}/>
+			<PrivateRoute exact path="/properties/:propId/payments/:groupPaymentId"
+						  component={PaymentsInfo}/>
+			<PrivateRoute exact path="/properties/:propId/CreatePayments"
+						  component={CreateGroupPayments}/>
+			<PrivateRoute exact path="/renters" component={Renters}/>
+			<PrivateRoute exact path="/newUser" component={NewUserPage}/>
+		</Switch>
+		console.log('isLogin', isLogin)
+
 
     return (
 		<Router history={history}>
@@ -43,35 +66,29 @@ class  App extends React.Component {
 						loggedInUserType={this.props.userId}
 					/>
 				)}
-				<div id="main-page">
-					{this.props.firstName && (
-						<div className="org-bar" style={{height: `${ORGBAR_HEIGHT}px`}}>
-                            {this.props.firstName}
-						</div>
-					)}
-					<div id="routeContent" style={{height: routeContentHeight}}>
-						<Switch>
-							<Route exact path="/" component={HomePage}/>
-							<PublicRoute path="/login" component={Login}/>
-							<PublicRoute path="/signup" component={Signup}/>
-							<PrivateRoute exact path="/chooseView" component={SelectionModeView}/>
-							<PrivateRoute exact path="/about" component={About}/>
-							<PrivateRoute exact path="/properties" component={Properties}/>
-							<PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
-							<PrivateRoute exact path="/properties/:propId" component={DocumentsPage}/>
-							<PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>
-							<PrivateRoute exact path="/properties/:propId/payments" component={PaymentsTabs}/>
-							<PrivateRoute exact path="/properties/:propId/documents" component={DocumentsPage}/>
-							<PrivateRoute exact path="/properties/:propId/payments/:groupPaymentId"
-							              component={PaymentsInfo}/>
-							<PrivateRoute exact path="/properties/:propId/CreatePayments"
-							              component={CreateGroupPayments}/>
-							<PrivateRoute exact path="/renters" component={Renters}/>
-							<PrivateRoute exact path="/newUser" component={NewUserPage}/>
-						</Switch>
+				{!isLogin ?  (
+
+					<div id="main-page">
+						{switchComp}
 					</div>
-				</div>
+				) : (
+                    <div   id="main-page">
+
+						{this.props.firstName && (
+							<div className="org-bar" style={{height: `${ORGBAR_HEIGHT}px`}}>
+								{this.props.firstName}
+							</div>
+						)}
+						<div className="page-in">
+
+						<div id="routeContent" style={{height: routeContentHeight}}>
+                                {switchComp}
+                            </div>
+					</div>
+					</div>
+				)}
 			</div>
+
 		</Router>
 	);}
 }
@@ -82,7 +99,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = ({clientReducer, myPaymentsReducer}) => ({
 	userId: clientReducer.userId,
     firstName: clientReducer.firstName,
-	myPayments: myPaymentsReducer.myPayments
+	myPayments: myPaymentsReducer.myPayments,
+	token: clientReducer.token
 
 });
 export default connect(

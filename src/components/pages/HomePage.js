@@ -77,7 +77,7 @@ class HomePage extends PureComponent {
 							<div style={{height: '600px'}}/>
 						</Parallax>
 
-						<div id="section_2">
+						<div id="section_2" style={{height: '600px'}}>
 							<p className="descriptionTeam">
 								<span className="spanText"> Final Project 2020</span>
 								<span

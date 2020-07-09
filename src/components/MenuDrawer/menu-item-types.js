@@ -4,17 +4,17 @@ import PaymentIcon from '@material-ui/icons/Payment';
 
 const menuItemTypes = {
     payments: {
-        to: "/documents",
+        to: "/payments",
         text: "תשלומים",
         Icon: PaymentIcon
     },
     professional: {
-        to: "/documents",
+        to: "/professional",
         text: "הזמנת בעל מקצוע",
         Icon: Build
     },
     renters: {
-        to: "/documents",
+        to: "/renters",
         text: "מידע שוכרים",
         Icon: GroupAdd
     },

@@ -1,3 +1,38 @@
+
+.row {
+  margin-bottom: 20px;
+}
+.row .col.s12 {
+  width: 100%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+.row .col {
+  float: left;
+  box-sizing: border-box;
+  padding: 0 .75rem;
+  min-height: 1px;
+}
+
+img.responsive-img, video.responsive-video {
+  max-width: 100%;
+  height: auto;
+}
+@media only screen and (min-width: 993px)  {
+    .row .col.push-l7 {
+      left: 58.3333333333%;
+
+    }
+    .row .col.offset-l1 {
+      margin-left: 8.3333333333%;
+    }
+    .row .col.pull-l5 {
+      right: 41.6666666667%;
+    }
+
+}
 .text-wrapper {
   display: flex;
   flex-direction: column;
