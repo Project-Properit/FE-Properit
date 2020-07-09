@@ -17,10 +17,10 @@ const setError = error => ({
 });
 
 const createGroupPayments = function createGroupPayments(all) {
-    const {userId, assetId, title, description, is_public, amount, payments, months} = all
+    const {userId, assetId, title, description, is_public, amount, payments, isPeriod, months} = all
     return {
         type: GROUPSPAYMENTS.CREATE,
-        userId, assetId, title, description, is_public, amount, payments, months
+        userId, assetId, title, description, is_public, amount, payments, isPeriod, months
     }
 }
 

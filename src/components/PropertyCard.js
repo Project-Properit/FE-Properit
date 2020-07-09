@@ -25,7 +25,5 @@ export const PropertyCard = props => {
 			</div>
 
 		</div>
-		// </Col>
-
 	)
 };

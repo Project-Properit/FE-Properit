@@ -9,7 +9,6 @@ import "./documentsView.css";
 
 const DocumentsView = (props) => {
 	const [newDocumentModalOpened, setNewDocumentModalOpened] = useState(false);
-	const [setDocuments] = useState([]);
 
 	const openModal = useCallback(() => {
 		setNewDocumentModalOpened(true);

@@ -21,7 +21,7 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 	const deleteDocument = useCallback(() => {
 		closeModal();
 		deleteHandler(document.dbx_path);
-	}, [document]);
+	}, [closeModal, deleteHandler, document]);
 
 	return <div className="documentCard">
 		{

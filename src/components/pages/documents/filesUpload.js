@@ -13,11 +13,10 @@ const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ �
 
 
 function FilesUpload(props) {
-	const fileName = props.name
 	const propId = window.location.pathname.replace('/properties/','').replace('/documents','')
-	const {name, maxFiles, existedFiles, setExistedFiles} = props;
+	const {maxFiles, existedFiles, setExistedFiles} = props;
 
-	const [files, setFiles, setName] = useState([]);
+	const [files, setFiles] = useState([]);
 
 	const setNewFiles = React.useCallback(newFiles => {
 		setFiles(newFiles);
@@ -58,12 +57,6 @@ function FilesUpload(props) {
 		const deletedFile = existedFiles.find(file => file._id.toString() === fileId.toString());
 		setExistedFiles(existedFiles.filter(f => f !== deletedFile));
 	}, [existedFiles, setExistedFiles]);
-
-	const deleteAllFiles = React.useCallback(() => {
-		filesRef.current.removeFiles();
-		setNewFiles([]);
-		setExistedFiles([]);
-	}, [setNewFiles, setExistedFiles]);
 
 	return (
 		<div className="App">
@@ -111,7 +104,6 @@ FilesUpload.defaultProps = {
 const mapStateToProps = (state) => {
 	return ({
 		properties: state.myProperties,
-		// files: state.fileUpload.files,
 		existedFiles: state.fileUpload.existedFiles
 	});
 }
@@ -120,13 +112,9 @@ const mapDispatchToProps = dispatch => ({
 	setFiles: (files) => dispatch(setFiles(files)),
 	setExistedFiles: (existedFiles) => dispatch(setExistedFiles(existedFiles)),
 	addFiles: (files) => dispatch(addFiles(files)),
-	deleteFiles: (files) => dispatch(deleteFiles(files))
-
-
 });
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(FilesUpload);
-// export default FilesUpload;

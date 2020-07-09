@@ -1,5 +1,3 @@
-import {setClient} from "../actions/clientActions";
-
 function checkAuthorization () {
   // attempt to grab the token from localstorage
   const storedToken = localStorage.getItem('token')

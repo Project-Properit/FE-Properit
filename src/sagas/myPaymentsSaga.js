@@ -7,7 +7,6 @@ import { actionChannel, take } from "@redux-saga/core/effects";
 
 export function* handlePaymentsLoad(action) {
 	try {
-		console.log('fetchPayments')
 		const myPayments = yield call(fetchPayments, action.assetId, action.userId);
 		yield put(setPayments(myPayments));
 	} catch (error) {

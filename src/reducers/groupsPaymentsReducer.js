@@ -24,8 +24,6 @@ const myGroupsPayments = (state = {
                 }
             };
         case GROUPSPAYMENTS.LOAD_SUCCESS:
-            console.log("myGroups")
-            console.log(action.myGroupsPayments)
             return {
                 ...state,
                 isLoading: false,
@@ -46,6 +44,8 @@ const myGroupsPayments = (state = {
             };
         case GROUPSPAYMENTS.CREATE:
             return {
+                isLoading: true,
+                myGroupsPayments: [],
                 create: {
                     requesting: true,
                     successful: false,

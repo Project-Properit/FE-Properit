@@ -15,7 +15,7 @@ export function* handlePropertyLoad(action) {
 }
 export function* handlePropertyRemove(action) {
     try {
-        const success = yield call(removeProperty, action.propertyId);
+        yield call(removeProperty, action.propertyId);
         // yield put(setProperty(myProperty));
     } catch (error) {
         yield put(setError(error.toString()));
