@@ -6,14 +6,14 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import logo from "../images/logoWhite .jpg";
 import SimpleListMenu from "./addressChoose";
-import { loadProperties } from "../actions/propertiesActions";
+import { chooseAsset, loadProperties } from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 class ProperitNavBar extends Component {
 
 
 	componentDidMount() {
-		this.props.loadProperties(this.props.ownerId);
+		this.props.loadProperties(this.props.userId);
 	}
 
 
@@ -50,6 +50,8 @@ class ProperitNavBar extends Component {
 		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'
 
 		if (isLogin) {
+			console.log('this.props.myProperties.length >0',this.props.myProperties.length >0)
+			console.log('this.props.myProperties',this.props.myProperties)
 			return (
 
                 <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
@@ -77,7 +79,7 @@ class ProperitNavBar extends Component {
 					<form class="form-inline">
 						{this.props.myProperties.length >0 &&
 						<SimpleListMenu className="mr-sm-2"  choosenFunc={(d) => this.onChooseAddress(d)}
-										options={this.props.myProperties.map(a => a.address)}/>}
+										options={this.props.myProperties.map(a => a.address)} choosenIndex={this.getIndexOfList()}/>}
 						<Nav.Link onClick={() => this.props.logout()} style={{color: "rgba(255,255,255,.5)"}}><ExitToAppIcon/> Logout</Nav.Link>
 					</form>
 					</Navbar.Collapse>
@@ -87,16 +89,22 @@ class ProperitNavBar extends Component {
 		return (<div></div>)
 
 	}
-
+	getIndexOfList(){
+		console.log('EXIST?????',this.props.chosenAssetId)
+		let c = this.props.myProperties.findIndex(a=>a.id===this.props.chosenAssetId)
+		return c===-1? null : c
+	}
 	onChooseAddress(d) {
 		let c = this.props.myProperties[d]
+		this.props.chooseAsset(c.id)
 		this.props.history.push("/properties/" + c.id);
 	}
 }
 
 const mapDispatchToProps = dispatch => ({
 	logout: () => dispatch(logoutAction()),
-	loadProperties: (ownerId) => dispatch(loadProperties(ownerId))
+	loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
+	chooseAsset: (assetId) => dispatch(chooseAsset(assetId))
 
 });
 const mapStateToProps = ({clientReducer, myProperties}) => ({
@@ -106,7 +114,8 @@ const mapStateToProps = ({clientReducer, myProperties}) => ({
 	isTenant: clientReducer.isTenant,
 	chosenMode: clientReducer.chosenMode,
 	tenantAssetId: clientReducer.tenantAssetId,
-	myProperties: myProperties.myProperties
+	myProperties: myProperties.myProperties,
+	chosenAssetId: myProperties.chosenAssetId
 
 });
 export default connect(

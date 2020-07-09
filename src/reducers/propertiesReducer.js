@@ -1,6 +1,6 @@
 import { PROPERTIES } from '../constants';
 
-const myPropertiesReducer = (state = {myProperties:[]}, action) => {
+const myPropertiesReducer = (state = {myProperties:[],chosenAssetId:null}, action) => {
     switch (action.type) {
         case PROPERTIES.LOAD: return {
             ...state,
@@ -18,6 +18,11 @@ const myPropertiesReducer = (state = {myProperties:[]}, action) => {
             ...state,
             isLoading:false,
             error:action.error
+
+        };
+        case PROPERTIES.CHOOSE_ASSET: return {
+            ...state,
+            chosenAssetId :action.assetId
 
         };
         default: return state

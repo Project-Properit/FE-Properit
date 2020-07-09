@@ -1,4 +1,4 @@
-import { PROPERTIES } from '../constants';
+import { MY_PAYMENTS, PROPERTIES } from '../constants';
 
 const loadProperties = (userId) => ({
     type: PROPERTIES.LOAD,
@@ -14,9 +14,14 @@ const setError = error => ({
     type: PROPERTIES.LOAD_FAIL,
     error,
 });
+const chooseAsset = (assetId) => ({
+    type: PROPERTIES.CHOOSE_ASSET,
+    assetId,
+});
 
 export {
     loadProperties,
     setProperties,
     setError,
+    chooseAsset
 };

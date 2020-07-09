@@ -9,10 +9,15 @@ import MenuList from '@material-ui/core/MenuList';
 
 export default function SimpleListMenu(props) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [selectedIndex, setSelectedIndex] = React.useState(1);
+	const [selectedIndex, setSelectedIndex] = React.useState();
+	console.log('selectedIndex',selectedIndex)
 	const logoutRef = useRef(null);
 	const [expanded, setExpanded] = useState(false);
-
+	const opt = props.options;
+	const chosen = props.choosenIndex;
+	console.log('choosen',chosen )
+	if (chosen && !selectedIndex)
+		setSelectedIndex(chosen);
 	const handleClickListItem = (event, expanded) => {
 		setAnchorEl(event.currentTarget);
 		setExpanded(!expanded);
@@ -49,7 +54,7 @@ export default function SimpleListMenu(props) {
 		>
 			<PersonPinCircle/>
 			<div style={{marginRight: "8px", marginLeft: "8px", whiteSpace: "nowrap"}}>
-				{props.options[selectedIndex]}
+				{opt[selectedIndex]}
 			</div>
 			{!expanded ? <ArrowDropDown/> : <ArrowDropUp/>}
 			{expanded && (
@@ -66,7 +71,7 @@ export default function SimpleListMenu(props) {
 						<ClickAwayListener onClickAway={handleClose}>
 							<MenuList autoFocusItem={Boolean(anchorEl)} id="menu-list-grow">
 
-								{props.options.map((option, index) => (
+								{opt.map((option, index) => (
 									<MenuItem
 										key={option}
 										// disabled={index === 0}
