@@ -1,55 +1,60 @@
 
 .propBody{
+
     //width: 100vw;
     //height: 100vh;
+
+    //----------
+    //display: flex;
+    //align-items: center;
+    //justify-content: center;
+    //overflow: hidden;
+    //padding: 40px;
+    //----------
+
+    max-width: 1000px;
+    margin: 10px auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 40px;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
-.propCard {
-    display: grid;
-    grid-template-columns: 250px;
-    grid-template-rows: 200px 200px 60px;
-    grid-template-areas: "image" "text" "stats";
+    .propCard {
 
-    font-family: Roboto;
-    border-radius: 18px;
-    background: white;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
-    text-align: center;
+        //----------
+    //display: grid;
+    //grid-template-columns: 250px;
+    //grid-template-rows: 200px 200px 60px;
+    //grid-template-areas: "image" "text" "stats";
+    //
+    //font-family: Roboto;
+    //border-radius: 18px;
+    //background: white;
+    //box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+    //text-align: center;
+    //
+    //transition: 0.5s ease;
+    ////cursor: pointer;
+    //----------
 
-    transition: 0.5s ease;
-    //cursor: pointer;
-}
+    position: relative;
+    margin: 20px 0;
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    transform-style: preserve-3d;
+    transform: perspective(2000px);
+    transition: 1s;
+    box-shadow: inset 300px 0 50px rgba(0,0,0,.5);
 
-.propCard-image {
-    grid-area: image;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    //background: url("https://properit.s3.amazonaws.com/house1.jpg");
-    background-size: cover;
-}
-.propCard-text {
-    grid-area: text;
-    margin: 25px;
-}
-.propCard-text .tenants {
-    //color: rgb(255,7,110);
-    color: #4e555b;
-    font-size: 17px;
-}
-.propCard-text p {
-    color: grey;
-    font-size: 15px;
-    font-weight: 300;
-}
-.propCard-text h2{
-    margin-top: 0px;
-    font-size: 28px;
 
 }
+
+//.propCard-image {
+//    grid-area: image;
+//    border-top-left-radius: 15px;
+//    border-top-right-radius: 15px;
+//    background-size: cover;
+//}
 .propCard-stats {
     grid-area: stats;
     display: grid;
@@ -65,13 +70,92 @@
     flex-direction: column;
     padding: 10px;
 }
-.propCard-stats .value {
+.EditValue {
+    //font-size: 22px;
+    //font-weight: 500;
+    //color: #231F20;
+    line-height: 12px;
+    width: 18px;
+    font-size: 8pt;
+    margin-top: 1px;
+    margin-right: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.ChooseValue{
     font-size: 22px;
     font-weight: 500;
-    color: #231F20;
+}
+
+//
+
+.propCard:hover {
+    //-----------
+    //transform: scale(1.1);
+    //box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+    //-----------
+    z-index: 1000;
+    transform: perspective(2000px) rotate(-10deg);
+    box-shadow: inset 20px 0 50px rgba(0,0,0,.5);
+}
+.propCard .imgBox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    transform-origin: left;
+    z-index: 1;
+    transition: 1s;
+}
+
+.propCard:hover .imgBox{
+    transform: rotateY(-135deg);
+}
+
+.propCard .imgBox .propImg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+//.propCard .details{
+//    position: absolute;
+//    top: 0;
+//    left: 0;
+//    box-sizing: border-box;
+//    padding: 20px;
+//}
+.propCard-text {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    box-sizing: border-box;
+    padding: 20px;
+    grid-area: text;
+    margin: 25px;
 
 }
-.propCard:hover {
-    transform: scale(1.1);
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+.propCard-text .tenants {
+    //color: rgb(255,7,110);
+    color: #4e555b;
+    font-size: 17px;
 }
+.propCard-text p {
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+}
+.propCard-text h2{
+    margin-top: 0px;
+    font-size: 50px;
+
+}
+.propCard-text a{
+    color: #3f51b5;
+
+}
+
