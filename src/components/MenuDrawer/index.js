@@ -17,7 +17,6 @@ const generateDrawerUrl = (currenntUrl, to) => {
     let url = currenntUrl;
     Object.values(menuItemTypes).forEach((type) => {
         url = url.replace(type.to, '');
-        console.log(type, url)
     })
     return url + to;
 };
@@ -25,7 +24,6 @@ const generateDrawerUrl = (currenntUrl, to) => {
 const MenuDrawer = () => {
     const [open, setOpen] = useState(true);
     const { pathname } = useLocation();
-    console.log('pathname', pathname);
     const toggleOpen = useCallback(() => setOpen(!open), [open, setOpen]);
 
     return (

@@ -61,7 +61,7 @@ class  App extends React.Component {
 		<Router history={history}>
             {this.props.userId? <ProperitNavBar/> :null}
 			<div style={{display: "flex"}}>
-				{this.props.userId && (
+				{(this.props.userId &&this.props.chosenAssetId) && (
 					<MenuDrawer
 						loggedInUserType={this.props.userId}
 					/>
@@ -76,7 +76,7 @@ class  App extends React.Component {
 
 						{this.props.firstName && (
 							<div className="org-bar" style={{height: `${ORGBAR_HEIGHT}px`}}>
-								{this.props.firstName}
+								{this.props.firstName} {this.props.lastName}
 							</div>
 						)}
 						<div className="page-in">
@@ -96,11 +96,13 @@ class  App extends React.Component {
 const mapDispatchToProps = dispatch => ({
 
 });
-const mapStateToProps = ({clientReducer, myPaymentsReducer}) => ({
+const mapStateToProps = ({clientReducer, myPaymentsReducer, myProperties}) => ({
 	userId: clientReducer.userId,
     firstName: clientReducer.firstName,
+    lastName: clientReducer.lastName,
 	myPayments: myPaymentsReducer.myPayments,
-	token: clientReducer.token
+	token: clientReducer.token,
+	chosenAssetId: myProperties.chosenAssetId
 
 });
 export default connect(

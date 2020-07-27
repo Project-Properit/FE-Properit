@@ -7,6 +7,7 @@ const initialSate = {
 	isTenant: getReal(localStorage.getItem('isTenant')),
 	isOwner: getReal(localStorage.getItem('isOwner')),
 	firstName: localStorage.getItem('firstName') || null,
+	lastName: localStorage.getItem('lastName') || null,
 	chosenMode: localStorage.getItem('chosenMode') || null,
 	tenantAssetId: localStorage.getItem('assetId') || null
 }
@@ -23,6 +24,7 @@ const clientReducer = (state = initialSate, action) => {
 			return {
 				userId: action.userId,
 				firstName: action.firstName,
+				lastName: action.lastName,
 				token: action.token,
 				isTenant: action.isTenant,
 				isOwner: action.isOwner,
@@ -34,6 +36,7 @@ const clientReducer = (state = initialSate, action) => {
 			return {
 				userId: null,
 				firstName: null,
+				lastName: null,
 				token: null,
 				isTenant: null,
 				isOwner: null,
