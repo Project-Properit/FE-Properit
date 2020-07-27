@@ -14,12 +14,9 @@ export function* handleDocumentsLoad(action) {
 }
 
 export default function* watchPropertiesLoad() {
-    //Creating Channel like a queue for `PROPERTIES.LOAD` requests.
     const subChannel = yield actionChannel(DOCUMENTS.LOAD);
     while (true) {
-        // Blocking - takes actions from queue.
         const action = yield take(subChannel);
         yield call(handleDocumentsLoad, action)
     }
-    // yield takeEvery(PROPERTIES.LOAD, handlePropertiesLoad);
 }

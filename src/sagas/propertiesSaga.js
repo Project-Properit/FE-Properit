@@ -4,23 +4,23 @@ import {setError, setProperties} from '../actions/propertiesActions';
 import {PROPERTIES} from '../constants';
 import {fetchProperties} from '../api';
 import {actionChannel, take} from "@redux-saga/core/effects";
+import { push } from "react-router-redux";
 
 export function* handlePropertiesLoad(action) {
     try {
         const myProperties = yield call(fetchProperties, action.userId);
+        localStorage.removeItem('chosenAssetId')
         yield put(setProperties(myProperties));
+        yield put(push('/properties'));
     } catch (error) {
         yield put(setError(error.toString()));
     }
 }
 
 export default function* watchPropertiesLoad() {
-    //Creating Channel like a queue for `PROPERTIES.LOAD` requests.
     const subChannel = yield actionChannel(PROPERTIES.LOAD);
     while (true){
-        // Blocking - takes actions from queue.
         const action = yield take(subChannel);
         yield call(handlePropertiesLoad, action)
     }
-    // yield takeEvery(PROPERTIES.LOAD, handlePropertiesLoad);
 }
