@@ -16,14 +16,11 @@ export function* handleGroupsPaymentsLoad(action) {
 }
 
 export default function* watchGroupsPaymentsLoad() {
-    //Creating Channel like a queue for `PROPERTIES.LOAD` requests.
     const subChannel = yield actionChannel(GROUPSPAYMENTS.LOAD);
     while (true) {
-        // Blocking - takes actions from queue.
         const action = yield take(subChannel);
         yield call(handleGroupsPaymentsLoad, action)
     }
-    // yield takeEvery(PROPERTIES.LOAD, handlePropertiesLoad);
 }
 
 function* handleGroupPaymentsCreate(action) {

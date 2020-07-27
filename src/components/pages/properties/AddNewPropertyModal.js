@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-// import "./styles.css"
 import { Button, TextField } from "@material-ui/core";
 import { addNewProperty } from "../../../actions/propertyActions";
 import MyModal from "../Modal";
@@ -13,23 +12,40 @@ class AddNewPropertyModal extends Component {
 			address: '',
 			room_num: 0,
 			rent_fee: 0,
-			comments: ''
+			comments: '',
+			create: {
+				requesting: false,
+				successful: false,
+				messages: [],
+				errors: {}
+			}
 		};
 	}
 
-	reset = () => {
-		this.setState({
-			address: '',
-			room: 0,
-			rental: 0,
-			comment: ''
-		})
+	validateAssetCreation = (address, room, rental) => {
+		return {
+			isValid: address !== null && address.length > 0 && room !== null && room !== undefined && room > 0 && rental > 0 && rental !== null && rental !== undefined ,
+			errors: {
+				address: (address === null || address.length === 0),
+				room: (room === null ||room===undefined|| room <= 0),
+				rental: (rental === null ||rental===undefined|| rental <= 0),
+			}
+		}
+	};
+	CheckBeforeSubmit = () => {
+		const trimmedAddress = this.state.address !== null ? this.state.address.trim() : this.state.address;
+		const validation = this.validateAssetCreation(trimmedAddress, this.state.room_num, this.state.rent_fee);
+		if (!validation.isValid) {
+			let create = this.state.create
+			create.errors = validation.errors
+			this.setState({create});
+		} else {
+			this.submit()
+		}
 	}
-
 	submit = () => {
 		this.props.AddNewProperty(this.state)
 	}
-
 
 	addressChanged = (e) => {
 		const {value} = e.target;
@@ -61,6 +77,7 @@ class AddNewPropertyModal extends Component {
 							label="כתובת"
 							style={{width: "100%", marginBottom: "24px"}}
 							required
+                            error={this.state.create.errors.address}
 							onChange={this.addressChanged}
 						/>
 						<br/>
@@ -73,6 +90,7 @@ class AddNewPropertyModal extends Component {
 							type="number"
 							label="מספר חדרים"
 							required
+                            error={this.state.create.errors.room}
 							style={{width: "100%", marginBottom: "24px"}}
 						/>
 						<br/>
@@ -85,6 +103,7 @@ class AddNewPropertyModal extends Component {
 							type="number"
 							label="סכום השכירות הכולל"
 							required
+							error={this.state.create.errors.rental}
 							style={{width: "100%", marginBottom: "24px"}}
 						/>
 						<br/>
@@ -101,7 +120,7 @@ class AddNewPropertyModal extends Component {
 						<br/>
 
 						<br/>
-						<Button id="createButton" variant="outlined" onClick={() => this.submit()} color="primary"
+						<Button id="createButton" variant="outlined" onClick={() => this.CheckBeforeSubmit()} color="primary"
 						        style={{marginTop: "10px"}}>
 							צור נכס
 						</Button>

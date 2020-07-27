@@ -80,14 +80,14 @@ class ProperitNavBar extends Component {
 
 	}
 	getIndexOfList(){
-		console.log('EXIST?????',this.props.chosenAssetId)
 		let c = this.props.myProperties.findIndex(a=>a.id===this.props.chosenAssetId)
+		console.log('c-',c)
 		return c===-1? null : c
 	}
 	onChooseAddress(d) {
 		let c = this.props.myProperties[d]
 		this.props.chooseAsset(c.id)
-		this.props.history.push("/properties/" + c.id);
+		this.props.history.push("/properties/" + c.id+'/payments');
 	}
 }
 

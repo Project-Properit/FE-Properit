@@ -19,6 +19,7 @@ function* logout() {
     localStorage.removeItem('isOwner')
     localStorage.removeItem('chosenMode')
     localStorage.removeItem('firstName')
+    localStorage.removeItem('lastName')
 
     // redirect to the /login screen
     yield put(push('login'));
@@ -31,6 +32,7 @@ function* loginFlow(email, password) {
     let userId
     let isOwner
     let firstName
+    let lastName
     let isTenant
     let tenantAssetId
     try {
@@ -41,11 +43,12 @@ function* loginFlow(email, password) {
         token = response.token
         userId = response.user_id
         firstName = response.first_name
+        lastName = response.last_name
         isOwner = response.is_owner
         isTenant = response.is_tenant
         tenantAssetId = response.tenant_asset_id === 'None' || response.tenant_asset_id === null ? null : response.tenant_asset_id
         // inform Redux to set our client token, this is non blocking so...
-        yield put(setClient(token, userId, isOwner, isTenant, firstName, tenantAssetId))
+        yield put(setClient(token, userId, isOwner, isTenant, firstName, lastName, tenantAssetId))
 
         // .. also inform redux that our login was successful
         yield put({type: LOGIN.LOGIN_SUCCESS})
@@ -54,6 +57,7 @@ function* loginFlow(email, password) {
         localStorage.setItem('token', (token))
         localStorage.setItem('userId', userId)
         localStorage.setItem('firstName', firstName)
+        localStorage.setItem('lastName', lastName)
         localStorage.setItem('isOwner', isOwner)
         localStorage.setItem('isTenant', isTenant)
         localStorage.setItem('assetId', tenantAssetId)

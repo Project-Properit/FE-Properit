@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./PropertyCard.scss"
+import Button from "@material-ui/core/Button";
 
 export const PropertyCard = props => {
 	const prop = props.property;
@@ -14,12 +15,13 @@ export const PropertyCard = props => {
 					<span className="tenants">{prop.tenant_list.length || 0} tenants</span>
 					<h2> {prop.address}</h2>
 					<p>{prop.comments}</p>
-					<Card.Link as={Link} to={props.groupsPaymentsUrl} className="value">Show all Payments</Card.Link>
-					<Card.Link as={Link} to={props.infoUrl} className="value">Choose</Card.Link>
+					<Button onClick={()=>props.onChoose(prop.id)}>Choose</Button>
+					{/*<Card.Link as={Link} to={props.groupsPaymentsUrl} className="value">Show all Payments</Card.Link>*/}
+					{/*<Card.Link as={Link} to={props.infoUrl} className="value">Choose</Card.Link>*/}
 				</div>
 				<div className="propCard-stats">
 					<div className="stat">
-						<Card.Link as={Link} to={props.editUrl} className="value">Info</Card.Link>
+						<Card.Link as={Link} to={props.editUrl} className="value">Edit</Card.Link>
 					</div>
 				</div>
 			</div>
