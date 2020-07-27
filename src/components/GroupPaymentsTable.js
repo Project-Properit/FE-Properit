@@ -109,10 +109,14 @@ function Row(props) {
 
 export default function CollapsibleTable(props) {
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{boxShadow: "2px 2px 13px darkgrey",
+            width: "70%",
+            marginTop: "50px",
+            borderRadius: "10px"
+        }}>
             <Table aria-label="collapsible table">
                 <TableHead>
-                    <TableRow>
+                    <TableRow style={{backgroundColor: "rgba(211, 203, 195, 0.42)"}}>
                         <TableCell/>
                         <TableCell>Name </TableCell>
                         <TableCell align="right">Collector</TableCell>
