@@ -8,6 +8,8 @@ import logo from "../images/logoWhite .jpg";
 import SimpleListMenu from "./addressChoose";
 import { chooseAsset, loadProperties } from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SettingsIcon from '@material-ui/icons/Settings';
+import Tooltip from "@material-ui/core/Tooltip";
 
 class ProperitNavBar extends Component {
 	componentDidMount() {
@@ -67,10 +69,11 @@ class ProperitNavBar extends Component {
 
 					</Nav>
 					<form className="form-inline">
+						<Nav.Link onClick={() => this.handleChangeSettings(this.props.userId)} style={{padding:"0.5rem" ,color: "rgba(255,255,255,.5)"}}><SettingsIcon/></Nav.Link>
 						{this.props.myProperties.length >0 &&
 						<SimpleListMenu className="mr-sm-2"  choosenFunc={(d) => this.onChooseAddress(d)}
 										options={this.props.myProperties.map(a => a.address)} choosenIndex={this.getIndexOfList()}/>}
-						<Nav.Link onClick={() => this.props.logout()} style={{color: "rgba(255,255,255,.5)"}}><ExitToAppIcon/> Logout</Nav.Link>
+						<Nav.Link onClick={() => this.props.logout()} style={{padding:"0.5rem" ,color: "rgba(255,255,255,.5)"}}><ExitToAppIcon/> Logout</Nav.Link>
 					</form>
 					</Navbar.Collapse>
 				</Navbar>
@@ -78,6 +81,9 @@ class ProperitNavBar extends Component {
 		}
 		return (<div></div>)
 
+	}
+	handleChangeSettings(userId){
+		this.props.history.push("/settings/" + userId);
 	}
 	getIndexOfList(){
 		console.log('EXIST?????',this.props.chosenAssetId)
