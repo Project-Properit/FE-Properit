@@ -2,27 +2,39 @@ import Card from "react-bootstrap/Card";
 import React from "react";
 import { Link } from "react-router-dom";
 import "./PropertyCard.scss"
-import Button from "@material-ui/core/Button";
+import home2 from '../images/home2.jpg'
+import {Button, IconButton } from "@material-ui/core";
+import {Add, Edit, OpenInBrowser} from "@material-ui/icons";
+import Tooltip from '@material-ui/core/Tooltip';
 
 export const PropertyCard = props => {
 	const prop = props.property;
 	const propImage = prop.img_url ? prop.img_url : 'https://properit.s3.amazonaws.com/house1.jpg'
+
 	return (
 		<div className="propBody">
 			<div className="propCard">
-				{/*<img src={propImage} className="propCard-image"/>*/}
+				<div className="imgBox">
+					<h2> {prop.address}</h2>
+					<img className="propImg" src="https://properit.s3.amazonaws.com/house1.jpg"/>
+				</div>
+				{/*<div className="details">*/}
 				<div className="propCard-text">
-					<span className="tenants">{prop.tenant_list.length || 0} tenants</span>
+					{/*<span className="tenants">{prop.tenant_list.length || 0} tenants</span>*/}
+					<span>{prop.tenant_list.length || 0} tenants</span>
 					<h2> {prop.address}</h2>
 					<p>{prop.comments}</p>
-					<Button onClick={()=>props.onChoose(prop.id)}>Choose</Button>
-					{/*<Card.Link as={Link} to={props.groupsPaymentsUrl} className="value">Show all Payments</Card.Link>*/}
-					{/*<Card.Link as={Link} to={props.infoUrl} className="value">Choose</Card.Link>*/}
-				</div>
-				<div className="propCard-stats">
-					<div className="stat">
-						<Card.Link as={Link} to={props.editUrl} className="value">Edit</Card.Link>
-					</div>
+					<Tooltip title="Edit The Property" placement="right-start">
+						<Card.Link as={Link} to={props.editUrl} className="EditValue"><Edit/></Card.Link>
+					</Tooltip>
+					{/*<div className="propCard-stats">*/}
+					{/*	<div className="stat">*/}
+					{/*		<Card.Link as={Link} to={props.infoUrl} className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>*/}
+					{/*	</div>*/}
+					{/*</div>*/}
+					<Button variant="outlined" color="primary">
+						<Card.Link as={Link} to={props.infoUrl} className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
+					</Button>
 				</div>
 			</div>
 

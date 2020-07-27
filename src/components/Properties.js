@@ -26,8 +26,8 @@ class Properties extends Component {
 			<div id="userContent">
 
 				<Container className="App">
-					<header style={{marginBottom: '4rem', textAlign: 'center'}} className="App-header">
-						<h2> Properties - {userId}</h2>
+					<header style={{marginBottom: '2rem', textAlign: 'center'}} className="App-header">
+						<h2> Properties {userId}</h2>
 					</header>
 
 					<CreatProperties/>

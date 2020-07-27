@@ -18,7 +18,7 @@ class Payments extends Component {
     render() {
         const {propId} = this.props.match.params
         return (
-            <div>
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <Loading loading={this.props.isLoading}/>
                 <CollapsibleTable
                     loadPayments={this.props.loadPayments} userId={this.props.userId} propId={propId}

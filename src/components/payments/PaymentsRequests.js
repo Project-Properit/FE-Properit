@@ -35,7 +35,7 @@ class PaymentsRequests extends Component {
     render() {
         let {propId} = this.props.match.params
         return (
-            <div id="documentsContainer">
+            <div id="documentsContainer" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 {this.state.newDocumentModalOpened ?
                     <CreateGroupPayments
                         userId={this.props.userId}

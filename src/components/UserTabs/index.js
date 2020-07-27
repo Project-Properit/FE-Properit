@@ -49,7 +49,7 @@ const UserTabs = () => {
     return (
         <div className="user-dashboard">
             <div className="tab-bar">
-                <Paper elevation={1}>
+                <Paper class="MuiPaper-root MuiPaper-rounded" elevation={1} style={{backgroundColor:"initial"}}>
                     <Tabs value={value} onChange={handleChange} variant="fullWidth" indicatorColor="primary">
                         <Tab label={(<div>{"קבוצות התשלום שיצרתי"}
                             <Badge color="error" badgeContent={groupPaymentsCount}>
