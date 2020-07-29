@@ -128,22 +128,21 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments, isPeriod, months) {
     const body = isPeriod ? JSON.stringify({title, description, is_public, amount, payments, isPeriod, months}):
         JSON.stringify({title, description, is_public, amount, payments})
-	console.log(body)
-    // const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
-    // return fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'x-access-tokens':localStorage.getItem('token')||''
-    //     },
-    //     body: body
-    // })
-    //     .then(handleApiErrors) // we'll make this in a second
-    //     .then(response => response.json())
-    //     .then(json => json)
-    //     .catch((error) => {
-    //         throw error
-    //     })
+    const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-tokens':localStorage.getItem('token')||''
+        },
+        body: body
+    })
+        .then(handleApiErrors) // we'll make this in a second
+        .then(response => response.json())
+        .then(json => json)
+        .catch((error) => {
+            throw error
+        })
 }
 
 function deleteGroupPayments(assetId, groupPaymentsId) {

@@ -18,6 +18,11 @@ const myPaymentsReducer = (state = {myPayments:[]}, action) => {
             error:action.error
 
         };
+        case MY_PAYMENTS.PAY: return {
+        ...state,
+            isLoading:true,
+            myPayments:[]
+        };
         default: return state
 
     }

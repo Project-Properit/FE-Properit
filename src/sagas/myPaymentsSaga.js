@@ -1,9 +1,9 @@
-import { call, put } from 'redux-saga/effects';
+import {call, put} from 'redux-saga/effects';
 
-import { setError, setPayments } from '../actions/MyPaymentsActions';
-import { MY_PAYMENTS } from '../constants';
-import { fetchPayments } from '../api';
-import { actionChannel, take } from "@redux-saga/core/effects";
+import {setError, setPayments} from '../actions/MyPaymentsActions';
+import {GROUPSPAYMENTS, MY_PAYMENTS} from '../constants';
+import {fetchPayments, payApi} from '../api';
+import {actionChannel, take, takeLatest} from "@redux-saga/core/effects";
 
 export function* handlePaymentsLoad(action) {
 	try {
@@ -22,4 +22,17 @@ export default function* watchPaymentsLoad() {
 		const action = yield take(subChannel);
 		yield call(handlePaymentsLoad, action)
 	}
+}
+function* handlePayPayment(action) {
+	try {
+		const {paymentId} = action
+		yield call(payApi, paymentId)
+		yield call(handlePaymentsLoad, action)
+	} catch (error) {
+		yield put({type: GROUPSPAYMENTS.CREATE_ERROR, error})
+	}
+}
+
+export function* payPaymentWatcher() {
+	yield takeLatest(MY_PAYMENTS.PAY, handlePayPayment); // see details what is REQUEST param below
 }

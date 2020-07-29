@@ -1,9 +1,13 @@
-import React from "react";
+import React, {Component} from 'react';
 import {Badge, Paper, Tab, Tabs} from "@material-ui/core";
 import "./index.css";
 import Box from "@material-ui/core/Box";
 import PaymentsRequests from "../payments/PaymentsRequests";
 import Payments from "../payments/Payments";
+import {loadGroupsPayments} from "../../actions/groupsPaymentsActions";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
+import {loadPayments} from "../../actions/MyPaymentsActions";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -31,49 +35,76 @@ function a11yProps(index) {
     };
 }
 
-const UserTabs = () => {
-    const [value, setValue] = React.useState(0);
-    const [groupPaymentsCount, setGroupPaymentsCount] = React.useState(0);
-    const [paymentsCount, setPaymentsCount] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+class UserTabs extends Component {
+    constructor() {
+        super();
+        this.state = {value: 0};
+    }
+    componentDidMount() {
+        const {propId} = this.props.match.params
+        this.props.loadPayments(propId, this.props.userId)
+        this.props.loadGroupsPayments(propId, this.props.userId);
+    }
+    handleChange = (event, newValue) => {
+        this.setState({value:newValue});
     };
+    getUnpayPayments = () => {
+        let count = 0;
+        this.props.myPayments.map(payment => {
+            console.log(payment.my_payment)
+            if(payment.my_payment.is_open)count=count+1
+        })
+        return count
+    }
 
-    const setGroupPaymentsCountMethod = (count) => {
-        setGroupPaymentsCount(count)
-    }
-    const setPaymentsCountMethod = (count) => {
-        setPaymentsCount(count)
-    }
-    return (
-        <div className="user-dashboard">
-            <div className="tab-bar">
-                <Paper class="MuiPaper-root MuiPaper-rounded" elevation={1} style={{backgroundColor:"initial"}}>
-                    <Tabs value={value} onChange={handleChange} variant="fullWidth" indicatorColor="primary">
-                        <Tab label={(<div>{"קבוצות התשלום שיצרתי"}
-                            <Badge color="error" badgeContent={groupPaymentsCount}>
-                            </Badge>
-                        </div>)}
-                             {...a11yProps(0)}
-                        />
-                        <Tab label={(<div>{"התשלומים שלי"}
-                            <Badge color="error" badgeContent={paymentsCount}>
-                            </Badge>
-                        </div>)}
-                             {...a11yProps(1)} />
-                    </Tabs>
-                    <TabPanel index={0} value={value}>
-                        <PaymentsRequests setGroupPaymentsCount={setGroupPaymentsCountMethod}/>
-                    </TabPanel>
-                    <TabPanel index={1} value={value}>
-                        <Payments setPaymentsCount={setPaymentsCountMethod}/>
-                    </TabPanel>
-                </Paper>
+    render() {
+        return (
+            <div className="user-dashboard">
+                <div className="tab-bar">
+                    <Paper class="MuiPaper-root MuiPaper-rounded" elevation={1} style={{backgroundColor: "initial"}}>
+                        <Tabs value={this.state.value} onS onChange={this.handleChange} variant="fullWidth"
+                              indicatorColor="primary">
+                            <Tab label={(<div>{"קבוצות התשלום שיצרתי"}
+                                <Badge color="error" badgeContent={this.props.myGroupsPayments.length}>
+                                </Badge>
+                            </div>)}
+                                 {...a11yProps(0)}
+                            />
+                            <Tab label={(<div>{"התשלומים שלי"}
+                                <Badge color="error" badgeContent={this.getUnpayPayments()}>
+                                </Badge>
+                            </div>)}
+                                 {...a11yProps(1)} />
+                        </Tabs>
+                        <TabPanel index={0} value={this.state.value}>
+                            <PaymentsRequests myGroupsPayments={this.props.myGroupsPayments}/>
+                        </TabPanel>
+                        <TabPanel index={1} value={this.state.value}>
+                            <Payments myPayments={this.props.myPayments}/>
+                        </TabPanel>
+                    </Paper>
+                </div>
             </div>
+        );
+    };
+}
 
-        </div>
-    );
-};
+const mapStateToProps = ({myGroupsPayments, myPaymentsReducer, clientReducer}) => ({
+    myGroupsPayments: myGroupsPayments.myGroupsPayments,
+    isLoadingGroups: myGroupsPayments.isLoading,
+    myPayments: myPaymentsReducer.myPayments,
+    isLoading: myPaymentsReducer.isLoading,
+    userId: clientReducer.userId,
+    error: myGroupsPayments.error,
+});
 
-export default UserTabs;
+const mapDispatchToProps = dispatch => ({
+    loadPayments: (assetId, userId) => dispatch(loadPayments(assetId, userId)),
+    loadGroupsPayments: (assetId, userId) => dispatch(loadGroupsPayments(assetId, userId))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(withRouter(UserTabs));
+
