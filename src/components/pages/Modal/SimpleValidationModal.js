@@ -17,7 +17,7 @@ export default function SimpleValidationModal(props) {
             }}
             >
                 <div>
-                    {message || "האם אתה בטוח שברצונך לבצע פעולה זו?"}
+                    {message || "Are You Sure?"}
                 </div>
                 <br />
                 <Button
@@ -25,7 +25,7 @@ export default function SimpleValidationModal(props) {
                     style={{ fontWeight: "bold", marginRight: "16px", backgroundColor: color || "#0a7ab0", color: "white" }}
                     onClick={onApprove}
                 >
-                    אשר
+                    Yes
                 </Button>
             </div>
         </MyModal>

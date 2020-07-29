@@ -22,7 +22,7 @@ const DocumentsView = (props) => {
 
 	const deleteDoc = (document) => {
 		deleteDocument(document.doc_id, propId).then(reponse => {
-			alert('הקובץ נמחק בהצלחה');
+			alert('File Successfully Deleted');
 			props.deleteDocument(document, propId);
 		});
 

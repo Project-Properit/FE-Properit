@@ -122,7 +122,7 @@ class AddNewPropertyModal extends Component {
 						<br/>
 						<Button id="createButton" variant="outlined" onClick={() => this.CheckBeforeSubmit()} color="primary"
 						        style={{marginTop: "10px"}}>
-							צור נכס
+						Create Property
 						</Button>
 					</div>
 				</MyModal>;
