@@ -32,7 +32,7 @@ export const PropertyCard = props => {
 					{/*		<Card.Link as={Link} to={props.infoUrl} className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>*/}
 					{/*	</div>*/}
 					{/*</div>*/}
-					<Button variant="outlined" color="primary">
+					<Button variant="outlined" color="primary" onClick={()=>props.onChoose()}>
 						<Card.Link as={Link} to={props.infoUrl} className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
 					</Button>
 				</div>
