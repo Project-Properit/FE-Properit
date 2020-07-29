@@ -74,7 +74,7 @@ class AddNewPropertyModal extends Component {
 						<TextField
 							value={this.state.address}
 							variant="outlined"
-							label="כתובת"
+							label="Address"
 							style={{width: "100%", marginBottom: "24px"}}
 							required
                             error={this.state.create.errors.address}
@@ -88,7 +88,7 @@ class AddNewPropertyModal extends Component {
 							variant="outlined"
 							onChange={this.roomChanged}
 							type="number"
-							label="מספר חדרים"
+							label="Room Numbers"
 							required
                             error={this.state.create.errors.room}
 							style={{width: "100%", marginBottom: "24px"}}
@@ -101,7 +101,7 @@ class AddNewPropertyModal extends Component {
 							variant="outlined"
 							onChange={this.rentalChanged}
 							type="number"
-							label="סכום השכירות הכולל"
+							label="Rent Fee"
 							required
 							error={this.state.create.errors.rental}
 							style={{width: "100%", marginBottom: "24px"}}
@@ -112,7 +112,7 @@ class AddNewPropertyModal extends Component {
 						<TextField
 							value={this.state.comments}
 							variant="outlined"
-							label="הערה"
+							label="Comments"
 							style={{width: "100%", marginBottom: "24px"}}
 							required
 							onChange={this.commentChanged}

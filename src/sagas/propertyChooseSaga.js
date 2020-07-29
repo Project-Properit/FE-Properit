@@ -3,6 +3,7 @@ import { PROPERTIES } from '../constants';
 import { actionChannel, take } from "@redux-saga/core/effects";
 
 export function* handlePropertiesChoose(action) {
+    console.log('handlePropertiesChoose')
         localStorage.setItem('chosenAssetId', action.assetId)
 }
 
