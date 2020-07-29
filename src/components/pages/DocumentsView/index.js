@@ -41,7 +41,7 @@ const DocumentsView = (props) => {
 		{
 			<Button variant="outlined" color="primary" className="createDocumentButton" onClick={openModal}>
 				<Add/>
-				הוסף מסמך
+				Add Document
 			</Button>
 		}
 		<div id="documentsList">

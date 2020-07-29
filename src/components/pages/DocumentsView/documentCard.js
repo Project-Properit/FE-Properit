@@ -39,11 +39,10 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 		</div>
 		<div className="documentData">
             <span>
-                <b>נוצר ב:</b>{" "} {moment(document.creation_date).format("HH:mm DD/MM/YYYY")}
+                <b>Created: </b>{" "} {moment(document.creation_date).format("HH:mm DD/MM/YYYY")}
             </span>
 			<div>
-				<b>קבצים מצורפים: </b>
-				<a href={document.url}>{document.url}</a>
+				<a href={document.url}><b>Your Files</b></a>
 			</div>
 		</div>
 	</div>;

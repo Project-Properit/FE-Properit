@@ -9,7 +9,7 @@ import "./filesUpload.css";
 import { connect } from "react-redux";
 import { addFiles, deleteFiles, setExistedFiles, setFiles } from "../../../actions/fielsUploadActions";
 
-const ADD_FILES_TEXT = "הוספת קבצים";
+const ADD_FILES_TEXT = "Add Files";
 const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ שתרצה להעלות";
 
 

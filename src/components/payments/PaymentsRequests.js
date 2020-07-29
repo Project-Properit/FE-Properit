@@ -52,7 +52,7 @@ class PaymentsRequests extends Component {
                             <Button variant="outlined" color="primary"
                                     className="createDocumentButton" onClick={this.openModal}
                                     disabled={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId)}>
-                                הוסף קבוצת תשלום
+                                Add Group Payment
                             </Button>
                         </div>
                     </Tooltip>

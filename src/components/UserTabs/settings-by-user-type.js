@@ -1,11 +1,11 @@
 const settingsByUserType = {
     user: {
         paymentGroups: {
-            tabLabel: "קבוצות התשלום שיצרתי",
+            tabLabel: "My Group Payments",
 
         },
         myPayments: {
-            tabLabel: "התשלומים שלי",
+            tabLabel: "My Payments",
 
         }
     },
