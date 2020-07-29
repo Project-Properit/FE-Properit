@@ -10,7 +10,7 @@ const menuItemTypes = {
     },
     professional: {
         to: "/professional",
-        text: "Call A Professional",
+        text: "Call Professional",
         Icon: Build
     },
     renters: {

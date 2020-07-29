@@ -32,6 +32,8 @@ class  App extends React.Component {
 
 
     render() {
+	    console.log('this.props.userId', this.props.userId)
+	    console.log('this.props.chosenAssetId', this.props.chosenAssetId)
 		const isLogin = this.props.token
 		const topBarHeight = TOPBAR_HEIGHT + (this.props.firstName ? ORGBAR_HEIGHT : 0);
     	const routeContentHeight = `calc(100vh - ${topBarHeight}px)`;

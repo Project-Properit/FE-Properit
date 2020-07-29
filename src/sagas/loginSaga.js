@@ -6,6 +6,8 @@ import {CLIENT, LOGIN} from '../constants'
 // So that we can modify our Client piece of state
 import {setClient, unsetClient} from '../actions/clientActions'
 import {loginApi} from "../api";
+import { setGroupsPayments } from "../actions/groupsPaymentsActions";
+import { chooseAsset } from "../actions/propertiesActions";
 
 function* logout() {
     // dispatches the CLIENT_UNSET action
@@ -71,9 +73,9 @@ function* loginFlow(email, password) {
             localStorage.setItem('chosenMode', 'tenant')
             if (tenantAssetId) {
                 yield put(push('/properties/' + tenantAssetId + '/payments'));
+                yield put(chooseAsset(tenantAssetId));
             } else {
                 yield put(push('/newUser'));
-
             }
         }
 
