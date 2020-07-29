@@ -47,7 +47,7 @@ class PaymentsRequests extends Component {
                     groupsPayments={this.props.myGroupsPayments}
                 />
                 <div>
-                    <Tooltip title={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId) ? "אין שוכרים לנכס" : "צור קבוצה חדשה"}>
+                    <Tooltip title={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId) ? "Property Has No Tenants" : "Create New Group"}>
                         <div style={{paddingTop:"20px"}}>
                             <Button variant="outlined" color="primary"
                                     className="createDocumentButton" onClick={this.openModal}
