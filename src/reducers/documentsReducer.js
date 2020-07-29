@@ -9,6 +9,7 @@ const myDocumentsReducer = (state = {myDocuments: []}, action) => {
                 myDocuments: []
             };
         case DOCUMENTS.LOAD_SUCCESS:
+            console.log(action);
             return {
                 ...state,
                 isLoading: false,

@@ -5,6 +5,7 @@ import { Add } from "@material-ui/icons";
 import NewDocumentModal from "./newDocumentModal";
 import DocumentCard from "./documentCard";
 import "./documentsView.css";
+import {deleteDocument} from "../../../api";
 
 
 const DocumentsView = (props) => {
@@ -17,15 +18,23 @@ const DocumentsView = (props) => {
 	const closeModal = useCallback(() => {
 		setNewDocumentModalOpened(false);
 	}, []);
-	const deleteDoc = (ii) => {
+	const propId = window.location.pathname.replace('/properties/','').replace('/documents','');
+
+	const deleteDoc = (document) => {
+		deleteDocument(document.doc_id, propId).then(reponse => {
+			alert('הקובץ נמחק בהצלחה');
+			props.deleteDocument(document, propId);
+		});
+
 	}
 
 
 	return <div id="documentsContainer">
 		{
 			newDocumentModalOpened ?
-				<NewDocumentModal closeHandler={closeModal}
-					// createDocumentHandler={(document) => setDocuments([document])}
+				<NewDocumentModal
+					closeHandler={closeModal}
+					createDocumentHandler={props.createNewDocument}
 				/>
 				: ""
 		}
@@ -36,13 +45,13 @@ const DocumentsView = (props) => {
 			</Button>
 		}
 		<div id="documentsList">
-			{props.documents&&
+			{props.documents &&
 				Object.keys(props.documents).map(function (key, index) {
 					return (
 						<DocumentCard
 							key={index}
 							document={props.documents[key]}
-							deleteHandler={(ii) => deleteDoc(ii)}
+							deleteHandler={() => deleteDoc(props.documents[key])}
 						/>
 					)
 				})

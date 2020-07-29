@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import {uploadFile} from '../../../api.js';
 import { AttachFile } from "@material-ui/icons";
 import { Typography } from "@material-ui/core";
 import Files from "react-files";
@@ -13,7 +14,6 @@ const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ �
 
 
 function FilesUpload(props) {
-	const propId = window.location.pathname.replace('/properties/','').replace('/documents','')
 	const {maxFiles, existedFiles, setExistedFiles} = props;
 
 	const [files, setFiles] = useState([]);
@@ -28,19 +28,9 @@ function FilesUpload(props) {
 	const onFilesChange = React.useCallback(newFiles => {
 		newFiles[newFiles.length - 1].image = ''
 		setNewFiles([...newFiles]);
-		const formData = new FormData();
-		formData.append('fileName', newFiles[newFiles.length - 1]);
-		axios.patch(`${process.env.REACT_APP_API_URL}/assets/${propId}/documents`, formData, {
-			headers: {
-				'x-access-tokens': localStorage.getItem('token') || '',
-				"Content-Type": "multipart/form-data"
-			}
-		}).then(response => {
-			newFiles[newFiles.length - 1].image = response.data.document_url || ''
-			setNewFiles([...newFiles])
-		}).catch((e) => {
-		})
-	}, [setNewFiles]);
+		// const formData = new FormData();
+		// formData.append('fileName', newFiles[newFiles.length - 1]);
+	}, [setNewFiles, process.env]);
 
 	const deleteFile = React.useCallback(fileId => {
 		const deletedFile = files.find(file => file.id.toString() === fileId.toString());

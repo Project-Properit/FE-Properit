@@ -27,12 +27,24 @@ const setError = error => ({
     error,
 });
 
+const addDocument = document => ({
+    type: PROPERTY.ADD_DOCUMENT,
+    document
+});
+
+const deleteDocument = document => ({
+    type: PROPERTY.DELETE_DOCUMENT,
+    document
+});
+
 const updatePropertyFormAction = createFormAction('UpdateProperty');
 const createPropertyFormAction = createFormAction('CreateProperty');
 export {
     loadProperty,
     setProperty,
     setError,
+    addDocument,
+    deleteDocument,
     clearProperty,
     removeProperty,
     addNewProperty,

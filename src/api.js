@@ -1,4 +1,5 @@
 import { handleApiErrors } from "./lib/api-errors";
+import axios from "axios";
 
 const TIMEOUT = 1000;
 
@@ -165,9 +166,31 @@ const fetchUser = async (userId) => {
     const url = `${window._env_.REACT_APP_API_URL}/users/` + userId;
     return apiCall(url, 'GET')
 }
+
+const uploadFile = async (formData, propId) => {
+
+	return axios.patch(
+		`${window._env_.REACT_APP_API_URL}/assets/${propId}/documents`, formData, {
+			headers: {
+				'x-access-tokens': localStorage.getItem('token') || '',
+				"Content-Type": "multipart/form-data"
+			}
+	})
+
+}
+
+const deleteDocument = async (documentId, propId) => axios.delete(
+		`${window._env_.REACT_APP_API_URL}/assets/${propId}/documents/${documentId}`, {
+
+		headers: {
+		'x-access-tokens': localStorage.getItem('token') || ''
+	}
+});
 	export {
 		fetchProperties,
 		fetchDocuments,
+		deleteDocument,
+		uploadFile,
 		loginApi,
 		fetchProperty,
 		updatePropApi,

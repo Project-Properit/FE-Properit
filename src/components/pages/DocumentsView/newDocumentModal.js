@@ -4,6 +4,7 @@ import MyModal from "../Modal/index";
 import FilesUpload from "../documents/filesUpload";
 
 import { TextField, Button } from "@material-ui/core";
+import {uploadFile} from "../../../api";
 
 
 const validateDocument = (name, files) => ({
@@ -14,7 +15,7 @@ const validateDocument = (name, files) => ({
     }
 });
 
-const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
+const NewDocumentModal = ({ closeHandler, createDocumentHandler, propId }) => {
     const [name, setName] = useState("");
     const [files, setFiles] = useState([]);
     const [errors, setErrors] = useState({});
@@ -28,7 +29,14 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler }) => {
         const trimmedName = name !== null ? name.trim() : name;
         const validation = validateDocument(trimmedName, files);
         if (validation.isValid) {
-            // createDocumentHandler({ name: trimmedName, files});
+            const propId = window.location.pathname.replace('/properties/','').replace('/documents','');
+            const formData = new FormData();
+            formData.append(trimmedName, files[0]);
+            uploadFile(formData, propId).then(response => {
+                createDocumentHandler(response.data[0]);
+                alert('הקובץ הועלה בהצלחה')
+            }).catch((e) => {
+            })
             closeHandler();
             reset();
         } else {

@@ -15,7 +15,7 @@ const   myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues
         case PROPERTY.LOAD_SUCCESS:
             return {
             ...state,
-            isLoading:false,
+            isLoading: false,
             myProperty:action.myProperty[0],
             initialValues:{
                 assetId:action.myProperty[0].id,
@@ -36,6 +36,22 @@ const   myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues
             initialValues:null
 
         };
+        case PROPERTY.ADD_DOCUMENT:
+            return {
+                ...state,
+                myProperty: {
+                    ...state.myProperty,
+                    documents: [...state.myProperty.documents, action.document]
+                }
+            }
+        case PROPERTY.DELETE_DOCUMENT:
+            return {
+                ...state,
+                myProperty: {
+                    ...state.myProperty,
+                    documents: state.myProperty.documents.filter(doc => doc.doc_id !== action.document.doc_id)
+                }
+            }
         default: return state
 
     }
