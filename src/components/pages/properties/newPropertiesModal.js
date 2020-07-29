@@ -54,7 +54,7 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
             <TextField
                 value={address || ""}
                 variant="outlined"
-                label="כתובת"
+                label="Address"
                 style={{ width: "100%", marginBottom: "24px" }}
                 required
                 error={errors.address}
