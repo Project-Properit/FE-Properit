@@ -175,7 +175,7 @@ class CreateGroupPayments extends Component {
                 <MyModal open setOpen={this.props.closeHandler} closeMe={this.props.closeHandler}
                          style={{width: "30%"}}>
                     <div style={{textAlign: 'center'}}>
-                        <FadeIn className="register-fade">
+                        <FadeIn className="register-fade group-payment">
                             <div className="register-box" style={{background: "whitesmoke"}}>
                                 <form>
                                     <TextField
@@ -236,10 +236,10 @@ class CreateGroupPayments extends Component {
                                                 ValueLabelComponent={this.valueLabelComponent}
                                         />
                                     </div>:null}
-                                    <div style={{display: "flex"}}>
+                                    <div style={{display: "flex", flexDirection: "column"}}>
                                         {this.props.myProperty.tenant_list.map(tenant => (
                                             tenant.id !== this.props.userId ?
-                                                <div key={tenant.id}>
+                                                <div key={tenant.id} style={{marginBottom: 10}}>
                                                     <Card style={{minWidth: 300}}>
                                                         <CardContent>
                                                             <FormControlLabel

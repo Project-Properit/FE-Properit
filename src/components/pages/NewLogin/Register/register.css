@@ -8,6 +8,17 @@
     /*height: calc(100vh - 64px);*/
     height: 100%;
 }
+
+
+.group-payment {
+    background: none !important;
+}
+
+.group-payment .register-box {
+    margin: 0 !important;
+    width: 100%;
+}
+
 .register-box {
     display: flex;
     flex-direction: column;
