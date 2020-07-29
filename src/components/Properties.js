@@ -36,7 +36,7 @@ class Properties extends Component {
 					<Row>
 						{this.props.myProperties.map(prop => (
 							<PropertyCard
-								onChoose={this.onChooseProperty}
+								onChoose={()=>this.onChooseProperty(prop.id)}
 								infoUrl={this.onInfoProperty(prop.id)}
 								editUrl={this.onEditProperty(prop.id)}
 								groupsPaymentsUrl={this.onGroupsPayments(prop.id)}
