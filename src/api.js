@@ -63,7 +63,7 @@ const createPropApi = async (propertyObject) => {
 };
 
 const payApi = async (payId) => {
-	const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}`;
+	const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}/pay`;
     return fetch(url, {
         method: 'PATCH',
         headers: {

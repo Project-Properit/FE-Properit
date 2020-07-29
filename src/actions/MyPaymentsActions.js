@@ -1,4 +1,4 @@
-import { MY_PAYMENTS } from '../constants';
+import {MY_PAYMENTS} from '../constants';
 
 const loadPayments = (assetId, userId) => ({
     type: MY_PAYMENTS.LOAD,
@@ -16,8 +16,20 @@ const setError = error => ({
     error,
 });
 
+const pay = function pay(all) {
+    const {paymentId, assetId, userId} = all
+    return {
+        type: MY_PAYMENTS.PAY,
+        paymentId,
+        assetId,
+        userId
+    }
+}
+
+
 export {
     loadPayments,
     setPayments,
     setError,
+    pay
 };
