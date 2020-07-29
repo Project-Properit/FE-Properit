@@ -71,7 +71,7 @@ class Login extends Component {
 				 {/*<div className="login-page">*/}
 				<div className="login-box">
 					<img src={avatar} className="avatar"/>
-					<h1>Login Here</h1>
+					<h1>Login</h1>
 					<form className="login-panel">
 						<TextField
 							required
@@ -88,7 +88,7 @@ class Login extends Component {
 							type={this.state.showPassword ? "text" : "password"}
 							value={this.state.password}
 							onChange={this.handlePasswordChange}
-							label="סיסמא"
+							label="Password"
 							required
 							InputProps={{
 								endAdornment: (
@@ -120,7 +120,7 @@ class Login extends Component {
 							onClick={() => this.submit()}
 							style={{fontWeight: "bold", fontSize: "24px"}}
 						>
-							הכנס למערכת
+							Login
 						</Button>
 						{/*<div style={{marginTop: '20px'}}>*/}
 							<Typography className="item">

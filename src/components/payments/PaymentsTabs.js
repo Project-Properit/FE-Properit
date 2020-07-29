@@ -15,7 +15,7 @@ const PaymentsTabs = () => {
                         <FadeIn>
                             <div >
                                 <div style={{display:"flex",justifyContent:"center"}}>
-                                    <div >{"קבוצות התשלום שיצרתי"}</div>
+                                    <div >{"My Payment Groups"}</div>
                                 </div>
                                 <PaymentsRequests setGroupPaymentsCount={()=>{}}/>
                             </div>

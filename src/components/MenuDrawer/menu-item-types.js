@@ -5,22 +5,22 @@ import PaymentIcon from '@material-ui/icons/Payment';
 const menuItemTypes = {
     payments: {
         to: "/payments",
-        text: "תשלומים",
+        text: "Payments",
         Icon: PaymentIcon
     },
     professional: {
         to: "/professional",
-        text: "הזמנת בעל מקצוע",
+        text: "Request A Professional",
         Icon: Build
     },
     renters: {
         to: "/renters",
-        text: "מידע שוכרים",
+        text: "My Renters",
         Icon: GroupAdd
     },
     documents: {
         to: "/documents",
-        text: "מסמכים",
+        text: "My Documents",
         Icon: InsertDriveFile
     },
 };

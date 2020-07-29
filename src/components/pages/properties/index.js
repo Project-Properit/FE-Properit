@@ -29,7 +29,7 @@ const DocumentsView = (props) => {
         {
             <Button variant="outlined" color="primary" className="createPropertiesButton" onClick={openModal}>
                 <Add/>
-                הוסף נכס
+                Add Property
             </Button>
         }
     </div>;
