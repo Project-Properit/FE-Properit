@@ -58,14 +58,14 @@ function GroupRow(props) {
                     {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                 </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell align="center" component="th" scope="row">
                     {row.title}
                 </TableCell>
-                <TableCell align="right">{row.owner.first_name + ' ' + row.owner.last_name}</TableCell>
-                <TableCell align="right">{row.amount}</TableCell>
-                <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.creation_date}</TableCell>
-                <TableCell>
+                <TableCell align="center">{row.owner.first_name + ' ' + row.owner.last_name}</TableCell>
+                <TableCell align="center">{row.amount}</TableCell>
+                <TableCell align="center">{row.description}</TableCell>
+                <TableCell align="center">{row.creation_date}</TableCell>
+                <TableCell align="center">
                     <Tooltip title={isDeletable() ? "לא ניתן למחוק. לפחות תשלום אחד אושר" : "מחק קבוצת תשלום זו"}>
                         <div>
                             <IconButton disabled={isDeletable()} onClick={openModal}>
@@ -85,21 +85,21 @@ function GroupRow(props) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell>Amount</TableCell>
-                                        <TableCell align="right">Status</TableCell>
-                                        <TableCell>Paid at</TableCell>
+                                        <TableCell align="center">Name</TableCell>
+                                        <TableCell align="center">Amount</TableCell>
+                                        <TableCell align="center">Status</TableCell>
+                                        <TableCell align="center">Paid at</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>{row.participants.map((historyRow) => (
                                     <TableRow key={historyRow.id}>
-                                        <TableCell component="th" scope="row">
+                                        <TableCell align="center" component="th" scope="row">
                                             {historyRow.first_name + ' ' + historyRow.last_name}
                                         </TableCell>
-                                        <TableCell>{historyRow.amount}</TableCell>
-                                        <TableCell align="right">{historyRow.is_open ? 'Open' : 'Close'}
+                                        <TableCell align="center">{historyRow.amount}</TableCell>
+                                        <TableCell align="center">{historyRow.is_open ? 'Open' : 'Close'}
                                         </TableCell>
-                                        <TableCell>{historyRow.when_payed}</TableCell>
+                                        <TableCell align="center">{historyRow.when_payed}</TableCell>
                                     </TableRow>
                                 ))}
                                 </TableBody>
@@ -125,12 +125,12 @@ export default function GroupsCollapsibleTable(props) {
                 <TableHead>
                     <TableRow style={{backgroundColor: "rgba(211, 203, 195, 0.42)"}}>
                         <TableCell/>
-                        <TableCell>Name </TableCell>
-                        <TableCell align="right">Collector</TableCell>
-                        <TableCell align="right">Amount</TableCell>
-                        <TableCell align="right">description</TableCell>
-                        <TableCell align="right">Creation Time</TableCell>
-                        <TableCell>
+                        <TableCell align="center">Name </TableCell>
+                        <TableCell align="center">Collector</TableCell>
+                        <TableCell align="center">Amount</TableCell>
+                        <TableCell align="center">description</TableCell>
+                        <TableCell align="center">Creation Time</TableCell>
+                        <TableCell align="center">
                         </TableCell>
                     </TableRow>
                 </TableHead>

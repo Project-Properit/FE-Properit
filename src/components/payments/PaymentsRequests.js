@@ -18,10 +18,6 @@ class PaymentsRequests extends Component {
     componentDidMount() {
         let {propId} = this.props.match.params
         this.props.loadProperty(propId);
-        this.props.loadGroupsPayments(propId, this.props.userId);
-    }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.myGroupsPayments) this.props.setGroupPaymentsCount(this.props.myGroupsPayments.length)
     }
 
     openModal = () => {
@@ -86,7 +82,6 @@ const mapStateToProps = ({myGroupsPayments, myPropertyReducer, clientReducer}) =
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadGroupsPayments: (assetId, userId) => dispatch(loadGroupsPayments(assetId, userId)),
     loadProperty: (assetId) => dispatch(loadProperty(assetId)),
     deleteGroupPayments: (userId, assetId, group_payments_id) => dispatch(deleteGroupPayments(userId, assetId, group_payments_id))
 });

@@ -40,9 +40,9 @@ function Row(props) {
     }, []);
 
     const handlePay = () => {
-        payApi(row.my_payment.payment_id)
+        let payObject = {paymentId:row.my_payment.payment_id, assetId:props.propId, userId:props.userId}
+        props.payMethod(payObject)
         closeModal()
-        props.loadPayments(props.propId, props.userId)
     }
 
     const classes = useRowStyles();
@@ -61,11 +61,11 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.title}
                 </TableCell>
-                <TableCell align="right">{row.owner.first_name + ' ' + row.owner.last_name}</TableCell>
-                <TableCell align="right">{row.my_payment.amount}</TableCell>
-                <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.creation_date}</TableCell>
-                <TableCell align="right">{row.my_payment.is_open ?
+                <TableCell align="center">{row.owner.first_name + ' ' + row.owner.last_name}</TableCell>
+                <TableCell align="center">{row.my_payment.amount}</TableCell>
+                <TableCell align="center">{row.description}</TableCell>
+                <TableCell align="center">{row.creation_date}</TableCell>
+                <TableCell align="center">{row.my_payment.is_open ?
                     <Button onClick={openModal} color="primary">
                         Pay
                     </Button> : `Paid at ${row.my_payment.when_payed}`}</TableCell>
@@ -81,20 +81,20 @@ function Row(props) {
                                 <Table size="small" aria-label="purchases">
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Name</TableCell>
-                                            <TableCell>Amount</TableCell>
-                                            <TableCell align="right">Status</TableCell>
+                                            <TableCell align="center">Name</TableCell>
+                                            <TableCell align="center">Amount</TableCell>
+                                            <TableCell align="center">Status</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {row.participants.map((historyRow) => (
                                             <TableRow key={historyRow.id}>
-                                                <TableCell component="th" scope="row">
+                                                <TableCell align="center" component="th" scope="row">
                                                     {historyRow.first_name + ' ' + historyRow.last_name}
                                                 </TableCell>
-                                                <TableCell>{historyRow.amount}</TableCell>
+                                                <TableCell align="center">{historyRow.amount}</TableCell>
                                                 <TableCell
-                                                    align="right">{historyRow.is_open ? 'Open' : 'Closed'}</TableCell>
+                                                    align="center">{historyRow.is_open ? 'Open' : 'Closed'}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>
@@ -109,7 +109,8 @@ function Row(props) {
 
 export default function CollapsibleTable(props) {
     return (
-        <TableContainer component={Paper} style={{boxShadow: "2px 2px 13px darkgrey",
+        <TableContainer component={Paper} style={{
+            boxShadow: "2px 2px 13px darkgrey",
             width: "70%",
             marginTop: "50px",
             borderRadius: "10px"
@@ -118,18 +119,18 @@ export default function CollapsibleTable(props) {
                 <TableHead>
                     <TableRow style={{backgroundColor: "rgba(211, 203, 195, 0.42)"}}>
                         <TableCell/>
-                        <TableCell>Name </TableCell>
-                        <TableCell align="right">Collector</TableCell>
-                        <TableCell align="right">Amount</TableCell>
-                        <TableCell align="right">description</TableCell>
-                        <TableCell align="right">Creation Time</TableCell>
-                        <TableCell align="right">Status</TableCell>
+                        <TableCell align="center">Name </TableCell>
+                        <TableCell align="center">Collector</TableCell>
+                        <TableCell align="center">Amount</TableCell>
+                        <TableCell align="center">description</TableCell>
+                        <TableCell align="center">Creation Time</TableCell>
+                        <TableCell align="center">Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {props.groupPayments.map((groupPayment) => (
                         <Row key={groupPayment.id} row={groupPayment} loadPayments={props.loadPayments}
-                             propId={props.propId} userId={props.userId}/>
+                             payMethod={props.payMethod} propId={props.propId} userId={props.userId}/>
                     ))}
                 </TableBody>
             </Table>
