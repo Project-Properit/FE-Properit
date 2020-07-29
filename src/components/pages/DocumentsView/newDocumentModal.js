@@ -34,7 +34,7 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler, propId }) => {
             formData.append(trimmedName, files[0]);
             uploadFile(formData, propId).then(response => {
                 createDocumentHandler(response.data[0]);
-                alert('הקובץ הועלה בהצלחה')
+                alert('File Successfully uploaded')
             }).catch((e) => {
             })
             closeHandler();
@@ -49,7 +49,7 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler, propId }) => {
             <TextField
                 value={name || ""}
                 variant="outlined"
-                label="שם"
+                label="Name"
                 style={{ width: "100%", marginBottom: "24px" }}
                 required
                 error={errors.name}
@@ -67,7 +67,7 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler, propId }) => {
                 errors.files ? <div style={{ marginTop: "10px", color: "red" }}>{errors.files}</div> : ""
             }
             <Button id="createButton" variant="outlined" onClick={createDocument} color="primary" style={{ marginTop: "10px" }}>
-                צור מסמך
+                Create Document
             </Button>
         </div>
     </MyModal>;

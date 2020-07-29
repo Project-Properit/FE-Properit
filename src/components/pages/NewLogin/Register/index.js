@@ -180,7 +180,7 @@ class Signup extends Component {
 									type={"password"}
 									value={this.state.password}
 									onChange={this.passwordTypeChanged}
-									label="סיסמא"
+									label="Password"
 									required
 									InputProps={{
 										endAdornment: (
@@ -261,7 +261,7 @@ class Signup extends Component {
 									style={{fontWeight: "bold", fontSize: "24px"}}
 									onClick={() => this.submit()}
 								>
-									צור משתמש
+								Create User
 								</Button>
 								{!requesting && !successful && (
 									<Typography className="item">

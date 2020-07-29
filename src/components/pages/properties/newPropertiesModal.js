@@ -110,7 +110,7 @@ const NewPropertiesModal = ({ closeHandler, createProperiesHandler }) => {
 
             <br />
             <Button id="createButton" variant="outlined" onClick={createProperties} color="primary" style={{ marginTop: "10px" }}>
-                צור נכס
+              Create Property
             </Button>
         </div>
     </MyModal>;

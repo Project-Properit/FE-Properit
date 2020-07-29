@@ -108,7 +108,7 @@ class Signup extends Component {
                                   variant="outlined"
                                   type={"password"}
                                   value={""}
-                                  label="סיסמא"
+                                  label="Password"
                                   required
                                   InputProps={{
                                       endAdornment: (
@@ -134,7 +134,7 @@ class Signup extends Component {
                               variant="contained"
                               style={{ fontWeight: "bold", fontSize: "24px" }}
                           >
-                              צור משתמש
+                              Create User
                           </Button>
                       </div>
                   </FadeIn>

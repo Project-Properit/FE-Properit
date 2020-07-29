@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { addFiles, deleteFiles, setExistedFiles, setFiles } from "../../../actions/fielsUploadActions";
 
 const ADD_FILES_TEXT = "Add Files";
-const DRAG_AND_DROP_ZONE_TEXT = "לחץ או גרור לכאן את הקובץ שתרצה להעלות";
+const DRAG_AND_DROP_ZONE_TEXT = "Click Here Or Drag Files";
 
 
 function FilesUpload(props) {
@@ -52,7 +52,7 @@ function FilesUpload(props) {
 		<div className="App">
 			<div className="filesUploadContainer">
 				<Typography variant="button" display="block">
-					{ADD_FILES_TEXT} ({maxFiles} מקסימום)
+					{ADD_FILES_TEXT} (Maximum {maxFiles} )
 				</Typography>
 				<Files
 					ref={filesRef}

@@ -275,7 +275,7 @@ class CreateGroupPayments extends Component {
                                         style={{fontWeight: "bold", fontSize: "24px"}}
                                         onClick={this.openModal}
                                     >
-                                        צור קבוצה
+                                        Create Group
                                     </Button>
                                 </form>
                             </div>
