@@ -13,6 +13,7 @@ import {groupPaymentsDeleteWatcherSaga, watchGroupPaymentsLoad} from "./groupPay
 import {watchPaymentLoad} from "./paymentSaga";
 import watchPaymentsLoad, {payPaymentWatcher} from "./myPaymentsSaga";
 import watchPropertyChoose from "./propertyChooseSaga";
+import watchPropertyClean from "./propertyCleanSaga";
 
 
 export default function* rootSaga() {
@@ -21,5 +22,5 @@ export default function* rootSaga() {
         propertiesSaga(), documentsSaga(),groupsPaymentsSaga(),groupPaymentsCreateWatcher(),groupPaymentsDeleteWatcherSaga(),
         signupWatcher(), loginWatcher(), watchLogout(), payPaymentWatcher(), watchGroupPaymentsLoad(),
         watchPropertyLoad(),formActionSaga(), PropertyUpdateWatcherSaga(),
-        watchPaymentLoad(),watchPaymentsLoad(), watchPropertyChoose()]);
+        watchPaymentLoad(),watchPaymentsLoad(), watchPropertyChoose(), watchPropertyClean()]);
 }

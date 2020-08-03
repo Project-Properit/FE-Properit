@@ -5,6 +5,12 @@ const initialSate = {
 }
 const myPropertiesReducer = (state = initialSate, action) => {
     switch (action.type) {
+        case PROPERTIES.CLEAN: return {
+            ...state,
+            myProperties:[],
+            error:null,
+            chosenAssetId:null
+        };
         case PROPERTIES.LOAD: return {
             ...state,
             isLoading:true,
