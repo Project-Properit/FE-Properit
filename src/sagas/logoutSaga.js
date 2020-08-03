@@ -15,6 +15,7 @@ function* logout(action) {
 	localStorage.removeItem('isOwner')
 	localStorage.removeItem('chosenMode')
 	localStorage.removeItem('firstName')
+	localStorage.removeItem('chosenAssetId')
 	// redirect to the /login screen
 	yield put(push('/login'));
 
@@ -28,13 +29,20 @@ function* ClientModeChoose(action) {
 
 	if (action.mode ==='owner') {
 		yield put(push('/properties'));
-	} else {
+	} else if (action.mode ==='tenant'){
 		if (tenantAssetId && tenantAssetId!=='null') {
 			yield put(push('/properties/' + tenantAssetId + '/payments'));
 		} else {
 			yield put(push('/newUser'));
 		}
 	}
+}
+function* UnsetPartialClient(action) {
+
+	localStorage.setItem('chosenMode',null)
+	localStorage.setItem('assetId',null)
+	localStorage.setItem('chosenAssetId',null)
+
 }
 
 function* logoutNoRedirect(action) {
@@ -57,4 +65,5 @@ export default function* watchLogout() {
 	yield takeEvery(LOGIN.LOGOUT, logout);
 	yield takeEvery(LOGIN.LOGOUT_NO_REDIRECT, logoutNoRedirect);
 	yield takeEvery(CLIENT.SET_MODE, ClientModeChoose);
+	yield takeEvery(CLIENT.CLIENT_PARTIAL_UNSET, UnsetPartialClient);
 }

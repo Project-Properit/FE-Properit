@@ -1,5 +1,8 @@
 import { MY_PAYMENTS, PROPERTIES } from '../constants';
 
+const cleanProperties = () => ({
+    type: PROPERTIES.CLEAN
+});
 const loadProperties = (userId) => ({
     type: PROPERTIES.LOAD,
     userId
@@ -20,6 +23,7 @@ const chooseAsset = (assetId) => ({
 });
 
 export {
+    cleanProperties,
     loadProperties,
     setProperties,
     setError,

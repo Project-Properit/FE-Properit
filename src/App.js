@@ -23,7 +23,6 @@ import { PaymentsInfo } from "./components/PaymentsInfo";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
 import MenuDrawer from "./components/MenuDrawer";
 import { connect } from "react-redux";
-import FadeIn from "react-fade-in";
 
 const ORGBAR_HEIGHT = 30;
 const TOPBAR_HEIGHT = 65;

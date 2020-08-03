@@ -43,6 +43,12 @@ const clientReducer = (state = initialSate, action) => {
 				chosenMode: null,
 				tenantAssetId: null
 			}
+		case CLIENT.CLIENT_PARTIAL_UNSET:
+			return {
+				...state,
+				chosenMode: null,
+				tenantAssetId: null
+			}
 
 		case CLIENT.SET_MODE:
 			return {

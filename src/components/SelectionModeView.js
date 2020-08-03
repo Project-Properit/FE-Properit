@@ -5,12 +5,18 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {setMode} from "../actions/clientActions";
+import { setMode, unsetPartialClient } from "../actions/clientActions";
 import Tie from '../images/bothOwner.jpeg'
 import TShirt from '../images/bothTenant.jpeg'
 import "./SelectionModeView.scss"
+import { cleanProperties } from "../actions/propertiesActions";
 
 class SelectionModeView extends Component {
+    componentDidMount() {
+        this.props.unsetPartialClient()
+        this.props.cleanProperties()
+    }
+
     render() {
         return (
             <div>
@@ -49,31 +55,22 @@ class SelectionModeView extends Component {
                         </div>
                     </div>
                 </div>
-                {/*<Row>*/}
-                {/*    <div className="card1">*/}
-                {/*        <img src={Tie} alt=""/>*/}
-                {/*        <Link as={Link}  onClick={()=>this.onOwnerMode()}><h3 className="bothTitle">Asset Owner</h3></Link>*/}
-                {/*    </div>*/}
-                {/*    <div className="card2">*/}
-                {/*        <img src={TShirt} alt=""/>*/}
-                {/*        <Link as={Link}  onClick={()=>this.onTenantMode()}><h3 className="bothTitle">Asset Tenant</h3></Link>*/}
-                {/*    </div>*/}
-                {/*</Row>*/}
+
             </Container>
             </div>
         );
     }
     onOwnerMode() {
         this.props.setMode('owner')
-        // return '/properties'
     }
     onTenantMode() {
         this.props.setMode('tenant')
-        // return '/payments'
     }
 }
 const mapDispatchToProps = dispatch => ({
-    setMode: (mode) => dispatch(setMode(mode))
+    unsetPartialClient: () => dispatch(unsetPartialClient()),
+    setMode: (mode) => dispatch(setMode(mode)),
+    cleanProperties: () => dispatch(cleanProperties())
 });
 export default connect(null,
     mapDispatchToProps
