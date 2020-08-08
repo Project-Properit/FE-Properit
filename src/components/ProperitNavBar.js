@@ -25,7 +25,10 @@ class ProperitNavBar extends Component {
 		else if (this.props.isTenant) {chosenModeNotFromScreen='tenant'}
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
 		let mainUrl;
-		if(!chosenMode || (chosenMode && this.props.isOwner && this.props.isTenant)){
+		if((!chosenMode && this.props.isOwner && this.props.isTenant)|| (chosenMode && this.props.isOwner && this.props.isTenant)){
+			console.log('chosenMode',chosenMode)
+			console.log('this.props.isOwner',this.props.isOwner)
+			console.log('this.props.isTenant',this.props.isTenant)
 			mainUrl='/chooseView'
 		}
 		else if(chosenMode==='owner'){mainUrl="/properties"}

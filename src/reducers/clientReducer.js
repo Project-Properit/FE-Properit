@@ -13,7 +13,11 @@ const initialSate = {
 }
 
 function getReal(item) {
-	return (item === 'true' || item)
+	if (item ==='true')
+		return true
+	if (item==='false')
+		return false
+	return item
 }
 
 const clientReducer = (state = initialSate, action) => {

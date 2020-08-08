@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import { PropertyCard } from "./PropertyCard";
 import Loading from "./Loading";
 import CreatProperties from "./pages/properties/index"
+import { removeProperty } from "../actions/propertyActions";
 
 class Properties extends Component {
 	constructor(props) {
@@ -18,6 +19,12 @@ class Properties extends Component {
 	onChooseProperty(propId) {
 		this.props.chooseAsset(propId)
 		this.props.history.push("/properties/" +propId+'/payments');
+	}
+	onRemoveProperty(propId) {
+		console.log("Remove",propId)
+		this.props.removeProperty(propId);
+
+
 	}
 	render() {
 		const {userId} = this.props.match.params;
@@ -37,6 +44,7 @@ class Properties extends Component {
 						{this.props.myProperties.map(prop => (
 							<PropertyCard
 								onChoose={()=>this.onChooseProperty(prop.id)}
+								onRemove={()=>this.onRemoveProperty(prop.id)}
 								infoUrl={this.onInfoProperty(prop.id)}
 								editUrl={this.onEditProperty(prop.id)}
 								groupsPaymentsUrl={this.onGroupsPayments(prop.id)}
@@ -74,6 +82,7 @@ const mapStateToProps = ({myProperties, clientReducer}) => ({
 
 const mapDispatchToProps = dispatch => ({
 	loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
+	removeProperty: (assetId) => dispatch(removeProperty(assetId)),
 	chooseAsset: (assetId) => dispatch(chooseAsset(assetId))
 });
 
