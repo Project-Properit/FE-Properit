@@ -42,8 +42,8 @@ const fetchProperty = async (propertyId) => {
 	return apiCall(url, 'GET')
 };
 const removeProperty = async (propertyId) => {
-	// const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
-	// return apiCall(url, 'DELETE')
+	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
+	return apiCall(url, 'DELETE')
 };
 const updatePropApi = async (propertyId, propertyObject) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
