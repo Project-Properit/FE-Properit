@@ -8,7 +8,7 @@ import About from "./components/About";
 import Properties from "./components/Properties";
 import PropertyInfo from "./components/PropertyInfo";
 import AddNewProperty from "./components/AddNewProperty";
-import Renters from "./components/Renters";
+import Renters from "./components/Renters/Renters";
 import ProperitNavBar from "./components/ProperitNavBar";
 import history from './history';
 import PrivateRoute from "./components/PrivateRoute";
@@ -23,7 +23,6 @@ import { PaymentsInfo } from "./components/PaymentsInfo";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
 import MenuDrawer from "./components/MenuDrawer";
 import { connect } from "react-redux";
-import FadeIn from "react-fade-in";
 
 const ORGBAR_HEIGHT = 30;
 const TOPBAR_HEIGHT = 65;
@@ -53,7 +52,7 @@ class  App extends React.Component {
 						  component={PaymentsInfo}/>
 			<PrivateRoute exact path="/properties/:propId/CreatePayments"
 						  component={CreateGroupPayments}/>
-			<PrivateRoute exact path="/renters" component={Renters}/>
+			<PrivateRoute exact path="/properties/:propId/renters" component={Renters}/>
 			<PrivateRoute exact path="/newUser" component={NewUserPage}/>
 		</Switch>
 		console.log('isLogin', isLogin)

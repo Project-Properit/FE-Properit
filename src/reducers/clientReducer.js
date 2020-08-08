@@ -13,7 +13,11 @@ const initialSate = {
 }
 
 function getReal(item) {
-	return (item === 'true' || item)
+	if (item ==='true')
+		return true
+	if (item==='false')
+		return false
+	return item
 }
 
 const clientReducer = (state = initialSate, action) => {
@@ -40,6 +44,12 @@ const clientReducer = (state = initialSate, action) => {
 				token: null,
 				isTenant: null,
 				isOwner: null,
+				chosenMode: null,
+				tenantAssetId: null
+			}
+		case CLIENT.CLIENT_PARTIAL_UNSET:
+			return {
+				...state,
 				chosenMode: null,
 				tenantAssetId: null
 			}

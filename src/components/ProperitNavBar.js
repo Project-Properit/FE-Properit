@@ -9,7 +9,7 @@ import SimpleListMenu from "./addressChoose";
 import { chooseAsset, loadProperties } from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Tooltip from "@material-ui/core/Tooltip";
+import { setMode } from "../actions/clientActions";
 
 class ProperitNavBar extends Component {
 	componentDidMount() {
@@ -25,7 +25,10 @@ class ProperitNavBar extends Component {
 		else if (this.props.isTenant) {chosenModeNotFromScreen='tenant'}
 		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
 		let mainUrl;
-		if(!chosenMode){
+		if((!chosenMode && this.props.isOwner && this.props.isTenant)|| (chosenMode && this.props.isOwner && this.props.isTenant)){
+			console.log('chosenMode',chosenMode)
+			console.log('this.props.isOwner',this.props.isOwner)
+			console.log('this.props.isTenant',this.props.isTenant)
 			mainUrl='/chooseView'
 		}
 		else if(chosenMode==='owner'){mainUrl="/properties"}
@@ -38,8 +41,6 @@ class ProperitNavBar extends Component {
 				mainUrl='/newUser'
 			}
 		}
-		const documentsUrl = this.props.location.pathname.replace('/documents','').replace('/payments','') +'/documents'
-		const paymentsUrl = this.props.location.pathname.replace('/payments','').replace('/documents','') +'/payments'
 
 		if (isLogin) {
 			console.log('this.props.myProperties.length >0',this.props.myProperties.length >0)
@@ -100,7 +101,8 @@ class ProperitNavBar extends Component {
 const mapDispatchToProps = dispatch => ({
 	logout: () => dispatch(logoutAction()),
 	loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
-	chooseAsset: (assetId) => dispatch(chooseAsset(assetId))
+	chooseAsset: (assetId) => dispatch(chooseAsset(assetId)),
+	setMode: (mode) => dispatch(setMode(mode))
 
 });
 const mapStateToProps = ({clientReducer, myProperties}) => ({
