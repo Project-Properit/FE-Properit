@@ -1,6 +1,6 @@
 import { PROPERTY} from '../constants';
 
-const   myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues:{tenant_list:[]}}, action) => {
+const myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues:{tenant_list:[]}}, action) => {
     switch (action.type) {
         case PROPERTY.LOAD: return {
             ...state,
