@@ -8,7 +8,7 @@ import About from "./components/About";
 import Properties from "./components/Properties";
 import PropertyInfo from "./components/PropertyInfo";
 import AddNewProperty from "./components/AddNewProperty";
-import Renters from "./components/Renters";
+import Renters from "./components/Renters/Renters";
 import ProperitNavBar from "./components/ProperitNavBar";
 import history from './history';
 import PrivateRoute from "./components/PrivateRoute";
@@ -52,7 +52,7 @@ class  App extends React.Component {
 						  component={PaymentsInfo}/>
 			<PrivateRoute exact path="/properties/:propId/CreatePayments"
 						  component={CreateGroupPayments}/>
-			<PrivateRoute exact path="/renters" component={Renters}/>
+			<PrivateRoute exact path="/properties/:propId/renters" component={Renters}/>
 			<PrivateRoute exact path="/newUser" component={NewUserPage}/>
 		</Switch>
 		console.log('isLogin', isLogin)

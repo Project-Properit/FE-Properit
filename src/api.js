@@ -41,6 +41,14 @@ const fetchProperty = async (propertyId) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets?id=` + propertyId;
 	return apiCall(url, 'GET')
 };
+const fetchRenterDetails = async (mail) => {
+	const url = `${window._env_.REACT_APP_API_URL}/users?email=` + mail;
+	return apiCall(url, 'GET')
+};
+const inviteRenter = async (assetId, renterId) => {
+	const url = `${window._env_.REACT_APP_API_URL}/users/${renterId}/invites`;
+	return apiCall(url, 'PATCH', {'asset_id':assetId})
+};
 const removeProperty = async (propertyId) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
 	return apiCall(url, 'DELETE')
@@ -195,5 +203,7 @@ const deleteDocument = async (documentId, propId) => axios.delete(
 		createPropApi,
 		fetchPayment,
 		fetchPayments,
+		fetchRenterDetails,
+		inviteRenter,
 		payApi
 	}
