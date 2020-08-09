@@ -51,15 +51,17 @@ class App extends React.Component {
             <PrivateRoute exact path="/renters" component={Renters}/>
             <PrivateRoute exact path="/newUser" component={NewUserPage}/>
         </Switch>
+        let chosenAssetId  = localStorage.getItem('chosenAssetId')  === 'null' ? null : localStorage.getItem('chosenAssetId')
         return (
             <Router history={history}>
                 {this.props.userId ? <ProperitNavBar/> : null}
                 <div style={{display: "flex"}}>
-                    {!isLogin || window.location.pathname === '/chooseView' || window.location.pathname === '/properties' ? null : (
+                    {/*{!isLogin || window.location.pathname === '/chooseView' || window.location.pathname === '/properties' ? null : (*/}
+                    {console.log('this.props.chosenAssetId', this.props.chosenAssetId)}
+                    {!chosenAssetId ? null : this.props.isOwner ? (
                         <MenuDrawer
                             loggedInUserType={this.props.userId}
-                        />)}
-                    {console.log(window.location.pathname)}
+                        />):null}
                     {!isLogin ? (
 
                         <div id="main-page">
@@ -95,7 +97,8 @@ const mapStateToProps = ({clientReducer, myPaymentsReducer, myProperties}) => ({
     lastName: clientReducer.lastName,
     myPayments: myPaymentsReducer.myPayments,
     token: clientReducer.token,
-    chosenAssetId: myProperties.chosenAssetId
+    chosenAssetId: myProperties.chosenAssetId,
+    isOwner: clientReducer.isOwner
 
 });
 export default connect(

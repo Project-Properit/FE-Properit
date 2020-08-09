@@ -9,7 +9,7 @@ import { push } from "react-router-redux";
 export function* handlePropertiesLoad(action) {
     try {
         const myProperties = yield call(fetchProperties, action.userId);
-        localStorage.removeItem('chosenAssetId')
+        // localStorage.removeItem('chosenAssetId')
         yield put(setProperties(myProperties));
     } catch (error) {
         yield put(setError(error.toString()));
