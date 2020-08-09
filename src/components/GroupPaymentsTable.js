@@ -16,6 +16,8 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
 import {payApi} from "../api";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
+import EventIcon from "@material-ui/icons/Event";
+import PublicIcon from '@material-ui/icons/Public';
 
 const useRowStyles = makeStyles({
     root: {
@@ -40,7 +42,7 @@ function Row(props) {
     }, []);
 
     const handlePay = () => {
-        let payObject = {paymentId:row.my_payment.payment_id, assetId:props.propId, userId:props.userId}
+        let payObject = {paymentId: row.my_payment.payment_id, assetId: props.propId, userId: props.userId}
         props.payMethod(payObject)
         closeModal()
     }
@@ -58,6 +60,10 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>}
                 </TableCell>
+                <TableCell align="center">
+                    {row.participants.length > 0 ? (<div><PublicIcon/><p>Public</p></div>) : row.is_periodic ?
+                        <div><EventIcon/><p>Monthly</p></div> : null}
+                </TableCell>
                 <TableCell component="th" scope="row">
                     {row.title}
                 </TableCell>
@@ -67,7 +73,7 @@ function Row(props) {
                 <TableCell align="center">{row.creation_date}</TableCell>
                 <TableCell align="center">{row.my_payment.is_open ?
                     <Button onClick={openModal} color="primary">
-                        Pay
+                        {row.is_periodic ? "Pay all payments" : "Pay"}
                     </Button> : `Paid at ${row.my_payment.when_payed}`}</TableCell>
             </TableRow>
             {row.participants.length > 0 ?
@@ -102,7 +108,40 @@ function Row(props) {
                             </Box>
                         </Collapse>
                     </TableCell>
-                </TableRow> : null}
+                </TableRow> : row.is_periodic ?
+                    <TableRow>
+                        <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={7}>
+                            <Collapse in={open} timeout="auto" unmountOnExit>
+                                <Box margin={1}>
+                                    <Typography variant="h6" gutterBottom component="div">
+                                        Payments
+                                    </Typography>
+                                    <Table size="small" aria-label="purchases">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align="center">Date</TableCell>
+                                                <TableCell align="center">Amount</TableCell>
+                                                <TableCell align="center">Status</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {row.participants.map((historyRow) => (
+                                                <TableRow key={historyRow.id}>
+                                                    <TableCell align="center" component="th" scope="row">
+                                                        {historyRow.date}
+                                                    </TableCell>
+                                                    <TableCell align="center">{historyRow.amount}</TableCell>
+                                                    <TableCell
+                                                        align="center">{historyRow.is_open ? 'Open' : 'Closed'}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </Box>
+                            </Collapse>
+                        </TableCell>
+                    </TableRow> : null
+            }
         </React.Fragment>
     );
 }
@@ -119,6 +158,7 @@ export default function CollapsibleTable(props) {
                 <TableHead>
                     <TableRow style={{backgroundColor: "rgba(211, 203, 195, 0.42)"}}>
                         <TableCell/>
+                        <TableCell align="center">Type </TableCell>
                         <TableCell align="center">Name </TableCell>
                         <TableCell align="center">Collector</TableCell>
                         <TableCell align="center">Amount</TableCell>

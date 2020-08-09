@@ -43,12 +43,16 @@ class CreateGroupPayments extends Component {
     setGroupPeriod = (event) => {
         if (event.target.checked) {
             this.setState({isPeriod: event.target.checked, months: [3, 8]})
+            this.setState({is_public:false})
         } else {
             delete this.state.months
             this.setState({isPeriod: event.target.checked})
         }
     }
     setCheckbox = (event, tenantId) => {
+        if (event.target.checked && this.state.isPeriod && Object.keys(this.state.tenants).length >= 1) {
+            alert("Periodic group can assign to one tenant")
+        }else{
         let checked = this.state.checked
         checked[tenantId] = event.target.checked
         if (event.target.checked) {
@@ -58,6 +62,7 @@ class CreateGroupPayments extends Component {
             delete this.state.tenants[tenantId]
         }
         this.setState({checked: checked})
+        }
     };
     validateGroupPayment = (title, description, tenants) => {
         let isOneAmountZero = false
@@ -205,7 +210,7 @@ class CreateGroupPayments extends Component {
                                     />
                                     <FormControlLabel
                                         control={
-                                            <Checkbox
+                                            <Checkbox disabled={this.state.isPeriod}
                                                 checked={this.state.is_public}
                                                 onChange={this.setPublic}
                                             />}
