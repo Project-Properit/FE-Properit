@@ -13,14 +13,13 @@ const initialSate = {
 }
 
 function getReal(item) {
-	return (item === 'true' || item)
+	return item === 'true'
 }
 
 const clientReducer = (state = initialSate, action) => {
 	switch (action.type) {
 
 		case CLIENT.CLIENT_SET:
-
 			return {
 				userId: action.userId,
 				firstName: action.firstName,

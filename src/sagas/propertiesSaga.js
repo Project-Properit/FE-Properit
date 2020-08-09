@@ -11,7 +11,6 @@ export function* handlePropertiesLoad(action) {
         const myProperties = yield call(fetchProperties, action.userId);
         localStorage.removeItem('chosenAssetId')
         yield put(setProperties(myProperties));
-        yield put(push('/properties'));
     } catch (error) {
         yield put(setError(error.toString()));
     }
