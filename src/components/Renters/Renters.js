@@ -57,10 +57,11 @@ class Renters extends Component {
                     {this.props.myProperty.tenant_list.length > 0 ?
                         <>
                             <h2>My Renters</h2>
+                            {this.props.isOwner ?
                             <Button variant="outlined" color="primary"
                                     className="createDocumentButton" onClick={this.openModal}>
                                 Invite A Renter
-                            </Button>
+                            </Button>:null}
                             < RentersTable
                                 renters={this.props.myProperty.tenant_list}
                             />
