@@ -20,7 +20,7 @@ class InviteRenter extends Component {
 	mailChanged = (e) => {
 		const {value} = e.target;
 		this.setState({mail: value});
-		if (this.props.renterDetails || this.props.renterNotFound)
+		if (this.props.renterDetails || this.props.renterNotFound|| this.props.renterExists)
 			this.props.clearDetails()
 	}
 	GetDetails = () => {
@@ -30,6 +30,7 @@ class InviteRenter extends Component {
 	inviteTenant = () => {
 		console.log("inviteTenant details on ", this.props.renterDetails.id, this.props.assetId)
 		this.props.inviteRenter(this.props.assetId, this.props.renterDetails.id)
+		this.props.closeHandler()
 	}
 
 
@@ -64,6 +65,7 @@ class InviteRenter extends Component {
 										</>
 										: <>
 										{this.props.renterNotFound&&<div>Renter not found, try different mail</div>}
+										{this.props.renterExists&&<div>Renter already exists in this asset</div>}
 										</>
 									}
 									{!this.props.renterDetails &&
