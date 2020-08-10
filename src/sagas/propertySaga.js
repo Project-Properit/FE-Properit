@@ -9,6 +9,16 @@ import { loadProperties } from "../actions/propertiesActions";
 export function* handlePropertyLoad(action) {
     try {
         const myProperty = yield call(fetchProperty, action.propertyId);
+        const pendingTenants = myProperty[0].pending_tenants
+        pendingTenants.forEach(function(tenant){
+            tenant.pending=true
+        })
+        const tenants = myProperty[0].tenant_list
+        tenants.forEach(function(tenant){
+            tenant.pending=false
+        })
+        myProperty[0].tenant_list = tenants
+        myProperty[0].pending_tenants = pendingTenants
         yield put(setProperty(myProperty));
     } catch (error) {
         yield put(setError(error.toString()));

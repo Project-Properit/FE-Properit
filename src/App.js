@@ -48,7 +48,7 @@ class App extends React.Component {
             <PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>
             <PrivateRoute exact path="/properties/:propId/payments" component={PaymentsTabs}/>
             <PrivateRoute exact path="/properties/:propId/documents" component={DocumentsPage}/>
-            <PrivateRoute exact path="/renters" component={Renters}/>
+            <PrivateRoute exact path="/properties/:propId/renters" component={Renters}/>
             <PrivateRoute exact path="/newUser" component={NewUserPage}/>
         </Switch>
         let chosenAssetId  = localStorage.getItem('chosenAssetId')  === 'null' ? null : localStorage.getItem('chosenAssetId')

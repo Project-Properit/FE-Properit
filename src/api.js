@@ -46,8 +46,8 @@ const fetchRenterDetails = async (mail) => {
 	return apiCall(url, 'GET')
 };
 const inviteRenter = async (assetId, renterId) => {
-	const url = `${window._env_.REACT_APP_API_URL}/users/${renterId}/invites`;
-	return apiCall(url, 'PATCH', {'asset_id':assetId})
+	const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/invites`;
+	return apiCall(url, 'PATCH', {'user_id':renterId})
 };
 const removeProperty = async (propertyId) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;

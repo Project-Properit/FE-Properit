@@ -19,6 +19,9 @@ const clearRenterDetails = () => ({
 const setNotFound = () => ({
     type: RENTER.NOT_FOUND,
 });
+const setExists = () => ({
+    type: RENTER.EXISTS,
+});
 
 
 export {
@@ -26,5 +29,6 @@ export {
     inviteRenter,
     setNotFound,
     clearRenterDetails,
-    setRenterDetails
+    setRenterDetails,
+    setExists
 };
