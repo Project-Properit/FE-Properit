@@ -1,17 +1,12 @@
-import Card from "react-bootstrap/Card";
-import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useCallback, useState} from "react";
 import "./PropertyCard.scss"
-import { Button } from "@material-ui/core";
-import { Delete, OpenInBrowser } from "@material-ui/icons";
+import {Delete, OpenInBrowser} from "@material-ui/icons";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
 import Tooltip from "@material-ui/core/Tooltip";
-import home2 from '../images/home2.jpg'
-import {Button, IconButton } from "@material-ui/core";
-import {Add, Edit, OpenInBrowser} from "@material-ui/icons";
-import Tooltip from '@material-ui/core/Tooltip';
-import HomeIcon from '../images/homeCard.png'
-
+import {Button} from "@material-ui/core";
+import HomeIcon from '../images/homeCard.png';
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 export const PropertyCard = props => {
 	const prop = props.property;
 	const [payModalOpened, setPayModalOpened] = useState(false);
@@ -49,7 +44,9 @@ export const PropertyCard = props => {
 
 						</Tooltip>
 					</div>
-					<a href={props.infoUrl} className="Choose">Choose</a>
+					{/*<a href={props.infoUrl} className="Choose">Choose</a>*/}
+					<Card.Link as={Link} to={props.infoUrl}
+							   className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
 				</div>
 			</div>
 
