@@ -41,7 +41,7 @@ class Properties extends Component {
 					<Loading loading={this.props.isLoading}/>
 
 					<Row style={{justifyContent: 'space-around',
-						marginTop: '15px'}}>
+						marginTop: '25px'}}>
 						{this.props.myProperties.map(prop => (
 							<PropertyCard
 								onChoose={()=>this.onChooseProperty(prop.id)}
