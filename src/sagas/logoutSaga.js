@@ -2,11 +2,12 @@ import { put, takeEvery } from 'redux-saga/effects';
 import { unsetClient } from "../actions/clientActions";
 import { push } from "react-router-redux";
 import { CLIENT, LOGIN } from '../constants'
+import {cleanProperties} from "../actions/propertiesActions";
 
 function* logout(action) {
 	// dispatches the CLIENT_UNSET action
 	yield put(unsetClient())
-
+	yield put(cleanProperties())
 	// remove our token
 	localStorage.removeItem('token')
 	localStorage.removeItem('userId')

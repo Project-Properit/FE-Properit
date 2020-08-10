@@ -23,6 +23,9 @@ class Renters extends Component {
 	closeModal = () => {
 		this.setState({modalOpened: false})
 	};
+	getRenterDetails = (mail) => {
+		this.props.getRenterDetails(mail)
+	};
 
 	render() {
 		const {propId} = this.props.match.params;
@@ -36,7 +39,7 @@ class Renters extends Component {
 						clearDetails={this.props.clearRenterDetails}
 						inviteRenter={this.props.inviteRenter}
 						renterDetails={this.props.renterDetails}
-						getRenterDetails={this.props.getRenterDetails}
+						getRenterDetails={this.getRenterDetails}
 						closeHandler={this.closeModal}
 					/> : null
 				}
