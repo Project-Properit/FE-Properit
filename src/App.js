@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router} from 'react-router-dom';
+import { Route, Router } from 'react-router-dom';
 import './App.css'
 import Login from "./components/pages/NewLogin/index";
 
@@ -8,7 +8,7 @@ import About from "./components/About";
 import Properties from "./components/Properties";
 import PropertyInfo from "./components/PropertyInfo";
 import AddNewProperty from "./components/AddNewProperty";
-import Renters from "./components/Renters";
+import Renters from "./components/Renters/Renters";
 import ProperitNavBar from "./components/ProperitNavBar";
 import history from './history';
 import PrivateRoute from "./components/PrivateRoute";

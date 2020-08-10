@@ -24,6 +24,31 @@ class ProperitNavBar extends Component {
         this.props.loadProperties(this.props.userId);
     }
 
+	render() {
+		const isLogin = this.props.token
+		const tenantAssetId = this.props.tenantAssetId
+		let chosenModeNotFromScreen;
+		if (this.props.isOwner && this.props.isTenant){chosenModeNotFromScreen=null}
+		else if (this.props.isOwner) {chosenModeNotFromScreen='owner'}
+		else if (this.props.isTenant) {chosenModeNotFromScreen='tenant'}
+		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
+		let mainUrl;
+		if((!chosenMode && this.props.isOwner && this.props.isTenant)|| (chosenMode && this.props.isOwner && this.props.isTenant)){
+			console.log('chosenMode',chosenMode)
+			console.log('this.props.isOwner',this.props.isOwner)
+			console.log('this.props.isTenant',this.props.isTenant)
+			mainUrl='/chooseView'
+		}
+		else if(chosenMode==='owner'){mainUrl="/properties"}
+		else if(chosenMode==='tenant')
+		{
+			if(tenantAssetId && tenantAssetId!=='null'){
+				mainUrl=`/properties/${tenantAssetId}/payments`
+			}
+			else{
+				mainUrl='/newUser'
+			}
+		}
     render() {
         const isLogin = this.props.token
         const tenantAssetId = this.props.tenantAssetId
