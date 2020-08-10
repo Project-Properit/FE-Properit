@@ -13,7 +13,7 @@ class Renters extends Component {
 	}
 
 	componentDidMount() {
-
+		this.props.loadProperty()
 	}
 
 	openModal = () => {
@@ -57,35 +57,37 @@ class Renters extends Component {
 					{this.props.myProperty.tenant_list.length > 0 ?
 						<>
 							<h2>My Renters</h2>
-							<Button variant="outlined" color="primary"
-							        className="createDocumentButton" onClick={this.openModal}>
-								Invite A Renter
-							</Button>
-							<RentersTable
+								<Button variant="outlined" color="primary"
+										className="createDocumentButton" onClick={this.openModal}>
+									Invite A Renter
+								</Button>:null
+								< RentersTable
 								renters={this.props.myProperty.tenant_list}
-							/>
-						</> : <>
+								/>
+						</> : this.props.isOwner ?
+						<>
 							<h2>Please order renters to your Asset</h2>
 							<Button variant="outlined" color="primary"
 							        className="createDocumentButton" onClick={this.openModal}>
 								Invite A Renter
 							</Button>
-						</>}
+						</>:null}
 				</div>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = ({myPropertyReducer, renterReducer}) => ({
+const mapStateToProps = ({myPropertyReducer, clientReducer, renterReducer}) => ({
 	myProperty: myPropertyReducer.myProperty,
 	renterDetails: renterReducer.renterDetails,
 	renterNotFound: renterReducer.notFound,
-	renterExists: renterReducer.renterExists
+	renterExists: renterReducer.renterExists,
+	isOwner: clientReducer.isOwner
 });
 
 const mapDispatchToProps = dispatch => ({
-	// loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
+	loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
     getRenterDetails: (mail) => dispatch(getRenterDetails(mail)),
     inviteRenter: (assetId,renterId) => dispatch(inviteRenter(assetId,renterId)),
     clearRenterDetails: () => dispatch(clearRenterDetails()),
