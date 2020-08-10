@@ -1,17 +1,28 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { setError } from '../actions/propertyActions';
 import { RENTER } from '../constants';
 import { fetchRenterDetails, inviteRenter } from '../api';
-import { setNotFound, setRenterDetails } from "../actions/renterDetailsActions";
+import { setExists, setNotFound, setRenterDetails } from "../actions/renterDetailsActions";
 
 export function* handleRenterDetailsLoad(action) {
     try {
-        const renterDetails = yield call(fetchRenterDetails, action.mail);
-        console.log('renterDetails------',renterDetails)
-        yield put(setRenterDetails(renterDetails));
-        if (renterDetails.length===0)
-            yield put(setNotFound());
+        const getAllRenters = (state) => state.myPropertyReducer.myProperty.tenant_list
+        const allRenters = yield select(getAllRenters)
+        let exist = false
+        allRenters.forEach(function(renter){
+            if (renter.email === action.mail)
+                exist = true
+        })
+        if (exist)
+            yield put(setExists());
+        else {
+            const renterDetails = yield call(fetchRenterDetails, action.mail);
+            console.log('renterDetails------', renterDetails)
+            yield put(setRenterDetails(renterDetails));
+            if (renterDetails.length === 0)
+                yield put(setNotFound());
+        }
 
     } catch (error) {
         yield put(setError(error.toString()));
@@ -19,7 +30,6 @@ export function* handleRenterDetailsLoad(action) {
 }
 export function* handleRenterInvite(action) {
     try {
-        console.log('actionactionactionactionactionactionaction')
         const renterDetails = yield call(inviteRenter, action.assetId,action.renterId);
         // console.log('renterDetails------',renterDetails)
         // yield put(setRenterDetails(renterDetails));

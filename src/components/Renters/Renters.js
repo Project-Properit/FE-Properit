@@ -29,6 +29,7 @@ class Renters extends Component {
 
 	render() {
 		const {propId} = this.props.match.params;
+		console.log('this.props.myProperty.tenant_list',this.props.myProperty.tenant_list)
 
 		return (
 			<div className="App">
@@ -36,6 +37,7 @@ class Renters extends Component {
 					<InviteRenter
 						assetId={propId}
 						renterNotFound={this.props.renterNotFound}
+						renterExists={this.props.renterExists}
 						clearDetails={this.props.clearRenterDetails}
 						inviteRenter={this.props.inviteRenter}
 						renterDetails={this.props.renterDetails}
@@ -72,7 +74,8 @@ class Renters extends Component {
 const mapStateToProps = ({myPropertyReducer, renterReducer}) => ({
 	myProperty: myPropertyReducer.myProperty,
 	renterDetails: renterReducer.renterDetails,
-	renterNotFound: renterReducer.notFound
+	renterNotFound: renterReducer.notFound,
+	renterExists: renterReducer.renterExists
 });
 
 const mapDispatchToProps = dispatch => ({

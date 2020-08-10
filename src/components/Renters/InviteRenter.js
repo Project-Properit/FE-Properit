@@ -20,7 +20,7 @@ class InviteRenter extends Component {
 	mailChanged = (e) => {
 		const {value} = e.target;
 		this.setState({mail: value});
-		if (this.props.renterDetails || this.props.renterNotFound)
+		if (this.props.renterDetails || this.props.renterNotFound|| this.props.renterExists)
 			this.props.clearDetails()
 	}
 	GetDetails = () => {
@@ -64,6 +64,7 @@ class InviteRenter extends Component {
 										</>
 										: <>
 										{this.props.renterNotFound&&<div>Renter not found, try different mail</div>}
+										{this.props.renterExists&&<div>Renter already exists in this asset</div>}
 										</>
 									}
 									{!this.props.renterDetails &&
