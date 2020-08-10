@@ -46,8 +46,10 @@ export const PropertyCard = props => {
 					</div>
 					{/*<a href={props.infoUrl} className="Choose">Choose</a>*/}
 					<Card.Link as={Link} to={props.infoUrl}
-							   className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
-				</div>
+							   // className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
+						className="Choose">Choose</Card.Link>
+
+			</div>
 			</div>
 
 		</div>
