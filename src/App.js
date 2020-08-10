@@ -58,10 +58,10 @@ class App extends React.Component {
                 <div style={{display: "flex"}}>
                     {/*{!isLogin || window.location.pathname === '/chooseView' || window.location.pathname === '/properties' ? null : (*/}
                     {console.log('this.props.chosenAssetId', this.props.chosenAssetId)}
-                    {!chosenAssetId ? null : this.props.isOwner ? (
+                    {!chosenAssetId ? null : (
                         <MenuDrawer
                             loggedInUserType={this.props.userId}
-                        />):null}
+                        />)}
                     {!isLogin ? (
 
                         <div id="main-page">
