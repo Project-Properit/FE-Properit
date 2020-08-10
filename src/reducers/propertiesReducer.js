@@ -16,7 +16,6 @@ const myPropertiesReducer = (state = initialSate, action) => {
             isLoading:true,
             myProperties:[],
             error:null,
-            chosenAssetId:null
         };
 
         case PROPERTIES.LOAD_SUCCESS: return {

@@ -10,45 +10,16 @@ import {chooseAsset, loadProperties} from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import {setMode} from "../actions/clientActions";
-import {ArrowDropDown, ArrowDropUp, PersonPinCircle} from "@material-ui/icons";
-import Paper from "@material-ui/core/Paper";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import MenuList from "@material-ui/core/MenuList";
-import MenuItem from "@material-ui/core/MenuItem";
+import {PersonPinCircle} from "@material-ui/icons";
 import {Button} from "@material-ui/core";
 import {loadProperty} from "../actions/propertyActions";
-import myPropertyReducer from "../reducers/propertyReducer";
+import {loadGroupsPayments} from "../actions/groupsPaymentsActions";
 
 class ProperitNavBar extends Component {
     componentDidMount() {
         this.props.loadProperties(this.props.userId);
     }
 
-	render() {
-		const isLogin = this.props.token
-		const tenantAssetId = this.props.tenantAssetId
-		let chosenModeNotFromScreen;
-		if (this.props.isOwner && this.props.isTenant){chosenModeNotFromScreen=null}
-		else if (this.props.isOwner) {chosenModeNotFromScreen='owner'}
-		else if (this.props.isTenant) {chosenModeNotFromScreen='tenant'}
-		const chosenMode = this.props.chosenMode ? this.props.chosenMode: chosenModeNotFromScreen
-		let mainUrl;
-		if((!chosenMode && this.props.isOwner && this.props.isTenant)|| (chosenMode && this.props.isOwner && this.props.isTenant)){
-			console.log('chosenMode',chosenMode)
-			console.log('this.props.isOwner',this.props.isOwner)
-			console.log('this.props.isTenant',this.props.isTenant)
-			mainUrl='/chooseView'
-		}
-		else if(chosenMode==='owner'){mainUrl="/properties"}
-		else if(chosenMode==='tenant')
-		{
-			if(tenantAssetId && tenantAssetId!=='null'){
-				mainUrl=`/properties/${tenantAssetId}/payments`
-			}
-			else{
-				mainUrl='/newUser'
-			}
-		}
     render() {
         const isLogin = this.props.token
         const tenantAssetId = this.props.tenantAssetId
@@ -145,6 +116,7 @@ class ProperitNavBar extends Component {
     }
 
     getIndexOfList() {
+        console.log(this.props.chosenAssetId)
         let c = this.props.myProperties.findIndex(a => a.id === this.props.chosenAssetId)
         console.log('c-', c)
         return c === -1 ? null : c
@@ -154,11 +126,14 @@ class ProperitNavBar extends Component {
         let c = this.props.myProperties[d]
         this.props.chooseAsset(c.id)
         this.props.history.push("/properties/" + c.id + '/payments');
+        this.props.loadProperty(c.id);
+        this.props.loadGroupsPayments(c.id, this.props.userId)
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logoutAction()),
+    loadGroupsPayments: (assetId, userId) => dispatch(loadGroupsPayments(assetId, userId)),
     loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
     loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
     chooseAsset: (assetId) => dispatch(chooseAsset(assetId)),
