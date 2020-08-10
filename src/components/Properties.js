@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { chooseAsset, loadProperties } from "../actions/propertiesActions";
+import {chooseAsset, cleanProperties, loadProperties} from "../actions/propertiesActions";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { PropertyCard } from "./PropertyCard";
@@ -14,6 +14,7 @@ class Properties extends Component {
 		this.onChooseProperty = this.onChooseProperty.bind(this);
 	}
 	componentDidMount() {
+		this.props.cleanProperties()
 		this.props.loadProperties(this.props.ownerId);
 	}
 	onChooseProperty(propId) {
@@ -83,6 +84,7 @@ const mapStateToProps = ({myProperties, clientReducer}) => ({
 
 const mapDispatchToProps = dispatch => ({
 	loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
+	cleanProperties: () => dispatch(cleanProperties()),
 	removeProperty: (assetId) => dispatch(removeProperty(assetId)),
 	chooseAsset: (assetId) => dispatch(chooseAsset(assetId))
 });
