@@ -1,6 +1,6 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
-import { setError } from '../actions/propertyActions';
+import { loadProperty, setError } from '../actions/propertyActions';
 import { RENTER } from '../constants';
 import { fetchRenterDetails, inviteRenter } from '../api';
 import { setExists, setNotFound, setRenterDetails } from "../actions/renterDetailsActions";
@@ -31,12 +31,14 @@ export function* handleRenterDetailsLoad(action) {
 export function* handleRenterInvite(action) {
     try {
         const renterDetails = yield call(inviteRenter, action.assetId,action.renterId);
+        yield put(loadProperty(action.assetId));
         // console.log('renterDetails------',renterDetails)
         // yield put(setRenterDetails(renterDetails));
         // if (renterDetails.length===0)
         //     yield put(setNotFound());
 
     } catch (error) {
+         yield put(loadProperty(action.assetId));
         // yield put(setError(error.toString()));
     }
 }

@@ -30,6 +30,7 @@ class InviteRenter extends Component {
 	inviteTenant = () => {
 		console.log("inviteTenant details on ", this.props.renterDetails.id, this.props.assetId)
 		this.props.inviteRenter(this.props.assetId, this.props.renterDetails.id)
+		this.props.closeHandler()
 	}
 
 

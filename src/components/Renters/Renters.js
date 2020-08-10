@@ -4,6 +4,7 @@ import RentersTable from "./RentersTable";
 import { Button } from "@material-ui/core";
 import InviteRenter from "./InviteRenter";
 import { clearRenterDetails, getRenterDetails, inviteRenter } from "../../actions/renterDetailsActions";
+import { loadProperty } from "../../actions/propertyActions";
 
 class Renters extends Component {
 	constructor(props) {
@@ -26,6 +27,11 @@ class Renters extends Component {
 	getRenterDetails = (mail) => {
 		this.props.getRenterDetails(mail)
 	};
+	inviteRenter = (assetId,renterId) => {
+		this.props.inviteRenter(assetId,renterId)
+		const {propId} = this.props.match.params;
+		// this.props.loadProperty(propId);
+	};
 
 	render() {
 		const {propId} = this.props.match.params;
@@ -39,7 +45,7 @@ class Renters extends Component {
 						renterNotFound={this.props.renterNotFound}
 						renterExists={this.props.renterExists}
 						clearDetails={this.props.clearRenterDetails}
-						inviteRenter={this.props.inviteRenter}
+						inviteRenter={this.inviteRenter}
 						renterDetails={this.props.renterDetails}
 						getRenterDetails={this.getRenterDetails}
 						closeHandler={this.closeModal}
@@ -79,6 +85,7 @@ const mapStateToProps = ({myPropertyReducer, renterReducer}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+	// loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
     getRenterDetails: (mail) => dispatch(getRenterDetails(mail)),
     inviteRenter: (assetId,renterId) => dispatch(inviteRenter(assetId,renterId)),
     clearRenterDetails: () => dispatch(clearRenterDetails()),
