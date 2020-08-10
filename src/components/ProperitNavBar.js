@@ -80,7 +80,7 @@ class ProperitNavBar extends Component {
                             {this.props.myProperties.length > 0 ?
                                 <SimpleListMenu className="mr-sm-2" choosenFunc={(d) => this.onChooseAddress(d)}
                                                 options={this.props.myProperties.map(a => a.address)}
-                                                choosenIndex={this.getIndexOfList()}/> : chosenMode === 'tenant' ?
+                                                choosenIndex={this.getIndexOfList()}/> : chosenMode === 'tenant' && this.props.chosenAssetId ?
                                 <Button
                                     dir="rtl"
                                     style={{

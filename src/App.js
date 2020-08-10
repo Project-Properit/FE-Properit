@@ -48,7 +48,7 @@ class App extends React.Component {
             <PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>
             <PrivateRoute exact path="/properties/:propId/payments" component={PaymentsTabs}/>
             <PrivateRoute exact path="/properties/:propId/documents" component={DocumentsPage}/>
-            <PrivateRoute exact path="/renters" component={Renters}/>
+            <PrivateRoute exact path="/properties/:propId/renters" component={Renters}/>
             <PrivateRoute exact path="/newUser" component={NewUserPage}/>
         </Switch>
         let chosenAssetId  = localStorage.getItem('chosenAssetId')  === 'null' ? null : localStorage.getItem('chosenAssetId')
@@ -58,10 +58,10 @@ class App extends React.Component {
                 <div style={{display: "flex"}}>
                     {/*{!isLogin || window.location.pathname === '/chooseView' || window.location.pathname === '/properties' ? null : (*/}
                     {console.log('this.props.chosenAssetId', this.props.chosenAssetId)}
-                    {!chosenAssetId ? null : this.props.isOwner ? (
+                    {!chosenAssetId ? null : (
                         <MenuDrawer
                             loggedInUserType={this.props.userId}
-                        />):null}
+                        />)}
                     {!isLogin ? (
 
                         <div id="main-page">

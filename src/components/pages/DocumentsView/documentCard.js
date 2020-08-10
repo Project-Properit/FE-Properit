@@ -32,9 +32,10 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 				{document.doc_name}
 			</Typography>
 			{
+				(localStorage.getItem('isOwner')) === 'true' ?
 				<IconButton onClick={openModal}>
 					<Delete/>
-				</IconButton>
+				</IconButton>:null
 			}
 		</div>
 		<div className="documentData">
