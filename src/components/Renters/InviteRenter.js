@@ -13,7 +13,6 @@ class InviteRenter extends Component {
 		};
 	}
 
-
 	componentDidMount() {
 
 	}
@@ -53,8 +52,7 @@ class InviteRenter extends Component {
 									/>
 									{this.props.renterDetails ?
 										<>
-											<div>{this.props.renterDetails.first_name}</div>
-											<div>{this.props.renterDetails.last_name}</div>
+											<div>{this.props.renterDetails.first_name} {this.props.renterDetails.last_name}</div>
 											<div>{this.props.renterDetails.phone}</div>
 											<Button
 												className="button"
@@ -68,20 +66,19 @@ class InviteRenter extends Component {
 										{this.props.renterNotFound&&<div>Renter not found, try different mail</div>}
 										</>
 									}
+									{!this.props.renterDetails &&
 									<Button
 										className="button"
 										color="primary"
 										variant="contained"
 										style={{fontWeight: "bold", fontSize: "24px"}}
 										onClick={this.GetDetails}
-									>
-										Find
-									</Button>
+									>Find</Button>}
 								</form>
 							</div>
 						</FadeIn>
 					</div>
-				</MyModal>;
+				</MyModal>
 			</div>
 		)
 	}
