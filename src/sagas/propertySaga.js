@@ -17,8 +17,7 @@ export function* handlePropertyLoad(action) {
         tenants.forEach(function(tenant){
             tenant.pending=false
         })
-        myProperty[0].tenant_list = tenants
-        myProperty[0].pending_tenants = pendingTenants
+        myProperty[0].tenant_list = tenants.concat(pendingTenants)
         yield put(setProperty(myProperty));
     } catch (error) {
         yield put(setError(error.toString()));
