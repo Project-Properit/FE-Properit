@@ -39,16 +39,19 @@ export const PropertyCard = props => {
 						<span>{prop.tenant_list.length || 0} tenants</span>
 						<p>{prop.comments}</p>
 						<Tooltip title="Remove The Property" placement="right-start">
-							<Button className="EditValue" onClick={openModal}> <Delete/></Button>
-							{/*<a href={props.editUrl} className="EditValue"><Edit/></a>*/}
+							<Button className="DeleteValue" onClick={openModal}
+									style={{top:"-250px", left:"-95px", boxShadow: "none"}}>
+								<Delete/>
+							</Button>
+							{/*<a href={props.editUrl} className="EditValue"><Delete/></a>*/}
 
 						</Tooltip>
 					</div>
 					{/*<a href={props.infoUrl} className="Choose">Choose</a>*/}
-					<Card.Link as={Link} to={props.infoUrl}
-							   // className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
-						className="Choose">Choose</Card.Link>
+					<Button   onClick={() => props.onChoose()}>
 
+					<Card.Link as={Link} to={props.infoUrl} className="Choose" style={{boxShadow: "none"}}>Choose</Card.Link>
+					</Button>
 			</div>
 			</div>
 
