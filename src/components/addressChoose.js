@@ -15,8 +15,9 @@ export default function SimpleListMenu(props) {
 	const [expanded, setExpanded] = useState(false);
 	const opt = props.options;
 	const chosen = props.choosenIndex;
+
 	console.log('choosen',chosen )
-	if ((chosen!==undefined && chosen!==null) && !selectedIndex && selectedIndex!==chosen)
+	if ((chosen!==undefined && chosen!==null) && selectedIndex !==null && selectedIndex!==chosen)
 		setSelectedIndex(chosen);
 	const handleClickListItem = (event, expanded) => {
 		setAnchorEl(event.currentTarget);

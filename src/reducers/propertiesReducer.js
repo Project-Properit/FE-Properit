@@ -1,7 +1,7 @@
-import { PROPERTIES } from '../constants';
+import { PROPERTIES, PROPERTY } from '../constants';
 const initialSate = {
-    myProperties:[],
-	chosenAssetId: localStorage.getItem('chosenAssetId') || null
+    myProperties: [],
+    chosenAssetId: localStorage.getItem('chosenAssetId')  === 'null' ? null : localStorage.getItem('chosenAssetId')
 }
 const myPropertiesReducer = (state = initialSate, action) => {
     switch (action.type) {
@@ -16,8 +16,8 @@ const myPropertiesReducer = (state = initialSate, action) => {
             isLoading:true,
             myProperties:[],
             error:null,
-            chosenAssetId:null
         };
+
         case PROPERTIES.LOAD_SUCCESS: return {
             ...state,
             isLoading:false,
@@ -29,12 +29,14 @@ const myPropertiesReducer = (state = initialSate, action) => {
             isLoading:false,
             error:action.error
 
-        };
-        case PROPERTIES.CHOOSE_ASSET: return {
-            ...state,
-            chosenAssetId :action.assetId
-        };
-        default: return state
+            };
+        case PROPERTIES.CHOOSE_ASSET:
+            return {
+                ...state,
+                chosenAssetId: action.assetId
+            };
+        default:
+            return state
 
     }
 

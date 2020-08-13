@@ -1,13 +1,23 @@
-import {actionChannel, call, put, take, takeEvery} from 'redux-saga/effects';
+import {actionChannel, call, put, take, takeEvery, select} from 'redux-saga/effects';
 
 import {setError, setProperty, updatePropertyFormAction, createPropertyFormAction} from '../actions/propertyActions';
 import {PROPERTY} from '../constants';
 import {fetchProperty, updatePropApi, createPropApi, removeProperty} from '../api';
 import {SubmissionError} from "redux-form";
+import { loadProperties } from "../actions/propertiesActions";
 
 export function* handlePropertyLoad(action) {
     try {
         const myProperty = yield call(fetchProperty, action.propertyId);
+        const pendingTenants = myProperty[0].pending_tenants
+        pendingTenants.forEach(function(tenant){
+            tenant.pending=true
+        })
+        const tenants = myProperty[0].tenant_list
+        tenants.forEach(function(tenant){
+            tenant.pending=false
+        })
+        myProperty[0].tenant_list = tenants.concat(pendingTenants)
         yield put(setProperty(myProperty));
     } catch (error) {
         yield put(setError(error.toString()));
@@ -16,7 +26,10 @@ export function* handlePropertyLoad(action) {
 export function* handlePropertyRemove(action) {
     try {
         yield call(removeProperty, action.propertyId);
-        // yield put(setProperty(myProperty));
+        const getOwnerId = (state) => state.clientReducer.userId
+
+        const ownerId = yield select(getOwnerId)
+        yield put (loadProperties(ownerId))
     } catch (error) {
         yield put(setError(error.toString()));
     }

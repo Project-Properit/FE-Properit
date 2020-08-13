@@ -9,18 +9,22 @@ const initialSate = {
 	firstName: localStorage.getItem('firstName') || null,
 	lastName: localStorage.getItem('lastName') || null,
 	chosenMode: localStorage.getItem('chosenMode') || null,
-	tenantAssetId: localStorage.getItem('assetId') || null
+	tenantAssetId: localStorage.getItem('assetId') || null,
+	chosenAssetId: localStorage.getItem('chosenAssetId')  === 'null' ? null : localStorage.getItem('chosenAssetId')
 }
 
 function getReal(item) {
-	return (item === 'true' || item)
+	if (item ==='true')
+		return true
+	if (item==='false')
+		return false
+	return item
 }
 
 const clientReducer = (state = initialSate, action) => {
 	switch (action.type) {
 
 		case CLIENT.CLIENT_SET:
-
 			return {
 				userId: action.userId,
 				firstName: action.firstName,
@@ -29,7 +33,8 @@ const clientReducer = (state = initialSate, action) => {
 				isTenant: action.isTenant,
 				isOwner: action.isOwner,
 				chosenMode: action.chosenMode,
-				tenantAssetId: action.tenantAssetId
+				tenantAssetId: action.tenantAssetId,
+				chosenAssetId: localStorage.getItem('chosenAssetId')  === 'null' ? null : localStorage.getItem('chosenAssetId')
 			}
 
 		case CLIENT.CLIENT_UNSET:
@@ -41,7 +46,8 @@ const clientReducer = (state = initialSate, action) => {
 				isTenant: null,
 				isOwner: null,
 				chosenMode: null,
-				tenantAssetId: null
+				tenantAssetId: null,
+				chosenAssetId: null
 			}
 		case CLIENT.CLIENT_PARTIAL_UNSET:
 			return {

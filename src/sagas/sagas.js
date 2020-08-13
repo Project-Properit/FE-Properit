@@ -14,6 +14,7 @@ import {watchPaymentLoad} from "./paymentSaga";
 import watchPaymentsLoad, {payPaymentWatcher} from "./myPaymentsSaga";
 import watchPropertyChoose from "./propertyChooseSaga";
 import watchPropertyClean from "./propertyCleanSaga";
+import { renterLoadWatcher } from "./renterSaga";
 
 
 export default function* rootSaga() {
@@ -22,5 +23,5 @@ export default function* rootSaga() {
         propertiesSaga(), documentsSaga(),groupsPaymentsSaga(),groupPaymentsCreateWatcher(),groupPaymentsDeleteWatcherSaga(),
         signupWatcher(), loginWatcher(), watchLogout(), payPaymentWatcher(), watchGroupPaymentsLoad(),
         watchPropertyLoad(),formActionSaga(), PropertyUpdateWatcherSaga(),
-        watchPaymentLoad(),watchPaymentsLoad(), watchPropertyChoose(), watchPropertyClean()]);
+        watchPaymentLoad(),watchPaymentsLoad(), watchPropertyChoose(), watchPropertyClean(),renterLoadWatcher()]);
 }

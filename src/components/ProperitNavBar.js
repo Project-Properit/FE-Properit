@@ -9,7 +9,7 @@ import SimpleListMenu from "./addressChoose";
 import {chooseAsset, loadProperties} from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-import {setMode} from "../actions/clientActions";
+import { setMode } from "../actions/clientActions";
 
 class ProperitNavBar extends Component {
     componentDidMount() {
@@ -17,7 +17,6 @@ class ProperitNavBar extends Component {
     }
 
     render() {
-        console.log(this.props)
         const isLogin = this.props.token
         const tenantAssetId = this.props.tenantAssetId
         let chosenModeNotFromScreen;
@@ -30,24 +29,25 @@ class ProperitNavBar extends Component {
         }
         const chosenMode = this.props.chosenMode ? this.props.chosenMode : chosenModeNotFromScreen
         let mainUrl;
-        console.log(chosenMode)
         if (!chosenMode || (chosenMode && this.props.isOwner && this.props.isTenant)) {
             mainUrl = '/chooseView'
         } else if (chosenMode === 'owner') {
             mainUrl = "/properties"
         } else if (chosenMode === 'tenant') {
-            console.log('inside tenant')
             if (tenantAssetId && tenantAssetId !== 'null') {
                 mainUrl = `/properties/${tenantAssetId}/payments`
             } else {
                 mainUrl = '/newUser'
             }
         }
-        console.log(mainUrl)
+
         if (isLogin) {
+            console.log('this.props.myProperties.length >0', this.props.myProperties.length > 0)
+            console.log('this.props.myProperties', this.props.myProperties)
             return (
+
                 <Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
-                    <Navbar.Brand onClick={() => this.changeToMainUrl(mainUrl)}><img className="logo" style={{height: '60px'}} src={logo}
+                    <Navbar.Brand as={Link} to={mainUrl}><img className="logo" style={{height: '60px'}} src={logo}
                                                               alt='logo'/></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -73,10 +73,29 @@ class ProperitNavBar extends Component {
                                 padding: "0.5rem",
                                 color: "rgba(255,255,255,.5)"
                             }}><SettingsIcon/></Nav.Link>
-                            {this.props.myProperties.length > 0 &&
-                            <SimpleListMenu className="mr-sm-2" choosenFunc={(d) => this.onChooseAddress(d)}
-                                            options={this.props.myProperties.map(a => a.address)}
-                                            choosenIndex={this.getIndexOfList()}/>}
+                            {this.props.myProperties.length > 0 ?
+                                <SimpleListMenu className="mr-sm-2" choosenFunc={(d) => this.onChooseAddress(d)}
+                                                options={this.props.myProperties.map(a => a.address)}
+                                                choosenIndex={this.getIndexOfList()}/> : chosenMode === 'tenant' && this.props.chosenAssetId ?
+                                <Button
+                                    dir="rtl"
+                                    style={{
+                                        padding: 0,
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        fontSize: "22px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                        position: "relative",
+                                        minWidth: "182px"
+                                    }}
+                                >
+                                    <PersonPinCircle/>
+                                    <div style={{marginRight: "8px", marginLeft: "8px", whiteSpace: "nowrap"}}>
+                                        {this.props.myProperty.address}
+                                    </div>
+                                </Button>:null}
                             <Nav.Link onClick={() => this.props.logout()}
                                       style={{padding: "0.5rem", color: "rgba(255,255,255,.5)"}}><ExitToAppIcon/> Logout</Nav.Link>
                         </form>
@@ -91,12 +110,11 @@ class ProperitNavBar extends Component {
     handleChangeSettings(userId) {
         this.props.history.push("/settings/" + userId);
     }
-    changeToMainUrl(mainUrl) {
-        this.props.history.push(mainUrl);
-            window.location.reload()
-    }
+
     getIndexOfList() {
+        console.log(this.props.chosenAssetId)
         let c = this.props.myProperties.findIndex(a => a.id === this.props.chosenAssetId)
+        console.log('c-', c)
         return c === -1 ? null : c
     }
 
@@ -104,17 +122,21 @@ class ProperitNavBar extends Component {
         let c = this.props.myProperties[d]
         this.props.chooseAsset(c.id)
         this.props.history.push("/properties/" + c.id + '/payments');
+        this.props.loadProperty(c.id);
+        this.props.loadGroupsPayments(c.id, this.props.userId)
     }
 }
 
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(logoutAction()),
+    loadGroupsPayments: (assetId, userId) => dispatch(loadGroupsPayments(assetId, userId)),
     loadProperties: (ownerId) => dispatch(loadProperties(ownerId)),
+    loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
     chooseAsset: (assetId) => dispatch(chooseAsset(assetId)),
     setMode: (mode) => dispatch(setMode(mode))
 
 });
-const mapStateToProps = ({clientReducer, myProperties}) => ({
+const mapStateToProps = ({myPropertyReducer, clientReducer, myProperties}) => ({
     token: clientReducer.token,
     userId: clientReducer.userId,
     isOwner: clientReducer.isOwner,
@@ -122,10 +144,11 @@ const mapStateToProps = ({clientReducer, myProperties}) => ({
     chosenMode: clientReducer.chosenMode,
     tenantAssetId: clientReducer.tenantAssetId,
     myProperties: myProperties.myProperties,
-    chosenAssetId: myProperties.chosenAssetId
+    chosenAssetId: myProperties.chosenAssetId,
+    myProperty: myPropertyReducer.myProperty
 
 });
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(withRouter(ProperitNavBar));
