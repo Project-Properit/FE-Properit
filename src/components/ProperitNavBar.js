@@ -10,6 +10,10 @@ import {chooseAsset, loadProperties} from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { setMode } from "../actions/clientActions";
+import {PersonPinCircle} from "@material-ui/icons";
+import {Button} from "@material-ui/core";
+import {loadProperty} from "../actions/propertyActions";
+import {loadGroupsPayments} from "../actions/groupsPaymentsActions";
 
 class ProperitNavBar extends Component {
     componentDidMount() {
