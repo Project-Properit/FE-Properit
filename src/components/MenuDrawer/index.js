@@ -10,7 +10,7 @@ export const TOPBAR_HEIGHT = 65;
 
 
 const menuByUserType = {
-    user: ["payments", "professional", "renters", "documents"],
+    user: ["payments", "renters", "documents"],
 };
 
 const generateDrawerUrl = (currenntUrl, to) => {
