@@ -1,161 +1,225 @@
-
-.propBody{
-
-    //width: 100vw;
-    //height: 100vh;
-
-    //----------
-    //display: flex;
-    //align-items: center;
-    //justify-content: center;
-    //overflow: hidden;
-    //padding: 40px;
-    //----------
-
-    max-width: 1000px;
-    margin: 10px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-    .propCard {
-
-        //----------
-    //display: grid;
-    //grid-template-columns: 250px;
-    //grid-template-rows: 200px 200px 60px;
-    //grid-template-areas: "image" "text" "stats";
-    //
-    //font-family: Roboto;
-    //border-radius: 18px;
-    //background: white;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
-    //text-align: center;
-    //
-    //transition: 0.5s ease;
-    ////cursor: pointer;
-    //----------
-
-    position: relative;
-    margin: 20px 0;
-    width: 300px;
-    height: 400px;
-    background: #fff;
-    transform-style: preserve-3d;
-    transform: perspective(2000px);
-    transition: 1s;
-    //box-shadow: inset 300px 0 50px rgba(0,0,0,.5);
-
-
-}
-
-//.propCard-image {
-//    grid-area: image;
-//    border-top-left-radius: 15px;
-//    border-top-right-radius: 15px;
-//    background-size: cover;
+//.propBody{
+//    max-width: 1000px;
+//    margin: 10px auto;
+//    display: flex;
+//    flex-wrap: wrap;
+//    justify-content: space-around;
 //}
-.propCard-stats {
-    grid-area: stats;
-    display: grid;
-    grid-template-rows: 1fr;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background: #AD974F;
-}
-.propCard-stats .stat {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px;
-}
-.EditValue {
-    //font-size: 22px;
-    //font-weight: 500;
-    //color: #231F20;
+//.propCard {
+//box-shadow: 5px 5px 15px rgba(0,0,0,0.9);
+//position: relative;
+//margin: 20px 0;
+//width: 300px;
+//height: 400px;
+//background: #fff;
+//transform-style: preserve-3d;
+//transform: perspective(2000px);
+//transition: 1s;
+//}
+//.propCard-stats {
+//    grid-area: stats;
+//    display: grid;
+//    grid-template-rows: 1fr;
+//    border-bottom-left-radius: 15px;
+//    border-bottom-right-radius: 15px;
+//    background: #AD974F;
+//}
+//.propCard-stats .stat {
+//    display: flex;
+//    align-items: center;
+//    justify-content: center;
+//    flex-direction: column;
+//    padding: 10px;
+//}
+.DeleteValue {
     line-height: 12px;
     width: 18px;
     font-size: 8pt;
     margin-top: 1px;
     margin-right: 2px;
     position: absolute;
-    top: 0;
-    left: 0;
-}
-.ChooseValue{
-    font-size: 22px;
-    font-weight: 500;
-}
+    top: 6px;
+    left: 20px;
+    color: #393939;
 
+}
+//.ChooseValue{
+//    font-size: 22px;
+//    font-weight: 500;
+//}
 //
-
-.propCard:hover {
-    //-----------
-    //transform: scale(1.1);
-    //box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
-    //-----------
-    z-index: 1000;
-    transform: perspective(2000px) rotate(-10deg);
-    box-shadow: inset 20px 0 50px rgba(0,0,0,.5);
-}
-.propCard .imgBox {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #000;
-    box-sizing: border-box;
-    transform-origin: left;
-    z-index: 1;
-    transition: 1s;
-}
-
-.propCard:hover .imgBox{
-    transform: rotateY(-135deg);
-}
-
-.propCard .imgBox .propImg{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-//.propCard .details{
+//.propCard:hover {
+//    z-index: 1000;
+//    transform: perspective(2000px) rotate(-10deg);
+//    box-shadow: inset 20px 0 50px rgba(0,0,0,.5);
+//}
+//.propCard .imgBox {
+//    position: relative;
+//    width: 100%;
+//    height: 100%;
+//    border: 1px solid #000;
+//    box-sizing: border-box;
+//    transform-origin: left;
+//    z-index: 1;
+//    transition: 1s;
+//}
+//
+//.propCard:hover .imgBox{
+//    transform: rotateY(-135deg);
+//}
+//
+//.propCard .imgBox .propImg{
 //    position: absolute;
 //    top: 0;
 //    left: 0;
+//    width: 100%;
+//    height: 100%;
+//    object-fit: cover;
+//}
+//.propCard-text {
+//    position: absolute;
+//    top: 30px;
+//    left: 30px;
 //    box-sizing: border-box;
 //    padding: 20px;
+//    grid-area: text;
+//    margin: 25px;
+//
 //}
-.propCard-text {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    box-sizing: border-box;
-    padding: 20px;
-    grid-area: text;
-    margin: 25px;
+//.propCard-text .tenants {
+//    color: #4e555b;
+//    font-size: 17px;
+//}
+//.propCard-text p {
+//    color: grey;
+//    font-size: 15px;
+//    font-weight: 300;
+//}
+//.propCard-text h2{
+//    margin-top: 0px;
+//    font-size: 50px;
+//
+//}
+//.propCard-text a{
+//    color: #3f51b5;
+//}
+//
 
+.propBody{
+  position: relative;
 }
-.propCard-text .tenants {
-    //color: rgb(255,7,110);
-    color: #4e555b;
-    font-size: 17px;
+.propBody .propCard{
+  position: relative;
+  width: 240px;
+  height: 350px;
+  background: #232323;
+  border-radius: 16px;
+  overflow: hidden;
 }
-.propCard-text p {
-    color: grey;
-    font-size: 15px;
-    font-weight: 300;
+.propBody .propCard:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e0d5c2;
+  clip-path: circle(120px at 80% 20%);
+  transition: 0.5s ease-in-out;
 }
-.propCard-text h2{
-    margin-top: 0px;
-    font-size: 50px;
+.propBody .propCard:hover:before{
+  clip-path: circle(220px at 80% 20%);
+}
+.propBody .propCard:after{
+  content: 'Asset';
+  position: absolute;
+  top: 58%;
+  left: -10%;
+  font-size: 6em;
+  font-weight: 800;
+  font-style: italic;
+  color: rgba(255,255,255,0.04);
+}
+.propBody .propCard .imgBox {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  //z-index: 10000;
+  width: 100%;
+  height: 220px;
+  transition: 0.5s;
+}
+.propBody .propCard:hover .imgBox {
+  top: -10%;
+  transform: translateY(0%);
+}
+.propBody .propCard .imgBox img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) ;
+  width: 140px;
+}
+.propBody .propCard .contentBx{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  transition: 1s;
+  z-index: 10;
+}
+.propBody .propCard:hover .contentBx{
+  height: 210px;
+}
+.propBody .propCard .contentBx h2{
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+}
+.propBody .propCard .contentBx .propCard-text{
+  //display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+.propBody .propCard:hover .contentBx .propCard-text{
+  opacity: 1;
+  visibility: visible;
+  //transition-delay: 0.5s;
+}
 
+.propBody .propCard .contentBx .propCard-text span{
+  color: #393939;
 }
-.propCard-text a{
-    color: #3f51b5;
+.propBody .propCard:hover .contentBx .propCard-text p{
+  color: #393939;
+}
+.propBody .propCard .contentBx .Choose{
+  display: inline-block;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 4px;
+  margin-top: -25px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #393939;
+  opacity: 0;
+  transform: translate(50px);
+  transition: 0.5s;
+}
 
+.propBody .propCard:hover .contentBx .Choose{
+  opacity: 1;
+  transform: translateY(0px);
+  transition-delay: 0.25s;
 }
+
+
+
+
 
