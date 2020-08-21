@@ -25,8 +25,8 @@ export default function* watchPaymentsLoad() {
 }
 function* handlePayPayment(action) {
 	try {
-		const {paymentId} = action
-		yield call(payApi, paymentId)
+		const {is_periodic,paymentId} = action
+		yield call(payApi, paymentId, is_periodic)
 		yield call(handlePaymentsLoad, action)
 	} catch (error) {
 		yield put({type: GROUPSPAYMENTS.CREATE_ERROR, error})

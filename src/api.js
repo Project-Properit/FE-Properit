@@ -62,14 +62,15 @@ const createPropApi = async (propertyObject) => {
 	return apiCall(url, 'POST', propertyObject)
 };
 
-const payApi = async (payId) => {
+const payApi = async (payId, is_periodic) => {
 	const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}/pay`;
     return fetch(url, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'x-access-tokens':localStorage.getItem('token')||''
-        }
+        },
+        body: JSON.stringify({is_periodic:is_periodic})
     })
         .then(handleApiErrors) // we'll make this in a second
         .then(response => response.json())

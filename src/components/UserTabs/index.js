@@ -50,9 +50,14 @@ class UserTabs extends Component {
     };
     getUnpayPayments = () => {
         let count = 0;
+        console.log(this.props.myPayments)
         this.props.myPayments.map(payment => {
-            console.log(payment.my_payment)
-            if(payment.my_payment.is_open)count=count+1
+            if(payment.is_periodic){
+                if(!payment.is_approved) count=count+1
+            }
+            else {
+                if (payment.my_payment.is_open) count = count + 1
+            }
         })
         return count
     }
