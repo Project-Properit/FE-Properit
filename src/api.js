@@ -128,7 +128,7 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 
 function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments, is_periodic, months) {
     const body = is_periodic ? JSON.stringify({title, description, is_public, amount, payments, is_periodic, months}):
-        JSON.stringify({title, description, is_public, amount, payments})
+        JSON.stringify({title, description, is_public, amount, payments, is_periodic})
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
     return fetch(url, {
         method: 'POST',

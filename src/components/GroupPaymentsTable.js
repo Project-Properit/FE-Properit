@@ -42,7 +42,9 @@ function Row(props) {
     }, []);
 
     const handlePay = () => {
-        let payObject = {paymentId: row.my_payment.payment_id, assetId: props.propId, userId: props.userId}
+        let payObject = null
+        if(row.is_periodic) payObject = {paymentId: row.id, assetId: props.propId, userId: props.userId, is_periodic: row.is_periodic}
+        else payObject = {paymentId: row.my_payment.payment_id, assetId: props.propId, userId: props.userId, is_periodic: row.is_periodic}
         props.payMethod(payObject)
         closeModal()
     }
@@ -71,10 +73,16 @@ function Row(props) {
                 <TableCell align="center">{row.my_payment.amount}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.creation_date}</TableCell>
-                <TableCell align="center">{row.my_payment.is_open ?
+                <TableCell align="center">{row.my_payment.is_open ? row.is_periodic ?
+                    <div><Button onClick={openModal} color="primary">Pay all payments</Button>
+                    <p></p>
+                    <p>Remain: {row.payments.length}</p></div>:
                     <Button onClick={openModal} color="primary">
-                        {row.is_periodic ? "Pay all payments" : "Pay"}
-                    </Button> : `Paid at ${row.my_payment.when_payed}`}</TableCell>
+                        Pay
+                    </Button>: `Paid at ${row.my_payment.when_payed}`}
+
+
+                </TableCell>
             </TableRow>
             {row.participants.length > 0 ?
                 <TableRow>
