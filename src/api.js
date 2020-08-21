@@ -163,7 +163,7 @@ function deleteGroupPayments(assetId, groupPaymentsId) {
         })
 }
 const fetchUser = async (userId) => {
-    const url = `${window._env_.REACT_APP_API_URL}/users/` + userId;
+    const url = `${window._env_.REACT_APP_API_URL}/users?id=` + userId;
     return apiCall(url, 'GET')
 }
 

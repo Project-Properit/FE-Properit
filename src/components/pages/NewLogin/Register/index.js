@@ -113,7 +113,6 @@ class Signup extends Component {
 				errors
 			}
 		} = this.props
-
 		return (
 			<div>
 				<Navbar bg="dark" variant="dark" style={{zIndex: '1201', height: '64px', lineHeight: '64px'}}>
@@ -304,7 +303,8 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-	signup: state.signupReducer
+	signup: state.signupReducer,
+	user: state.userReducer
 })
 const mapDispatchToProps = dispatch => ({
 	signupRequest: (all) => dispatch(signupRequest(all))
