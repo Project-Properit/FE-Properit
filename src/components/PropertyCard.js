@@ -1,12 +1,12 @@
-import Card from "react-bootstrap/Card";
-import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useCallback, useState} from "react";
 import "./PropertyCard.scss"
-import { Button } from "@material-ui/core";
-import { Delete, OpenInBrowser } from "@material-ui/icons";
+import {Delete, OpenInBrowser} from "@material-ui/icons";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
 import Tooltip from "@material-ui/core/Tooltip";
-
+import {Button} from "@material-ui/core";
+import HomeIcon from '../images/homeCard.png';
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 export const PropertyCard = props => {
 	const prop = props.property;
 	const [payModalOpened, setPayModalOpened] = useState(false);
@@ -31,23 +31,28 @@ export const PropertyCard = props => {
 				: null}
 			<div className="propCard">
 				<div className="imgBox">
-					<h2> {prop.address}</h2>
-					<img className="propImg" src="https://properit.s3.amazonaws.com/house1.jpg"/>
+					<img src={HomeIcon}/>
 				</div>
-
-				<div className="propCard-text">
-					<Tooltip title="Remove The Property" placement="right-start">
-						<Button className="EditValue" onClick={openModal}> <Delete/></Button>
-					</Tooltip>
-					<span>{prop.tenant_list.length || 0} tenants</span>
+				<div className="contentBx">
 					<h2> {prop.address}</h2>
-					<p>{prop.comments}</p>
+					<div className="propCard-text">
+						<span>{prop.tenant_list.length || 0} tenants</span>
+						<p>{prop.comments}</p>
+						<Tooltip title="Remove The Property" placement="right-start">
+							<Button className="DeleteValue" onClick={openModal}
+									style={{top:"-250px", left:"-95px", boxShadow: "none"}}>
+								<Delete/>
+							</Button>
+							{/*<a href={props.editUrl} className="EditValue"><Delete/></a>*/}
 
-					<Button variant="outlined" color="primary" onClick={() => props.onChoose()}>
-						<Card.Link as={Link} to={props.infoUrl}
-						           className="ChooseValue"><OpenInBrowser/> Choose</Card.Link>
+						</Tooltip>
+					</div>
+					{/*<a href={props.infoUrl} className="Choose">Choose</a>*/}
+					<Button   onClick={() => props.onChoose()}>
+
+					<Card.Link as={Link} to={props.infoUrl} className="Choose" style={{boxShadow: "none"}}>Choose</Card.Link>
 					</Button>
-				</div>
+			</div>
 			</div>
 
 		</div>

@@ -39,15 +39,15 @@ class InviteRenter extends Component {
 			<div>
 				<MyModal open setOpen={this.props.closeHandler} closeMe={this.props.closeHandler}
 				         style={{width: "30%"}}>
-					<div style={{textAlign: 'center'}}>
-						<FadeIn className="register-fade group-payment">
-							<div className="register-box" style={{background: "whitesmoke"}}>
+					<div style={{textAlign: 'center',width: "100%"}}>
+						<FadeIn className="register-fade group-payment" style={{width: "100%"}}>
+							<div className="register-box" style={{background: "white", width: "100%"}}>
 								<form>
 									<TextField
 										className="item"
 										value={this.state.mail}
 										onChange={this.mailChanged}
-										variant="outlined"
+										// variant="outlined"
 										label="Mail"
 										required
 									/>

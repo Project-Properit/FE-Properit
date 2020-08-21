@@ -26,11 +26,21 @@ function FilesUpload(props) {
 
 	const filesRef = React.useRef();
 	const onFilesChange = React.useCallback(newFiles => {
-		newFiles[newFiles.length - 1].image = ''
-		setNewFiles([...newFiles]);
+		if(newFiles && newFiles.length > 0) {
+			newFiles[newFiles.length - 1].image = ''
+			setNewFiles([...newFiles]);
+		}
 		// const formData = new FormData();
 		// formData.append('fileName', newFiles[newFiles.length - 1]);
 	}, [setNewFiles, process.env]);
+
+	const onFilesError = React.useCallback(error => {
+		if(error.code === 2) {
+			alert('הקובץ שנבחר גדול מידי');
+		} else {
+			alert(error.message)
+		}
+	})
 
 	const deleteFile = React.useCallback(fileId => {
 		const deletedFile = files.find(file => file.id.toString() === fileId.toString());
@@ -58,6 +68,7 @@ function FilesUpload(props) {
 					ref={filesRef}
 					className={`filesDropzone${maxFiles === files.length + existedFiles.length ? " hidden" : ""}`}
 					onChange={onFilesChange}
+					onError={onFilesError}
 					multiple={maxFiles > 1}
 					maxFiles={maxFiles - existedFiles.length}
 					accepts={['image/png', '.pdf']}
