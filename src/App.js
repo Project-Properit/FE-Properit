@@ -21,6 +21,7 @@ import SelectionModeView from "./components/SelectionModeView";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
 import MenuDrawer from "./components/MenuDrawer";
 import {connect} from "react-redux";
+import Settings from "./components/pages/User/Settings";
 
 const ORGBAR_HEIGHT = 30;
 const TOPBAR_HEIGHT = 65;
@@ -41,6 +42,7 @@ class App extends React.Component {
             <PrivateRoute exact path="/chooseView" component={SelectionModeView}/>
             <PrivateRoute exact path="/about" component={About}/>
             <PrivateRoute exact path="/properties" component={Properties}/>
+            <PrivateRoute exact path="/settings/:userId" component={Settings}/>
             <PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
             <PrivateRoute exact path="/properties/:propId" component={DocumentsPage}/>
             <PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>
