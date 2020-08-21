@@ -35,22 +35,22 @@ class CreateGroupPayments extends Component {
                 messages: [],
                 errors: {},
             },
-            isPeriod: false,
+            is_periodic: false,
             createConfirmModalOpened: false
         };
     }
 
     setGroupPeriod = (event) => {
         if (event.target.checked) {
-            this.setState({isPeriod: event.target.checked, months: [3, 8]})
+            this.setState({is_periodic: event.target.checked, months: [3, 8]})
             this.setState({is_public:false})
         } else {
             delete this.state.months
-            this.setState({isPeriod: event.target.checked})
+            this.setState({is_periodic: event.target.checked})
         }
     }
     setCheckbox = (event, tenantId) => {
-        if (event.target.checked && this.state.isPeriod && Object.keys(this.state.tenants).length >= 1) {
+        if (event.target.checked && this.state.is_periodic && Object.keys(this.state.tenants).length >= 1) {
             alert("Periodic group can assign to one tenant")
         }else{
         let checked = this.state.checked
@@ -210,7 +210,7 @@ class CreateGroupPayments extends Component {
                                     />
                                     <FormControlLabel
                                         control={
-                                            <Checkbox disabled={this.state.isPeriod}
+                                            <Checkbox disabled={this.state.is_periodic}
                                                 checked={this.state.is_public}
                                                 onChange={this.setPublic}
                                             />}
@@ -219,12 +219,12 @@ class CreateGroupPayments extends Component {
                                     <FormControlLabel
                                     control={
                                         <Switch
-                                        checked={this.state.isPeriod}
+                                        checked={this.state.is_periodic}
                                         onChange={this.setGroupPeriod}
                                     />}
                                     label={"Set Period Group Payments"}
                                     />
-                                    {this.state.isPeriod?
+                                    {this.state.is_periodic?
                                     <div>
                                         <Typography id="range-slider" gutterBottom>
                                             Choose months to charge

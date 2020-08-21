@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router } from 'react-router-dom';
+import {Route, Router} from 'react-router-dom';
 import './App.css'
 import Login from "./components/pages/NewLogin/index";
 
@@ -17,9 +17,7 @@ import PublicRoute from "./components/PublicRoute";
 import HomePage from "./components/pages/HomePage";
 import NewUserPage from "./components/pages/NewUserPage";
 import DocumentsPage from "./components/pages/DocumentsPage";
-import CreateGroupPayments from "./components/CreateGroupPayments";
 import SelectionModeView from "./components/SelectionModeView";
-import {PaymentsInfo} from "./components/PaymentsInfo";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
 import MenuDrawer from "./components/MenuDrawer";
 import {connect} from "react-redux";
