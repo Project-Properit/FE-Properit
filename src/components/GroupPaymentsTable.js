@@ -42,7 +42,7 @@ function Row(props) {
     }, []);
 
     const handlePay = () => {
-        let payObject = null
+        let payObject
         if(row.is_periodic) payObject = {paymentId: row.id, assetId: props.propId, userId: props.userId, is_periodic: row.is_periodic}
         else payObject = {paymentId: row.my_payment.payment_id, assetId: props.propId, userId: props.userId, is_periodic: row.is_periodic}
         props.payMethod(payObject)
@@ -73,7 +73,7 @@ function Row(props) {
                 <TableCell align="center">{row.my_payment.amount}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.creation_date}</TableCell>
-                <TableCell align="center">{row.my_payment.is_open ? row.is_periodic ?
+                <TableCell align="center">{row.my_payment.is_open ? row.is_periodic ? row.is_approved ? `Approved at ${row.when_approved}}`:
                     <div><Button onClick={openModal} color="primary">Pay all payments</Button>
                     <p></p>
                     <p>Remain: {row.payments.length}</p></div>:
