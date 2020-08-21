@@ -142,8 +142,8 @@ class Settings extends Component {
         return (
             <div>
                 <div style={{textAlign: 'center'}}>
-                    <FadeIn className="register-fade">
-                        <div className="register-box">
+                    <FadeIn className="update-fade">
+                        <div className="update-box">
                             <img src={avatar} className="avatar"/>
                             <h1>Settings</h1>
                             <form className="register-panel">

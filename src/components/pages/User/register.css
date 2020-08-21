@@ -1,6 +1,4 @@
-.register-fade {
-    background: url("../../../images/modern-loft-interior.jpg") no-repeat center;
-    background-size: cover;
+.update-fade {
     font-family: sans-serif;
     display: flex;
     align-items: center;
@@ -10,16 +8,7 @@
 }
 
 
-.group-payment {
-    background: none !important;
-}
-
-.group-payment .register-box {
-    margin: 0 !important;
-    width: 100%;
-}
-
-.register-box {
+.update-box {
     display: flex;
     flex-direction: column;
     width: 382px;
@@ -52,22 +41,22 @@ h1 {
 
 }
 
-.register-box .item {
+.update-box .item {
     width: 100%;
     margin-bottom: 20px;
 
 }
 
-.register-box .item1 {
+.update-box .item1 {
     width: 100%;
     margin-bottom: 0 !important;
 
 }
 
-.register-box .item .label {
+.update-box .item .label {
 }
 
-.register-box .button {
+.update-box .button {
     width: 100%;
     margin-bottom: 20px;
     border: none;
@@ -78,7 +67,7 @@ h1 {
     border-radius: 20px;
 }
 
-.register-box .link {
+.update-box .link {
 
     color: #16181b;
 }
