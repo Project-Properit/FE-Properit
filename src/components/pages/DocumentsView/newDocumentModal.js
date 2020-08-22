@@ -3,9 +3,26 @@ import React, { useState, useCallback } from "react";
 import MyModal from "../Modal/index";
 import FilesUpload from "../documents/filesUpload";
 
-import { TextField, Button } from "@material-ui/core";
+import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } from "@material-ui/core";
 import {uploadFile} from "../../../api";
 
+const ALLOW_TO = {
+    EVERYONE: {
+        apiValue: ["owner", "tenant1"],
+        value: "EVERYONE",
+        text: "כולם"
+    },
+    TENANT1: {
+        apiValue: ["admin", "desk"],
+        value: "TENANT1",
+        text: "שוהם יעקב בלבד"
+    },
+    TENANT2: {
+        apiValue: ["admin", "desk"],
+        value: "TENANT2",
+        text: "רון ארביב בלבד"
+    },
+};
 
 const validateDocument = (name, files) => ({
     isValid: (name !== null && name.length > 0) && files.length > 0,
@@ -19,6 +36,11 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler, propId }) => {
     const [name, setName] = useState("");
     const [files, setFiles] = useState([]);
     const [errors, setErrors] = useState({});
+    const [allowTo, setAllowTo] = useState(ALLOW_TO.EVERYONE.value);
+
+    const onAllowToChange = useCallback(e => {
+        setAllowTo(e.target.value);
+    }, [setAllowTo]);
 
     const reset = () => {
         setName("");
@@ -58,7 +80,21 @@ const NewDocumentModal = ({ closeHandler, createDocumentHandler, propId }) => {
                 }}
             />
             <br/>
-
+            <div className="allowTo">
+                <FormLabel>מי רשאי לראות?</FormLabel>
+                <RadioGroup value={allowTo} onChange={onAllowToChange}>
+                    {Object.values(ALLOW_TO).map(option => (
+                        <FormControlLabel
+                            key={option.value}
+                            value={option.value}
+                            label={option.text}
+                            onChange={setAllowTo}
+                            control={<Radio />}
+                        />
+                    ))
+                    }
+                </RadioGroup>
+            </div>
             <br />
             <FilesUpload
                          files={files} foo={setFiles} maxFiles={1} name={name}
