@@ -22,6 +22,18 @@ const setNotFound = () => ({
 const setExists = () => ({
     type: RENTER.EXISTS,
 });
+const loadInvites = (userId) => ({
+    type: RENTER.LOAD_INVITES,
+    userId
+});
+const approveInvite = (userId, assetId) => ({
+    type: RENTER.APPROVE_INVITE,
+    userId, assetId
+});
+const setRenterInvites = (renterInvites) => ({
+    type: RENTER.SET_INVITES,
+    renterInvites
+});
 
 
 export {
@@ -30,5 +42,8 @@ export {
     setNotFound,
     clearRenterDetails,
     setRenterDetails,
-    setExists
+    setExists,
+    loadInvites,
+    setRenterInvites,
+    approveInvite,
 };

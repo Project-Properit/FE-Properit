@@ -13,6 +13,7 @@ import userReducer from "./userReducer";
 import payment from "./paymentReducer";
 import myPaymentsReducer from "./myPaymentsReducer";
 import renterReducer from "./renterReducer";
+import renterInvitesReducer from "./renterInvitesReducer";
 
 const rootReducer = combineReducers({
     myProperties: myPropertiesReducer,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     payment,
     myPaymentsReducer,
     renterReducer,
+    renterInvitesReducer,
     form
 
 });
