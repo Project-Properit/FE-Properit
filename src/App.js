@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router } from 'react-router-dom';
+import {Route, Router} from 'react-router-dom';
 import './App.css'
 import Login from "./components/pages/NewLogin/index";
 
@@ -17,12 +17,11 @@ import PublicRoute from "./components/PublicRoute";
 import HomePage from "./components/pages/HomePage";
 import NewUserPage from "./components/pages/NewUserPage";
 import DocumentsPage from "./components/pages/DocumentsPage";
-import CreateGroupPayments from "./components/CreateGroupPayments";
 import SelectionModeView from "./components/SelectionModeView";
-import {PaymentsInfo} from "./components/PaymentsInfo";
 import PaymentsTabs from "./components/payments/PaymentsTabs";
 import MenuDrawer from "./components/MenuDrawer";
 import {connect} from "react-redux";
+import Settings from "./components/pages/User/Settings";
 
 const ORGBAR_HEIGHT = 30;
 const TOPBAR_HEIGHT = 65;
@@ -43,6 +42,7 @@ class App extends React.Component {
             <PrivateRoute exact path="/chooseView" component={SelectionModeView}/>
             <PrivateRoute exact path="/about" component={About}/>
             <PrivateRoute exact path="/properties" component={Properties}/>
+            <PrivateRoute exact path="/settings/:userId" component={Settings}/>
             <PrivateRoute exact path="/addNewProperty" component={AddNewProperty}/>
             <PrivateRoute exact path="/properties/:propId" component={DocumentsPage}/>
             <PrivateRoute exact path="/properties/:propId/edit" component={PropertyInfo}/>

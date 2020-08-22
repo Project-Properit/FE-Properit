@@ -1,7 +1,7 @@
 import {all} from 'redux-saga/effects';
 
 import propertiesSaga from "./propertiesSaga";
-import userSaga from "./userSaga";
+import userSaga, {updateWatcher} from "./userSaga";
 import documentsSaga from "./documentsSaga";
 import groupsPaymentsSaga, {groupPaymentsCreateWatcher} from "./groupsPaymentsSaga";
 import signupWatcher from "./sugnUpSaga";
@@ -21,7 +21,7 @@ export default function* rootSaga() {
     yield all([
         userSaga(),
         propertiesSaga(), documentsSaga(),groupsPaymentsSaga(),groupPaymentsCreateWatcher(),groupPaymentsDeleteWatcherSaga(),
-        signupWatcher(), loginWatcher(), watchLogout(), payPaymentWatcher(), watchGroupPaymentsLoad(),
+        signupWatcher(), loginWatcher(), watchLogout(), payPaymentWatcher(), watchGroupPaymentsLoad(),updateWatcher(),
         watchPropertyLoad(),formActionSaga(), PropertyUpdateWatcherSaga(),
         watchPaymentLoad(),watchPaymentsLoad(), watchPropertyChoose(), watchPropertyClean(),renterLoadWatcher()]);
 }

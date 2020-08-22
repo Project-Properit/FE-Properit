@@ -9,7 +9,7 @@ import SimpleListMenu from "./addressChoose";
 import {chooseAsset, loadProperties} from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-import {setMode} from "../actions/clientActions";
+import { setMode } from "../actions/clientActions";
 import {PersonPinCircle} from "@material-ui/icons";
 import {Button} from "@material-ui/core";
 import {loadProperty} from "../actions/propertyActions";
@@ -153,6 +153,6 @@ const mapStateToProps = ({myPropertyReducer, clientReducer, myProperties}) => ({
 
 });
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(withRouter(ProperitNavBar));

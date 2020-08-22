@@ -17,12 +17,13 @@ const setError = error => ({
 });
 
 const pay = function pay(all) {
-    const {paymentId, assetId, userId} = all
+    const {paymentId, assetId, userId, is_periodic} = all
     return {
         type: MY_PAYMENTS.PAY,
         paymentId,
         assetId,
-        userId
+        userId,
+        is_periodic
     }
 }
 

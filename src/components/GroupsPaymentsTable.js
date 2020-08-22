@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import EventIcon from '@material-ui/icons/Event';
+import PeopleIcon from '@material-ui/icons/People';
 import {Delete} from "@material-ui/icons";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -54,9 +56,13 @@ function GroupRow(props) {
         <React.Fragment>{deleteModalOpened ?
             <SimpleValidationModal open onApprove={deleteDocument} closeMe={closeModal}/> : null}
             <TableRow className={classes.root}>
-                <TableCell><IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                    {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
-                </IconButton>
+                <TableCell>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                    </IconButton>
+                </TableCell>
+                <TableCell align="center">
+                    {row.is_periodic ? <div><EventIcon/><p>Monthly</p></div>: <div><PeopleIcon/><p>Group</p></div>}
                 </TableCell>
                 <TableCell align="center" component="th" scope="row">
                     {row.title}
@@ -66,7 +72,7 @@ function GroupRow(props) {
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.creation_date}</TableCell>
                 <TableCell align="center">
-                    <Tooltip title={isDeletable() ? "לא ניתן למחוק. לפחות תשלום אחד אושר" : "מחק קבוצת תשלום זו"}>
+                    <Tooltip title={isDeletable() ? "At least one payment paid" : "Delete"}>
                         <div>
                             <IconButton disabled={isDeletable()} onClick={openModal}>
                                 <Delete/>
@@ -88,6 +94,7 @@ function GroupRow(props) {
                                         <TableCell align="center">Name</TableCell>
                                         <TableCell align="center">Amount</TableCell>
                                         <TableCell align="center">Status</TableCell>
+                                        {row.is_periodic? <TableCell align="center">Info</TableCell>:null}
                                         <TableCell align="center">Paid at</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -99,6 +106,8 @@ function GroupRow(props) {
                                         <TableCell align="center">{historyRow.amount}</TableCell>
                                         <TableCell align="center">{historyRow.is_open ? 'Open' : 'Close'}
                                         </TableCell>
+                                        {row.is_periodic? <TableCell align="center">
+                                            {row.payments.indexOf(historyRow.payment_id) + 1} payment of {row.payments.length} </TableCell>:null}
                                         <TableCell align="center">{historyRow.when_payed}</TableCell>
                                     </TableRow>
                                 ))}
@@ -116,7 +125,8 @@ export default function GroupsCollapsibleTable(props) {
     const [groupsPayments] = useState([]);
     let groups = props.groupsPayments ? props.groupsPayments : groupsPayments
     return (
-        <TableContainer component={Paper} style={{boxShadow: "2px 2px 13px darkgrey",
+        <TableContainer component={Paper} style={{
+            boxShadow: "2px 2px 13px darkgrey",
             width: "70%",
             marginTop: "50px",
             borderRadius: "10px"
@@ -125,6 +135,7 @@ export default function GroupsCollapsibleTable(props) {
                 <TableHead>
                     <TableRow style={{backgroundColor: "rgba(211, 203, 195, 0.42)"}}>
                         <TableCell/>
+                        <TableCell align="center">Type </TableCell>
                         <TableCell align="center">Name </TableCell>
                         <TableCell align="center">Collector</TableCell>
                         <TableCell align="center">Amount</TableCell>
