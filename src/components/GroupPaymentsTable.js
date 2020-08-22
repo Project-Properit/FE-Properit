@@ -16,6 +16,9 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
 import {payApi} from "../api";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
+import EventIcon from "@material-ui/icons/Event";
+import PublicIcon from '@material-ui/icons/Public';
+import PaymentIcon from '@material-ui/icons/Payment';
 
 const useRowStyles = makeStyles({
     root: {
@@ -40,7 +43,9 @@ function Row(props) {
     }, []);
 
     const handlePay = () => {
-        let payObject = {paymentId:row.my_payment.payment_id, assetId:props.propId, userId:props.userId}
+        let payObject
+        if(row.is_periodic) payObject = {paymentId: row.id, assetId: props.propId, userId: props.userId, is_periodic: row.is_periodic}
+        else payObject = {paymentId: row.my_payment.payment_id, assetId: props.propId, userId: props.userId, is_periodic: row.is_periodic}
         props.payMethod(payObject)
         closeModal()
     }
@@ -58,6 +63,10 @@ function Row(props) {
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>}
                 </TableCell>
+                <TableCell align="center">
+                    {row.participants.length > 0 ? (<div><PublicIcon/><p>Public</p></div>) : row.is_periodic ?
+                        <div><EventIcon/><p>Monthly</p></div> : <div><PaymentIcon/><p>Payment</p></div>}
+                </TableCell>
                 <TableCell component="th" scope="row">
                     {row.title}
                 </TableCell>
@@ -65,10 +74,14 @@ function Row(props) {
                 <TableCell align="center">{row.my_payment.amount}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.creation_date}</TableCell>
-                <TableCell align="center">{row.my_payment.is_open ?
+                {row.is_periodic? <TableCell align="center">
+                    {row.payments.indexOf(row.my_payment.payment_id) + 1} payment of {row.payments.length} </TableCell>:<TableCell></TableCell>}
+                <TableCell align="center">{row.my_payment.is_open ? row.is_periodic ? row.is_approved ? `Approved at ${row.when_approved}`:
+                    <Button onClick={openModal} color="primary">Pay all payments</Button>:
                     <Button onClick={openModal} color="primary">
                         Pay
-                    </Button> : `Paid at ${row.my_payment.when_payed}`}</TableCell>
+                    </Button>: `Paid at ${row.my_payment.when_payed}`}
+                </TableCell>
             </TableRow>
             {row.participants.length > 0 ?
                 <TableRow>
@@ -102,7 +115,40 @@ function Row(props) {
                             </Box>
                         </Collapse>
                     </TableCell>
-                </TableRow> : null}
+                </TableRow> : row.is_periodic ?
+                    <TableRow>
+                        <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={7}>
+                            <Collapse in={open} timeout="auto" unmountOnExit>
+                                <Box margin={1}>
+                                    <Typography variant="h6" gutterBottom component="div">
+                                        Payments
+                                    </Typography>
+                                    <Table size="small" aria-label="purchases">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align="center">Date</TableCell>
+                                                <TableCell align="center">Amount</TableCell>
+                                                <TableCell align="center">Status</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {row.participants.map((historyRow) => (
+                                                <TableRow key={historyRow.id}>
+                                                    <TableCell align="center" component="th" scope="row">
+                                                        {historyRow.date}
+                                                    </TableCell>
+                                                    <TableCell align="center">{historyRow.amount}</TableCell>
+                                                    <TableCell
+                                                        align="center">{historyRow.is_open ? 'Open' : 'Closed'}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </Box>
+                            </Collapse>
+                        </TableCell>
+                    </TableRow> : null
+            }
         </React.Fragment>
     );
 }
@@ -119,11 +165,13 @@ export default function CollapsibleTable(props) {
                 <TableHead>
                     <TableRow style={{backgroundColor: "rgba(211, 203, 195, 0.42)"}}>
                         <TableCell/>
+                        <TableCell align="center">Type </TableCell>
                         <TableCell align="center">Name </TableCell>
                         <TableCell align="center">Collector</TableCell>
                         <TableCell align="center">Amount</TableCell>
                         <TableCell align="center">description</TableCell>
                         <TableCell align="center">Creation Time</TableCell>
+                        <TableCell align="center">Info</TableCell>
                         <TableCell align="center">Status</TableCell>
                     </TableRow>
                 </TableHead>

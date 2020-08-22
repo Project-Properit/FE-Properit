@@ -19,10 +19,23 @@ const setError = error => ({
     error,
 });
 
+const updateSettingsRequest = function updateSettingsRequest (all) {
+    const { userId, email, phone, first_name, last_name, payment_details} = all
+    return {
+        type: USER.UPDATE_REQUESTING,
+        userId,
+        email,
+        phone,
+        first_name,
+        last_name,
+        payment_details
+    }
+}
 
 export {
     setUser,
     loadUser,
     setError,
-    clearUsers
+    clearUsers,
+    updateSettingsRequest
 };

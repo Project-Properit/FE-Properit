@@ -62,14 +62,15 @@ const createPropApi = async (propertyObject) => {
 	return apiCall(url, 'POST', propertyObject)
 };
 
-const payApi = async (payId) => {
+const payApi = async (payId, is_periodic) => {
 	const url = `${window._env_.REACT_APP_API_URL}/payments/${payId}/pay`;
     return fetch(url, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'x-access-tokens':localStorage.getItem('token')||''
-        }
+        },
+        body: JSON.stringify({is_periodic:is_periodic})
     })
         .then(handleApiErrors) // we'll make this in a second
         .then(response => response.json())
@@ -126,9 +127,9 @@ const fetchGroupPayments = async (assetId, groupPaymentsId) => {
 	return apiCall(url, 'GET')
 };
 
-function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments, isPeriod, months) {
-    const body = isPeriod ? JSON.stringify({title, description, is_public, amount, payments, isPeriod, months}):
-        JSON.stringify({title, description, is_public, amount, payments})
+function createGroupPaymentsApi (assetId, title, description, is_public, amount, payments, is_periodic, months) {
+    const body = is_periodic ? JSON.stringify({title, description, is_public, amount, payments, is_periodic, months}):
+        JSON.stringify({title, description, is_public, amount, payments, is_periodic})
     const url = `${window._env_.REACT_APP_API_URL}/assets/` + assetId + '/group-payments';
     return fetch(url, {
         method: 'POST',
@@ -163,7 +164,7 @@ function deleteGroupPayments(assetId, groupPaymentsId) {
         })
 }
 const fetchUser = async (userId) => {
-    const url = `${window._env_.REACT_APP_API_URL}/users/` + userId;
+    const url = `${window._env_.REACT_APP_API_URL}/users?id=` + userId;
     return apiCall(url, 'GET')
 }
 
