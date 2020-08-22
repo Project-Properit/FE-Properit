@@ -49,6 +49,14 @@ const inviteRenter = async (assetId, renterId) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets/${assetId}/invites`;
 	return apiCall(url, 'PATCH', {'user_id':renterId})
 };
+const approveInvite = async (userId, assetId) => {
+	const url = `${window._env_.REACT_APP_API_URL}/users/${userId}/invites`;
+	return apiCall(url, 'PATCH', {'asset_id':assetId})
+};
+const getRenterInvites = async (userId) => {
+	const url = `${window._env_.REACT_APP_API_URL}/users/${userId}/invites`;
+	return apiCall(url, 'GET')
+};
 const removeProperty = async (propertyId) => {
 	const url = `${window._env_.REACT_APP_API_URL}/assets/` + propertyId;
 	return apiCall(url, 'DELETE')
@@ -206,5 +214,7 @@ const deleteDocument = async (documentId, propId) => axios.delete(
 		fetchPayments,
 		fetchRenterDetails,
 		inviteRenter,
+		getRenterInvites,
+		approveInvite,
 		payApi
 	}

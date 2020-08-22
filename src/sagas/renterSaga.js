@@ -2,8 +2,10 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { loadProperty, setError } from '../actions/propertyActions';
 import { RENTER } from '../constants';
-import { fetchRenterDetails, inviteRenter } from '../api';
-import { setExists, setNotFound, setRenterDetails } from "../actions/renterDetailsActions";
+import { approveInvite, fetchRenterDetails, getRenterInvites, inviteRenter } from '../api';
+import { setExists, setNotFound, setRenterDetails, setRenterInvites } from "../actions/renterDetailsActions";
+import { push } from "react-router-redux";
+import { chooseAsset } from "../actions/propertiesActions";
 
 export function* handleRenterDetailsLoad(action) {
     try {
@@ -42,7 +44,27 @@ export function* handleRenterInvite(action) {
         // yield put(setError(error.toString()));
     }
 }
+export function* handleGetRenterInvites(action) {
+    try {
+        const renterInvites = yield call(getRenterInvites, action.userId);
+        yield put(setRenterInvites(renterInvites));
+
+    } catch (error) {
+    }
+}
+export function* handleApproveInvite(action) {
+    try {
+        yield call(approveInvite, action.userId, action.assetId);
+        localStorage.setItem('assetId', action.assetId)
+        yield put(chooseAsset(action.assetId));
+        yield put(push('/properties/' + action.assetId + '/payments'));
+
+    } catch (error) {
+    }
+}
 export function* renterLoadWatcher() {
-  yield takeEvery(RENTER.LOAD_DETAILS, handleRenterDetailsLoad); // see details what is REQUEST param below
-  yield takeEvery(RENTER.INVITE_RENTER, handleRenterInvite); // see details what is REQUEST param below
+  yield takeEvery(RENTER.LOAD_DETAILS, handleRenterDetailsLoad);
+  yield takeEvery(RENTER.INVITE_RENTER, handleRenterInvite);
+  yield takeEvery(RENTER.LOAD_INVITES, handleGetRenterInvites);
+  yield takeEvery(RENTER.APPROVE_INVITE, handleApproveInvite);
 }
