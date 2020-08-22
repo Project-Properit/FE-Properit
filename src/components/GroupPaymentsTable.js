@@ -53,7 +53,6 @@ function Row(props) {
     const classes = useRowStyles();
     return (
         <React.Fragment>
-            {console.log(row)}
             {payModalOpened ?
                 <SimpleValidationModal open onApprove={handlePay} closeMe={closeModal}/>
                 : null}

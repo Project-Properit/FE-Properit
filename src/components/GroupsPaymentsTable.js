@@ -55,7 +55,6 @@ function GroupRow(props) {
     return (
         <React.Fragment>{deleteModalOpened ?
             <SimpleValidationModal open onApprove={deleteDocument} closeMe={closeModal}/> : null}
-            {console.log(row)}
             <TableRow className={classes.root}>
                 <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
