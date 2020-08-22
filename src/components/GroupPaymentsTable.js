@@ -18,6 +18,7 @@ import {payApi} from "../api";
 import SimpleValidationModal from "./pages/Modal/SimpleValidationModal";
 import EventIcon from "@material-ui/icons/Event";
 import PublicIcon from '@material-ui/icons/Public';
+import PaymentIcon from '@material-ui/icons/Payment';
 
 const useRowStyles = makeStyles({
     root: {
@@ -52,6 +53,7 @@ function Row(props) {
     const classes = useRowStyles();
     return (
         <React.Fragment>
+            {console.log(row)}
             {payModalOpened ?
                 <SimpleValidationModal open onApprove={handlePay} closeMe={closeModal}/>
                 : null}
@@ -64,7 +66,7 @@ function Row(props) {
                 </TableCell>
                 <TableCell align="center">
                     {row.participants.length > 0 ? (<div><PublicIcon/><p>Public</p></div>) : row.is_periodic ?
-                        <div><EventIcon/><p>Monthly</p></div> : null}
+                        <div><EventIcon/><p>Monthly</p></div> : <div><PaymentIcon/><p>Payment</p></div>}
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {row.title}
@@ -73,15 +75,13 @@ function Row(props) {
                 <TableCell align="center">{row.my_payment.amount}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.creation_date}</TableCell>
+                {row.is_periodic? <TableCell align="center">
+                    {row.payments.indexOf(row.my_payment.payment_id) + 1} payment of {row.payments.length} </TableCell>:<TableCell></TableCell>}
                 <TableCell align="center">{row.my_payment.is_open ? row.is_periodic ? row.is_approved ? `Approved at ${row.when_approved}`:
-                    <div><Button onClick={openModal} color="primary">Pay all payments</Button>
-                    <p></p>
-                    <p>Remain: {row.payments.length}</p></div>:
+                    <Button onClick={openModal} color="primary">Pay all payments</Button>:
                     <Button onClick={openModal} color="primary">
                         Pay
                     </Button>: `Paid at ${row.my_payment.when_payed}`}
-
-
                 </TableCell>
             </TableRow>
             {row.participants.length > 0 ?
@@ -172,6 +172,7 @@ export default function CollapsibleTable(props) {
                         <TableCell align="center">Amount</TableCell>
                         <TableCell align="center">description</TableCell>
                         <TableCell align="center">Creation Time</TableCell>
+                        <TableCell align="center">Info</TableCell>
                         <TableCell align="center">Status</TableCell>
                     </TableRow>
                 </TableHead>

@@ -55,6 +55,7 @@ function GroupRow(props) {
     return (
         <React.Fragment>{deleteModalOpened ?
             <SimpleValidationModal open onApprove={deleteDocument} closeMe={closeModal}/> : null}
+            {console.log(row)}
             <TableRow className={classes.root}>
                 <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -94,6 +95,7 @@ function GroupRow(props) {
                                         <TableCell align="center">Name</TableCell>
                                         <TableCell align="center">Amount</TableCell>
                                         <TableCell align="center">Status</TableCell>
+                                        {row.is_periodic? <TableCell align="center">Info</TableCell>:null}
                                         <TableCell align="center">Paid at</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -105,6 +107,8 @@ function GroupRow(props) {
                                         <TableCell align="center">{historyRow.amount}</TableCell>
                                         <TableCell align="center">{historyRow.is_open ? 'Open' : 'Close'}
                                         </TableCell>
+                                        {row.is_periodic? <TableCell align="center">
+                                            {row.payments.indexOf(historyRow.payment_id) + 1} payment of {row.payments.length} </TableCell>:null}
                                         <TableCell align="center">{historyRow.when_payed}</TableCell>
                                     </TableRow>
                                 ))}
