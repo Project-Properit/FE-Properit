@@ -69,7 +69,7 @@ class UserTabs extends Component {
                     <Paper class="MuiPaper-root MuiPaper-rounded" elevation={1} style={{backgroundColor: "initial"}}>
                         <Tabs value={this.state.value} onS onChange={this.handleChange} variant="fullWidth"
                               indicatorColor="primary">
-                            <Tab label={(<div>{"My Payments Groups"}
+                            <Tab label={(<div>{"My Group Payments "}
                                 <Badge color="error" badgeContent={this.props.myGroupsPayments.length}>
                                 </Badge>
                             </div>)}

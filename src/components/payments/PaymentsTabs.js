@@ -25,7 +25,7 @@ class PaymentsTabs extends Component {
                             <FadeIn>
                                 <div>
                                     <div style={{display: "flex", justifyContent: "center"}}>
-                                        <div>{"My Payment Groups"}</div>
+                                        <h2>{"My Group Payments "}</h2>
                                     </div>
                                     <PaymentsRequests setGroupPaymentsCount={() => {
                                     }}/>

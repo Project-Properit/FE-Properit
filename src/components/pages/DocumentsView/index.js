@@ -29,6 +29,7 @@ const DocumentsView = (props) => {
     }
 
     return <div id="documentsContainer">
+        <h2>Documents</h2>
         {
                 newDocumentModalOpened ?
                     <NewDocumentModal
