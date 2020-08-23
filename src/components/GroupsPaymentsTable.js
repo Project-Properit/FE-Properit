@@ -70,6 +70,7 @@ function GroupRow(props) {
                 <TableCell align="center">{row.owner.first_name + ' ' + row.owner.last_name}</TableCell>
                 <TableCell align="center">{row.amount}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
+                <TableCell align="center">{row.is_periodic?`Remain ${row.remain_payments} Payments`: row.is_public? "This Group is Public":null}</TableCell>
                 <TableCell align="center">{row.creation_date}</TableCell>
                 <TableCell align="center">
                     <Tooltip title={isDeletable() ? "At least one payment paid" : "Delete"}>
@@ -139,10 +140,10 @@ export default function GroupsCollapsibleTable(props) {
                         <TableCell align="center">Name </TableCell>
                         <TableCell align="center">Collector</TableCell>
                         <TableCell align="center">Amount</TableCell>
-                        <TableCell align="center">description</TableCell>
+                        <TableCell align="center">Description</TableCell>
+                        <TableCell align="center">Info</TableCell>
                         <TableCell align="center">Creation Time</TableCell>
-                        <TableCell align="center">
-                        </TableCell>
+                        <TableCell align="center"></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

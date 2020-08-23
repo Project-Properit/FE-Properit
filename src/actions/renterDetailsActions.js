@@ -12,12 +12,18 @@ const setRenterDetails = (renterDetails) => ({
     type: RENTER.SET_DETAILS,
     renterDetails
 });
+const setInviteSuccess = () => ({
+    type: RENTER.INVITE_SUCCESS
+});
 const clearRenterDetails = () => ({
     type: RENTER.CLEAR_DETAILS,
 
 });
 const setNotFound = () => ({
     type: RENTER.NOT_FOUND,
+});
+const setExistsInOtherProperty = () => ({
+    type: RENTER.EXISTS_IN_OTHER_PROPERTY,
 });
 const setExists = () => ({
     type: RENTER.EXISTS,
@@ -46,4 +52,6 @@ export {
     loadInvites,
     setRenterInvites,
     approveInvite,
+    setExistsInOtherProperty,
+    setInviteSuccess,
 };

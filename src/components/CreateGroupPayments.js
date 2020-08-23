@@ -42,8 +42,8 @@ class CreateGroupPayments extends Component {
 
     setGroupPeriod = (event) => {
         if (event.target.checked) {
-            this.setState({is_periodic: event.target.checked, months: [3, 8]})
-            this.setState({is_public:false})
+            this.setState({is_periodic: event.target.checked, months: [this.getRelevantMonth(), 12]})
+            this.setState({is_public: false})
         } else {
             delete this.state.months
             this.setState({is_periodic: event.target.checked})
@@ -52,22 +52,22 @@ class CreateGroupPayments extends Component {
     setCheckbox = (event, tenantId) => {
         if (event.target.checked && this.state.is_periodic && Object.keys(this.state.tenants).length >= 1) {
             alert("Periodic group can assign to one tenant")
-        }else{
-        let checked = this.state.checked
-        checked[tenantId] = event.target.checked
-        if (event.target.checked) {
-            this.setNewAmount(0, tenantId)
         } else {
-            this.setNewAmount(0, tenantId)
-            delete this.state.tenants[tenantId]
-        }
-        this.setState({checked: checked})
+            let checked = this.state.checked
+            checked[tenantId] = event.target.checked
+            if (event.target.checked) {
+                this.setNewAmount(0, tenantId)
+            } else {
+                this.setNewAmount(0, tenantId)
+                delete this.state.tenants[tenantId]
+            }
+            this.setState({checked: checked})
         }
     };
     validateGroupPayment = (title, description, tenants) => {
         let isOneAmountZero = false
         for (const [key, value] of Object.entries(tenants)) {
-            if (value['amount'] <= 0) {
+            if (value['amount'] <= 0 && value['amount']!=='NaN') {
                 isOneAmountZero = true
             }
         }
@@ -211,36 +211,36 @@ class CreateGroupPayments extends Component {
                                     <FormControlLabel
                                         control={
                                             <Checkbox disabled={this.state.is_periodic}
-                                                checked={this.state.is_public}
-                                                onChange={this.setPublic}
+                                                      checked={this.state.is_public}
+                                                      onChange={this.setPublic}
                                             />}
                                         label={"Public Group Payment"}
                                     />
                                     <FormControlLabel
-                                    control={
-                                        <Switch
-                                        checked={this.state.is_periodic}
-                                        onChange={this.setGroupPeriod}
-                                    />}
-                                    label={"Set Period Group Payments"}
+                                        control={
+                                            <Switch
+                                                checked={this.state.is_periodic}
+                                                onChange={this.setGroupPeriod}
+                                            />}
+                                        label={"Set Period Group Payments"}
                                     />
-                                    {this.state.is_periodic?
-                                    <div>
-                                        <Typography id="range-slider" gutterBottom>
-                                            Choose months to charge
-                                        </Typography>
-                                        <Slider style={{paddingTop:"20px",width: 320}}
-                                                min={1}
-                                                step={1}
-                                                max={12}
-                                                scale={(x) => this.getMonth(x)}
-                                                value={this.state.months}
-                                                onChange={this.setMonths}
-                                                valueLabelDisplay="on"
-                                                aria-labelledby="range-slider"
-                                                ValueLabelComponent={this.valueLabelComponent}
-                                        />
-                                    </div>:null}
+                                    {this.state.is_periodic ?
+                                        <div>
+                                            <Typography id="range-slider" gutterBottom>
+                                                Choose months to charge
+                                            </Typography>
+                                            <Slider style={{paddingTop: "20px", width: 320}}
+                                                    min={this.getRelevantMonth()}
+                                                    step={1}
+                                                    max={12}
+                                                    scale={(x) => this.getMonth(x)}
+                                                    value={this.state.months}
+                                                    onChange={this.setMonths}
+                                                    valueLabelDisplay="on"
+                                                    aria-labelledby="range-slider"
+                                                    ValueLabelComponent={this.valueLabelComponent}
+                                            />
+                                        </div> : null}
                                     <div style={{display: "flex", flexDirection: "column"}}>
                                         {this.props.myProperty.tenant_list.map(tenant => (
                                             tenant.id !== this.props.userId ?
@@ -296,7 +296,10 @@ class CreateGroupPayments extends Component {
             </div>
         )
     }
-
+    getRelevantMonth(){
+        const date = new Date();
+        return date.getMonth()+1 ;
+    }
     getTenantAmount(tenantId) {
         if (this.state.tenants.hasOwnProperty(tenantId)) {
             return this.state.tenants[tenantId].amount
@@ -314,6 +317,7 @@ class CreateGroupPayments extends Component {
     }
 
     setNewAmount = (amount, tenantId) => {
+        if (amount === '')amount=0
         let tenants = this.state.tenants
         if (this.state.tenants.hasOwnProperty(tenantId)) {
             tenants[tenantId].amount = parseInt(amount)

@@ -5,7 +5,7 @@ import PaymentIcon from '@material-ui/icons/Payment';
 const menuItemTypes = {
     payments: {
         to: "/payments",
-        text: "Payments",
+        text: "My Payments",
         Icon: PaymentIcon
     },
     professional: {
@@ -15,12 +15,12 @@ const menuItemTypes = {
     },
     renters: {
         to: "/renters",
-        text: "My Renters",
+        text: "Renters",
         Icon: GroupAdd
     },
     documents: {
         to: "/documents",
-        text: "My Documents",
+        text: "Documents",
         Icon: InsertDriveFile
     },
 };

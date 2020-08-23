@@ -48,7 +48,7 @@ export function* updateFlow(action) {
     try {
         const {userId,email, phone, first_name, last_name, payment_details} = action
         const response = yield call(updateApi, userId, email, phone, first_name, last_name, payment_details)
-        yield put({type: USER.UPDATE_SUCCESS, response})
+        yield put({type: USER.UPDATE_SUCCESS, response, first_name, last_name})
     } catch (error) {
         yield put({type: USER.UPDATE_ERROR, error})
     }

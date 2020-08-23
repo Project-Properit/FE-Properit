@@ -15,9 +15,17 @@ const apiCall = async (url, method, jsonBody = {}, withToken = true) => {
 		},
 		body: jb
 	});
-	const data = await response.json();
+
+	let data;
 	if (response.status >= 400) {
-		throw new Error(data.errors);
+
+		 data = await response.text();
+		 console.log(data)
+		throw new Error(data);
+	}
+	else
+	{
+		 data = await response.json();
 	}
 	return data;
 
