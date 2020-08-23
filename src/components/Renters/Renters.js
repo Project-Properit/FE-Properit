@@ -40,10 +40,12 @@ class Renters extends Component {
 
 		return (
 			<div className="App">
-				{this.state.modalOpened ?
+				{this.state.modalOpened && !this.props.inviteSuccess ?
 					<InviteRenter
 						assetId={propId}
 						renterNotFound={this.props.renterNotFound}
+						inviteSuccess={this.props.inviteSuccess}
+						renterExistsInOtherProperty={this.props.renterExistsInOtherProperty}
 						renterExists={this.props.renterExists}
 						clearDetails={this.props.clearRenterDetails}
 						inviteRenter={this.inviteRenter}
@@ -89,6 +91,8 @@ const mapStateToProps = ({myPropertyReducer, clientReducer, renterReducer}) => (
 	renterDetails: renterReducer.renterDetails,
 	renterNotFound: renterReducer.notFound,
 	renterExists: renterReducer.renterExists,
+	renterExistsInOtherProperty: renterReducer.renterExistsInOtherProperty,
+	inviteSuccess: renterReducer.inviteSuccess,
 	isOwner: clientReducer.isOwner,
 	chosenMode: clientReducer.chosenMode
 });

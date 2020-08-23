@@ -3,45 +3,51 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { loadProperty, setError } from '../actions/propertyActions';
 import { RENTER } from '../constants';
 import { approveInvite, fetchRenterDetails, getRenterInvites, inviteRenter } from '../api';
-import { setExists, setNotFound, setRenterDetails, setRenterInvites } from "../actions/renterDetailsActions";
+import {
+    setExists,
+    setExistsInOtherProperty, setInviteSuccess,
+    setNotFound,
+    setRenterDetails,
+    setRenterInvites
+} from "../actions/renterDetailsActions";
 import { push } from "react-router-redux";
 import { chooseAsset } from "../actions/propertiesActions";
 
 export function* handleRenterDetailsLoad(action) {
     try {
-        const getAllRenters = (state) => state.myPropertyReducer.myProperty.tenant_list
-        const allRenters = yield select(getAllRenters)
-        let exist = false
-        allRenters.forEach(function(renter){
-            if (renter.email === action.mail)
-                exist = true
-        })
-        if (exist)
-            yield put(setExists());
-        else {
-            const renterDetails = yield call(fetchRenterDetails, action.mail);
-            console.log('renterDetails------', renterDetails)
-            yield put(setRenterDetails(renterDetails));
-            if (renterDetails.length === 0)
-                yield put(setNotFound());
-        }
+
+
+        const renterDetails = yield call(fetchRenterDetails, action.mail);
+
+        console.log('renterDetails------', renterDetails)
+        yield put(setRenterDetails(renterDetails));
+        if (renterDetails.length === 0)
+            yield put(setNotFound());
+
 
     } catch (error) {
+
         yield put(setError(error.toString()));
     }
 }
 export function* handleRenterInvite(action) {
     try {
-        const renterDetails = yield call(inviteRenter, action.assetId,action.renterId);
-        yield put(loadProperty(action.assetId));
-        // console.log('renterDetails------',renterDetails)
-        // yield put(setRenterDetails(renterDetails));
-        // if (renterDetails.length===0)
-        //     yield put(setNotFound());
-
+        const getAllRenters = (state) => state.myPropertyReducer.myProperty.tenant_list
+        const allRenters = yield select(getAllRenters)
+        let exist = false
+        allRenters.forEach(function(renter){
+            if (renter.id === action.renterId)
+                exist = true
+        })
+        if (exist)
+            yield put(setExists());
+        else {
+            yield call(inviteRenter, action.assetId, action.renterId);
+            yield put(setInviteSuccess());
+            yield put(loadProperty(action.assetId));
+        }
     } catch (error) {
-         yield put(loadProperty(action.assetId));
-        // yield put(setError(error.toString()));
+         yield put(setExistsInOtherProperty());
     }
 }
 export function* handleGetRenterInvites(action) {
