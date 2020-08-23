@@ -69,6 +69,7 @@ class Renters extends Component {
 								null}
 							<RentersTable
 								renters={this.props.myProperty.tenant_list} mode={this.props.chosenMode}
+								pendingRenters={this.props.myProperty.pending_tenants}
 							/>
 						</>
 						:
