@@ -1,12 +1,12 @@
 import { PROPERTY} from '../constants';
 
-const myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues:{tenant_list:[]}}, action) => {
+const myPropertyReducer = (state = {myProperty:{tenant_list:[], pending_tenants:[]}, initialValues:{tenant_list:[]}}, action) => {
     switch (action.type) {
         case PROPERTY.LOAD: return {
             ...state,
             isLoading:true,
-            myProperty:{tenant_list:[]},
-            initialValues:{tenant_list:[]}
+            myProperty:{tenant_list:[],pending_tenants:[]},
+            initialValues:{tenant_list:[], pending_tenants:[]}
         };
         case PROPERTY.CLEAR: return {
             ...state,
@@ -27,6 +27,7 @@ const myPropertyReducer = (state = {myProperty:{tenant_list:[]}, initialValues:{
                 asset_type:action.myProperty[0].asset_type,
                 creation_date:action.myProperty[0].creation_date,
                 tenant_list:action.myProperty[0].tenant_list,
+                pending_tenants:action.myProperty[0].pending_tenants,
             }
         };
         case PROPERTY.LOAD_FAIL: return {

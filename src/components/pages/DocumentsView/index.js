@@ -21,7 +21,7 @@ const DocumentsView = (props) => {
     const propId = window.location.pathname.replace('/properties/', '').replace('/documents', '');
 
     const deleteDoc = (document) => {
-        deleteDocument(document.doc_id, propId).then(reponse => {
+            deleteDocument(document.doc_id, propId).then(reponse => {
             alert('File Successfully Deleted');
             props.deleteDocument(document, propId);
         });
@@ -32,6 +32,7 @@ const DocumentsView = (props) => {
         {
                 newDocumentModalOpened ?
                     <NewDocumentModal
+                        tenants={props.tenants}
                         closeHandler={closeModal}
                         createDocumentHandler={props.createNewDocument}
                     />
