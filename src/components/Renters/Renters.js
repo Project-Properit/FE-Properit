@@ -1,41 +1,42 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import RentersTable from "./RentersTable";
-import {Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import InviteRenter from "./InviteRenter";
-import {clearRenterDetails, getRenterDetails, inviteRenter} from "../../actions/renterDetailsActions";
-import {loadProperty} from "../../actions/propertyActions";
+import { clearRenterDetails, getRenterDetails, inviteRenter } from "../../actions/renterDetailsActions";
+import { loadProperty } from "../../actions/propertyActions";
 
 class Renters extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {modalOpened: false, isSetOnce: false};
-    }
-    componentDidMount() {
-        const {propId} = this.props.match.params;
-        this.props.loadProperty(propId)
-    }
+	constructor(props) {
+		super(props);
+		this.state = {modalOpened: false, isSetOnce: false};
+	}
 
-    openModal = () => {
-        this.props.clearRenterDetails()
-        this.setState({modalOpened: true})
-    };
+	componentDidMount() {
+		const {propId} = this.props.match.params;
+		this.props.loadProperty(propId)
+	}
 
-    closeModal = () => {
-        this.setState({modalOpened: false})
-    };
-    getRenterDetails = (mail) => {
-        this.props.getRenterDetails(mail)
-    };
-    inviteRenter = (assetId, renterId) => {
-        this.props.inviteRenter(assetId, renterId)
-        const {propId} = this.props.match.params;
-        // this.props.loadProperty(propId);
-    };
+	openModal = () => {
+		this.props.clearRenterDetails()
+		this.setState({modalOpened: true})
+	};
 
-    render() {
-        const {propId} = this.props.match.params;
-        console.log('this.props.myProperty.tenant_list', this.props.myProperty.tenant_list)
+	closeModal = () => {
+		this.setState({modalOpened: false})
+	};
+	getRenterDetails = (mail) => {
+		this.props.getRenterDetails(mail)
+	};
+	inviteRenter = (assetId, renterId) => {
+		this.props.inviteRenter(assetId, renterId)
+		const {propId} = this.props.match.params;
+		// this.props.loadProperty(propId);
+	};
+
+	render() {
+		const {propId} = this.props.match.params;
+		console.log('this.props.myProperty.tenant_list', this.props.myProperty.tenant_list)
 
         return (
             <div className="App">
@@ -80,21 +81,22 @@ class Renters extends Component {
 }
 
 const mapStateToProps = ({myPropertyReducer, clientReducer, renterReducer}) => ({
-    myProperty: myPropertyReducer.myProperty,
-    renterDetails: renterReducer.renterDetails,
-    renterNotFound: renterReducer.notFound,
-    renterExists: renterReducer.renterExists,
-    isOwner: clientReducer.isOwner
+	myProperty: myPropertyReducer.myProperty,
+	renterDetails: renterReducer.renterDetails,
+	renterNotFound: renterReducer.notFound,
+	renterExists: renterReducer.renterExists,
+	isOwner: clientReducer.isOwner,
+	chosenMode: clientReducer.chosenMode
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
-    getRenterDetails: (mail) => dispatch(getRenterDetails(mail)),
-    inviteRenter: (assetId, renterId) => dispatch(inviteRenter(assetId, renterId)),
-    clearRenterDetails: () => dispatch(clearRenterDetails()),
+	loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
+	getRenterDetails: (mail) => dispatch(getRenterDetails(mail)),
+	inviteRenter: (assetId, renterId) => dispatch(inviteRenter(assetId, renterId)),
+	clearRenterDetails: () => dispatch(clearRenterDetails())
 });
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Renters);
