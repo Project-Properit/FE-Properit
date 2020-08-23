@@ -39,6 +39,7 @@ function Row(props) {
 }
 
 export default function CollapsibleTable(props) {
+	const renters = props.renters.concat(props.pendingRenters)
 	return (
 		<TableContainer component={Paper} style={{
 			boxShadow: "2px 2px 13px darkgrey",
@@ -58,7 +59,7 @@ export default function CollapsibleTable(props) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{props.renters.map((renter) => (
+					{renters.map((renter) => (
 						<Row key={renter.id} row={renter}/>
 					))}
 				</TableBody>

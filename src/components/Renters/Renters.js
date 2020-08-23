@@ -54,7 +54,7 @@ class Renters extends Component {
                 <header className="App-header">
                 </header>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                    {this.props.myProperty.tenant_list.length > 0 ?
+                    {this.props.myProperty.tenant_list.length > 0 || this.props.myProperty.pending_tenants.length > 0?
                         <>
                             <h2>My Renters</h2>
                             {this.props.isOwner ?
@@ -64,6 +64,7 @@ class Renters extends Component {
                             </Button>:null}
                             < RentersTable
                                 renters={this.props.myProperty.tenant_list}
+                                pendingRenters={this.props.myProperty.pending_tenants}
                             />
                         </> : this.props.isOwner ? <>
                             <h2>Please order renters to your Asset</h2>

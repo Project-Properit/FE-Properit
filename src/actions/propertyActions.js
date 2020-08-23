@@ -27,7 +27,7 @@ const setError = error => ({
     error,
 });
 
-const addDocument = document => ({
+const addDocument = (document) => ({
     type: PROPERTY.ADD_DOCUMENT,
     document
 });
