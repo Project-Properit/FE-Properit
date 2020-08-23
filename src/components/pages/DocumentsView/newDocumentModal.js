@@ -4,9 +4,7 @@ import MyModal from "../Modal/index";
 import FilesUpload from "../documents/filesUpload";
 
 import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } from "@material-ui/core";
-import {Button, TextField} from "@material-ui/core";
 import {uploadFile} from "../../../api";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 
 // const ALLOW_TO = {
