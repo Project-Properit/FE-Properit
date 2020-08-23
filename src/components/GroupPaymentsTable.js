@@ -59,7 +59,7 @@ function Row(props) {
             <TableRow className={classes.root}>
                 <TableCell>
                     {row.is_public && row.participants.length > 0 &&
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{boxShadow: "none"}}>
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>}
                 </TableCell>
