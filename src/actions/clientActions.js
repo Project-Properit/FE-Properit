@@ -11,6 +11,11 @@ const setClient = (token, userId, isOwner, isTenant, firstName, lastName, tenant
 	tenantAssetId
 });
 
+const updateClient=(firstName, lastName) => ({
+	type: CLIENT.CLIENT_UPDATE,
+	firstName,
+	lastName,
+})
 
 const unsetClient = () => ({
 	type: CLIENT.CLIENT_UNSET
@@ -28,5 +33,6 @@ export {
 	setClient,
 	unsetClient,
 	unsetPartialClient,
-	setMode
+	setMode,
+	updateClient
 };

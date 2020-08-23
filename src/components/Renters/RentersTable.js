@@ -39,14 +39,12 @@ function Row(props) {
 }
 
 export default function CollapsibleTable(props) {
-	let renters = props.renters;
-	console.log('Renters',renters);
+	let renters = props.renters.concat(props.pendingRenters)
 	if (props.mode === 'tenant'){
 		renters = renters.filter(function(renter) {
                 return !renter.pending ;
 	});
 	}
-
 	return (
 		<TableContainer component={Paper} style={{
 			boxShadow: "2px 2px 13px darkgrey",

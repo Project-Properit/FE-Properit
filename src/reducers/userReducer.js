@@ -36,7 +36,6 @@ const userReducer = (state = {
         case USER.LOAD_SUCCESS:
             state.all_users_were_load.push(action.userObject);
             let test = state.all_users_were_load.filter((v, i, a) => a.findIndex(t => (JSON.stringify(t) === JSON.stringify(v))) === i)
-            console.log(action.userObject)
             return {
                 ...state,
                 user: action.userObject,
@@ -72,6 +71,8 @@ const userReducer = (state = {
                 errors: [],
             }
         case USER.UPDATE_SUCCESS:
+            localStorage.setItem('firstName', action.first_name)
+            localStorage.setItem('lastName', action.last_name)
             return {
                 ...state,
                 errors: [],
