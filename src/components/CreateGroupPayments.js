@@ -42,7 +42,7 @@ class CreateGroupPayments extends Component {
 
     setGroupPeriod = (event) => {
         if (event.target.checked) {
-            this.setState({is_periodic: event.target.checked, months: [3, 8]})
+            this.setState({is_periodic: event.target.checked, months: [this.getRelevantMonth(), 12]})
             this.setState({is_public: false})
         } else {
             delete this.state.months
@@ -67,7 +67,6 @@ class CreateGroupPayments extends Component {
     validateGroupPayment = (title, description, tenants) => {
         let isOneAmountZero = false
         for (const [key, value] of Object.entries(tenants)) {
-            console.log(value['amount'])
             if (value['amount'] <= 0 && value['amount']!=='NaN') {
                 isOneAmountZero = true
             }
@@ -231,7 +230,7 @@ class CreateGroupPayments extends Component {
                                                 Choose months to charge
                                             </Typography>
                                             <Slider style={{paddingTop: "20px", width: 320}}
-                                                    min={1}
+                                                    min={this.getRelevantMonth()}
                                                     step={1}
                                                     max={12}
                                                     scale={(x) => this.getMonth(x)}
@@ -242,7 +241,6 @@ class CreateGroupPayments extends Component {
                                                     ValueLabelComponent={this.valueLabelComponent}
                                             />
                                         </div> : null}
-                                    {console.log(this.props.myProperty.tenant_list)}
                                     <div style={{display: "flex", flexDirection: "column"}}>
                                         {this.props.myProperty.tenant_list.map(tenant => (
                                             tenant.id !== this.props.userId ?
@@ -298,7 +296,10 @@ class CreateGroupPayments extends Component {
             </div>
         )
     }
-
+    getRelevantMonth(){
+        const date = new Date();
+        return date.getMonth()+1 ;
+    }
     getTenantAmount(tenantId) {
         if (this.state.tenants.hasOwnProperty(tenantId)) {
             return this.state.tenants[tenantId].amount

@@ -57,7 +57,7 @@ class Renters extends Component {
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     {this.props.myProperty.tenant_list.length > 0 || this.props.myProperty.pending_tenants.length > 0?
                         <>
-                            <h2>My Renters</h2>
+                            <h2>Renters</h2>
                             {this.props.isOwner ?
                             <Button variant="outlined" color="primary"
                                     className="createDocumentButton" onClick={this.openModal}>

@@ -31,7 +31,19 @@ class PaymentsRequests extends Component {
     render() {
         let {propId} = this.props.match.params
         return (
-            <div id="documentsContainer" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                <div>
+                    <Tooltip
+                        title={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId) ? "Property Has No Tenants" : "Create New Group"}>
+                        <div style={{paddingTop: "20px"}}>
+                            <Button variant="outlined" color="primary"
+                                    className="createDocumentButton" onClick={this.openModal}
+                                    disabled={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId)}>
+                                Add Group Payment
+                            </Button>
+                        </div>
+                    </Tooltip>
+                </div>
                 {this.state.newDocumentModalOpened ?
                     <CreateGroupPayments
                         userId={this.props.userId}
@@ -46,26 +58,15 @@ class PaymentsRequests extends Component {
                     propId={propId}
                     groupsPayments={this.props.myGroupsPayments}
                 />
-                <div>
-                    <Tooltip title={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId) ? "Property Has No Tenants" : "Create New Group"}>
-                        <div style={{paddingTop:"20px"}}>
-                            <Button variant="outlined" color="primary"
-                                    className="createDocumentButton" onClick={this.openModal}
-                                    disabled={this.checkTenantsList(this.props.myProperty.tenant_list, this.props.userId)}>
-                                Add Group Payment
-                            </Button>
-                        </div>
-                    </Tooltip>
-                </div>
             </div>
         );
     }
 
 
-    checkTenantsList(tenantsList, userId){
-        if(tenantsList.length === 0) return true
-        else{
-            if(tenantsList.length === 1 && tenantsList[0].id === userId) return true
+    checkTenantsList(tenantsList, userId) {
+        if (tenantsList.length === 0) return true
+        else {
+            if (tenantsList.length === 1 && tenantsList[0].id === userId) return true
         }
     }
 
