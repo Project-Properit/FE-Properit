@@ -1,0 +1,37 @@
+.menu-drawer {
+    width: 210px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow-x: hidden;
+
+
+}
+
+.menu-drawer,
+.menu-drawer .MuiDrawer-paper {
+    overflow-x: hidden;
+}
+
+/*.menu-drawer .menuItem {*/
+/*}*/
+
+.menu-drawer.open,
+.menu-drawer.open .MuiDrawer-paper {
+    width: 210px;
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.menu-drawer.closed,
+.menu-drawer.closed .MuiDrawer-paper {
+    transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    width: 56px;
+}
+
+.menu-drawer .open-close-button {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.menu-drawer .MuiIconButton-root {
+    padding: 8px;
+}

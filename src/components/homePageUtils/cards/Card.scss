@@ -1,0 +1,70 @@
+.card {
+  width: 12em;
+  height: 5em;
+  position: absolute !important;
+  right: 30px;
+  background-color: #231F20 !important;
+
+  margin: .5rem 0 1rem 0;
+  transition: box-shadow .25s, -webkit-box-shadow .25s;
+
+  .card-content {
+    padding: 24px;
+    border-radius: 0 0 2px 2px;
+
+    .p {
+      margin: 0;
+    }
+  }
+
+  .white-text {
+    color: #fff !important;
+  }
+
+  .card .card-action:last-child {
+    border-radius: 0 0 2px 2px;
+  }
+
+  .card-action {
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background-color: inherit;
+    border-top: 1px solid rgba(160,160,160,0.2);
+    position: relative;
+    padding: 16px 24px;
+
+    .waves-effect {
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      z-index: 1;
+
+    }
+    .no-background {
+      background-color: #231F20 !important;
+      border: 1px solid #fff;
+    }
+
+    .btn {
+      color: white !important;
+      background-color: #AD974F;
+
+      text-decoration: none;
+      letter-spacing: .5px;
+      outline: 0;
+      height: 36px;
+      text-transform: uppercase;
+
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+
+      &:focus {
+        outline: none;
+        border-color: #8E793E !important;
+        box-shadow: 0 0 10px #8E793E !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.content {
+  text-align: center;
+
+  .code-block {
+    color: #777777;
+    padding: 1rem;
+    background: #f7f7f7;
+    border-left: 5px solid cadetblue;
+  }
+
+  @mixin section() {
+    height: 500px;
+  }
+
+  section_1 {
+    @include section;
+
+    background: white;
+  }
+  .section{
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+  }
+  #section_2 {
+    background-color: #231F20;
+    .descriptionTeam{
+      font-size: 2rem;
+      color: #fff;
+
+      .spanText {
+        display: block;
+      }
+    }
+    .cardRow {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      height: 430px;
+      align-items: center;
+    }
+  }
+
+  .section-content {
+    padding: 5rem 5rem 5rem 5rem;
+    text-align: left;
+  }
+}
