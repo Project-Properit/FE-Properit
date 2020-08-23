@@ -42,3 +42,19 @@
 .documentCard > .documentData  > div {
     margin-top: 10px;
 }
+
+.pg-viewer-wrapper {
+    max-height: 182px;
+}
+/*.pg-viewer {*/
+/*    width: 100%;*/
+/*}*/
+/*.pdf-canvas:not(:first-child) {*/
+/*    display: none;*/
+/*}*/
+
+.pdf-canvas {
+    width: 50px;
+    margin: 0 !important;
+    /*height: 200px;*/
+}

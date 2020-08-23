@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import MenuItem from '@material-ui/core/MenuItem';
 import { Button } from "@material-ui/core";
-import { ArrowDropDown, ArrowDropUp, PersonPinCircle } from "@material-ui/icons";
+import { ArrowDropDown, ArrowDropUp, PersonPinCircle, PinDrop} from "@material-ui/icons";
 
 import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -42,18 +42,19 @@ export default function SimpleListMenu(props) {
 				padding: 0,
 				color: "white",
 				fontWeight: "bold",
-				fontSize: "22px",
+				fontSize: "18px",
 				display: "flex",
 				alignItems: "center",
 				justifyContent: "space-between",
 				position: "relative",
-				minWidth: "182px"
+				minWidth: "150px",
+				boxShadow: "none"
 			}}
 			onClick={event =>
 				handleClickListItem(event, expanded)
 			}
 		>
-			<PersonPinCircle/>
+			<PinDrop/>
 			<div style={{marginRight: "8px", marginLeft: "8px", whiteSpace: "nowrap"}}>
 				{opt[selectedIndex]}
 			</div>

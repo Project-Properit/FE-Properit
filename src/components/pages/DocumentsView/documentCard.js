@@ -12,7 +12,7 @@ import FilePreview from 'react-preview-file';
 
 import moment from "moment";
 
-import FilePdf from "../../../images/test.pdf"
+import FilePdf from "../../../images/download.pdf"
 
 const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 	const [deleteModalOpened, setDeleteModalOpened] = useState(false);
@@ -40,6 +40,8 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 	// 	setNumPages(numPages);
 	// }
 
+
+
 	return <div className="documentCard">
 
 		{
@@ -51,42 +53,19 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 			</Typography>
 			{
 				(localStorage.getItem('isOwner')) === 'true' ?
-				<IconButton onClick={openModal}>
+				<IconButton onClick={openModal} style={{boxShadow: "none"}}>
 					<Delete/>
 				</IconButton>:null
 			}
 		</div>
 
 		<div className="documentData">
-			{/*<img src={document.preview_url}/>*/}
-			{/*<FilePreview file={{FilePdf}}>*/}
-			{/*	{(preview) => <img src={preview} />}*/}
-			{/*</FilePreview>*/}
-			{/*<PDFtoIMG file={FilePdf}>*/}
-			{/*	{({pages}) => {*/}
-			{/*		console.log("pages" ,pages)*/}
-			{/*		if (!pages.length) return 'Loading...';*/}
-			{/*		return pages.map((page, index)=>*/}
-			{/*			<img key={index} src={page}/>*/}
-			{/*		);*/}
-			{/*	}}*/}
-			{/*</PDFtoIMG>*/}
-
-			{/*<FileViewer*/}
-			{/*	fileType={docType}*/}
-			{/*	filePath={(document.preview_url)*/}
-			{/*	}*/}
-			{/*/>*/}
-
-			{/*<Document*/}
-			{/*	file={document.preview_url}*/}
-			{/*	onLoadSuccess={onDocumentLoadSuccess}*/}
-			{/*>*/}
-			{/*	{[1].map(page => (*/}
-			{/*		<Page pageNumber={page} />*/}
-			{/*	))}*/}
-			{/*</Document>*/}
-
+			<FileViewer
+				fileType={'pdf'}
+				filePath={FilePdf}
+				// fileType={docType}
+				// filePath={(document.preview_url)}
+			/>
 			<span>
                 <b>Created: </b>{" "} {moment(document.creation_date).format("HH:mm DD/MM/YYYY")}
             </span>

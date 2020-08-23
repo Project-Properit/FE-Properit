@@ -158,7 +158,7 @@ export default function CollapsibleTable(props) {
         <TableContainer component={Paper} style={{
             boxShadow: "2px 2px 13px darkgrey",
             width: "70%",
-            marginTop: "50px",
+            marginTop: "25px",
             borderRadius: "10px"
         }}>
             <Table aria-label="collapsible table">
