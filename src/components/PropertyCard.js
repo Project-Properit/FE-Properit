@@ -40,7 +40,7 @@ export const PropertyCard = props => {
 						<p>{prop.comments}</p>
 						<Tooltip title="Remove The Property" placement="right-start">
 							<Button className="DeleteValue" onClick={openModal}
-									style={{top:"-250px", left:"-95px", boxShadow: "none"}}>
+									style={{top:"-184px", left:"-75px", boxShadow: "none"}}>
 								<Delete/>
 							</Button>
 							{/*<a href={props.editUrl} className="EditValue"><Delete/></a>*/}

@@ -45,16 +45,24 @@
 
 .pg-viewer-wrapper {
     max-height: 182px;
+    overflow-y: hidden;
 }
-/*.pg-viewer {*/
-/*    width: 100%;*/
-/*}*/
+.pg-viewer {
+    overflow-x: hidden;
+    min-height: 148px;
+}
 /*.pdf-canvas:not(:first-child) {*/
 /*    display: none;*/
 /*}*/
-
+.pdf-viewer {
+    overflow-x: hidden;
+    max-height: 148px;
+}
 .pdf-canvas {
     width: 50px;
     margin: 0 !important;
     /*height: 200px;*/
+}
+.canvas {
+    max-height: 144px !important;
 }

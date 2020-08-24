@@ -67,7 +67,7 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
 			<FileViewer
 				// fileType={'pdf'}
 				// filePath={FilePdf}
-				fileType={docType }
+				fileType={docType}
 				filePath={(document.preview_url)}
 			/>
 			<span>
