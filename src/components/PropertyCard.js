@@ -33,19 +33,20 @@ export const PropertyCard = props => {
 				<div className="imgBox">
 					<img src={HomeIcon}/>
 				</div>
+				<Tooltip title="Remove The Property" placement="right-start">
+					<Button className="DeleteValue" onClick={openModal}
+							style={{left:"-75px", boxShadow: "none"}}>
+						<Delete style={{color: "#393939"}}/>
+					</Button>
+					{/*<a href={props.editUrl} className="EditValue"><Delete/></a>*/}
+
+				</Tooltip>
 				<div className="contentBx">
 					<h2> {prop.address}</h2>
 					<div className="propCard-text">
 						<span>{prop.tenant_list.length || 0} tenants</span>
 						<p>{prop.comments}</p>
-						<Tooltip title="Remove The Property" placement="right-start">
-							<Button className="DeleteValue" onClick={openModal}
-									style={{top:"-184px", left:"-75px", boxShadow: "none"}}>
-								<Delete/>
-							</Button>
-							{/*<a href={props.editUrl} className="EditValue"><Delete/></a>*/}
 
-						</Tooltip>
 					</div>
 					{/*<a href={props.infoUrl} className="Choose">Choose</a>*/}
 					<Button   onClick={() => props.onChoose()}>

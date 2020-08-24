@@ -40,7 +40,7 @@
     position: absolute;
     top: 6px;
     left: 20px;
-    color: #393939;
+    color: rgba(246, 242, 242, 0.01);
 
 }
 //.ChooseValue{
@@ -170,7 +170,7 @@
   z-index: 10;
 }
 .propBody .propCard:hover .contentBx{
-  height: 180px;
+  height: 170px;
 }
 .propBody .propCard .contentBx h2{
   position: relative;
@@ -197,14 +197,14 @@
   color: #393939;
 }
 .propBody .propCard:hover .contentBx .propCard-text p{
-  color: #393939;
+  color: aliceblue;
 }
 .propBody .propCard .contentBx .Choose{
   display: inline-block;
   padding: 10px 20px;
   background: #fff;
   border-radius: 4px;
-  margin-top: -25px;
+  margin-top: -3px;
   text-decoration: none;
   font-weight: 600;
   color: #393939;
@@ -218,6 +218,10 @@
   transform: translateY(0px);
   transition-delay: 0.25s;
 }
+
+//.MuiSvgIcon-root {
+//  color: #393939;
+//}
 
 
 
