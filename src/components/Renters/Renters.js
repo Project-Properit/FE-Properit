@@ -75,7 +75,7 @@ class Renters extends Component {
 						:
 						this.props.isOwner ?
 							<>
-								<h2>Please order renters to your Asset</h2>
+								<h2>Please Invite renters to your Asset</h2>
 								<Button variant="outlined" color="primary"
 								        className="createDocumentButton" onClick={this.openModal}>
 									Invite A Renter
