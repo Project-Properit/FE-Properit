@@ -74,7 +74,7 @@ const DocumentCard = ({document, deleteHandler, loggedInUser}) => {
                 <b>Created: </b>{" "} {moment(document.creation_date).format("HH:mm DD/MM/YYYY")}
             </span>
 			<div>
-				<a href={document.url}><b>Your Files</b></a>
+				<a href={document.url} style={{color: "#373b3e"}}><b>Your Files</b></a>
 			</div>
 		</div>
 	</div>;
