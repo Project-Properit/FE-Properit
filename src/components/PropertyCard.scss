@@ -111,7 +111,7 @@
 .propBody .propCard{
   position: relative;
   width: 240px;
-  height: 350px;
+  height: 250px;
   background: #232323;
   border-radius: 16px;
   overflow: hidden;
@@ -124,11 +124,11 @@
   width: 100%;
   height: 100%;
   background: #e0d5c2;
-  clip-path: circle(120px at 80% 20%);
+  clip-path: circle(75px at 80% 20%);
   transition: 0.5s ease-in-out;
 }
 .propBody .propCard:hover:before{
-  clip-path: circle(220px at 80% 20%);
+  clip-path: circle(160px at 80% 20%);
 }
 .propBody .propCard:after{
   content: 'Asset';
@@ -150,27 +150,27 @@
   transition: 0.5s;
 }
 .propBody .propCard:hover .imgBox {
-  top: -10%;
+  top: -27%;
   transform: translateY(0%);
 }
 .propBody .propCard .imgBox img{
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
-  transform: translate(-50%,-50%) ;
-  width: 140px;
+  transform: translate(-50%,-100%) ;
+  width: 93px;
 }
 .propBody .propCard .contentBx{
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 80px;
   text-align: center;
   transition: 1s;
   z-index: 10;
 }
 .propBody .propCard:hover .contentBx{
-  height: 210px;
+  height: 180px;
 }
 .propBody .propCard .contentBx h2{
   position: relative;
@@ -182,7 +182,7 @@
   //display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 20px;
+  padding: 0px 20px;
   transition: 0.5s;
   opacity: 0;
   visibility: hidden;

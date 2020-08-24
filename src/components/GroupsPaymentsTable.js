@@ -57,7 +57,7 @@ function GroupRow(props) {
             <SimpleValidationModal open onApprove={deleteDocument} closeMe={closeModal}/> : null}
             <TableRow className={classes.root}>
                 <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{boxShadow: "none"}}>
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>
                 </TableCell>
@@ -75,7 +75,7 @@ function GroupRow(props) {
                 <TableCell align="center">
                     <Tooltip title={isDeletable() ? "At least one payment paid" : "Delete"}>
                         <div>
-                            <IconButton disabled={isDeletable()} onClick={openModal}>
+                            <IconButton disabled={isDeletable()} onClick={openModal} style={{boxShadow: "none"}}>
                                 <Delete/>
                             </IconButton>
                         </div>
@@ -129,7 +129,7 @@ export default function GroupsCollapsibleTable(props) {
         <TableContainer component={Paper} style={{
             boxShadow: "2px 2px 13px darkgrey",
             width: "70%",
-            marginTop: "50px",
+            marginTop: "25px",
             borderRadius: "10px"
         }}>
             <Table aria-label="collapsible table">

@@ -1,16 +1,29 @@
-import React, {useCallback, useState} from "react";
+import React, { useState, useCallback } from "react";
 
 import MyModal from "../Modal/index";
 import FilesUpload from "../documents/filesUpload";
 
-import {Button, TextField} from "@material-ui/core";
+import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } from "@material-ui/core";
 import {uploadFile} from "../../../api";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import FormLabel from "@material-ui/core/FormLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 
+// const ALLOW_TO = {
+//     EVERYONE: {
+//         apiValue: ["owner", "tenant1"],
+//         value: "EVERYONE",
+//         text: "כולם"
+//     },
+//     TENANT1: {
+//         apiValue: ["admin", "desk"],
+//         value: "TENANT1",
+//         text: "שוהם יעקב בלבד"
+//     },
+//     TENANT2: {
+//         apiValue: ["admin", "desk"],
+//         value: "TENANT2",
+//         text: "רון ארביב בלבד"
+//     },
+// };
 
 const validateDocument = (name, files) => ({
     isValid: (name !== null && name.length > 0) && files.length > 0,

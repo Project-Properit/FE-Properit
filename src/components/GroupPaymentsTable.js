@@ -59,7 +59,7 @@ function Row(props) {
             <TableRow className={classes.root}>
                 <TableCell>
                     {row.is_public && row.participants.length > 0 &&
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)} style={{boxShadow: "none"}}>
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>}
                 </TableCell>
@@ -158,7 +158,7 @@ export default function CollapsibleTable(props) {
         <TableContainer component={Paper} style={{
             boxShadow: "2px 2px 13px darkgrey",
             width: "70%",
-            marginTop: "50px",
+            marginTop: "25px",
             borderRadius: "10px"
         }}>
             <Table aria-label="collapsible table">
