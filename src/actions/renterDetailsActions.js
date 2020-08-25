@@ -15,6 +15,9 @@ const setRenterDetails = (renterDetails) => ({
 const setInviteSuccess = () => ({
     type: RENTER.INVITE_SUCCESS
 });
+const setMailSentSuccess = () => ({
+    type: RENTER.SENT_MAIL_SUCCESS
+});
 const clearRenterDetails = () => ({
     type: RENTER.CLEAR_DETAILS,
 
@@ -54,4 +57,5 @@ export {
     approveInvite,
     setExistsInOtherProperty,
     setInviteSuccess,
+    setMailSentSuccess,
 };

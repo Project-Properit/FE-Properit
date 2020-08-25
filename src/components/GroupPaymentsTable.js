@@ -77,7 +77,7 @@ function Row(props) {
                 {row.is_periodic? <TableCell align="center">
                     {row.payments.indexOf(row.my_payment.payment_id) + 1} payment of {row.payments.length} </TableCell>:<TableCell></TableCell>}
                 <TableCell align="center">{row.my_payment.is_open ? row.is_periodic ? row.is_approved ? `Approved at ${row.when_approved}`:
-                    <Button onClick={openModal} color="primary">Pay all payments</Button>:
+                    <Button onClick={openModal} color="primary">Approve Periodic Payment</Button>:
                     <Button onClick={openModal} color="primary">
                         Pay
                     </Button>: `Paid at ${row.my_payment.when_payed}`}
