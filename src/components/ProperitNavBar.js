@@ -72,21 +72,9 @@ class ProperitNavBar extends Component {
                         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
-                                {isLogin && chosenMode === 'owner' &&
-                                <>
-                                    {/*<Nav.Link as={Link} to="/properties">Properties</Nav.Link>*/}
-                                    {/*<Nav.Link as={Link} to={documentsUrl}>Documents</Nav.Link>*/}
-                                    {/*<Nav.Link as={Link} to={paymentsUrl}>Payments</Nav.Link>*/}
-                                </>
-                                }
-                                {isLogin && chosenMode === 'tenant' &&
-                                <>
-                                    {/*<Nav.Link as={Link} to="/payments">Payments</Nav.Link>*/}
-
-                                </>
-                                }
-
-
+                                <h4 style={{color:"white", paddingTop:"5%"}}>
+                                {this.props.firstName} {this.props.lastName}
+                                </h4>
                             </Nav>
                             <form className="form-inline">
                                 <Nav.Link onClick={this.openModal} style={{
@@ -158,6 +146,8 @@ const mapDispatchToProps = dispatch => ({
 });
 const mapStateToProps = ({myPropertyReducer, clientReducer, myProperties}) => ({
     token: clientReducer.token,
+    firstName: clientReducer.firstName,
+    lastName: clientReducer.lastName,
     userId: clientReducer.userId,
     isOwner: clientReducer.isOwner,
     isTenant: clientReducer.isTenant,
