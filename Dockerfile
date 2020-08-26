@@ -4,6 +4,8 @@ WORKDIR /app
 COPY . /app
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL $REACT_APP_API_URL
+ARG NODE_OPTIONS
+ENV NODE_OPTIONS --max-old-space-size=6144
 RUN apk add --no-cache ffmpeg opus pixman cairo pango giflib ca-certificates
 RUN apk add --no-cache --virtual .build-deps python g++ make gcc .build-deps curl git pixman-dev cairo-dev pangomm-dev libjpeg-turbo-dev giflib-dev
 RUN npm install
