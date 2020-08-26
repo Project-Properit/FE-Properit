@@ -23,7 +23,9 @@ const useRowStyles = makeStyles({
     root: {
         '& > *': {
             borderBottom: 'unset',
-        },
+            fontFamily: "Arial"
+
+},
     },
 });
 

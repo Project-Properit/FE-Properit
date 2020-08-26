@@ -42,14 +42,14 @@ export const PropertyCard = props => {
 
 				</Tooltip>
 				<div className="contentBx">
-					<h2> {prop.address}</h2>
+					<h2 style={{fontSize:"1.5rem"}}> {prop.address}</h2>
 					<div className="propCard-text">
-						<span>{prop.tenant_list.length || 0} tenants</span>
-						<p>{prop.comments}</p>
+						<span style={{fontWeight: "bold"}}>{prop.tenant_list.length || 0} tenants</span>
+						<p style={{fontWeight: "bold"}}>{prop.comments}</p>
 
 					</div>
 					{/*<a href={props.infoUrl} className="Choose">Choose</a>*/}
-					<Button   onClick={() => props.onChoose()}>
+					<Button   onClick={() => props.onChoose()} style={{padding: "0%"}}>
 
 					<Card.Link as={Link} to={props.infoUrl} className="Choose" style={{boxShadow: "none"}}>Choose</Card.Link>
 					</Button>
