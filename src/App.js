@@ -68,11 +68,11 @@ class App extends React.Component {
                     ) : (
                         <div id="main-page">
 
-                            {this.props.firstName && (
-                                <div className="org-bar" style={{height: `${ORGBAR_HEIGHT}px`}}>
-                                    {this.props.firstName} {this.props.lastName}
-                                </div>
-                            )}
+                            {/*{this.props.firstName && (*/}
+                            {/*    <div className="org-bar" style={{height: `${ORGBAR_HEIGHT}px`}}>*/}
+                            {/*        {this.props.firstName} {this.props.lastName}*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
                             <div className="page-in">
 
                                 <div id="routeContent" style={{height: routeContentHeight}}>

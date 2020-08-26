@@ -7,24 +7,6 @@ import { TextField, RadioGroup, Radio, FormControlLabel, FormLabel, Button } fro
 import {uploadFile} from "../../../api";
 import FormControl from "@material-ui/core/FormControl";
 
-// const ALLOW_TO = {
-//     EVERYONE: {
-//         apiValue: ["owner", "tenant1"],
-//         value: "EVERYONE",
-//         text: "כולם"
-//     },
-//     TENANT1: {
-//         apiValue: ["admin", "desk"],
-//         value: "TENANT1",
-//         text: "שוהם יעקב בלבד"
-//     },
-//     TENANT2: {
-//         apiValue: ["admin", "desk"],
-//         value: "TENANT2",
-//         text: "רון ארביב בלבד"
-//     },
-// };
-
 const validateDocument = (name, files) => ({
     isValid: (name !== null && name.length > 0) && files.length > 0,
     errors: {
@@ -33,7 +15,7 @@ const validateDocument = (name, files) => ({
     }
 });
 
-const NewDocumentModal = ({closeHandler, createDocumentHandler, tenants}) => {
+const NewDocumentModal = ({loadDocuments, closeHandler, createDocumentHandler, tenants}) => {
     const [name, setName] = useState("");
     const [files, setFiles] = useState([]);
     const [errors, setErrors] = useState({});
@@ -55,9 +37,10 @@ const NewDocumentModal = ({closeHandler, createDocumentHandler, tenants}) => {
             uploadFile(formData, propId).then(response => {
                 createDocumentHandler(response.data[0]);
                 alert('File Successfully uploaded')
+                loadDocuments(propId)
             }).catch((e) => {
             })
-            closeHandler();
+            closeHandler()
             reset();
         } else {
             setErrors(validation.errors);

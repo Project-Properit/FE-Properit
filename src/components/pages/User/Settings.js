@@ -148,7 +148,9 @@ class Settings extends Component {
             <div>
                 {this.state.createConfirmModalOpened ? <SimpleValidationModal open onApprove={this.submit}
                                                                               closeMe={this.closeModal}/> : null}
-                <MyModal open setOpen={this.props.closeHandler} closeMe={this.props.closeHandler}
+                <MyModal open
+                         setOpen={this.props.closeHandler}
+                         closeMe={this.props.closeHandler}
                          style={{width: "30%"}}>
                     <div style={{textAlign: 'center'}}>
                         <FadeIn className="update-fade">
@@ -250,10 +252,9 @@ class Settings extends Component {
                                     </ExpansionPanel>
 
                                     <Button
-                                        className="button"
+                                        variant="outlined"
                                         color="primary"
-                                        variant="contained"
-                                        style={{fontWeight: "bold", fontSize: "24px"}}
+                                        style={{marginTop: "10px"}}
                                         onClick={this.openModal}
                                     >
                                         Update
