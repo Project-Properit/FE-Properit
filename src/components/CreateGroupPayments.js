@@ -18,6 +18,14 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemTextField from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+
 
 class CreateGroupPayments extends Component {
     constructor() {
@@ -173,6 +181,7 @@ class CreateGroupPayments extends Component {
     }
 
     render() {
+        const labelId = `checkbox-list-secondary-label`;
         return (
             <div>
                 {this.state.createConfirmModalOpened ? <SimpleValidationModal open onApprove={this.submit}
@@ -184,7 +193,7 @@ class CreateGroupPayments extends Component {
                             <div className="register-box" style={{background: "whitesmoke"}}>
                                 <form>
                                     <TextField
-                                        className="item"
+                                        className="item2"
                                         value={this.state.title}
                                         onChange={this.titleTypeChanged}
                                         variant="outlined"
@@ -193,7 +202,7 @@ class CreateGroupPayments extends Component {
                                         required
                                     />
                                     <TextField
-                                        className="item"
+                                        className="item2"
                                         value={this.state.description}
                                         onChange={this.descriptionTypeChanged}
                                         variant="outlined"
@@ -202,7 +211,7 @@ class CreateGroupPayments extends Component {
                                         required
                                     />
                                     <TextField
-                                        className="item"
+                                        className="item2"
                                         value={this.state.amount}
                                         variant="outlined"
                                         label="Total Amount"
@@ -241,38 +250,64 @@ class CreateGroupPayments extends Component {
                                                     ValueLabelComponent={this.valueLabelComponent}
                                             />
                                         </div> : null}
-                                    <div style={{display: "flex", flexDirection: "column"}}>
+                                    <List dense style={{width: "100%", maxWidth: "360", backgroundColor: "theme.palette.background.paper"}}>
+                                    {/*<div style={{display: "flex", flexDirection: "column"}}>*/}
                                         {this.props.myProperty.tenant_list.map(tenant => (
                                             tenant.id !== this.props.userId ?
-                                                <div key={tenant.id} style={{marginBottom: 10}}>
-                                                    <Card style={{minWidth: 300}}>
-                                                        <CardContent>
-                                                            <FormControlLabel
-                                                                control={
-                                                                    <Checkbox
-                                                                        checked={this.getCheckbox(tenant.id)}
-                                                                        onChange={e => this.setCheckbox(e, tenant.id)}
-                                                                        inputProps={{'aria-label': 'primary checkbox'}}
-                                                                    />}
-                                                                label={"Add " + tenant.first_name + ' ' + tenant.last_name}
-                                                            />
-                                                            <div style={{marginBottom: 12}} color="textSecondary">
-                                                                <TextField
-                                                                    className="item"
-                                                                    value={this.getTenantAmount(tenant.id)}
-                                                                    onChange={e => this.setNewAmount(e.target.value, tenant.id)}
-                                                                    variant="outlined"
-                                                                    error={this.getTenantAmount(tenant.id) <= 0}
-                                                                    label="Amount"
-                                                                    disabled={!this.getCheckbox(tenant.id)}
+                                                // <div key={tenant.id} style={{marginBottom: 10}}>
+                                                //     <Card style={{minWidth: 300}}>
+                                                //         <CardContent>
+                                                        <ListItem key={tenant.id} button>
+                                                            <ListItemAvatar>
+                                                                <Avatar>{tenant.first_name.charAt(0).toUpperCase()}{tenant.last_name.charAt(0).toUpperCase()}</Avatar>
+                                                            </ListItemAvatar>
+                                                            <div style={{display:"block"}}>
+                                                                <div>
+
+                                                            <ListItemSecondaryAction>
+                                                                {/*<FormControlLabel*/}
+                                                                {/*    control={*/}
+                                                                <Checkbox
+                                                                    checked={this.getCheckbox(tenant.id)}
+                                                                    onChange={e => this.setCheckbox(e, tenant.id)}
+                                                                    inputProps={{'aria-label': 'primary checkbox'}}
+                                                                    // label={"Add " + tenant.first_name + ' ' + tenant.last_name}
                                                                 />
+                                                                {/*}*/}
+                                                                {/*/>*/}
+
+                                                            </ListItemSecondaryAction>
+                                                            <ListItemText id={labelId} primary={`Add ${tenant.first_name + ' ' + tenant.last_name}`} />
+                                                                </div>
+
+                                                                {/*    </CardContent>*/}
+                                                    {/*</Card>*/}
+                                                    {/*        }*/}
+                                                    {/*        />*/}
+                                                            {this.getCheckbox(tenant.id) ?
+                                                                    <TextField
+                                                                        // className="item2"
+                                                                        value={this.getTenantAmount(tenant.id)}
+                                                                        onChange={e => this.setNewAmount(e.target.value, tenant.id)}
+                                                                        variant="outlined"
+                                                                        error={this.getTenantAmount(tenant.id) <= 0}
+                                                                        label="Amount"
+                                                                        disabled={!this.getCheckbox(tenant.id)}
+                                                                        primary="Single-line item"
+
+                                                                    />
+                                                                : null
+                                                            }
                                                             </div>
-                                                        </CardContent>
-                                                    </Card>
-                                                </div> : null
+
+                                                        </ListItem> : null
+
+                                            // </div> : null
                                         ))
                                         }
-                                    </div>
+                                    {/*</div>*/}
+
+                                    </List>
                                     <Button
                                         className="button"
                                         color="primary"

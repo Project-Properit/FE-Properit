@@ -45,8 +45,8 @@ export default function MyModal(props) {
                 <div
                     style={{
                         backgroundColor: "white",
-                        borderRadius: "8px",
-                        maxHeight: "95vh",
+                         borderRadius: "8px",
+                        maxHeight: "78vh",
                         overflowY: "auto",
                         ...style
                     }}
