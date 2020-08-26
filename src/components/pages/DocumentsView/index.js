@@ -36,7 +36,7 @@ const DocumentsView = (props) => {
                         tenants={props.tenants}
                         closeHandler={closeModal}
                         createDocumentHandler={props.createNewDocument}
-                        loadDocuments={props.loadProperty}
+                        loadDocuments={props.loadDocuments}
                     />
                     : ""
         }

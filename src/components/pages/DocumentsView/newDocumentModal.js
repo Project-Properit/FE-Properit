@@ -37,11 +37,11 @@ const NewDocumentModal = ({loadDocuments, closeHandler, createDocumentHandler, t
             uploadFile(formData, propId).then(response => {
                 createDocumentHandler(response.data[0]);
                 alert('File Successfully uploaded')
+                loadDocuments(propId)
             }).catch((e) => {
             })
             closeHandler()
             reset();
-            loadDocuments(propId)
         } else {
             setErrors(validation.errors);
         }

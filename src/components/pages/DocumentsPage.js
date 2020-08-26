@@ -25,9 +25,9 @@ class DocumentsPage extends React.Component{
 		const myDocs = this.props.myProperty ? this.props.myProperty.documents: []
 	    return <DocumentsView tenants={this.props.myProperty.tenant_list}
 							  documents={myDocs}
-							  loadDocuments={this.props.loadProperty}
 							  createNewDocument={this.createNewDocument}
-							  deleteDocument={this.props.deleteDocument}/>;
+							  deleteDocument={this.props.deleteDocument}
+							  loadDocuments={this.props.loadProperty}/>;
     }
 
  }
