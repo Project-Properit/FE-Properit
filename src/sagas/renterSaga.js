@@ -5,7 +5,7 @@ import { RENTER } from '../constants';
 import { approveInvite, fetchRenterDetails, getRenterInvites, inviteRenter } from '../api';
 import {
     setExists,
-    setExistsInOtherProperty, setInviteSuccess,
+    setExistsInOtherProperty, setInviteSuccess, setMailSentSuccess,
     setNotFound,
     setRenterDetails,
     setRenterInvites
@@ -68,9 +68,17 @@ export function* handleApproveInvite(action) {
     } catch (error) {
     }
 }
+export function* handleSendMail() {
+    try {
+        yield call(setMailSentSuccess);
+
+    } catch (error) {
+    }
+}
 export function* renterLoadWatcher() {
   yield takeEvery(RENTER.LOAD_DETAILS, handleRenterDetailsLoad);
   yield takeEvery(RENTER.INVITE_RENTER, handleRenterInvite);
   yield takeEvery(RENTER.LOAD_INVITES, handleGetRenterInvites);
   yield takeEvery(RENTER.APPROVE_INVITE, handleApproveInvite);
+  yield takeEvery(RENTER.SENT_MAIL_SUCCESS, handleSendMail);
 }
