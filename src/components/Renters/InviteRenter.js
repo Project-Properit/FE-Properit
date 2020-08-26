@@ -12,28 +12,27 @@ class InviteRenter extends Component {
 			mail: ''
 		};
 	}
-
-	componentDidMount() {
-
-	}
-
 	mailChanged = (e) => {
 		const {value} = e.target;
 		this.setState({mail: value});
-		if (this.props.renterDetails || this.props.renterNotFound|| this.props.renterExists || this.props.renterExistsInOtherProperty)
+		if (this.props.renterDetails || this.props.renterNotFound|| this.props.renterExists || this.props.renterExistsInOtherProperty|| this.props.renterMailSent)
 			this.props.clearDetails()
 	}
 	GetDetails = () => {
-		console.log("Getting details on ", this.state.mail)
 		this.props.getRenterDetails(this.state.mail)
 	}
 	inviteTenant = () => {
-		console.log("inviteTenant details on ", this.props.renterDetails.id, this.props.assetId)
 		this.props.inviteRenter(this.props.assetId, this.props.renterDetails.id)
 		if (this.props.inviteSuccess)
 		{
 			this.props.closeHandler()
 		}
+	}
+	SendMail = () => {
+		this.props.sendMail()
+
+			// this.props.closeHandler()
+
 	}
 	    onKeyDown1 = (e) => {
         if (e.key === 'Enter') {
@@ -79,12 +78,24 @@ class InviteRenter extends Component {
 											>Invite</Button>
 										</>
 										: <>
-										{this.props.renterNotFound&&<div>Renter not found, try different mail</div>}
+										{this.props.renterNotFound&&
+											<>
+										<div>Looks like {this.state.mail} haven't join us yet, Send him an invitation!</div>
+												<Button
+												className="button"
+												color="primary"
+												variant="contained"
+												style={{fontWeight: "bold", fontSize: "24px"}}
+												onClick={this.SendMail}
+											>Send Invitation Mail</Button>
+												</>
+										}
 										{this.props.renterExists&&<div>Renter already exists in this asset</div>}
 										{this.props.renterExistsInOtherProperty&&<div>Renter already a member of a property</div>}
+										{this.props.renterMailSent&&<div>Mail sent to {this.state.mail}</div>}
 										</>
 									}
-									{!this.props.renterDetails &&
+									{!this.props.renterDetails && !this.props.renterExists && !this.props.renterExistsInOtherProperty && !this.props.renterNotFound &&
 									<Button
 										className="button"
 										color="primary"

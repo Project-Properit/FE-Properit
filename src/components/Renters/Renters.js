@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import RentersTable from "./RentersTable";
 import { Button } from "@material-ui/core";
 import InviteRenter from "./InviteRenter";
-import { clearRenterDetails, getRenterDetails, inviteRenter } from "../../actions/renterDetailsActions";
+import {
+	clearRenterDetails,
+	getRenterDetails,
+	inviteRenter,
+	setMailSentSuccess
+} from "../../actions/renterDetailsActions";
 import { loadProperty } from "../../actions/propertyActions";
 
 class Renters extends Component {
@@ -47,17 +52,19 @@ class Renters extends Component {
 						inviteSuccess={this.props.inviteSuccess}
 						renterExistsInOtherProperty={this.props.renterExistsInOtherProperty}
 						renterExists={this.props.renterExists}
+						renterMailSent={this.props.renterMailSent}
 						clearDetails={this.props.clearRenterDetails}
 						inviteRenter={this.inviteRenter}
 						renterDetails={this.props.renterDetails}
 						getRenterDetails={this.getRenterDetails}
 						closeHandler={this.closeModal}
+						sendMail={this.props.sendMail}
 					/> : null
 				}
 				<header className="App-header">
 				</header>
 				<div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-					{this.props.myProperty.tenant_list.length > 0 ?
+					{this.props.myProperty.tenant_list.length>0 ||this.props.myProperty.pending_tenants.length > 0 ?
 						<>
 							<h2>My Renters</h2>
 							{this.props.isOwner ?
@@ -75,7 +82,7 @@ class Renters extends Component {
 						:
 						this.props.isOwner ?
 							<>
-								<h2>Please order renters to your Asset</h2>
+								<h2>Please Invite renters to your Asset</h2>
 								<Button variant="outlined" color="primary"
 								        className="createDocumentButton" onClick={this.openModal}>
 									Invite A Renter
@@ -92,6 +99,7 @@ const mapStateToProps = ({myPropertyReducer, clientReducer, renterReducer}) => (
 	renterDetails: renterReducer.renterDetails,
 	renterNotFound: renterReducer.notFound,
 	renterExists: renterReducer.renterExists,
+	renterMailSent: renterReducer.renterMailSent,
 	renterExistsInOtherProperty: renterReducer.renterExistsInOtherProperty,
 	inviteSuccess: renterReducer.inviteSuccess,
 	isOwner: clientReducer.isOwner,
@@ -102,7 +110,8 @@ const mapDispatchToProps = dispatch => ({
 	loadProperty: (propertyId) => dispatch(loadProperty(propertyId)),
 	getRenterDetails: (mail) => dispatch(getRenterDetails(mail)),
 	inviteRenter: (assetId, renterId) => dispatch(inviteRenter(assetId, renterId)),
-	clearRenterDetails: () => dispatch(clearRenterDetails())
+	clearRenterDetails: () => dispatch(clearRenterDetails()),
+	sendMail: () => dispatch(setMailSentSuccess())
 });
 
 export default connect(

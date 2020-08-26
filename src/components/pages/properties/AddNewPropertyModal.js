@@ -114,7 +114,6 @@ class AddNewPropertyModal extends Component {
 							variant="outlined"
 							label="Comments"
 							style={{width: "100%", marginBottom: "24px"}}
-							required
 							onChange={this.commentChanged}
 						/>
 						<br/>

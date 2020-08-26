@@ -35,9 +35,9 @@ function FilesList(props) {
                 <div className="file">
                     <span className="fileName">{file.name}</span>
                     <span>({file.size})</span>
-                    <IconButton color="secondary" onClick={file.onDelete} fileid={file.id}>
-                        <Cancel />
-                    </IconButton>
+                    {/*<IconButton color="secondary" onClick={file.onDelete} fileid={file.id}>*/}
+                    {/*    <Cancel />*/}
+                    {/*</IconButton>*/}
                     {urlFile.endsWith('.pdf') ?
                         <a href= {file.image}>{file.image}</a>
                     :
