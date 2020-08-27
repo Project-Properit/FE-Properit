@@ -41,7 +41,7 @@ class GroupsPayments extends Component {
 					<button>Create Group Payment</button>
 				</Link>
 				<div>
-					<Row>
+					<Row style={{fontFamily: "Arial"}}>
 						{this.props.allGroupPayments.map((groupPayments, index) => (
 							<GroupPayments
 								key={index}

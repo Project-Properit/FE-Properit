@@ -10,7 +10,7 @@ import {chooseAsset, loadProperties} from "../actions/propertiesActions";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import {setMode} from "../actions/clientActions";
-import {PersonPinCircle} from "@material-ui/icons";
+import {PersonPinCircle, PinDrop, AccountCircle} from "@material-ui/icons";
 import {Button} from "@material-ui/core";
 import {loadProperty} from "../actions/propertyActions";
 import {loadGroupsPayments} from "../actions/groupsPaymentsActions";
@@ -73,14 +73,10 @@ class ProperitNavBar extends Component {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
                                 <h4 style={{color:"white", paddingTop:"5%"}}>
-                                {this.props.firstName} {this.props.lastName}
+                                {this.props.firstName} {this.props.lastName}  {<AccountCircle/>}
                                 </h4>
                             </Nav>
                             <form className="form-inline">
-                                <Nav.Link onClick={this.openModal} style={{
-                                    padding: "0.5rem",
-                                    color: "rgba(255,255,255,.5)"
-                                }}><SettingsIcon/></Nav.Link>
                                 {this.props.myProperties.length > 0 ?
                                     <SimpleListMenu className="mr-sm-2" choosenFunc={(d) => this.onChooseAddress(d)}
                                                     options={this.props.myProperties.map(a => a.address)}
@@ -96,14 +92,20 @@ class ProperitNavBar extends Component {
                                                 alignItems: "center",
                                                 justifyContent: "space-between",
                                                 position: "relative",
-                                                minWidth: "182px"
+                                                minWidth: "182px",
+                                                boxShadow: "none"
+
                                             }}
                                         >
-                                            <PersonPinCircle/>
+                                            <PinDrop/>
                                             <div style={{marginRight: "8px", marginLeft: "8px", whiteSpace: "nowrap"}}>
                                                 {this.props.myProperty.address}
                                             </div>
                                         </Button> : null}
+                                <Nav.Link onClick={this.openModal} style={{
+                                    padding: "0.5rem",
+                                    color: "rgba(255,255,255,.5)"
+                                }}><SettingsIcon/></Nav.Link>
                                 <Nav.Link onClick={() => this.props.logout()}
                                           style={{
                                               padding: "0.5rem",
